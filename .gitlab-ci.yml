@@ -3,16 +3,17 @@ stages:
 
 kernel:validate:
   stage: validate
-  image: python:3.11-slim
+  image: ghcr.io/astral-sh/uv:python3.11-bookworm-slim
   rules:
     - when: always
   script:
     - python --version
-    - pip install --no-cache-dir ./tools/rocs-cli
-    - rocs validate --repo . --strict-placeholders
-    - rocs build --repo .
+    - uv --version
+    - uv venv .venv
+    - uv pip install -p .venv/bin/python -n ./tools/rocs-cli
+    - .venv/bin/rocs validate --repo . --strict-placeholders
+    - .venv/bin/rocs build --repo .
   artifacts:
     when: always
     paths:
       - ontology/dist/
-
