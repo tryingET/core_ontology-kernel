@@ -9,10 +9,9 @@ kernel:validate:
   script:
     - python --version
     - uv --version
-    - uv venv .venv
-    - uv pip install -p .venv/bin/python -n ./tools/rocs-cli
-    - .venv/bin/rocs validate --repo . --strict-placeholders
-    - .venv/bin/rocs build --repo .
+    - uvx --version
+    - uvx -n --from ./tools/rocs-cli rocs validate --repo . --strict-placeholders
+    - uvx -n --from ./tools/rocs-cli rocs build --repo .
   artifacts:
     when: always
     paths:
