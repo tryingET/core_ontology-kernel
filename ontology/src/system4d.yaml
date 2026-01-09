@@ -1,0 +1,85 @@
+ontology:
+  system4d:
+    name: "AI Society Core Baseline"
+    version: "0.1"
+    owners:
+      - name: "<YOU>"
+        contact: "<EMAIL/SLACK>"
+    container:
+      boundary:
+        in_scope:
+          - "Shared governance, safety baseline, meta-language for all companies"
+        out_of_scope:
+          - "Domain-specific semantics (belongs to company overlays)"
+          - "Repo implementation details (belongs to repo overlays)"
+      constraints:
+        - "No secrets in committed files, prompts, logs."
+        - "No PII/PHI in repos unless explicitly required and governed."
+        - "Always-on agent instruction files must stay minimal."
+        - "Stable concept identifiers (ont.id) independent of code refactors."
+        - "Kernel relation vocabulary limited (~10–15)."
+      edges:
+        - name: "GitLab"
+          direction: "bi"
+          protocol: "https"
+          system: "self-hosted gitlab"
+          contract: "<gitlab-url>"
+      dependencies:
+        - name: "CI runner"
+          type: "infra"
+          note: "Build/validate ontology artifacts"
+      anti_goals:
+        - "Build an enterprise knowledge graph for everything."
+        - "Allow unlimited neighbor expansion into prompts."
+    compass:
+      drivers:
+        - "Ensure consistent meaning and safe autonomy across a holding-style setup."
+      outcomes:
+        - "Agents can retrieve budgeted context packs with minimal noise."
+        - "Cross-company work uses a shared meta-language and baseline constraints."
+      tradeoffs:
+        - decision: "Autonomy vs Control"
+          chosen: "Autonomy inside explicit boundaries + strong invariants + audit trail"
+          because: "You want speed, but must prevent drift and leakage."
+    engine:
+      triggers:
+        - "New company is created"
+        - "New repo is created"
+        - "Incident/hotfix"
+      states:
+        - name: "draft"
+          meaning: "Baseline exists but not fully enforced"
+        - name: "enforced"
+          meaning: "Validation + policy gates are required"
+      invariants:
+        - id: "CORE-INV-001"
+          statement: "Secrets must not be committed or placed into prompts."
+          enforcement: "policy"
+        - id: "CORE-INV-002"
+          statement: "Concept IDs are stable; meaning changes use deprecation + new ID."
+          enforcement: "policy"
+        - id: "CORE-INV-003"
+          statement: "Incident bypass requires Exception immediately + Debt immediately."
+          enforcement: "governance"
+      lifecycle:
+        - "author -> compile -> validate -> release(tag) -> deprecate/migrate"
+    fog:
+      assumptions:
+        - id: "CORE-A-001"
+          statement: "Agents follow profiles and do not indiscriminately load sources."
+          how_to_validate: "Run evaluation tasks across repos"
+      risks:
+        - id: "CORE-R-001"
+          statement: "Prompt injection or instruction abuse through repo files"
+          mitigation: "Keep always-on small; treat instructions as untrusted; use validation"
+        - id: "CORE-R-002"
+          statement: "Cross-company leakage of sensitive domain details"
+          mitigation: "Layered access + profiles + strict boundaries in finance/health overlays"
+      exceptions:
+        - id: "CORE-E-INCIDENT"
+          statement: "Hotfix allowed to restore service"
+          reason: "Availability; MUST record Exception immediately + Debt immediately"
+      debt:
+        - id: "CORE-D-001"
+          statement: "Not all repos enforce policies yet"
+          payoff_plan: "Roll out CI includes gradually; start with finance/health first"

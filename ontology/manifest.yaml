@@ -1,0 +1,9 @@
+rocs:
+  layer: core
+  id: "ai-society.core"
+  version: "0.1.0"
+  created: "2026-01-07"
+  owners:
+    - "<YOU>"
+  generated:
+    dist_dir: "ontology/dist"
