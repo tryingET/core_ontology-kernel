@@ -7,7 +7,7 @@ ont:
   description: "Eine Fähigkeit/Permission, die Aktionen erlaubt."
   relations: []
   examples:
-    - "<example>"
+    - "Agent can open a Merge Request"
   anti_examples:
     - "Ein Ziel (Outcome)"
 system4d:
@@ -24,7 +24,7 @@ system4d:
 Eine Fähigkeit/Permission, die Aktionen erlaubt.
 
 ## Typical usage
-- <how this concept is used in your holding>
+- Used in agent profiles and access control discussions.
 
 ## Common confusions
-- <what people might confuse this with>
+- Confused with implementation details (a script is not a capability).

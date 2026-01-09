@@ -7,7 +7,7 @@ ont:
   description: "Credential/Token/Key; darf nicht geleakt werden."
   relations: []
   examples:
-    - "<example>"
+    - "PAT_GITLAB token in a local .env"
   anti_examples:
     - "Ein öffentliches API-Endpoint"
 system4d:
@@ -24,7 +24,7 @@ system4d:
 Credential/Token/Key; darf nicht geleakt werden.
 
 ## Typical usage
-- <how this concept is used in your holding>
+- Used in policies and CI checks (secret scanning; no-leak constraints).
 
 ## Common confusions
-- <what people might confuse this with>
+- Confused with public identifiers (URLs, group names).

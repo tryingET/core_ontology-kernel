@@ -7,7 +7,7 @@ ont:
   description: "Deploybares Systemteil mit definierten Interfaces."
   relations: []
   examples:
-    - "<example>"
+    - "Self-hosted GitLab service"
   anti_examples:
     - "Eine Klasse im Code"
 system4d:
@@ -24,7 +24,7 @@ system4d:
 Deploybares Systemteil mit definierten Interfaces.
 
 ## Typical usage
-- <how this concept is used in your holding>
+- Used to model deployed systems with SLOs, owners, and incidents.
 
 ## Common confusions
-- <what people might confuse this with>
+- Confused with libraries or scripts that are not deployed services.

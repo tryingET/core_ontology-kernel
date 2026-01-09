@@ -7,7 +7,7 @@ ont:
   description: "Ein handelndes Subjekt im System (Mensch oder System)."
   relations: []
   examples:
-    - "<example>"
+    - "Human maintainer or bot acting in GitLab"
   anti_examples:
     - "Ein reiner Datensatz ohne Handlungsfähigkeit"
 system4d:
@@ -24,7 +24,7 @@ system4d:
 Ein handelndes Subjekt im System (Mensch oder System).
 
 ## Typical usage
-- <how this concept is used in your holding>
+- Used as the supertype for entities that can take actions and hold responsibilities.
 
 ## Common confusions
-- <what people might confuse this with>
+- Confused with passive artifacts (documents, datasets).

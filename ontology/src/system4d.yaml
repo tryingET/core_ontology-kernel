@@ -3,8 +3,8 @@ ontology:
     name: "AI Society Core Baseline"
     version: "0.1"
     owners:
-      - name: "<YOU>"
-        contact: "<EMAIL/SLACK>"
+      - name: "lightningRalf"
+        contact: "GitLab @mjpa"
     container:
       boundary:
         in_scope:
@@ -23,7 +23,7 @@ ontology:
           direction: "bi"
           protocol: "https"
           system: "self-hosted gitlab"
-          contract: "<gitlab-url>"
+          contract: "http://192.168.161.10:8929"
       dependencies:
         - name: "CI runner"
           type: "infra"
@@ -61,6 +61,9 @@ ontology:
         - id: "CORE-INV-003"
           statement: "Incident bypass requires Exception immediately + Debt immediately."
           enforcement: "governance"
+        - id: "CORE-INV-004"
+          statement: "All repos classify stored/generated data; restricted/secret requires explicit governance."
+          enforcement: "policy"
       lifecycle:
         - "author -> compile -> validate -> release(tag) -> deprecate/migrate"
     fog:

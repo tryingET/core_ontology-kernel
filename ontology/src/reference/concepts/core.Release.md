@@ -7,7 +7,7 @@ ont:
   description: "Versionierter Stand von Artefakten, der referenzierbar ist."
   relations: []
   examples:
-    - "<example>"
+    - "Tag v0.1.0 of ontology-kernel"
   anti_examples:
     - "Ein Commit ohne Tag"
 system4d:
@@ -24,7 +24,7 @@ system4d:
 Versionierter Stand von Artefakten, der referenzierbar ist.
 
 ## Typical usage
-- <how this concept is used in your holding>
+- Used to pin versions in manifests and make builds reproducible.
 
 ## Common confusions
-- <what people might confuse this with>
+- Confused with an untagged commit on main.

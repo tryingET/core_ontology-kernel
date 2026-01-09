@@ -7,7 +7,7 @@ ont:
   description: "Ein Git Repository als Systemgrenze für Code + Artefakte."
   relations: []
   examples:
-    - "<example>"
+    - "ai-society/core/ontology-kernel"
   anti_examples:
     - "Eine Company (höhere Ebene)"
 system4d:
@@ -24,7 +24,7 @@ system4d:
 Ein Git Repository als Systemgrenze für Code + Artefakte.
 
 ## Typical usage
-- <how this concept is used in your holding>
+- Used as the boundary unit for code, policies, CI, and governance.
 
 ## Common confusions
-- <what people might confuse this with>
+- Confused with higher-level org/company groupings.

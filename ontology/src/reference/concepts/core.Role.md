@@ -7,7 +7,7 @@ ont:
   description: "Eine Rolle/Berechtigung, die Fähigkeiten bündelt."
   relations: []
   examples:
-    - "<example>"
+    - "Owner / Maintainer role in GitLab"
   anti_examples:
     - "Eine Person selbst (das ist Actor)"
 system4d:
@@ -24,7 +24,7 @@ system4d:
 Eine Rolle/Berechtigung, die Fähigkeiten bündelt.
 
 ## Typical usage
-- <how this concept is used in your holding>
+- Used to define who can approve, merge, and change protected paths.
 
 ## Common confusions
-- <what people might confuse this with>
+- Confused with a person (`core.Actor`) rather than an assignable responsibility.

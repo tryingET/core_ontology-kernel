@@ -7,7 +7,7 @@ ont:
   description: "Klassifikation von Daten (public/internal/restricted/secret)."
   relations: []
   examples:
-    - "<example>"
+    - "A repo declares docs as internal, and secrets as secret"
   anti_examples:
     - "Ein Dateiname"
 system4d:
@@ -24,7 +24,13 @@ system4d:
 Klassifikation von Daten (public/internal/restricted/secret).
 
 ## Typical usage
-- <how this concept is used in your holding>
+- Used to decide what can be included in prompts and which repos need stricter controls.
 
 ## Common confusions
-- <what people might confuse this with>
+- Confused with a filename or folder name (classification is about content).
+
+## Canonical classes
+- `core.DataClass.Public`
+- `core.DataClass.Internal`
+- `core.DataClass.Restricted`
+- `core.DataClass.SecretData`

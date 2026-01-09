@@ -8,13 +8,23 @@ ont:
   characteristics:
     transitive: false
     symmetric: false
-  axis_default: "<parents|children|left|right|previous|next>"
+  axis_default: "children"
 examples:
-  - "<positive example>"
+  - "core.AuditEvent triggers core.Policy (audit event causes a policy review)"
 anti_examples:
-  - "<common misuse example>"
+  - "Using triggers for deterministic outputs (use `produces`)"
 ---
 
 ## Notes
 - Keep semantics crisp.
 - Do not overload one relation with multiple meanings (Lucidity).
+
+## Use when
+- X causes Y to start/occur (trigger → effect).
+
+## Do not use when
+- You mean a guaranteed output (use `produces`) or a hard requirement (use `depends_on`).
+
+## Domain / Range
+- Domain: triggering event/condition
+- Range: triggered process/event/state

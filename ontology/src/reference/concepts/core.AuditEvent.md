@@ -7,7 +7,7 @@ ont:
   description: "Nachvollziehbares Ereignis (wer tat was wann warum)."
   relations: []
   examples:
-    - "<example>"
+    - "Merge Request merged (who/what/when/why)"
   anti_examples:
     - "Ein unstrukturierter Log-Text"
 system4d:
@@ -24,7 +24,7 @@ system4d:
 Nachvollziehbares Ereignis (wer tat was wann warum).
 
 ## Typical usage
-- <how this concept is used in your holding>
+- Used to link changes to governance decisions and approvals.
 
 ## Common confusions
-- <what people might confuse this with>
+- Confused with unstructured log lines that lack actor/intent.

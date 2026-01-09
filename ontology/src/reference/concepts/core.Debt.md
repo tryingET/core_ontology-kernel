@@ -7,7 +7,7 @@ ont:
   description: "Bewusster Shortcut mit Payoff-Plan."
   relations: []
   examples:
-    - "<example>"
+    - "Skip a validation step temporarily, with a dated payoff plan"
   anti_examples:
     - "Ein dauerhafter Zustand ohne Plan"
 system4d:
@@ -24,7 +24,7 @@ system4d:
 Bewusster Shortcut mit Payoff-Plan.
 
 ## Typical usage
-- <how this concept is used in your holding>
+- Recorded alongside exceptions and incidents to avoid permanent bypasses.
 
 ## Common confusions
-- <what people might confuse this with>
+- Confused with unknown bugs (debt is explicit and tracked).

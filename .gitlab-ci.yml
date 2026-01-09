@@ -1,0 +1,18 @@
+stages:
+  - validate
+
+kernel:validate:
+  stage: validate
+  image: python:3.11-slim
+  rules:
+    - when: always
+  script:
+    - python --version
+    - pip install --no-cache-dir ./tools/rocs-cli
+    - rocs validate --repo . --strict-placeholders
+    - rocs build --repo .
+  artifacts:
+    when: always
+    paths:
+      - ontology/dist/
+

@@ -7,7 +7,7 @@ ont:
   description: "Eine aktive Unsicherheit mit möglichem Schaden."
   relations: []
   examples:
-    - "<example>"
+    - "Prompt injection via repo files"
   anti_examples:
     - "Eine reine Annahme ohne Impact"
 system4d:
@@ -24,7 +24,7 @@ system4d:
 Eine aktive Unsicherheit mit möglichem Schaden.
 
 ## Typical usage
-- <how this concept is used in your holding>
+- Tracked in registers; mitigations inform policies and tooling.
 
 ## Common confusions
-- <what people might confuse this with>
+- Confused with an incident (realized failure) rather than a potential.
