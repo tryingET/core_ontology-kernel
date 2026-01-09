@@ -5,7 +5,6 @@ ont:
   labels: ["triggers"]
   description: "X löst Y aus (Trigger → Effect)"
   group: "causality"
-  inverse: "triggered_by"
   characteristics:
     transitive: false
     symmetric: false

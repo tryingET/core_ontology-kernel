@@ -5,7 +5,7 @@ ont:
   labels: ["Exception"]
   synonyms: []
   description: "Bewusste Ausnahme von einer Regel (mit Begründung und Scope)."
-  relations:
+  relations: []
   examples:
     - "<example>"
   anti_examples:

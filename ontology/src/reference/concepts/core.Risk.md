@@ -5,7 +5,7 @@ ont:
   labels: ["Risk"]
   synonyms: []
   description: "Eine aktive Unsicherheit mit möglichem Schaden."
-  relations:
+  relations: []
   examples:
     - "<example>"
   anti_examples:

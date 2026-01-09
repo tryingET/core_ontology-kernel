@@ -5,7 +5,7 @@ ont:
   labels: ["Service"]
   synonyms: []
   description: "Deploybares Systemteil mit definierten Interfaces."
-  relations:
+  relations: []
   examples:
     - "<example>"
   anti_examples:

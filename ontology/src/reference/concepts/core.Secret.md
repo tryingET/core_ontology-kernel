@@ -5,7 +5,7 @@ ont:
   labels: ["Secret"]
   synonyms: []
   description: "Credential/Token/Key; darf nicht geleakt werden."
-  relations:
+  relations: []
   examples:
     - "<example>"
   anti_examples:

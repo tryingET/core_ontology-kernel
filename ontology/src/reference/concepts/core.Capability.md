@@ -5,7 +5,7 @@ ont:
   labels: ["Capability"]
   synonyms: []
   description: "Eine Fähigkeit/Permission, die Aktionen erlaubt."
-  relations:
+  relations: []
   examples:
     - "<example>"
   anti_examples:

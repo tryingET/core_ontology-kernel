@@ -5,7 +5,7 @@ ont:
   labels: ["Policy"]
   synonyms: []
   description: "Eine formalisierte Regel, die Verhalten einschränkt oder überprüft."
-  relations:
+  relations: []
   examples:
     - "<example>"
   anti_examples:

@@ -5,7 +5,6 @@ ont:
   labels: ["produces"]
   description: "X erzeugt/führt zu Y (Outcome/Result)"
   group: "outcome"
-  inverse: "produced_by"
   characteristics:
     transitive: false
     symmetric: false

@@ -5,7 +5,6 @@ ont:
   labels: ["instance_of"]
   description: "Instanz → Klasse"
   group: "classification"
-  inverse: "has_instance"
   characteristics:
     transitive: false
     symmetric: false

@@ -5,7 +5,7 @@ ont:
   labels: ["Invariant"]
   synonyms: []
   description: "Golden Rule: wenn gebrochen → Konsistenz/Daten korrupt."
-  relations:
+  relations: []
   examples:
     - "<example>"
   anti_examples:

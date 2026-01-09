@@ -5,7 +5,7 @@ ont:
   labels: ["Role"]
   synonyms: []
   description: "Eine Rolle/Berechtigung, die Fähigkeiten bündelt."
-  relations:
+  relations: []
   examples:
     - "<example>"
   anti_examples:

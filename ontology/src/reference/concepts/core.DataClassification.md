@@ -5,7 +5,7 @@ ont:
   labels: ["DataClassification"]
   synonyms: []
   description: "Klassifikation von Daten (public/internal/restricted/secret)."
-  relations:
+  relations: []
   examples:
     - "<example>"
   anti_examples:

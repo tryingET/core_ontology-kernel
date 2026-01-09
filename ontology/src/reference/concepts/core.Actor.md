@@ -5,9 +5,7 @@ ont:
   labels: ["Actor"]
   synonyms: []
   description: "Ein handelndes Subjekt im System (Mensch oder System)."
-  relations:
-    - type: is_a
-      target: "core.Agent"
+  relations: []
   examples:
     - "<example>"
   anti_examples:

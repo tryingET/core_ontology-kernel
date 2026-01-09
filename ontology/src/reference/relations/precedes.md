@@ -5,7 +5,6 @@ ont:
   labels: ["precedes"]
   description: "X kommt vor Y (zeitlich/logisch)"
   group: "sequence"
-  inverse: "follows"
   characteristics:
     transitive: false
     symmetric: false

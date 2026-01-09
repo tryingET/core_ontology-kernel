@@ -5,7 +5,6 @@ ont:
   labels: ["is_a"]
   description: "Untertyp/Unterklasse → Obertyp/Oberklasse"
   group: "taxonomy"
-  inverse: "has_subtype"
   characteristics:
     transitive: true
     symmetric: false

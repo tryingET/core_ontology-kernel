@@ -5,7 +5,7 @@ ont:
   labels: ["IntegrationEdge"]
   synonyms: []
   description: "Integration/Schnittstelle zwischen Systemen (höchster Bug-Risk)."
-  relations:
+  relations: []
   examples:
     - "<example>"
   anti_examples:

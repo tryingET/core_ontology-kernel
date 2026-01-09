@@ -5,7 +5,6 @@ ont:
   labels: ["depends_on"]
   description: "X benötigt Y, um korrekt zu funktionieren"
   group: "dependency"
-  inverse: "required_by"
   characteristics:
     transitive: false
     symmetric: false

@@ -5,7 +5,7 @@ ont:
   labels: ["AuditEvent"]
   synonyms: []
   description: "Nachvollziehbares Ereignis (wer tat was wann warum)."
-  relations:
+  relations: []
   examples:
     - "<example>"
   anti_examples:

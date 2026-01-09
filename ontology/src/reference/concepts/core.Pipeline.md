@@ -5,7 +5,7 @@ ont:
   labels: ["Pipeline"]
   synonyms: []
   description: "CI/CD Workflow, der Artefakte baut/prüft/deployed."
-  relations:
+  relations: []
   examples:
     - "<example>"
   anti_examples:

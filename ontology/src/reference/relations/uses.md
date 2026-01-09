@@ -5,7 +5,6 @@ ont:
   labels: ["uses"]
   description: "X nutzt Y (Implementations-/Betriebsbezug)"
   group: "usage"
-  inverse: "used_by"
   characteristics:
     transitive: false
     symmetric: false

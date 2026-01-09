@@ -5,7 +5,6 @@ ont:
   labels: ["part_of"]
   description: "Teil → Ganzes"
   group: "mereology"
-  inverse: "has_part"
   characteristics:
     transitive: true
     symmetric: false

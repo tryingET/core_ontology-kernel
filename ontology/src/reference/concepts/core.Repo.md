@@ -5,7 +5,7 @@ ont:
   labels: ["Repo"]
   synonyms: []
   description: "Ein Git Repository als Systemgrenze für Code + Artefakte."
-  relations:
+  relations: []
   examples:
     - "<example>"
   anti_examples:

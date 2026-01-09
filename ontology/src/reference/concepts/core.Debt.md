@@ -5,7 +5,7 @@ ont:
   labels: ["Debt"]
   synonyms: []
   description: "Bewusster Shortcut mit Payoff-Plan."
-  relations:
+  relations: []
   examples:
     - "<example>"
   anti_examples:

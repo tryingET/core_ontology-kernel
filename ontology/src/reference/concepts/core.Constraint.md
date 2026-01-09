@@ -5,7 +5,7 @@ ont:
   labels: ["Constraint"]
   synonyms: []
   description: "Axiom mit Sperrwirkung: schließt unerwünschte Welten aus."
-  relations:
+  relations: []
   examples:
     - "<example>"
   anti_examples:

@@ -5,7 +5,7 @@ ont:
   labels: ["Release"]
   synonyms: []
   description: "Versionierter Stand von Artefakten, der referenzierbar ist."
-  relations:
+  relations: []
   examples:
     - "<example>"
   anti_examples:

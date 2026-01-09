@@ -5,7 +5,7 @@ ont:
   labels: ["Assumption"]
   synonyms: []
   description: "Unbewiesene Annahme; muss validierbar gemacht werden."
-  relations:
+  relations: []
   examples:
     - "<example>"
   anti_examples:
