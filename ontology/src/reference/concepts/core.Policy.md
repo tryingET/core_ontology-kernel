@@ -5,9 +5,9 @@ ont:
   labels: ["Policy"]
   synonyms: []
   description: "Eine formalisierte Regel, die Verhalten einschränkt oder überprüft."
-  relations:
+  relations: []
   examples:
-    - "<example>"
+    - "CODEOWNERS-required approval for protected paths"
   anti_examples:
     - "Eine vage Guideline ohne Prüfbarkeit"
 system4d:
@@ -24,7 +24,7 @@ system4d:
 Eine formalisierte Regel, die Verhalten einschränkt oder überprüft.
 
 ## Typical usage
-- <how this concept is used in your holding>
+- Used for enforceable rules with explicit scope and checks.
 
 ## Common confusions
-- <what people might confuse this with>
+- Confused with informal guidelines that cannot be validated.

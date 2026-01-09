@@ -5,9 +5,9 @@ ont:
   labels: ["Invariant"]
   synonyms: []
   description: "Golden Rule: wenn gebrochen → Konsistenz/Daten korrupt."
-  relations:
+  relations: []
   examples:
-    - "<example>"
+    - "Concept IDs are stable; meaning changes create a new ID"
   anti_examples:
     - "Eine Präferenz, die man ignorieren kann"
 system4d:
@@ -24,7 +24,7 @@ system4d:
 Golden Rule: wenn gebrochen → Konsistenz/Daten korrupt.
 
 ## Typical usage
-- <how this concept is used in your holding>
+- Used as non-negotiable rules enforced by policy/validation.
 
 ## Common confusions
-- <what people might confuse this with>
+- Confused with optional best practices.

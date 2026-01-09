@@ -9,7 +9,7 @@ ont:
     - type: is_a
       target: "core.Actor"
   examples:
-    - "<example>"
+    - "GitLab MR-Triage Bot"
   anti_examples:
     - "Ein Service ohne Entscheidungslogik"
 system4d:
@@ -26,7 +26,7 @@ system4d:
 Ein autonom/teilautonom handelnder Software-Akteur (LLM-Agent, Bot).
 
 ## Typical usage
-- <how this concept is used in your holding>
+- Used to model autonomous actors that take actions (e.g. triage, checks, proposals).
 
 ## Common confusions
-- <what people might confuse this with>
+- Confused with `core.Service` (a deployed runtime without decision-making autonomy).

@@ -5,9 +5,9 @@ ont:
   labels: ["IntegrationEdge"]
   synonyms: []
   description: "Integration/Schnittstelle zwischen Systemen (höchster Bug-Risk)."
-  relations:
+  relations: []
   examples:
-    - "<example>"
+    - "Service ↔ GitLab API over HTTPS"
   anti_examples:
     - "Eine interne Funktionssignatur"
 system4d:
@@ -24,7 +24,7 @@ system4d:
 Integration/Schnittstelle zwischen Systemen (höchster Bug-Risk).
 
 ## Typical usage
-- <how this concept is used in your holding>
+- Used to enumerate external dependencies and contracts at system boundaries.
 
 ## Common confusions
-- <what people might confuse this with>
+- Confused with internal function calls inside one system boundary.

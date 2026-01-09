@@ -5,9 +5,9 @@ ont:
   labels: ["Pipeline"]
   synonyms: []
   description: "CI/CD Workflow, der Artefakte baut/prüft/deployed."
-  relations:
+  relations: []
   examples:
-    - "<example>"
+    - "GitLab CI validate job"
   anti_examples:
     - "Ein manueller Schritt ohne Automatisierung"
 system4d:
@@ -24,7 +24,7 @@ system4d:
 CI/CD Workflow, der Artefakte baut/prüft/deployed.
 
 ## Typical usage
-- <how this concept is used in your holding>
+- Used to describe automated checks that gate changes.
 
 ## Common confusions
-- <what people might confuse this with>
+- Confused with a manual checklist.

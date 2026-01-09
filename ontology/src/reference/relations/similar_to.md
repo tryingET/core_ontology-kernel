@@ -9,13 +9,23 @@ ont:
   characteristics:
     transitive: false
     symmetric: true
-  axis_default: "<parents|children|left|right|previous|next>"
+  axis_default: "left"
 examples:
-  - "<positive example>"
+  - "core.Debt similar_to core.Exception (both represent intentional deviation from ideal state)"
 anti_examples:
-  - "<common misuse example>"
+  - "Using similar_to for subtype (use `is_a`) or containment (use `part_of`)"
 ---
 
 ## Notes
 - Keep semantics crisp.
 - Do not overload one relation with multiple meanings (Lucidity).
+
+## Use when
+- Two concepts are adjacent/analogous, but neither is a subtype/part/instance of the other.
+
+## Do not use when
+- You can express a stronger relation like `is_a`, `part_of`, or `depends_on`.
+
+## Domain / Range
+- Domain: concept
+- Range: concept

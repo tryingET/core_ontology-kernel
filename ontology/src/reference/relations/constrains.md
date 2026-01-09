@@ -5,17 +5,26 @@ ont:
   labels: ["constrains"]
   description: "Axiom/Constraint begrenzt oder gilt für X"
   group: "constraint"
-  inverse: "constrained_by"
   characteristics:
     transitive: false
     symmetric: false
-  axis_default: "<parents|children|left|right|previous|next>"
+  axis_default: "parents"
 examples:
-  - "<positive example>"
+  - "core.Policy constrains core.Repo (e.g. no-secrets policy applies to a repo)"
 anti_examples:
-  - "<common misuse example>"
+  - "Using constrains when you mean depends_on"
 ---
 
 ## Notes
 - Keep semantics crisp.
 - Do not overload one relation with multiple meanings (Lucidity).
+
+## Use when
+- A rule/constraint/policy limits a target (scope/applicability).
+
+## Do not use when
+- You mean a runtime/build dependency (use `depends_on`) or simple usage (use `uses`).
+
+## Domain / Range
+- Domain: `core.Constraint` / `core.Policy`
+- Range: any constrained concept (commonly `core.Repo`, `core.Service`)

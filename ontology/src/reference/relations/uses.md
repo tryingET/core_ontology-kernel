@@ -5,17 +5,26 @@ ont:
   labels: ["uses"]
   description: "X nutzt Y (Implementations-/Betriebsbezug)"
   group: "usage"
-  inverse: "used_by"
   characteristics:
     transitive: false
     symmetric: false
-  axis_default: "<parents|children|left|right|previous|next>"
+  axis_default: "children"
 examples:
-  - "<positive example>"
+  - "core.Service uses core.IntegrationEdge"
 anti_examples:
-  - "<common misuse example>"
+  - "Using uses for mandatory requirement (use `depends_on`)"
 ---
 
 ## Notes
 - Keep semantics crisp.
 - Do not overload one relation with multiple meanings (Lucidity).
+
+## Use when
+- X uses Y as part of its implementation/operation (not necessarily required).
+
+## Do not use when
+- You mean a strict requirement (use `depends_on`) or containment (use `part_of`).
+
+## Domain / Range
+- Domain: user system/process
+- Range: used system/component

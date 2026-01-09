@@ -5,9 +5,9 @@ ont:
   labels: ["Exception"]
   synonyms: []
   description: "Bewusste Ausnahme von einer Regel (mit Begründung und Scope)."
-  relations:
+  relations: []
   examples:
-    - "<example>"
+    - "Incident hotfix bypass approved with scope and end date"
   anti_examples:
     - "Ein Bug (ungewollt)"
 system4d:
@@ -24,7 +24,7 @@ system4d:
 Bewusste Ausnahme von einer Regel (mit Begründung und Scope).
 
 ## Typical usage
-- <how this concept is used in your holding>
+- Used for governance-approved rule bypasses with explicit scope and justification.
 
 ## Common confusions
-- <what people might confuse this with>
+- Confused with an accidental failure (bug/incident).

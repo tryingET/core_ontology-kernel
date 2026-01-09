@@ -5,17 +5,26 @@ ont:
   labels: ["part_of"]
   description: "Teil → Ganzes"
   group: "mereology"
-  inverse: "has_part"
   characteristics:
     transitive: true
     symmetric: false
-  axis_default: "<parents|children|left|right|previous|next>"
+  axis_default: "parents"
 examples:
-  - "<positive example>"
+  - "core.IntegrationEdge part_of core.Service (integration is part of a service boundary)"
 anti_examples:
-  - "<common misuse example>"
+  - "Using part_of when you mean depends_on"
 ---
 
 ## Notes
 - Keep semantics crisp.
 - Do not overload one relation with multiple meanings (Lucidity).
+
+## Use when
+- X is a component of Y (mereology / containment).
+
+## Do not use when
+- X just interacts with Y (use `uses`) or requires Y (use `depends_on`).
+
+## Domain / Range
+- Domain: component concept
+- Range: whole concept

@@ -5,9 +5,9 @@ ont:
   labels: ["Assumption"]
   synonyms: []
   description: "Unbewiesene Annahme; muss validierbar gemacht werden."
-  relations:
+  relations: []
   examples:
-    - "<example>"
+    - "Assume CI runner can reach GitLab base URL"
   anti_examples:
     - "Ein Fakt (bewiesen)"
 system4d:
@@ -24,7 +24,7 @@ system4d:
 Unbewiesene Annahme; muss validierbar gemacht werden.
 
 ## Typical usage
-- <how this concept is used in your holding>
+- Tracked in registers; validated during rollout and incident reviews.
 
 ## Common confusions
-- <what people might confuse this with>
+- Confused with a decision (assumptions are provisional).

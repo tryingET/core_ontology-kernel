@@ -5,9 +5,9 @@ ont:
   labels: ["Constraint"]
   synonyms: []
   description: "Axiom mit Sperrwirkung: schließt unerwünschte Welten aus."
-  relations:
+  relations: []
   examples:
-    - "<example>"
+    - "No secrets in committed files"
   anti_examples:
     - "Ein optionaler Hinweis ohne Konsequenz"
 system4d:
@@ -24,7 +24,7 @@ system4d:
 Axiom mit Sperrwirkung: schließt unerwünschte Welten aus.
 
 ## Typical usage
-- <how this concept is used in your holding>
+- Used to capture hard boundaries that shape design and processes.
 
 ## Common confusions
-- <what people might confuse this with>
+- Confused with preferences or guidelines without enforcement.
