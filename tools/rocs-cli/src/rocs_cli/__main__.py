@@ -9,6 +9,8 @@ from pathlib import Path
 import yaml
 from rich.console import Console
 
+from rocs_cli import __version__
+
 
 console = Console()
 
@@ -284,6 +286,7 @@ def cmd_build(args: argparse.Namespace) -> int:
 
 def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(prog="rocs")
+    parser.add_argument("--version", action="version", version=f"rocs-cli {__version__}")
     sub = parser.add_subparsers(dest="cmd", required=True)
 
     p = sub.add_parser("summary")
@@ -310,4 +313,3 @@ def main(argv: list[str] | None = None) -> None:
 
 if __name__ == "__main__":
     main()
-
