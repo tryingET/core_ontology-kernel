@@ -15,6 +15,9 @@ anti_examples:
   - "Using instance_of where taxonomy/subtype is intended (use `is_a`)"
 ---
 
+## Definition
+`X instance_of Y` means X is an instance/value of the class-like concept Y (membership, not subtype).
+
 ## Notes
 - Keep semantics crisp.
 - Do not overload one relation with multiple meanings (Lucidity).

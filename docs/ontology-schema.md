@@ -19,6 +19,7 @@ Required:
 
 Recommended:
 - `ont.status`: `active` (default) or `deprecated`
+- `ont.lint_ignore`: list of lint rule IDs to suppress for this doc (use sparingly; prefer fixing the issue)
 
 ### Deprecation
 
@@ -36,4 +37,3 @@ Required:
 
 Optional:
 - `ont.inverse`: only if the inverse relation label is also defined in the kernel (or the relation is symmetric and self-inverse).
-

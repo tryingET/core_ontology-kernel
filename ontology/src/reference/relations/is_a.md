@@ -15,6 +15,9 @@ anti_examples:
   - "Using is_a for instances/values (use `instance_of`)"
 ---
 
+## Definition
+`X is_a Y` means X is a subtype of Y (inherits Y’s meaning/constraints); use for taxonomy only.
+
 ## Notes
 - Keep semantics crisp.
 - Do not overload one relation with multiple meanings (Lucidity).

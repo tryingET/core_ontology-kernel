@@ -15,6 +15,9 @@ anti_examples:
   - "Using part_of when you mean depends_on"
 ---
 
+## Definition
+`X part_of Y` means X is a component/contained part of Y (mereology/containment), not just a dependency.
+
 ## Notes
 - Keep semantics crisp.
 - Do not overload one relation with multiple meanings (Lucidity).

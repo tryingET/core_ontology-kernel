@@ -15,6 +15,9 @@ anti_examples:
   - "Using triggers for deterministic outputs (use `produces`)"
 ---
 
+## Definition
+`X triggers Y` means X causes Y to start/occur (trigger → effect); prefer `produces` for guaranteed outputs.
+
 ## Notes
 - Keep semantics crisp.
 - Do not overload one relation with multiple meanings (Lucidity).

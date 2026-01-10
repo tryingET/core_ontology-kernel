@@ -15,6 +15,9 @@ anti_examples:
   - "Using uses for mandatory requirement (use `depends_on`)"
 ---
 
+## Definition
+`X uses Y` means X leverages Y as part of its implementation/operation (often optional; use `depends_on` if required).
+
 ## Notes
 - Keep semantics crisp.
 - Do not overload one relation with multiple meanings (Lucidity).

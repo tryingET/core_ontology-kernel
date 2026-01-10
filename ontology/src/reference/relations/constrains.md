@@ -15,6 +15,9 @@ anti_examples:
   - "Using constrains when you mean depends_on"
 ---
 
+## Definition
+`X constrains Y` means X limits Y by defining a rule/constraint/policy that applies to Y (scope/applicability).
+
 ## Notes
 - Keep semantics crisp.
 - Do not overload one relation with multiple meanings (Lucidity).

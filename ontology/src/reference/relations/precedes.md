@@ -15,6 +15,9 @@ anti_examples:
   - "Using precedes for dependency (use `depends_on`)"
 ---
 
+## Definition
+`X precedes Y` means X must occur/hold before Y in time or in a logical sequence (ordering, not causality).
+
 ## Notes
 - Keep semantics crisp.
 - Do not overload one relation with multiple meanings (Lucidity).
