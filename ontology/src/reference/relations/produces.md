@@ -15,6 +15,9 @@ anti_examples:
   - "Using produces for ordering without outcome (use `precedes`)"
 ---
 
+## Definition
+`X produces Y` means X yields/creates Y as an outcome (artifact/state/result), not merely an ordering.
+
 ## Notes
 - Keep semantics crisp.
 - Do not overload one relation with multiple meanings (Lucidity).

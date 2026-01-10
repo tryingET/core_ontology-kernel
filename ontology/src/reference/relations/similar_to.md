@@ -16,6 +16,9 @@ anti_examples:
   - "Using similar_to for subtype (use `is_a`) or containment (use `part_of`)"
 ---
 
+## Definition
+`X similar_to Y` means X and Y are analogous/adjacent concepts without implying subtype, part, or instance semantics.
+
 ## Notes
 - Keep semantics crisp.
 - Do not overload one relation with multiple meanings (Lucidity).

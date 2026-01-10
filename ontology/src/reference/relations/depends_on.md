@@ -15,6 +15,9 @@ anti_examples:
   - "Using depends_on for mere 'uses' relationships"
 ---
 
+## Definition
+`X depends_on Y` means X requires Y to function correctly (runtime/build/operational requirement).
+
 ## Notes
 - Keep semantics crisp.
 - Do not overload one relation with multiple meanings (Lucidity).

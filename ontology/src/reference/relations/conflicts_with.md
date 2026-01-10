@@ -16,6 +16,9 @@ anti_examples:
   - "Using conflicts_with to express similarity (use `similar_to`)"
 ---
 
+## Definition
+`X conflicts_with Y` means X and Y cannot both be satisfied/true in the same scope (a direct contradiction or incompatibility).
+
 ## Notes
 - Keep semantics crisp.
 - Do not overload one relation with multiple meanings (Lucidity).
