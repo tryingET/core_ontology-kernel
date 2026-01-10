@@ -11,11 +11,13 @@ from rich.console import Console
 from rocs_cli import __version__
 from rocs_cli.cache import cache_dir, clear_cache, list_cache_entries, prune_cache
 from rocs_cli.graph import build_edges, collapse_nodes, compute_layout, write_graph
+from rocs_cli.id_index import build_id_index
 from rocs_cli.inverses import check_inverses
 from rocs_cli.layers import dist_dir, parse_gitlab_ref, repo_root as _repo_root, resolve_layers
 from rocs_cli.lint import lint_docs
 from rocs_cli.model import collect_docs
 from rocs_cli.normalize import normalize_tree
+from rocs_cli.pack import build_pack, pack_config_from_profile
 from rocs_cli.rules import Finding, RULES
 from rocs_cli.validate import (
     enforce_budget,
@@ -24,6 +26,7 @@ from rocs_cli.validate import (
     validate_reference_schema,
     validate_repo_structure,
 )
+from rocs_cli.vendored import verify_vendored_hashes
 
 
 console = Console()
@@ -214,14 +217,16 @@ def cmd_build(args: argparse.Namespace) -> int:
         "relation_ids": sorted(relations.keys()),
     }
     (dist / "summary.json").write_text(json.dumps(payload, indent=2) + "\n", "utf-8")
+    (dist / "id_index.json").write_text(json.dumps(build_id_index(concepts=concepts, relations=relations), indent=2) + "\n", "utf-8")
     console.print(f"[green]wrote[/green] {dist/'summary.json'}")
+    console.print(f"[green]wrote[/green] {dist/'id_index.json'}")
     return 0
 
 
 def cmd_pack(args: argparse.Namespace) -> int:
     _maybe_load_env_file(getattr(args, "env_file", None))
     repo = _repo_root(args.repo)
-    layers, _meta = resolve_layers(repo, profile=args.profile, resolve_refs=args.resolve_refs)
+    layers, meta = resolve_layers(repo, profile=args.profile, resolve_refs=args.resolve_refs)
     layers = _filter_layers(layers, only=args.only, layer=args.layer)
     concepts, relations = collect_docs(layers)
     cid = args.ont_id
@@ -229,8 +234,43 @@ def cmd_pack(args: argparse.Namespace) -> int:
     if not doc:
         console.print(f"[red]unknown ont_id[/red]: {cid}")
         return 2
-    console.print(str(doc.path))
-    console.print(doc.path.read_text("utf-8"))
+
+    rel_types: set[str] | None = None
+    if args.rel_types:
+        rel_types = {x.strip() for x in args.rel_types.split(",") if x.strip()}
+
+    cfg = pack_config_from_profile(
+        profile_def=meta.get("profile_def") if isinstance(meta, dict) else None,
+        overrides={
+            "max_depth": args.depth,
+            "rel_types": rel_types,
+            "include_relation_defs": True if args.include_relation_defs else None,
+            "max_docs": args.max_docs,
+            "max_bytes": args.max_bytes,
+        },
+    )
+
+    packed, pack_meta = build_pack(concepts=concepts, relations=relations, root_id=cid, config=cfg)
+    if args.format == "json":
+        console.print_json(
+            json.dumps(
+                {
+                    "repo": str(repo),
+                    "profile": meta.get("profile"),
+                    "pack": pack_meta,
+                    "docs": [{"ont_id": d.ont_id, "kind": d.kind, "path": d.path} for d in packed],
+                }
+            )
+        )
+        return 0
+
+    first = True
+    for d in packed:
+        if not first:
+            console.print("\n---\n")
+        first = False
+        console.print(d.path)
+        console.print(d.text)
     return 0
 
 
@@ -333,6 +373,20 @@ def cmd_cache(args: argparse.Namespace) -> int:
         console.print(f"[green]pruned[/green] {removed}")
         return 0
     raise SystemExit(f"unknown cache subcmd: {args.subcmd}")
+
+
+def cmd_vendored_check(args: argparse.Namespace) -> int:
+    vendored_dir = Path(args.vendored_dir).resolve()
+    ok, lines = verify_vendored_hashes(vendored_dir)
+    if ok:
+        console.print("[green]vendored-check: OK[/green]")
+        return 0
+    console.print("[red]vendored-check: FAIL[/red]")
+    for ln in lines[:200]:
+        console.print(f"- {ln}")
+    if len(lines) > 200:
+        console.print(f"... ({len(lines) - 200} more)")
+    return 1
 
 
 def cmd_normalize(args: argparse.Namespace) -> int:
@@ -549,7 +603,17 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--env-file", help="dotenv file to load into environment (for GitLab base url/token)")
     p.add_argument("--only", help="filter layers: path|ref")
     p.add_argument("--layer", help="filter a specific layer name")
+    p.add_argument("--depth", type=int, help="relation expansion depth (default: profile pack.max_depth or 0)")
+    p.add_argument("--rel-types", help="comma-separated relation labels to follow (default: profile pack.rel_types or all)")
+    p.add_argument("--include-relation-defs", action="store_true", help="include relation definition docs used")
+    p.add_argument("--max-docs", type=int, help="max docs in pack (default: profile pack.max_docs)")
+    p.add_argument("--max-bytes", type=int, help="max UTF-8 bytes in pack (default: profile pack.max_bytes)")
+    p.add_argument("--format", choices=["text", "json"], default="text")
     p.set_defaults(fn=cmd_pack)
+
+    p = sub.add_parser("vendored-check")
+    p.add_argument("--vendored-dir", required=True, help="path to vendored rocs-cli dir (contains VENDORED_HASHES.json)")
+    p.set_defaults(fn=cmd_vendored_check)
 
     p = sub.add_parser("cache")
     sub2 = p.add_subparsers(dest="subcmd", required=True)

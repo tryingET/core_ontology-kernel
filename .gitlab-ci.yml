@@ -10,6 +10,7 @@ kernel:validate:
     - python --version
     - uv --version
     - uvx --version
+    - uvx -n --from ./tools/rocs-cli rocs vendored-check --vendored-dir ./tools/rocs-cli
     - uvx -n --from ./tools/rocs-cli rocs validate --repo . --strict-placeholders
     - uvx -n --from ./tools/rocs-cli rocs build --repo .
   artifacts:
