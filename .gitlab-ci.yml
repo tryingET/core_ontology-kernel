@@ -4,6 +4,8 @@ stages:
 kernel:validate:
   stage: validate
   image: ghcr.io/astral-sh/uv:python3.11-bookworm-slim
+  tags:
+    - runner::mr
   rules:
     - when: always
   script:
