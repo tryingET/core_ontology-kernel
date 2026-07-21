@@ -1,0 +1,13 @@
+{
+  "action_epoch": 1,
+  "required_action_epoch_floor": 1,
+  "roles": [
+    "namespace_policy",
+    "compatibility_decision",
+    "lifecycle_decision",
+    "trust_state",
+    "release_approval",
+    "publication_state"
+  ],
+  "schema": "ontology-kernel.semantic-owner-sandbox-read-request.v0"
+}

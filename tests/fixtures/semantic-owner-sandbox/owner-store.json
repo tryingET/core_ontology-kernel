@@ -1,0 +1,346 @@
+{
+  "canonical_store_locator": "local-sandbox://core/ontology-kernel/task-3988#owner-store",
+  "issuer": {
+    "id": "semantic-owner",
+    "kind": "semantic_owner"
+  },
+  "live_acquisition_implemented": false,
+  "owner_repository": {
+    "canonical_locator": "local://core/ontology-kernel",
+    "identity_revision": 1,
+    "owner": "semantic-owner",
+    "repository_id": "ontology-kernel"
+  },
+  "records": [
+    {
+      "acquisition_contract": "ontology-kernel.semantic-namespace-read-sandbox.v0",
+      "artifact": {
+        "allowed_id_prefix": "sandbox.task-3988.",
+        "artifact_digest": "sha256:726f5736419f7a792bca0895f08b81bdb8e003d1b12cd97565fc83d172094d23",
+        "canonical_namespace_unchanged": true,
+        "environment": "disposable_sandbox",
+        "issuer": {
+          "id": "semantic-owner",
+          "kind": "semantic_owner"
+        },
+        "namespace": "ai-society.core.sandbox.task-3988",
+        "namespace_revision": 1,
+        "non_authorizing": true,
+        "owner_predicate": {
+          "eligible_owner_ids": [
+            "sandbox-owner-a",
+            "sandbox-owner-b",
+            "sandbox-owner-c"
+          ],
+          "kind": "threshold",
+          "minimum_distinct_approvals": 2
+        },
+        "owner_repository": {
+          "canonical_locator": "local://core/ontology-kernel",
+          "identity_revision": 1,
+          "owner": "semantic-owner",
+          "repository_id": "ontology-kernel"
+        },
+        "production_state_mutated": false,
+        "schema": "ontology-kernel.semantic-namespace-policy-sandbox.v0"
+      },
+      "artifact_digest": "sha256:726f5736419f7a792bca0895f08b81bdb8e003d1b12cd97565fc83d172094d23",
+      "category": "semantic_lifecycle",
+      "fact_schema": "semantic-authority-semantic-lifecycle-fact.v0",
+      "issuer": {
+        "id": "semantic-owner",
+        "kind": "semantic_owner"
+      },
+      "owner_repository": {
+        "canonical_locator": "local://core/ontology-kernel",
+        "identity_revision": 1,
+        "owner": "semantic-owner",
+        "repository_id": "ontology-kernel"
+      },
+      "record_digest": "sha256:eebdd69316445814cfc4e555269a5a6305f7148ed0ea4bf76ddbc13159c957f5",
+      "role": "namespace_policy"
+    },
+    {
+      "acquisition_contract": "ontology-kernel.semantic-compatibility-read-sandbox.v0",
+      "artifact": {
+        "artifact_digest": "sha256:1d01b87c133994331bf873c1cc3e172f12c7025c27d6012f73df5ca77ccd1b38",
+        "candidate_id": "sandbox.task-3988.Example",
+        "classification": "conditionally_compatible",
+        "decision_revision": 1,
+        "environment": "disposable_sandbox",
+        "evidence_digest": "sha256:c3022ad29ca525024128e8a3f0e6378ed0551c3c3c03645a19a8f3061d43c6e9",
+        "identifier_reuse_override_forbidden": true,
+        "issuer": {
+          "id": "semantic-owner",
+          "kind": "semantic_owner"
+        },
+        "minimum_deprecation_releases": 2,
+        "namespace": "ai-society.core.sandbox.task-3988",
+        "non_authorizing": true,
+        "owner_repository": {
+          "canonical_locator": "local://core/ontology-kernel",
+          "identity_revision": 1,
+          "owner": "semantic-owner",
+          "repository_id": "ontology-kernel"
+        },
+        "production_state_mutated": false,
+        "required_semver_effect": "minor",
+        "schema": "ontology-kernel.semantic-compatibility-decision-sandbox.v0"
+      },
+      "artifact_digest": "sha256:1d01b87c133994331bf873c1cc3e172f12c7025c27d6012f73df5ca77ccd1b38",
+      "category": "semantic_lifecycle",
+      "fact_schema": "semantic-authority-semantic-lifecycle-fact.v0",
+      "issuer": {
+        "id": "semantic-owner",
+        "kind": "semantic_owner"
+      },
+      "owner_repository": {
+        "canonical_locator": "local://core/ontology-kernel",
+        "identity_revision": 1,
+        "owner": "semantic-owner",
+        "repository_id": "ontology-kernel"
+      },
+      "record_digest": "sha256:9dc828860f96643b8b4bd6d0f744ca55bc2fbc28cbb00ce543e755e6e53c610f",
+      "role": "compatibility_decision"
+    },
+    {
+      "acquisition_contract": "ontology-kernel.semantic-lifecycle-read-sandbox.v0",
+      "artifact": {
+        "artifact_digest": "sha256:c3a39cb894c96bf97e94151f4d6568b8531f850a5ded5676db828236484938ca",
+        "decision_revision": 1,
+        "environment": "disposable_sandbox",
+        "history": [
+          {
+            "predecessor_digest": null,
+            "revision": 1,
+            "state": "active"
+          },
+          {
+            "predecessor_digest": "sha256:6ca1e6439b7ec608a84fc6a552f80ba9bd5e74ef1b45f5764f948741306d157d",
+            "revision": 2,
+            "state": "deprecated"
+          },
+          {
+            "predecessor_digest": "sha256:4d52fc5f7afce6524b549fdf483801bf1ff44ea5e219008fef5308ac660b7d44",
+            "revision": 4,
+            "state": "removed"
+          }
+        ],
+        "identifier_reuse_allowed": false,
+        "issuer": {
+          "id": "semantic-owner",
+          "kind": "semantic_owner"
+        },
+        "namespace": "ai-society.core.sandbox.task-3988",
+        "non_authorizing": true,
+        "owner_repository": {
+          "canonical_locator": "local://core/ontology-kernel",
+          "identity_revision": 1,
+          "owner": "semantic-owner",
+          "repository_id": "ontology-kernel"
+        },
+        "production_state_mutated": false,
+        "schema": "ontology-kernel.semantic-lifecycle-decision-sandbox.v0",
+        "semantic_id": "sandbox.task-3988.Legacy",
+        "tombstone_permanent": true
+      },
+      "artifact_digest": "sha256:c3a39cb894c96bf97e94151f4d6568b8531f850a5ded5676db828236484938ca",
+      "category": "semantic_lifecycle",
+      "fact_schema": "semantic-authority-semantic-lifecycle-fact.v0",
+      "issuer": {
+        "id": "semantic-owner",
+        "kind": "semantic_owner"
+      },
+      "owner_repository": {
+        "canonical_locator": "local://core/ontology-kernel",
+        "identity_revision": 1,
+        "owner": "semantic-owner",
+        "repository_id": "ontology-kernel"
+      },
+      "record_digest": "sha256:9b3488e7b72acc4a19d67e934613e31f567e42c49a5579e6b4ba3a36fd438f4c",
+      "role": "lifecycle_decision"
+    },
+    {
+      "acquisition_contract": "ontology-kernel.semantic-trust-read-sandbox.v0",
+      "artifact": {
+        "active_root": {
+          "key_ids": [
+            "sandbox-non-signing-key-a",
+            "sandbox-non-signing-key-b"
+          ],
+          "prior_root_digest": "sha256:0fcc221e1765c4c845f95d3789eeab060965649a4c82f4a772450002fb7a83c8",
+          "revision": 2,
+          "root_id": "sandbox-root"
+        },
+        "artifact_digest": "sha256:a874db463169d974e48761e278d63aeab5ee1c2ad529a1a104e74324829254dd",
+        "environment": "disposable_sandbox",
+        "fixture_key_material_present": false,
+        "issuer": {
+          "id": "semantic-owner",
+          "kind": "semantic_owner"
+        },
+        "namespace": "ai-society.core.sandbox.task-3988",
+        "non_authorizing": true,
+        "owner_repository": {
+          "canonical_locator": "local://core/ontology-kernel",
+          "identity_revision": 1,
+          "owner": "semantic-owner",
+          "repository_id": "ontology-kernel"
+        },
+        "production_state_mutated": false,
+        "revocation_fail_closed": true,
+        "revocations": [
+          {
+            "reason_digest": "sha256:9ebb8c1b152c42d8cdf08c0a2c84bc5a32f6d171cc21f93c482f2eb8db6bd4e8",
+            "revision": 1,
+            "target_digest": "sha256:752d26a26a63416a4cf1b33871d05991fab7f4f97c2316dc0188e84c94ac23b6",
+            "target_kind": "fixture_key_id"
+          }
+        ],
+        "rotation": {
+          "approved": true,
+          "new_root_digest": "sha256:479b6b9932971a757fe09eca331997b8e5968d3d34e617f9b24b8e93835eed45",
+          "old_root_digest": "sha256:0fcc221e1765c4c845f95d3789eeab060965649a4c82f4a772450002fb7a83c8"
+        },
+        "schema": "ontology-kernel.semantic-trust-state-sandbox.v0",
+        "trust_revision": 2
+      },
+      "artifact_digest": "sha256:a874db463169d974e48761e278d63aeab5ee1c2ad529a1a104e74324829254dd",
+      "category": "semantic_trust",
+      "fact_schema": "semantic-authority-semantic-trust-fact.v0",
+      "issuer": {
+        "id": "semantic-owner",
+        "kind": "semantic_owner"
+      },
+      "owner_repository": {
+        "canonical_locator": "local://core/ontology-kernel",
+        "identity_revision": 1,
+        "owner": "semantic-owner",
+        "repository_id": "ontology-kernel"
+      },
+      "record_digest": "sha256:fe678aa329a6f5030d7b141c58e1f3de833ffd7c4a12d1a9f4f4388aa150c89d",
+      "role": "trust_state"
+    },
+    {
+      "acquisition_contract": "ontology-kernel.semantic-approval-read-sandbox.v0",
+      "artifact": {
+        "action": "validate_sandbox_release_candidate_only",
+        "approval_revision": 1,
+        "artifact_digest": "sha256:ae85c2a9e67b2250d153c8567b59ceeb23d00de9c9b321affaf82f0ea0fb81a0",
+        "candidate_capsule_digest": "sha256:56258f80a932a5d6b77b0f9e2461736ae29e0b8428a50e6ef3df64392b6ffd4c",
+        "compatibility_decision_digest": "sha256:84b76472a61789d002303c10264ad7bbc231f02abca04e012e143326000fe27b",
+        "environment": "disposable_sandbox",
+        "issuer": {
+          "id": "semantic-owner",
+          "kind": "semantic_owner"
+        },
+        "namespace": "ai-society.core.sandbox.task-3988",
+        "non_authorizing": true,
+        "owner_repository": {
+          "canonical_locator": "local://core/ontology-kernel",
+          "identity_revision": 1,
+          "owner": "semantic-owner",
+          "repository_id": "ontology-kernel"
+        },
+        "production_state_mutated": false,
+        "publication_authorized": false,
+        "schema": "ontology-kernel.semantic-release-approval-sandbox.v0",
+        "threshold_satisfied": true,
+        "votes": [
+          {
+            "owner_id": "sandbox-owner-a",
+            "proof_digest": "sha256:d437ce60c10091c64a81b56fda671a1894b77e050be63cfcdcdf45b10330c5fc",
+            "proof_kind": "deterministic_fixture_digest"
+          },
+          {
+            "owner_id": "sandbox-owner-b",
+            "proof_digest": "sha256:00980f4dc75407535866f7795acfbfe7218b6b91cbfaf53a2da5334db4cf2251",
+            "proof_kind": "deterministic_fixture_digest"
+          }
+        ]
+      },
+      "artifact_digest": "sha256:ae85c2a9e67b2250d153c8567b59ceeb23d00de9c9b321affaf82f0ea0fb81a0",
+      "category": "semantic_vote",
+      "fact_schema": "semantic-authority-semantic-vote-fact.v0",
+      "issuer": {
+        "id": "semantic-owner",
+        "kind": "semantic_owner"
+      },
+      "owner_repository": {
+        "canonical_locator": "local://core/ontology-kernel",
+        "identity_revision": 1,
+        "owner": "semantic-owner",
+        "repository_id": "ontology-kernel"
+      },
+      "record_digest": "sha256:00a65d0d1ed5793fb73ddeaaa7b99920574fcf200bdb7f72756a376e8de3c3a1",
+      "role": "release_approval"
+    },
+    {
+      "acquisition_contract": "ontology-kernel.semantic-publication-read-sandbox.v0",
+      "artifact": {
+        "append_only": true,
+        "artifact_digest": "sha256:0d2a8d384fb7bc68a100b26408689886d5485d78c3417fafbf93bac314c91a8e",
+        "canonical_production_head": null,
+        "cas_lineage_complete": true,
+        "environment": "disposable_sandbox",
+        "history": [
+          {
+            "prior_record_digest": null,
+            "record_digest": "sha256:690127e37a93358f4a95fda1b8fd556a0034f70174af44ed2baea0ae8fb10ece",
+            "revision": 1,
+            "status": "published"
+          },
+          {
+            "prior_record_digest": "sha256:690127e37a93358f4a95fda1b8fd556a0034f70174af44ed2baea0ae8fb10ece",
+            "record_digest": "sha256:933a2b3ef68b89f1f1843eddc95ab9223406af618e46e704a1b91c0573613a71",
+            "revision": 2,
+            "status": "withdrawn"
+          },
+          {
+            "prior_record_digest": "sha256:933a2b3ef68b89f1f1843eddc95ab9223406af618e46e704a1b91c0573613a71",
+            "record_digest": "sha256:3bd536d06fbf78dbe2eec988a0a9472d2eb558b5b4a199e5299ee9c7e4ec931f",
+            "revision": 3,
+            "status": "revoked"
+          }
+        ],
+        "issuer": {
+          "id": "semantic-owner",
+          "kind": "semantic_owner"
+        },
+        "ledger_revision": 3,
+        "namespace": "ai-society.core.sandbox.task-3988",
+        "non_authorizing": true,
+        "owner_repository": {
+          "canonical_locator": "local://core/ontology-kernel",
+          "identity_revision": 1,
+          "owner": "semantic-owner",
+          "repository_id": "ontology-kernel"
+        },
+        "production_state_mutated": false,
+        "publication_authorized": false,
+        "sandbox_head_digest": "sha256:3bd536d06fbf78dbe2eec988a0a9472d2eb558b5b4a199e5299ee9c7e4ec931f",
+        "schema": "ontology-kernel.semantic-publication-state-sandbox.v0"
+      },
+      "artifact_digest": "sha256:0d2a8d384fb7bc68a100b26408689886d5485d78c3417fafbf93bac314c91a8e",
+      "category": "semantic_publication",
+      "fact_schema": "semantic-authority-semantic-publication-fact.v0",
+      "issuer": {
+        "id": "semantic-owner",
+        "kind": "semantic_owner"
+      },
+      "owner_repository": {
+        "canonical_locator": "local://core/ontology-kernel",
+        "identity_revision": 1,
+        "owner": "semantic-owner",
+        "repository_id": "ontology-kernel"
+      },
+      "record_digest": "sha256:af1f87f3ce98430a802e50bc98b0b5550163a3ffe84149eff397214be2543c59",
+      "role": "publication_state"
+    }
+  ],
+  "sandbox_only": true,
+  "schema": "ontology-kernel.semantic-owner-sandbox-store.v0",
+  "store_head_digest": "sha256:4b4ad6a583ff74a1a08503ad8f4560b414d988f93c8f06c4adb149f9fc57ea76",
+  "store_id": "semantic-owner-sandbox-task-3988",
+  "store_revision": 1
+}

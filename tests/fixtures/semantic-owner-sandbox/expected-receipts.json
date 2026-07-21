@@ -1,0 +1,438 @@
+{
+  "action_epoch": 1,
+  "bundle_digest": "sha256:96426d468aa315ffe2d319d3d27b89a04ba724a3f876445f44addabc85fe1da3",
+  "live_acquisition_implemented": false,
+  "owner_repository": {
+    "canonical_locator": "local://core/ontology-kernel",
+    "identity_revision": 1,
+    "owner": "semantic-owner",
+    "repository_id": "ontology-kernel"
+  },
+  "pins": [
+    {
+      "acquisition_capability_digest": "sha256:54d93dbda5778ea36394f27e46aea6b5f0fcfacbae78f0e6af9e2c31b36efdc0",
+      "acquisition_contract": "ontology-kernel.semantic-namespace-read-sandbox.v0",
+      "acquisition_contract_digest": "sha256:5dab37e83c6af3dbe9ac664056161b2adaa45d64638aa59eaa3444c0c7bc9fe4",
+      "acquisition_distribution_digest": "sha256:11ffe20be24a6be96b28ef28e285052d0d326f373964b2fd9683996f7ba527f8",
+      "canonical_store_locator": "local-sandbox://core/ontology-kernel/task-3988#owner-store",
+      "capability_pin_digest": "sha256:3f3d82f0d9dcdda93cdb14b4a4ec9fc92d6914cb1aafcd6c66916a93b040148e",
+      "capability_pin_id": "sandbox-pin:task-3988:namespace_policy",
+      "category": "semantic_lifecycle",
+      "fact_digest": "sha256:f99dc2f7f425d86e066c16e5c7f39ea6121527618b4ac59cfed1824459e5b850",
+      "fact_schema": "semantic-authority-semantic-lifecycle-fact.v0",
+      "fact_value": {
+        "kind": "digest",
+        "value": "sha256:726f5736419f7a792bca0895f08b81bdb8e003d1b12cd97565fc83d172094d23"
+      },
+      "freshness_cas_token_digest": "sha256:cea8174e485199d78635388d48bb348743eb6a981e29ccd3764dfdba78b0e49b",
+      "owner_id": "semantic-owner",
+      "owner_repository": {
+        "canonical_locator": "local://core/ontology-kernel",
+        "identity_revision": 1,
+        "owner": "semantic-owner",
+        "repository_id": "ontology-kernel"
+      },
+      "owner_surface": "semantic_owner",
+      "required_action_epoch_floor": 1,
+      "revocation_head_digest": "sha256:a874db463169d974e48761e278d63aeab5ee1c2ad529a1a104e74324829254dd",
+      "role": "namespace_policy",
+      "schema": "semantic-owner-acquisition-capability-pin.v0",
+      "store_head_digest": "sha256:4b4ad6a583ff74a1a08503ad8f4560b414d988f93c8f06c4adb149f9fc57ea76",
+      "store_id": "semantic-owner-sandbox-task-3988",
+      "store_revision": 1
+    },
+    {
+      "acquisition_capability_digest": "sha256:9b052ff65a742c5f41597631c0b1bb88094cc75689ed44637898b708c8efd647",
+      "acquisition_contract": "ontology-kernel.semantic-compatibility-read-sandbox.v0",
+      "acquisition_contract_digest": "sha256:e37653a183189afb6d0b2ad2c518c03b34526aa87d8432236db62b7e8ba0c6fc",
+      "acquisition_distribution_digest": "sha256:f7c896559b3f65a3ecb8a0b04d9f93c8609e2e0fbae83f5e85652e86844000fa",
+      "canonical_store_locator": "local-sandbox://core/ontology-kernel/task-3988#owner-store",
+      "capability_pin_digest": "sha256:a974520f9058b17df8184952a85d89d44aac75136b682197814236ecd84578f4",
+      "capability_pin_id": "sandbox-pin:task-3988:compatibility_decision",
+      "category": "semantic_lifecycle",
+      "fact_digest": "sha256:9ab8da7443241eb00b2b2502deda6f8704ba61f164827477be2529931fffbd45",
+      "fact_schema": "semantic-authority-semantic-lifecycle-fact.v0",
+      "fact_value": {
+        "kind": "digest",
+        "value": "sha256:1d01b87c133994331bf873c1cc3e172f12c7025c27d6012f73df5ca77ccd1b38"
+      },
+      "freshness_cas_token_digest": "sha256:e09dd43ff19c8430bb221f919715fbb758d5ebb1a2ef19483b5b45504c08f24e",
+      "owner_id": "semantic-owner",
+      "owner_repository": {
+        "canonical_locator": "local://core/ontology-kernel",
+        "identity_revision": 1,
+        "owner": "semantic-owner",
+        "repository_id": "ontology-kernel"
+      },
+      "owner_surface": "semantic_owner",
+      "required_action_epoch_floor": 1,
+      "revocation_head_digest": "sha256:a874db463169d974e48761e278d63aeab5ee1c2ad529a1a104e74324829254dd",
+      "role": "compatibility_decision",
+      "schema": "semantic-owner-acquisition-capability-pin.v0",
+      "store_head_digest": "sha256:4b4ad6a583ff74a1a08503ad8f4560b414d988f93c8f06c4adb149f9fc57ea76",
+      "store_id": "semantic-owner-sandbox-task-3988",
+      "store_revision": 1
+    },
+    {
+      "acquisition_capability_digest": "sha256:0491f9557ede5efc31c804eb3107b4335fa5918446f61cdbfb9c3e8b1abcfd78",
+      "acquisition_contract": "ontology-kernel.semantic-lifecycle-read-sandbox.v0",
+      "acquisition_contract_digest": "sha256:b969dd73491b6bfc03c178c4c7e0e3d0ba57de86a6600297dbfd5cc8f57d687b",
+      "acquisition_distribution_digest": "sha256:d5b879fedc008fb5c234ee42813fb8ca5b11f89acde5c7092d9d0cf564eb755e",
+      "canonical_store_locator": "local-sandbox://core/ontology-kernel/task-3988#owner-store",
+      "capability_pin_digest": "sha256:5bb30143d0889f1b21d213f2659f1801a5652aee04c4c70547fd317cb935b17e",
+      "capability_pin_id": "sandbox-pin:task-3988:lifecycle_decision",
+      "category": "semantic_lifecycle",
+      "fact_digest": "sha256:af26dde8ae199bc1e289e3c2b1958f7aec848b9e5c6f734fb617b81ba4123869",
+      "fact_schema": "semantic-authority-semantic-lifecycle-fact.v0",
+      "fact_value": {
+        "kind": "digest",
+        "value": "sha256:c3a39cb894c96bf97e94151f4d6568b8531f850a5ded5676db828236484938ca"
+      },
+      "freshness_cas_token_digest": "sha256:8b47f2043a148522fb64ffb02ada317503a695b4699af41d120f150507072cc4",
+      "owner_id": "semantic-owner",
+      "owner_repository": {
+        "canonical_locator": "local://core/ontology-kernel",
+        "identity_revision": 1,
+        "owner": "semantic-owner",
+        "repository_id": "ontology-kernel"
+      },
+      "owner_surface": "semantic_owner",
+      "required_action_epoch_floor": 1,
+      "revocation_head_digest": "sha256:a874db463169d974e48761e278d63aeab5ee1c2ad529a1a104e74324829254dd",
+      "role": "lifecycle_decision",
+      "schema": "semantic-owner-acquisition-capability-pin.v0",
+      "store_head_digest": "sha256:4b4ad6a583ff74a1a08503ad8f4560b414d988f93c8f06c4adb149f9fc57ea76",
+      "store_id": "semantic-owner-sandbox-task-3988",
+      "store_revision": 1
+    },
+    {
+      "acquisition_capability_digest": "sha256:06e575b32dbf567809f957259a334377b5312e94fe17bc957e4e45e9e77abf5d",
+      "acquisition_contract": "ontology-kernel.semantic-trust-read-sandbox.v0",
+      "acquisition_contract_digest": "sha256:27173adb36eae8442bcaef76f7c4c0f51093cfc81390631155698b720024dce0",
+      "acquisition_distribution_digest": "sha256:42774c9a146fac5c8f05b4c533463d22522b1bbf6178f04ed6f0779c1bad9488",
+      "canonical_store_locator": "local-sandbox://core/ontology-kernel/task-3988#owner-store",
+      "capability_pin_digest": "sha256:6aae02d5a3d81f0e734ce87b97bbfbb054728573768d047dac2478e5673e8094",
+      "capability_pin_id": "sandbox-pin:task-3988:trust_state",
+      "category": "semantic_trust",
+      "fact_digest": "sha256:c7d113aa7ec5f9bc6769b9926e943a56b5ef1539bc86842685832596fabbfb30",
+      "fact_schema": "semantic-authority-semantic-trust-fact.v0",
+      "fact_value": {
+        "kind": "digest",
+        "value": "sha256:a874db463169d974e48761e278d63aeab5ee1c2ad529a1a104e74324829254dd"
+      },
+      "freshness_cas_token_digest": "sha256:6744cbe9050647b5ede0a37fa3a815787b5ad88f67864219ae8f444005984c23",
+      "owner_id": "semantic-owner",
+      "owner_repository": {
+        "canonical_locator": "local://core/ontology-kernel",
+        "identity_revision": 1,
+        "owner": "semantic-owner",
+        "repository_id": "ontology-kernel"
+      },
+      "owner_surface": "semantic_owner",
+      "required_action_epoch_floor": 1,
+      "revocation_head_digest": "sha256:a874db463169d974e48761e278d63aeab5ee1c2ad529a1a104e74324829254dd",
+      "role": "trust_state",
+      "schema": "semantic-owner-acquisition-capability-pin.v0",
+      "store_head_digest": "sha256:4b4ad6a583ff74a1a08503ad8f4560b414d988f93c8f06c4adb149f9fc57ea76",
+      "store_id": "semantic-owner-sandbox-task-3988",
+      "store_revision": 1
+    },
+    {
+      "acquisition_capability_digest": "sha256:732204841eb0d9100e538ce7566d18e8c14c1dfd9691e52cd83d328c6efe8c7b",
+      "acquisition_contract": "ontology-kernel.semantic-approval-read-sandbox.v0",
+      "acquisition_contract_digest": "sha256:a458934dd8f430baea5c1ff177fa39ce53bb61f3f502cd4e5f05e14f4b7b0f61",
+      "acquisition_distribution_digest": "sha256:2c290fb70187179a5b8e2a10dc3118e4a78e7ee5948be6c2ae395f953e5d372a",
+      "canonical_store_locator": "local-sandbox://core/ontology-kernel/task-3988#owner-store",
+      "capability_pin_digest": "sha256:69e98c61aca04e8e4821f62a57e53038405bf64d20dc668562b5ecb4b861afb0",
+      "capability_pin_id": "sandbox-pin:task-3988:release_approval",
+      "category": "semantic_vote",
+      "fact_digest": "sha256:a6bb7c82c229d363eaaa36fc8de97b0ce042fb2248366da10b840dc762d6060c",
+      "fact_schema": "semantic-authority-semantic-vote-fact.v0",
+      "fact_value": {
+        "kind": "digest",
+        "value": "sha256:ae85c2a9e67b2250d153c8567b59ceeb23d00de9c9b321affaf82f0ea0fb81a0"
+      },
+      "freshness_cas_token_digest": "sha256:a4cb44802e927930b50008300b53d04a92e194106a96136a7106d6a3fd76f13a",
+      "owner_id": "semantic-owner",
+      "owner_repository": {
+        "canonical_locator": "local://core/ontology-kernel",
+        "identity_revision": 1,
+        "owner": "semantic-owner",
+        "repository_id": "ontology-kernel"
+      },
+      "owner_surface": "semantic_owner",
+      "required_action_epoch_floor": 1,
+      "revocation_head_digest": "sha256:a874db463169d974e48761e278d63aeab5ee1c2ad529a1a104e74324829254dd",
+      "role": "release_approval",
+      "schema": "semantic-owner-acquisition-capability-pin.v0",
+      "store_head_digest": "sha256:4b4ad6a583ff74a1a08503ad8f4560b414d988f93c8f06c4adb149f9fc57ea76",
+      "store_id": "semantic-owner-sandbox-task-3988",
+      "store_revision": 1
+    },
+    {
+      "acquisition_capability_digest": "sha256:3d3fac278c9cc12a8f3d1d3789336509bc00d1afac583aca63cff6ed5674ecfb",
+      "acquisition_contract": "ontology-kernel.semantic-publication-read-sandbox.v0",
+      "acquisition_contract_digest": "sha256:4bd9dcac667c5176697b7e1371571790c7647084a49dc0230ee888701ebe3dc4",
+      "acquisition_distribution_digest": "sha256:65167613200b0acb07b80602f3b117c72d49dc85113f21ff290e7478334228d2",
+      "canonical_store_locator": "local-sandbox://core/ontology-kernel/task-3988#owner-store",
+      "capability_pin_digest": "sha256:ae057cb597f4184316dabe08ad30726c06cc4e30fabeacb0319cfb8d72b92411",
+      "capability_pin_id": "sandbox-pin:task-3988:publication_state",
+      "category": "semantic_publication",
+      "fact_digest": "sha256:c8a835158285dfd0ba3c477f5c9f35945520ac7d7b3eced5c771edeef020f530",
+      "fact_schema": "semantic-authority-semantic-publication-fact.v0",
+      "fact_value": {
+        "kind": "digest",
+        "value": "sha256:0d2a8d384fb7bc68a100b26408689886d5485d78c3417fafbf93bac314c91a8e"
+      },
+      "freshness_cas_token_digest": "sha256:4d577b54d442c3aada09e73b391d6089c94b9b9555ea18987724f2316c81df85",
+      "owner_id": "semantic-owner",
+      "owner_repository": {
+        "canonical_locator": "local://core/ontology-kernel",
+        "identity_revision": 1,
+        "owner": "semantic-owner",
+        "repository_id": "ontology-kernel"
+      },
+      "owner_surface": "semantic_owner",
+      "required_action_epoch_floor": 1,
+      "revocation_head_digest": "sha256:a874db463169d974e48761e278d63aeab5ee1c2ad529a1a104e74324829254dd",
+      "role": "publication_state",
+      "schema": "semantic-owner-acquisition-capability-pin.v0",
+      "store_head_digest": "sha256:4b4ad6a583ff74a1a08503ad8f4560b414d988f93c8f06c4adb149f9fc57ea76",
+      "store_id": "semantic-owner-sandbox-task-3988",
+      "store_revision": 1
+    }
+  ],
+  "receipts": [
+    {
+      "acquisition_capability_digest": "sha256:54d93dbda5778ea36394f27e46aea6b5f0fcfacbae78f0e6af9e2c31b36efdc0",
+      "acquisition_contract": "ontology-kernel.semantic-namespace-read-sandbox.v0",
+      "acquisition_contract_digest": "sha256:5dab37e83c6af3dbe9ac664056161b2adaa45d64638aa59eaa3444c0c7bc9fe4",
+      "acquisition_distribution_digest": "sha256:11ffe20be24a6be96b28ef28e285052d0d326f373964b2fd9683996f7ba527f8",
+      "action_epoch": 1,
+      "canonical_store_locator": "local-sandbox://core/ontology-kernel/task-3988#owner-store",
+      "capability_pin_digest": "sha256:3f3d82f0d9dcdda93cdb14b4a4ec9fc92d6914cb1aafcd6c66916a93b040148e",
+      "capability_pin_id": "sandbox-pin:task-3988:namespace_policy",
+      "category": "semantic_lifecycle",
+      "claim_scope": "owner_store_read_only",
+      "fact_digest": "sha256:f99dc2f7f425d86e066c16e5c7f39ea6121527618b4ac59cfed1824459e5b850",
+      "fact_schema": "semantic-authority-semantic-lifecycle-fact.v0",
+      "fact_value": {
+        "kind": "digest",
+        "value": "sha256:726f5736419f7a792bca0895f08b81bdb8e003d1b12cd97565fc83d172094d23"
+      },
+      "freshness_cas_token_digest": "sha256:cea8174e485199d78635388d48bb348743eb6a981e29ccd3764dfdba78b0e49b",
+      "issuer": {
+        "id": "semantic-owner",
+        "kind": "semantic_owner"
+      },
+      "observation_id": "sandbox-receipt:task-3988:namespace_policy",
+      "owner_repository": {
+        "canonical_locator": "local://core/ontology-kernel",
+        "identity_revision": 1,
+        "owner": "semantic-owner",
+        "repository_id": "ontology-kernel"
+      },
+      "owner_store_read_receipt_digest": "sha256:ae6d52679bb34ceeeeb52211b8584cb307e418c0a19ec754a19381b263ea22e2",
+      "required_action_epoch_floor": 1,
+      "revocation_head_digest": "sha256:a874db463169d974e48761e278d63aeab5ee1c2ad529a1a104e74324829254dd",
+      "role": "namespace_policy",
+      "schema": "semantic-owner-store-read-receipt.v0",
+      "store_head_digest": "sha256:4b4ad6a583ff74a1a08503ad8f4560b414d988f93c8f06c4adb149f9fc57ea76",
+      "store_id": "semantic-owner-sandbox-task-3988",
+      "store_revision": 1
+    },
+    {
+      "acquisition_capability_digest": "sha256:9b052ff65a742c5f41597631c0b1bb88094cc75689ed44637898b708c8efd647",
+      "acquisition_contract": "ontology-kernel.semantic-compatibility-read-sandbox.v0",
+      "acquisition_contract_digest": "sha256:e37653a183189afb6d0b2ad2c518c03b34526aa87d8432236db62b7e8ba0c6fc",
+      "acquisition_distribution_digest": "sha256:f7c896559b3f65a3ecb8a0b04d9f93c8609e2e0fbae83f5e85652e86844000fa",
+      "action_epoch": 1,
+      "canonical_store_locator": "local-sandbox://core/ontology-kernel/task-3988#owner-store",
+      "capability_pin_digest": "sha256:a974520f9058b17df8184952a85d89d44aac75136b682197814236ecd84578f4",
+      "capability_pin_id": "sandbox-pin:task-3988:compatibility_decision",
+      "category": "semantic_lifecycle",
+      "claim_scope": "owner_store_read_only",
+      "fact_digest": "sha256:9ab8da7443241eb00b2b2502deda6f8704ba61f164827477be2529931fffbd45",
+      "fact_schema": "semantic-authority-semantic-lifecycle-fact.v0",
+      "fact_value": {
+        "kind": "digest",
+        "value": "sha256:1d01b87c133994331bf873c1cc3e172f12c7025c27d6012f73df5ca77ccd1b38"
+      },
+      "freshness_cas_token_digest": "sha256:e09dd43ff19c8430bb221f919715fbb758d5ebb1a2ef19483b5b45504c08f24e",
+      "issuer": {
+        "id": "semantic-owner",
+        "kind": "semantic_owner"
+      },
+      "observation_id": "sandbox-receipt:task-3988:compatibility_decision",
+      "owner_repository": {
+        "canonical_locator": "local://core/ontology-kernel",
+        "identity_revision": 1,
+        "owner": "semantic-owner",
+        "repository_id": "ontology-kernel"
+      },
+      "owner_store_read_receipt_digest": "sha256:db528f55e7ffd2aa35919d8e40f1ff614fa759bc4b1bdd3775d0470f945c95d3",
+      "required_action_epoch_floor": 1,
+      "revocation_head_digest": "sha256:a874db463169d974e48761e278d63aeab5ee1c2ad529a1a104e74324829254dd",
+      "role": "compatibility_decision",
+      "schema": "semantic-owner-store-read-receipt.v0",
+      "store_head_digest": "sha256:4b4ad6a583ff74a1a08503ad8f4560b414d988f93c8f06c4adb149f9fc57ea76",
+      "store_id": "semantic-owner-sandbox-task-3988",
+      "store_revision": 1
+    },
+    {
+      "acquisition_capability_digest": "sha256:0491f9557ede5efc31c804eb3107b4335fa5918446f61cdbfb9c3e8b1abcfd78",
+      "acquisition_contract": "ontology-kernel.semantic-lifecycle-read-sandbox.v0",
+      "acquisition_contract_digest": "sha256:b969dd73491b6bfc03c178c4c7e0e3d0ba57de86a6600297dbfd5cc8f57d687b",
+      "acquisition_distribution_digest": "sha256:d5b879fedc008fb5c234ee42813fb8ca5b11f89acde5c7092d9d0cf564eb755e",
+      "action_epoch": 1,
+      "canonical_store_locator": "local-sandbox://core/ontology-kernel/task-3988#owner-store",
+      "capability_pin_digest": "sha256:5bb30143d0889f1b21d213f2659f1801a5652aee04c4c70547fd317cb935b17e",
+      "capability_pin_id": "sandbox-pin:task-3988:lifecycle_decision",
+      "category": "semantic_lifecycle",
+      "claim_scope": "owner_store_read_only",
+      "fact_digest": "sha256:af26dde8ae199bc1e289e3c2b1958f7aec848b9e5c6f734fb617b81ba4123869",
+      "fact_schema": "semantic-authority-semantic-lifecycle-fact.v0",
+      "fact_value": {
+        "kind": "digest",
+        "value": "sha256:c3a39cb894c96bf97e94151f4d6568b8531f850a5ded5676db828236484938ca"
+      },
+      "freshness_cas_token_digest": "sha256:8b47f2043a148522fb64ffb02ada317503a695b4699af41d120f150507072cc4",
+      "issuer": {
+        "id": "semantic-owner",
+        "kind": "semantic_owner"
+      },
+      "observation_id": "sandbox-receipt:task-3988:lifecycle_decision",
+      "owner_repository": {
+        "canonical_locator": "local://core/ontology-kernel",
+        "identity_revision": 1,
+        "owner": "semantic-owner",
+        "repository_id": "ontology-kernel"
+      },
+      "owner_store_read_receipt_digest": "sha256:79f7908be04f4fdfbd9e996b88dc8776c539dc433510b77075072e18feb4a551",
+      "required_action_epoch_floor": 1,
+      "revocation_head_digest": "sha256:a874db463169d974e48761e278d63aeab5ee1c2ad529a1a104e74324829254dd",
+      "role": "lifecycle_decision",
+      "schema": "semantic-owner-store-read-receipt.v0",
+      "store_head_digest": "sha256:4b4ad6a583ff74a1a08503ad8f4560b414d988f93c8f06c4adb149f9fc57ea76",
+      "store_id": "semantic-owner-sandbox-task-3988",
+      "store_revision": 1
+    },
+    {
+      "acquisition_capability_digest": "sha256:06e575b32dbf567809f957259a334377b5312e94fe17bc957e4e45e9e77abf5d",
+      "acquisition_contract": "ontology-kernel.semantic-trust-read-sandbox.v0",
+      "acquisition_contract_digest": "sha256:27173adb36eae8442bcaef76f7c4c0f51093cfc81390631155698b720024dce0",
+      "acquisition_distribution_digest": "sha256:42774c9a146fac5c8f05b4c533463d22522b1bbf6178f04ed6f0779c1bad9488",
+      "action_epoch": 1,
+      "canonical_store_locator": "local-sandbox://core/ontology-kernel/task-3988#owner-store",
+      "capability_pin_digest": "sha256:6aae02d5a3d81f0e734ce87b97bbfbb054728573768d047dac2478e5673e8094",
+      "capability_pin_id": "sandbox-pin:task-3988:trust_state",
+      "category": "semantic_trust",
+      "claim_scope": "owner_store_read_only",
+      "fact_digest": "sha256:c7d113aa7ec5f9bc6769b9926e943a56b5ef1539bc86842685832596fabbfb30",
+      "fact_schema": "semantic-authority-semantic-trust-fact.v0",
+      "fact_value": {
+        "kind": "digest",
+        "value": "sha256:a874db463169d974e48761e278d63aeab5ee1c2ad529a1a104e74324829254dd"
+      },
+      "freshness_cas_token_digest": "sha256:6744cbe9050647b5ede0a37fa3a815787b5ad88f67864219ae8f444005984c23",
+      "issuer": {
+        "id": "semantic-owner",
+        "kind": "semantic_owner"
+      },
+      "observation_id": "sandbox-receipt:task-3988:trust_state",
+      "owner_repository": {
+        "canonical_locator": "local://core/ontology-kernel",
+        "identity_revision": 1,
+        "owner": "semantic-owner",
+        "repository_id": "ontology-kernel"
+      },
+      "owner_store_read_receipt_digest": "sha256:ba4f7e2c70d79f2b0d71d4e2d36e6eb9007d87b59275230319bedf7a988b6bf4",
+      "required_action_epoch_floor": 1,
+      "revocation_head_digest": "sha256:a874db463169d974e48761e278d63aeab5ee1c2ad529a1a104e74324829254dd",
+      "role": "trust_state",
+      "schema": "semantic-owner-store-read-receipt.v0",
+      "store_head_digest": "sha256:4b4ad6a583ff74a1a08503ad8f4560b414d988f93c8f06c4adb149f9fc57ea76",
+      "store_id": "semantic-owner-sandbox-task-3988",
+      "store_revision": 1
+    },
+    {
+      "acquisition_capability_digest": "sha256:732204841eb0d9100e538ce7566d18e8c14c1dfd9691e52cd83d328c6efe8c7b",
+      "acquisition_contract": "ontology-kernel.semantic-approval-read-sandbox.v0",
+      "acquisition_contract_digest": "sha256:a458934dd8f430baea5c1ff177fa39ce53bb61f3f502cd4e5f05e14f4b7b0f61",
+      "acquisition_distribution_digest": "sha256:2c290fb70187179a5b8e2a10dc3118e4a78e7ee5948be6c2ae395f953e5d372a",
+      "action_epoch": 1,
+      "canonical_store_locator": "local-sandbox://core/ontology-kernel/task-3988#owner-store",
+      "capability_pin_digest": "sha256:69e98c61aca04e8e4821f62a57e53038405bf64d20dc668562b5ecb4b861afb0",
+      "capability_pin_id": "sandbox-pin:task-3988:release_approval",
+      "category": "semantic_vote",
+      "claim_scope": "owner_store_read_only",
+      "fact_digest": "sha256:a6bb7c82c229d363eaaa36fc8de97b0ce042fb2248366da10b840dc762d6060c",
+      "fact_schema": "semantic-authority-semantic-vote-fact.v0",
+      "fact_value": {
+        "kind": "digest",
+        "value": "sha256:ae85c2a9e67b2250d153c8567b59ceeb23d00de9c9b321affaf82f0ea0fb81a0"
+      },
+      "freshness_cas_token_digest": "sha256:a4cb44802e927930b50008300b53d04a92e194106a96136a7106d6a3fd76f13a",
+      "issuer": {
+        "id": "semantic-owner",
+        "kind": "semantic_owner"
+      },
+      "observation_id": "sandbox-receipt:task-3988:release_approval",
+      "owner_repository": {
+        "canonical_locator": "local://core/ontology-kernel",
+        "identity_revision": 1,
+        "owner": "semantic-owner",
+        "repository_id": "ontology-kernel"
+      },
+      "owner_store_read_receipt_digest": "sha256:08f5a31ba4482904702ef8e73fa958cec1bc7e1eee9fbe14d63bbd8f6f2ba0f4",
+      "required_action_epoch_floor": 1,
+      "revocation_head_digest": "sha256:a874db463169d974e48761e278d63aeab5ee1c2ad529a1a104e74324829254dd",
+      "role": "release_approval",
+      "schema": "semantic-owner-store-read-receipt.v0",
+      "store_head_digest": "sha256:4b4ad6a583ff74a1a08503ad8f4560b414d988f93c8f06c4adb149f9fc57ea76",
+      "store_id": "semantic-owner-sandbox-task-3988",
+      "store_revision": 1
+    },
+    {
+      "acquisition_capability_digest": "sha256:3d3fac278c9cc12a8f3d1d3789336509bc00d1afac583aca63cff6ed5674ecfb",
+      "acquisition_contract": "ontology-kernel.semantic-publication-read-sandbox.v0",
+      "acquisition_contract_digest": "sha256:4bd9dcac667c5176697b7e1371571790c7647084a49dc0230ee888701ebe3dc4",
+      "acquisition_distribution_digest": "sha256:65167613200b0acb07b80602f3b117c72d49dc85113f21ff290e7478334228d2",
+      "action_epoch": 1,
+      "canonical_store_locator": "local-sandbox://core/ontology-kernel/task-3988#owner-store",
+      "capability_pin_digest": "sha256:ae057cb597f4184316dabe08ad30726c06cc4e30fabeacb0319cfb8d72b92411",
+      "capability_pin_id": "sandbox-pin:task-3988:publication_state",
+      "category": "semantic_publication",
+      "claim_scope": "owner_store_read_only",
+      "fact_digest": "sha256:c8a835158285dfd0ba3c477f5c9f35945520ac7d7b3eced5c771edeef020f530",
+      "fact_schema": "semantic-authority-semantic-publication-fact.v0",
+      "fact_value": {
+        "kind": "digest",
+        "value": "sha256:0d2a8d384fb7bc68a100b26408689886d5485d78c3417fafbf93bac314c91a8e"
+      },
+      "freshness_cas_token_digest": "sha256:4d577b54d442c3aada09e73b391d6089c94b9b9555ea18987724f2316c81df85",
+      "issuer": {
+        "id": "semantic-owner",
+        "kind": "semantic_owner"
+      },
+      "observation_id": "sandbox-receipt:task-3988:publication_state",
+      "owner_repository": {
+        "canonical_locator": "local://core/ontology-kernel",
+        "identity_revision": 1,
+        "owner": "semantic-owner",
+        "repository_id": "ontology-kernel"
+      },
+      "owner_store_read_receipt_digest": "sha256:0ff086eb04c3cfe01b24400e3a3b9be8ea437417a5b8abce24aa63eb56118aa1",
+      "required_action_epoch_floor": 1,
+      "revocation_head_digest": "sha256:a874db463169d974e48761e278d63aeab5ee1c2ad529a1a104e74324829254dd",
+      "role": "publication_state",
+      "schema": "semantic-owner-store-read-receipt.v0",
+      "store_head_digest": "sha256:4b4ad6a583ff74a1a08503ad8f4560b414d988f93c8f06c4adb149f9fc57ea76",
+      "store_id": "semantic-owner-sandbox-task-3988",
+      "store_revision": 1
+    }
+  ],
+  "sandbox_only": true,
+  "schema": "ontology-kernel.semantic-owner-sandbox-receipt-bundle.v0",
+  "store_head_digest": "sha256:4b4ad6a583ff74a1a08503ad8f4560b414d988f93c8f06c4adb149f9fc57ea76"
+}
