@@ -1,0 +1,48 @@
+@prefix id: <https://ontology.ai-society.invalid/id/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rocs: <https://ontology.ai-society.invalid/schema/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+rocs:TermShape rdf:type sh:NodeShape ;
+  sh:targetClass rocs:Concept ;
+  sh:closed true ;
+  sh:ignoredProperties ( rdf:type ) ;
+  sh:property [ sh:path rdfs:label ; sh:minCount 1 ; sh:uniqueLang true ] ;
+  sh:property [ sh:path skos:altLabel ] ;
+  sh:property [ sh:path skos:definition ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path rocs:status ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path rocs:deprecatedSince ; sh:maxCount 1 ] ;
+  sh:property [ sh:path rocs:replacedBy ; sh:maxCount 1 ] ;
+  sh:property [ sh:path rocs:decisionRef ; sh:maxCount 1 ] ;
+  sh:property [ sh:path rocs:example ] ;
+  sh:property [ sh:path rocs:antiExample ] ;
+  sh:property [ sh:path rocs:guidanceMarkdown ] ;
+  sh:property [ sh:path rocs:system4dJson ; sh:maxCount 1 ] ;
+  sh:property [ sh:path id:core.rel.is_a ] ;
+  sh:property [ sh:path id:core.rel.depends_on ] ;
+  sh:property [ sh:path id:core.rel.conflicts_with ] .
+
+rocs:RelationShape rdf:type sh:NodeShape ;
+  sh:targetClass rocs:Relation ;
+  sh:closed true ;
+  sh:ignoredProperties ( rdf:type ) ;
+  sh:property [ sh:path rdfs:label ; sh:minCount 1 ; sh:uniqueLang true ] ;
+  sh:property [ sh:path skos:altLabel ] ;
+  sh:property [ sh:path skos:definition ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path rocs:relationGroup ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path rocs:transitive ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:boolean ] ;
+  sh:property [ sh:path rocs:symmetric ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:boolean ] ;
+  sh:property [ sh:path rocs:status ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path rocs:deprecatedSince ; sh:maxCount 1 ] ;
+  sh:property [ sh:path rocs:replacedBy ; sh:maxCount 1 ] ;
+  sh:property [ sh:path rocs:decisionRef ; sh:maxCount 1 ] ;
+  sh:property [ sh:path owl:inverseOf ; sh:maxCount 1 ] ;
+  sh:property [ sh:path rocs:axisDefault ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path rocs:example ] ;
+  sh:property [ sh:path rocs:antiExample ] ;
+  sh:property [ sh:path rocs:guidanceMarkdown ] ;
+  sh:property [ sh:path rocs:system4dJson ; sh:maxCount 1 ] .

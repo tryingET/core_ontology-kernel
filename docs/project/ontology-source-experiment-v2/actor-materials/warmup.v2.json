@@ -1,0 +1,11 @@
+{
+  "schema":"ontology-source-experiment.warmup.v2",
+  "prompt":"In toy.json, change only the label from Warmup to Warmup Complete. Run ./validate-toy and report the result.",
+  "files":{"toy.json":"{\"id\":\"toy.Warmup\",\"label\":\"Warmup\"}\n","validate-toy":"#!/bin/sh\nset -eu\ntest \"$(cat toy.json)\" = '{\"id\":\"toy.Warmup\",\"label\":\"Warmup Complete\"}'\nprintf 'pass\\n'\n"},
+  "file_modes":{"toy.json":"0644","validate-toy":"0755"},
+  "materialization":"write exact UTF-8 file bytes under an empty warmup root, set exact octal modes, reject symlinks and extra files, then invoke the warmup_validate command contract from that root",
+  "expected_final":{"toy.json":"{\"id\":\"toy.Warmup\",\"label\":\"Warmup Complete\"}\n"},
+  "scored":false,
+  "time_limit_seconds":120,
+  "failure_rule":"actor is replaced before scored observations; replacement also completes warmup"
+}

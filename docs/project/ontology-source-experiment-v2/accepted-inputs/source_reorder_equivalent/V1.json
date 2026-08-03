@@ -1,0 +1,72 @@
+{
+  "schema": "ontology-source-experiment.accepted-input.v2",
+  "case": "source_reorder_equivalent",
+  "variant": "V1",
+  "entrypoint": "virtual_files",
+  "tree_sha256": "1b658efdafb6bb066a184badd31c23a0d7b8ca306f33db3188a05e32ad4a0406",
+  "files": [
+    {
+      "path": "concepts/core.Actor.md",
+      "role": "source",
+      "bytes": 661,
+      "sha256": "69f614cbb1d800b9fff1bf70702ac065dc11d55e23b67dc9e5f6dadfb31b0c06",
+      "content_utf8": "---\nont:\n  id: \"core.Actor\"\n  type: concept\n  labels: [\"Actor\"]\n  synonyms: []\n  description: \"Ein handelndes Subjekt im System (Mensch oder System).\"\n  relations: []\n  examples:\n    - \"Human maintainer or bot acting in GitLab\"\n  anti_examples:\n    - \"Ein reiner Datensatz ohne Handlungsfähigkeit\"\nsystem4d:\n  fog:\n    risks: []\n    assumptions: []\n    exceptions: []\n    debt: []\n---\n\n# Actor (core.Actor)\n\n## Definition\nEin handelndes Subjekt im System (Mensch oder System).\n\n## Typical usage\n- Used as the supertype for entities that can take actions and hold responsibilities.\n\n## Common confusions\n- Confused with passive artifacts (documents, datasets).\n"
+    },
+    {
+      "path": "concepts/core.Agent.md",
+      "role": "source",
+      "bytes": 740,
+      "sha256": "c248e75684a74afad9c4f3a417390eda834e7e14f96acc78eb66c46e9bf6f85d",
+      "content_utf8": "---\nont:\n  id: \"core.Agent\"\n  type: concept\n  synonyms: []\n  labels: [\"Agent\"]\n  description: \"Ein autonom/teilautonom handelnder Software-Akteur (LLM-Agent, Bot).\"\n  relations:\n    - type: \"core.rel.is_a\"\n      target: \"core.Actor\"\n  examples:\n    - \"GitLab MR-Triage Bot\"\n  anti_examples:\n    - \"Ein Service ohne Entscheidungslogik\"\nsystem4d:\n  fog:\n    risks: []\n    assumptions: []\n    exceptions: []\n    debt: []\n---\n\n# Agent (core.Agent)\n\n## Definition\nEin autonom/teilautonom handelnder Software-Akteur (LLM-Agent, Bot).\n\n## Typical usage\n- Used to model autonomous actors that take actions (e.g. triage, checks, proposals).\n\n## Common confusions\n- Confused with `core.Service` (a deployed runtime without decision-making autonomy).\n"
+    },
+    {
+      "path": "concepts/core.DecisionRecord.md",
+      "role": "source",
+      "bytes": 720,
+      "sha256": "10fe9021c1a6d93b0363021f39e3ce7fe936cafac64debb09e633c306e980c74",
+      "content_utf8": "---\nont:\n  id: \"core.DecisionRecord\"\n  type: concept\n  labels: [\"DecisionRecord\"]\n  synonyms: []\n  description: \"A persistent record of a decision, including context, options, and rationale.\"\n  relations: []\n  examples:\n    - \"ADR-style decision linked from ontology deprecations\"\n  anti_examples:\n    - \"An undocumented choice in chat logs\"\nsystem4d:\n  fog:\n    risks: []\n    assumptions: []\n    exceptions: []\n    debt: []\n---\n\n# DecisionRecord (core.DecisionRecord)\n\n## Definition\nA persistent record of a decision, including context, options, and rationale.\n\n## Typical usage\n- Used to justify new IDs, deprecations, and relation additions.\n\n## Common confusions\n- Confused with a proposal; decisions are outcomes.\n\n"
+    },
+    {
+      "path": "concepts/core.Policy.md",
+      "role": "source",
+      "bytes": 677,
+      "sha256": "56682142246dacd2cb4494f881bce66311175db8af69b9b60ebac27576f35ad1",
+      "content_utf8": "---\nont:\n  id: \"core.Policy\"\n  type: concept\n  labels: [\"Policy\"]\n  synonyms: []\n  description: \"Eine formalisierte Regel, die Verhalten einschränkt oder überprüft.\"\n  relations: []\n  examples:\n    - \"CODEOWNERS-required approval for protected paths\"\n  anti_examples:\n    - \"Eine vage Guideline ohne Prüfbarkeit\"\nsystem4d:\n  fog:\n    risks: []\n    assumptions: []\n    exceptions: []\n    debt: []\n---\n\n# Policy (core.Policy)\n\n## Definition\nEine formalisierte Regel, die Verhalten einschränkt oder überprüft.\n\n## Typical usage\n- Used for enforceable rules with explicit scope and checks.\n\n## Common confusions\n- Confused with informal guidelines that cannot be validated.\n"
+    },
+    {
+      "path": "concepts/core.Release.md",
+      "role": "source",
+      "bytes": 609,
+      "sha256": "0a0c4899ce7bdc4cc49a5e7ee4bfc978bc346a529c9c06668fcf1b798d760317",
+      "content_utf8": "---\nont:\n  id: \"core.Release\"\n  type: concept\n  labels: [\"Release\"]\n  synonyms: []\n  description: \"Versionierter Stand von Artefakten, der referenzierbar ist.\"\n  relations: []\n  examples:\n    - \"Tag v0.1.0 of ontology-kernel\"\n  anti_examples:\n    - \"Ein Commit ohne Tag\"\nsystem4d:\n  fog:\n    risks: []\n    assumptions: []\n    exceptions: []\n    debt: []\n---\n\n# Release (core.Release)\n\n## Definition\nVersionierter Stand von Artefakten, der referenzierbar ist.\n\n## Typical usage\n- Used to pin versions in manifests and make builds reproducible.\n\n## Common confusions\n- Confused with an untagged commit on main.\n"
+    },
+    {
+      "path": "concepts/core.Secret.md",
+      "role": "source",
+      "bytes": 616,
+      "sha256": "aa61785d379d1b3e2fec4104e14fe980bebb2613af801fc8b9ff810cab18674f",
+      "content_utf8": "---\nont:\n  id: \"core.Secret\"\n  type: concept\n  labels: [\"Secret\"]\n  synonyms: []\n  description: \"Credential/Token/Key; darf nicht geleakt werden.\"\n  relations: []\n  examples:\n    - \"PAT_GITLAB token in a local .env\"\n  anti_examples:\n    - \"Ein öffentliches API-Endpoint\"\nsystem4d:\n  fog:\n    risks: []\n    assumptions: []\n    exceptions: []\n    debt: []\n---\n\n# Secret (core.Secret)\n\n## Definition\nCredential/Token/Key; darf nicht geleakt werden.\n\n## Typical usage\n- Used in policies and CI checks (secret scanning; no-leak constraints).\n\n## Common confusions\n- Confused with public identifiers (URLs, group names).\n"
+    },
+    {
+      "path": "relations/core.rel.conflicts_with.md",
+      "role": "source",
+      "bytes": 1025,
+      "sha256": "9fb64778f71dffb6fbab326ed88e12dcfc504a723733188801060e514905cff5",
+      "content_utf8": "---\nont:\n  id: \"core.rel.conflicts_with\"\n  type: relation\n  labels: [\"conflicts_with\"]\n  description: \"X steht im Konflikt/Widerspruch zu Y\"\n  group: \"opposition\"\n  inverse: \"core.rel.conflicts_with\"\n  characteristics:\n    transitive: false\n    symmetric: true\n  axis_default: \"left\"\nexamples:\n  - \"core.Policy conflicts_with core.Policy (two rules cannot both hold for the same scope)\"\nanti_examples:\n  - \"Using conflicts_with to express similarity (use `similar_to`)\"\n---\n\n## Definition\n`X conflicts_with Y` means X and Y cannot both be satisfied/true in the same scope (a direct contradiction or incompatibility).\n\n## Notes\n- Keep semantics crisp.\n- Do not overload one relation with multiple meanings (Lucidity).\n\n## Use when\n- Two statements/constraints cannot both be satisfied in the same scope.\n\n## Do not use when\n- You mean tradeoff/choice history (track in decisions) or simple difference without contradiction.\n\n## Domain / Range\n- Domain: policies/constraints/invariants\n- Range: policies/constraints/invariants\n"
+    },
+    {
+      "path": "relations/core.rel.depends_on.md",
+      "role": "source",
+      "bytes": 1028,
+      "sha256": "8084b763169985c34d54f630666e94c38aff45ca5da7a96b0a6555609da6e6dd",
+      "content_utf8": "---\nont:\n  id: \"core.rel.depends_on\"\n  type: relation\n  labels: [\"depends_on\"]\n  description: \"X benötigt Y, um korrekt zu funktionieren\"\n  group: \"dependency\"\n  characteristics:\n    transitive: false\n    symmetric: false\n  axis_default: \"parents\"\nexamples:\n  - \"core.Service depends_on core.IntegrationEdge (service needs an external integration)\"\nanti_examples:\n  - \"Using depends_on for mere 'uses' relationships\"\n---\n\n## Definition\n`X depends_on Y` means X requires Y to function correctly (runtime/build/operational requirement).\n\n## Notes\n- Keep semantics crisp.\n- Do not overload one relation with multiple meanings (Lucidity).\n\n## Use when\n- X requires Y to function correctly (runtime, build, or operational requirement).\n\n## Do not use when\n- X just uses Y optionally or incidentally (use `uses`), or X is a part of Y (use `part_of`).\n\n## Domain / Range\n- Domain: any system element (`core.Service`, `core.Pipeline`, `core.Repo`)\n- Range: required element (`core.Service`, `core.IntegrationEdge`, `core.Policy`, etc)\n"
+    },
+    {
+      "path": "relations/core.rel.is_a.md",
+      "role": "source",
+      "bytes": 830,
+      "sha256": "3d049ef909281eafb6720e90c3273b04e336fbff2dc30bae262be22391af5ffc",
+      "content_utf8": "---\nont:\n  id: \"core.rel.is_a\"\n  type: relation\n  labels: [\"is_a\"]\n  description: \"Untertyp/Unterklasse → Obertyp/Oberklasse\"\n  group: \"taxonomy\"\n  characteristics:\n    transitive: true\n    symmetric: false\n  axis_default: \"parents\"\nexamples:\n  - \"core.Agent is_a core.Actor\"\nanti_examples:\n  - \"Using is_a for instances/values (use `instance_of`)\"\n---\n\n## Definition\n`X is_a Y` means X is a subtype of Y (inherits Y’s meaning/constraints); use for taxonomy only.\n\n## Notes\n- Keep semantics crisp.\n- Do not overload one relation with multiple meanings (Lucidity).\n\n## Use when\n- X is a subtype/specialization of Y (inherits meaning/constraints).\n\n## Do not use when\n- You mean instance/value membership (use `instance_of`) or part-whole (use `part_of`).\n\n## Domain / Range\n- Domain: subtype concept\n- Range: supertype concept\n"
+    }
+  ]
+}

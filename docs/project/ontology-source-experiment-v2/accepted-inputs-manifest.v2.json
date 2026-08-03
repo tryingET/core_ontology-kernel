@@ -1,0 +1,286 @@
+{
+  "schema": "ontology-source-experiment.accepted-inputs-manifest.v2",
+  "tree_sha256": "b48bad40744b7da08a1c087b2529464fb5211404fa90fcd6d3780e054a03fd8a",
+  "inputs": [
+    {
+      "case": "add_term",
+      "variant": "V1",
+      "path": "add_term/V1.json",
+      "bytes": 10070,
+      "sha256": "958c4935c35c78a788be7abf3ac70a0ee9b5597dc00e5032c0ade916e53440e5"
+    },
+    {
+      "case": "add_term",
+      "variant": "V2",
+      "path": "add_term/V2.json",
+      "bytes": 12861,
+      "sha256": "2cfa72b16f175559e6752cc730d976b36f02cce16d0bc11fab929652d530bb19"
+    },
+    {
+      "case": "add_term",
+      "variant": "V3",
+      "path": "add_term/V3.json",
+      "bytes": 13799,
+      "sha256": "a1640c77172838a52c1792f48d5b82a0fefd875e3e7f476691fd80da3b2efd94"
+    },
+    {
+      "case": "add_term",
+      "variant": "V4",
+      "path": "add_term/V4.json",
+      "bytes": 13322,
+      "sha256": "9b3933f73efd17c232fe6028cf6d4dc6f981a8e7b1bfe555d2f33423b9dc6574"
+    },
+    {
+      "case": "baseline",
+      "variant": "V1",
+      "path": "baseline/V1.json",
+      "bytes": 9433,
+      "sha256": "eb61489e487ac84b112fdfa038f8299e8b77e494545d7828b226ddf159dc1c66"
+    },
+    {
+      "case": "baseline",
+      "variant": "V2",
+      "path": "baseline/V2.json",
+      "bytes": 12016,
+      "sha256": "bf7b1c14334773398e19509bce9e3c6a9cf122d7e3fe805f929b8fd37ce55aab"
+    },
+    {
+      "case": "baseline",
+      "variant": "V3",
+      "path": "baseline/V3.json",
+      "bytes": 13315,
+      "sha256": "cbebb2940f8060921323f6b6884d0810faffc13fd60503c4deafc26010b3bced"
+    },
+    {
+      "case": "baseline",
+      "variant": "V4",
+      "path": "baseline/V4.json",
+      "bytes": 12431,
+      "sha256": "9f323a0cb1bf5ae8d0192429820fdbfbd0f5e08ebef40068afd4345e4c16e98c"
+    },
+    {
+      "case": "definition_change",
+      "variant": "V1",
+      "path": "definition_change/V1.json",
+      "bytes": 9428,
+      "sha256": "274ecceec71fd28b8b95918e4086693657b48b0eeb9e6c9835a6da8368abb386"
+    },
+    {
+      "case": "definition_change",
+      "variant": "V2",
+      "path": "definition_change/V2.json",
+      "bytes": 12011,
+      "sha256": "2bbb0d4f938928298e318065ffcf5962bf6793dc5d73543c0daad5ade1aa3048"
+    },
+    {
+      "case": "definition_change",
+      "variant": "V3",
+      "path": "definition_change/V3.json",
+      "bytes": 13310,
+      "sha256": "8ac1bfdcd0ef1e0c890f7a3aaee478bf8be67bbbff6ccfb31aa01b9e6bd7b50b"
+    },
+    {
+      "case": "definition_change",
+      "variant": "V4",
+      "path": "definition_change/V4.json",
+      "bytes": 12426,
+      "sha256": "f217b147819c08051e9166825cfb0740d9df24f0d577858ac085c4180366a9e2"
+    },
+    {
+      "case": "deprecation",
+      "variant": "V1",
+      "path": "deprecation/V1.json",
+      "bytes": 9600,
+      "sha256": "67bb5ea19cf860fa91ff4df9f51348bcf0aae687aa31c80d67d65ff5f9d879b8"
+    },
+    {
+      "case": "deprecation",
+      "variant": "V2",
+      "path": "deprecation/V2.json",
+      "bytes": 12231,
+      "sha256": "3ecf2e1501c6e8ba3e0bf2e83e1b33ce1d980202bba4237536425e8f56213160"
+    },
+    {
+      "case": "deprecation",
+      "variant": "V3",
+      "path": "deprecation/V3.json",
+      "bytes": 13533,
+      "sha256": "5e96d501de198c779dc64b9f8cf818fcf0f696e29704267cef4cc2dc563a2bad"
+    },
+    {
+      "case": "deprecation",
+      "variant": "V4",
+      "path": "deprecation/V4.json",
+      "bytes": 12576,
+      "sha256": "9d2722fb0c541b698b32a5aa25da66793380b56c315e44905f09a512f388ec15"
+    },
+    {
+      "case": "edge_wrong",
+      "variant": "V1",
+      "path": "edge_wrong/V1.json",
+      "bytes": 9436,
+      "sha256": "fd1b7867d55ed0e99db33ebc1871a80dbc448a0891f542f66f5310b6b8831461"
+    },
+    {
+      "case": "edge_wrong",
+      "variant": "V2",
+      "path": "edge_wrong/V2.json",
+      "bytes": 12019,
+      "sha256": "26b0d451f0c4ec5767fc46c2040dc08811c7f0aba63e4a2e0f30dc0d7e184c40"
+    },
+    {
+      "case": "edge_wrong",
+      "variant": "V3",
+      "path": "edge_wrong/V3.json",
+      "bytes": 13318,
+      "sha256": "644d7385f4c3c0f226b720f6b8dfad315694bda413639336c5b03c52e8fe972b"
+    },
+    {
+      "case": "edge_wrong",
+      "variant": "V4",
+      "path": "edge_wrong/V4.json",
+      "bytes": 12434,
+      "sha256": "cf458e5faeb444554f9cf3ffecd6a8c1f641c42e5a59cad98640ae797301a32d"
+    },
+    {
+      "case": "label_rename",
+      "variant": "V1",
+      "path": "label_rename/V1.json",
+      "bytes": 9445,
+      "sha256": "68b0ef4f191297a5fbfe3479c9282b2f88af7b722438bc35a4f91a5a237ae5c8"
+    },
+    {
+      "case": "label_rename",
+      "variant": "V2",
+      "path": "label_rename/V2.json",
+      "bytes": 12028,
+      "sha256": "d51f392af150062df26d66e555e50e492127b39925aae36017346e6e5426ebbf"
+    },
+    {
+      "case": "label_rename",
+      "variant": "V3",
+      "path": "label_rename/V3.json",
+      "bytes": 13327,
+      "sha256": "dcf1ae059da12f713985ac9a8fd572ce33e7fccbaa16e4f2465831cd565c0e17"
+    },
+    {
+      "case": "label_rename",
+      "variant": "V4",
+      "path": "label_rename/V4.json",
+      "bytes": 12443,
+      "sha256": "476e0ef8dda5f729ecbc578375c51fd5ed4c911ec79b85da612f7b9d88709ec2"
+    },
+    {
+      "case": "merge_label_and_guidance",
+      "variant": "V1",
+      "path": "merge_label_and_guidance/V1.json",
+      "bytes": 9504,
+      "sha256": "dd7cb94c605292da891fd5079d370692d5f32ef97f07239a023fcc6ef1146666"
+    },
+    {
+      "case": "merge_label_and_guidance",
+      "variant": "V2",
+      "path": "merge_label_and_guidance/V2.json",
+      "bytes": 12088,
+      "sha256": "3241884ac1aec072e86b3337e04c78d964e1eb960bf6d424eb0b3e6bb142c3b5"
+    },
+    {
+      "case": "merge_label_and_guidance",
+      "variant": "V3",
+      "path": "merge_label_and_guidance/V3.json",
+      "bytes": 13414,
+      "sha256": "7bd36013d3430de17e812ed745d52062d756ded6e30198351f5a6a24c76667ff"
+    },
+    {
+      "case": "merge_label_and_guidance",
+      "variant": "V4",
+      "path": "merge_label_and_guidance/V4.json",
+      "bytes": 12495,
+      "sha256": "8906e12f3da59d4dd72fdde195c6069fb706079db01909b96b6540e0bc8cfb7b"
+    },
+    {
+      "case": "source_reorder_equivalent",
+      "variant": "V1",
+      "path": "source_reorder_equivalent/V1.json",
+      "bytes": 9450,
+      "sha256": "72786c291153ce973616402434c639e551555a4ea06feac5297e841311c62c14"
+    },
+    {
+      "case": "source_reorder_equivalent",
+      "variant": "V2",
+      "path": "source_reorder_equivalent/V2.json",
+      "bytes": 11786,
+      "sha256": "1a2b11f643d92d2f9f8679018ecdacd70669373feffb3b85cb9527da6a1eef9c"
+    },
+    {
+      "case": "source_reorder_equivalent",
+      "variant": "V3",
+      "path": "source_reorder_equivalent/V3.json",
+      "bytes": 13332,
+      "sha256": "36bf5b5157d206d1d3c588bd773552e67f6094e448bcad1804805504d27e1dc9"
+    },
+    {
+      "case": "source_reorder_equivalent",
+      "variant": "V4",
+      "path": "source_reorder_equivalent/V4.json",
+      "bytes": 13724,
+      "sha256": "1bb86e95a23ecf82abca1d790375e0951c17444eb84eae610f3f63e11bed75be"
+    },
+    {
+      "case": "unicode_nfc",
+      "variant": "V1",
+      "path": "unicode_nfc/V1.json",
+      "bytes": 9437,
+      "sha256": "765e84335a36fcea922f7fc6144a07969a95e5408ce5f8f3f32608d2f3451bc9"
+    },
+    {
+      "case": "unicode_nfc",
+      "variant": "V2",
+      "path": "unicode_nfc/V2.json",
+      "bytes": 12020,
+      "sha256": "b9995d8d0f27e9a957db0c252de75805f43c70ecfd634cd5fe76c3629767ffdd"
+    },
+    {
+      "case": "unicode_nfc",
+      "variant": "V3",
+      "path": "unicode_nfc/V3.json",
+      "bytes": 13319,
+      "sha256": "01af6fe880e43272285e28ad42e8fdb658198d658c45c5ca9be8ecaff0386c32"
+    },
+    {
+      "case": "unicode_nfc",
+      "variant": "V4",
+      "path": "unicode_nfc/V4.json",
+      "bytes": 12435,
+      "sha256": "45d314e579295159fba9738d8d09c08cdc082ec9af8ac9693473555501d34a0d"
+    },
+    {
+      "case": "unicode_nfd_equivalent",
+      "variant": "V1",
+      "path": "unicode_nfd_equivalent/V1.json",
+      "bytes": 9449,
+      "sha256": "9eecef5f370c30512053afe0d8ea3a34e38489ddb1fdc13efeeec1b5f860741b"
+    },
+    {
+      "case": "unicode_nfd_equivalent",
+      "variant": "V2",
+      "path": "unicode_nfd_equivalent/V2.json",
+      "bytes": 12032,
+      "sha256": "62923b42b69ca569e7a8bcb8a213fc9c4dbfa6ba55ae1f924dae35bddce1c85e"
+    },
+    {
+      "case": "unicode_nfd_equivalent",
+      "variant": "V3",
+      "path": "unicode_nfd_equivalent/V3.json",
+      "bytes": 13331,
+      "sha256": "1d28ee4ced937788f95da59ebfaaef27bf2a1420cae64f9bbf0505d1a969a3b5"
+    },
+    {
+      "case": "unicode_nfd_equivalent",
+      "variant": "V4",
+      "path": "unicode_nfd_equivalent/V4.json",
+      "bytes": 12447,
+      "sha256": "e6921629998cd51f1e4c02b9bc3050e2cec879f1adb77d8c72e2c7aaa3357901"
+    }
+  ]
+}

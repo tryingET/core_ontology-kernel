@@ -1,0 +1,27 @@
+{
+  "schema": "ontology-source-experiment.baseline-manifest.v0",
+  "repository": "core/ontology-kernel",
+  "commit": "038151bbe8bca46700a800cc05fa39a87ee89ed7",
+  "source_tree_scope": "ontology/src/reference",
+  "tracked_definition_counts": {"concepts":31,"relations":12},
+  "directory_readmes_excluded": [
+    "ontology/src/reference/concepts/README.md",
+    "ontology/src/reference/relations/README.md"
+  ],
+  "dirty_worktree_inputs_excluded": [
+    "ontology/src/reference/concepts/core.AgentExperience.md"
+  ],
+  "fixture_files": [
+    {"term_id":"core.Agent","path":"ontology/src/reference/concepts/core.Agent.md","git_blob":"76069ee7869b4a5a2c5a775c3c9167aa4d46ac11","byte_sha256":"4e473ad56cb0e2e773b10fc6aaeb9af69c9ccbf7fc262e16ba826d49a1e24036"},
+    {"term_id":"core.Actor","path":"ontology/src/reference/concepts/core.Actor.md","git_blob":"52a480ac14de626e32fef4e344adb095817df83c","byte_sha256":"69f614cbb1d800b9fff1bf70702ac065dc11d55e23b67dc9e5f6dadfb31b0c06"},
+    {"term_id":"core.Secret","path":"ontology/src/reference/concepts/core.Secret.md","git_blob":"7da5f666fd4e3f595939f860396913db5b3ea0a3","byte_sha256":"aa61785d379d1b3e2fec4104e14fe980bebb2613af801fc8b9ff810cab18674f"},
+    {"term_id":"core.Policy","path":"ontology/src/reference/concepts/core.Policy.md","git_blob":"467a00b7f32b468b9b0d46e15d4b2c2181e365ee","byte_sha256":"56682142246dacd2cb4494f881bce66311175db8af69b9b60ebac27576f35ad1"},
+    {"term_id":"core.Release","path":"ontology/src/reference/concepts/core.Release.md","git_blob":"5ef5ccc481962484fe0a501945ee6056c028d402","byte_sha256":"0a0c4899ce7bdc4cc49a5e7ee4bfc978bc346a529c9c06668fcf1b798d760317"},
+    {"term_id":"core.DecisionRecord","path":"ontology/src/reference/concepts/core.DecisionRecord.md","git_blob":"5b51b31b3aa097c99a776a0886763112bf8c1482","byte_sha256":"10fe9021c1a6d93b0363021f39e3ce7fe936cafac64debb09e633c306e980c74"},
+    {"term_id":"core.rel.is_a","path":"ontology/src/reference/relations/is_a.md","git_blob":"75be9b0412643cbc12a38ffe709a3b7ed452b354","byte_sha256":"3d049ef909281eafb6720e90c3273b04e336fbff2dc30bae262be22391af5ffc"},
+    {"term_id":"core.rel.depends_on","path":"ontology/src/reference/relations/depends_on.md","git_blob":"9b305447352ee457829d72eee0abefda9c2a5cb7","byte_sha256":"8084b763169985c34d54f630666e94c38aff45ca5da7a96b0a6555609da6e6dd"},
+    {"term_id":"core.rel.conflicts_with","path":"ontology/src/reference/relations/conflicts_with.md","git_blob":"c6483a0c92aa204e77f9bab2f6d4042c220f0733","byte_sha256":"1f05dfaffd82f83211933912bffda9efc3f388d5439307fc51b24360ff1230b7"}
+  ],
+  "source_tree_digest_algorithm": "sha256 over UTF-8 lines '<byte_sha256>  <repo-relative-path>\\n' sorted by unsigned UTF-8 path bytes; tracked files only; symlinks forbidden",
+  "workspace_precondition": "immutable clean baseline checkout plus separate writable variant copies; operator dirty checkout excluded"
+}

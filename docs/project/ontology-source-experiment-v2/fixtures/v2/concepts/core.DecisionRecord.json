@@ -1,0 +1,32 @@
+{
+  "guidance": {
+    "anti_examples": [
+      "An undocumented choice in chat logs"
+    ],
+    "examples": [
+      "ADR-style decision linked from ontology deprecations"
+    ],
+    "sections": [
+      "# DecisionRecord (core.DecisionRecord)\n\n## Definition\nA persistent record of a decision, including context, options, and rationale.\n\n## Typical usage\n- Used to justify new IDs, deprecations, and relation additions.\n\n## Common confusions\n- Confused with a proposal; decisions are outcomes.\n\n"
+    ]
+  },
+  "ont": {
+    "description": "A persistent record of a decision, including context, options, and rationale.",
+    "id": "core.DecisionRecord",
+    "labels": [
+      "DecisionRecord"
+    ],
+    "relations": [],
+    "synonyms": [],
+    "type": "concept"
+  },
+  "schema": "rocs-source-experiment.v0",
+  "system4d": {
+    "fog": {
+      "assumptions": [],
+      "debt": [],
+      "exceptions": [],
+      "risks": []
+    }
+  }
+}

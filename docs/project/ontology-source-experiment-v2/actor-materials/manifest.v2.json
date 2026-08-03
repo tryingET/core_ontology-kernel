@@ -1,0 +1,41 @@
+{
+  "schema": "ontology-source-experiment.actor-materials-manifest.v2",
+  "tree_sha256": "6d7fe1c167958a08cf767a573772e7fd65ac333f6335f163c645640c569983eb",
+  "files": [
+    {
+      "path": "actor-system-instructions.txt",
+      "bytes": 983,
+      "sha256": "ba9110bf9851b353c3ad0007f8a9c060e58388af1f2b19de04c40d949fa432a9"
+    },
+    {
+      "path": "experiment-wrapper-contract.v2.json",
+      "bytes": 1973,
+      "sha256": "2219e561e564c005c5bb4567a037838496eb5476a02a28efd4436a85ddacaac5"
+    },
+    {
+      "path": "reviewer-presentation.v2.json",
+      "bytes": 1435,
+      "sha256": "7f746fd3d8738d4f951daa76c819eee8721fda78347569e52ff0d13a2666e819"
+    },
+    {
+      "path": "reviewer-system-instructions.txt",
+      "bytes": 802,
+      "sha256": "ca949b8a35554207dcdf1023bec5ad9a9e95df040e355de225e1968ccb4b3bd9"
+    },
+    {
+      "path": "tool-allowlist.v2.json",
+      "bytes": 1747,
+      "sha256": "a006f22e305e70215726481c4de49ac6f8d785615ea2519ea4df618dfaf45fb6"
+    },
+    {
+      "path": "validation-help.v2.json",
+      "bytes": 1219,
+      "sha256": "0980055713abc8828511d6e2edf161f490785d2430409d8c847574902f97d25f"
+    },
+    {
+      "path": "warmup.v2.json",
+      "bytes": 885,
+      "sha256": "de86d8f821f6497808862e80792ee6fa7e407ab5518790f7d402336d23d5285a"
+    }
+  ]
+}

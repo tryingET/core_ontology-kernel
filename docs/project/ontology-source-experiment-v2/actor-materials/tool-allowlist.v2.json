@@ -1,0 +1,17 @@
+{
+  "schema":"ontology-source-experiment.tool-allowlist.v2",
+  "actor_tools":["read","edit","write","bash"],
+  "reviewer_tools":["read"],
+  "actor_path_policy":"read/write only inside supplied observation root; read one supplied validation-help file outside root; all other paths denied",
+  "reviewer_path_policy":"read only the supplied normalized packet",
+  "bash_allowlist":["pwd","git status --short","git diff -- <supplied-source-paths>","./validate-toy","./experiment validate --variant <assigned exact variant> --root .","./experiment author-v4 --root . < term-payload.json"],
+  "command_contracts":[
+    {"id":"warmup_validate","cwd":"warmup observation root","argv":["./validate-toy"],"stdin":null,"allowed_only_during":"unscored warmup"},
+    {"id":"variant_validate","cwd":"scored observation root","argv":["./experiment","validate","--variant","<assigned exact variant>","--root","."],"stdin":null,"allowed_only_during":"scored observation"},
+    {"id":"v4_author","cwd":"V4 scored observation root","argv":["./experiment","author-v4","--root","."],"stdin":{"operator":"<","relative_regular_file":"term-payload.json","symlinks":"forbidden","max_bytes":65536},"allowed_only_during":"V4 scored observation"}
+  ],
+  "shell_grammar":"No pipes, command substitution, variable expansion, globbing, output redirection, append redirection, here-documents, here-strings, command lists, backgrounding, or control operators. The sole input redirection is the exact v4_author contract.",
+  "bash_forbidden":["network","package installation","process signaling","filesystem traversal outside observation root","reading environment secrets","git commit","git push","AK/ROCS/Prompt Vault mutation"],
+  "network":"disabled",
+  "timeout_seconds":900
+}

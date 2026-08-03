@@ -1,0 +1,32 @@
+{
+  "guidance": {
+    "anti_examples": [
+      "Ein reiner Datensatz ohne Handlungsfähigkeit"
+    ],
+    "examples": [
+      "Human maintainer or bot acting in GitLab"
+    ],
+    "sections": [
+      "# Actor (core.Actor)\n\n## Definition\nEin handelndes Subjekt im System (Mensch oder System).\n\n## Typical usage\n- Used as the supertype for entities that can take actions and hold responsibilities.\n\n## Common confusions\n- Confused with passive artifacts (documents, datasets).\n"
+    ]
+  },
+  "ont": {
+    "description": "Ein handelndes Subjekt im System (Mensch oder System).",
+    "id": "core.Actor",
+    "labels": [
+      "Actor"
+    ],
+    "relations": [],
+    "synonyms": [],
+    "type": "concept"
+  },
+  "schema": "rocs-source-experiment.v0",
+  "system4d": {
+    "fog": {
+      "assumptions": [],
+      "debt": [],
+      "exceptions": [],
+      "risks": []
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "guidance": {
+    "anti_examples": [
+      "Using conflicts_with to express similarity (use `similar_to`)"
+    ],
+    "examples": [
+      "core.Policy conflicts_with core.Policy (two rules cannot both hold for the same scope)"
+    ],
+    "sections": [
+      "## Definition\n`X conflicts_with Y` means X and Y cannot both be satisfied/true in the same scope (a direct contradiction or incompatibility).\n\n## Notes\n- Keep semantics crisp.\n- Do not overload one relation with multiple meanings (Lucidity).\n\n## Use when\n- Two statements/constraints cannot both be satisfied in the same scope.\n\n## Do not use when\n- You mean tradeoff/choice history (track in decisions) or simple difference without contradiction.\n\n## Domain / Range\n- Domain: policies/constraints/invariants\n- Range: policies/constraints/invariants\n"
+    ]
+  },
+  "ont": {
+    "axis_default": "left",
+    "characteristics": {
+      "symmetric": true,
+      "transitive": false
+    },
+    "description": "X steht im Konflikt/Widerspruch zu Y",
+    "group": "opposition",
+    "id": "core.rel.conflicts_with",
+    "inverse": "core.rel.conflicts_with",
+    "labels": [
+      "conflicts_with"
+    ],
+    "type": "relation"
+  },
+  "schema": "rocs-source-experiment.v0",
+  "system4d": null
+}

@@ -1,0 +1,37 @@
+{
+  "guidance": {
+    "anti_examples": [
+      "Ein Service ohne Entscheidungslogik"
+    ],
+    "examples": [
+      "GitLab MR-Triage Bot"
+    ],
+    "sections": [
+      "# Agent (core.Agent)\n\n## Definition\nEin autonom/teilautonom handelnder Software-Akteur (LLM-Agent, Bot).\n\n## Typical usage\n- Used to model autonomous actors that take actions (e.g. triage, checks, proposals).\n\n## Common confusions\n- Confused with `core.Service` (a deployed runtime without decision-making autonomy).\n"
+    ]
+  },
+  "ont": {
+    "description": "Ein autonom/teilautonom handelnder Software-Akteur (LLM-Agent, Bot).",
+    "id": "core.Agent",
+    "labels": [
+      "Agent"
+    ],
+    "relations": [
+      {
+        "relation_id": "core.rel.is_a",
+        "target_id": "core.Actor"
+      }
+    ],
+    "synonyms": [],
+    "type": "concept"
+  },
+  "schema": "rocs-source-experiment.v0",
+  "system4d": {
+    "fog": {
+      "assumptions": [],
+      "debt": [],
+      "exceptions": [],
+      "risks": []
+    }
+  }
+}

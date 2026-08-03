@@ -1,0 +1,16 @@
+{
+  "schema":"ontology-source-experiment.evidence-manifest-contract.v1",
+  "output_filename":"evidence-manifest.v1.json",
+  "included":"every regular file recursively under retained evidence root except output_filename",
+  "forbidden_types":["symlink","socket","fifo","block_device","character_device","unknown"],
+  "path_rules":["POSIX relative path","UTF-8 NFC","no leading slash","no dot or dot-dot segment","no NUL","unique after NFC","sort by unsigned UTF-8 path bytes"],
+  "entry":{"path":"string","bytes":"nonnegative integer","sha256":"64 lowercase hex"},
+  "tree_preimage":"For each sorted entry, UTF-8 bytes: <sha256><two ASCII spaces><path><LF>; concatenate without header.",
+  "tree_digest":"SHA-256 of tree_preimage, lowercase hex",
+  "manifest_object":{"schema":"ontology-source-experiment.evidence-manifest.v1","algorithm":"exact copy of this contract schema id","evidence_tree_sha256":"tree_digest","entries":"ordered entry array"},
+  "verification":"After atomic manifest write, independently reopen every entry without following symlinks, verify type/bytes/hash, reconstruct preimage, and compare tree digest.",
+  "operator_status_command":["git","status","--porcelain=v1","-z","--untracked-files=all"],
+  "operator_status_capture":"retain raw stdout bytes and SHA-256 before experiment; rerun exact argv at closeout and require byte-for-byte and digest equality",
+  "baseline_status_capture":"same command/byte rule; baseline must be zero bytes before and after",
+  "cleanup_gate":"No disposable output may be deleted until independent evidence manifest verification passes. Retained evidence root is never automatically deleted."
+}

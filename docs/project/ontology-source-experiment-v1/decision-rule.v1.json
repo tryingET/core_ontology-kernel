@@ -1,0 +1,53 @@
+{
+  "schema": "ontology-source-experiment.decision-rule.v1",
+  "variants": ["V1","V2","V3","V4"],
+  "correctness_gates": [
+    "semantic_loss_zero",
+    "golden_oracle_match_100_percent_each_implementation",
+    "independent_digest_agreement_100_percent",
+    "applicable_malformed_cases_100_percent",
+    "identity_relationships_100_percent",
+    "ordering_relationships_100_percent",
+    "rdf_roundtrip_100_percent_supported_profile",
+    "projection_honesty_100_percent",
+    "authority_separation_100_percent",
+    "hand_maintained_semantic_surfaces_per_term_lte_1",
+    "source_checkout_reversibility_exact"
+  ],
+  "correctness_rule": "all gates conjunctive; no waivers; missing is failure for technical eligibility",
+  "complexity_vector_order": [
+    "hand_maintained_semantic_surfaces_per_term",
+    "authoring_task_errors",
+    "median_paired_task_seconds",
+    "new_production_semantic_loc",
+    "custom_normative_contract_bytes",
+    "added_direct_runtime_dependencies"
+  ],
+  "complexity_measurement": {
+    "hand_maintained_semantic_surfaces_per_term":"maximum number of semantic artifacts or state surfaces an actor must intentionally edit or repair for one term change; generated atomic outputs count zero; any manual repair counts one",
+    "authoring_task_errors":"exact sum of the 48 machine-oracle 0|1 observations; subjective reviewer votes never change it",
+    "median_paired_task_seconds":"exact rational median over all 48 elapsed-nanosecond observations including timeout ceilings",
+    "new_production_semantic_loc":"deterministic A+B common-plus-variant physical LOC under the frozen source layout",
+    "custom_normative_contract_bytes":"frozen UTF-8 byte count of exact common+variant contract sections, plus V3 shapes",
+    "added_direct_runtime_dependencies":"deterministic sum of locked direct A+B dependencies scoped common or variant; standard library excluded"
+  },
+  "dominance":"A Pareto-dominates B iff A is <= B on every complexity dimension and < B on at least one; correctness-ineligible variants are excluded before comparison",
+  "complexity_contract": "complexity-measurement.v1.json",
+  "ergonomics_sufficient": {
+    "required_actors":8,
+    "required_tasks_per_actor_per_variant":6,
+    "required_complete_paired_observations":192,
+    "exact_model":"openai-codex/gpt-5.6-sol",
+    "missing_rule":"any missing actor/task/variant observation or model substitution -> insufficient_evidence"
+  },
+  "disposition_table": [
+    {"condition":"zero correctness-eligible variants","disposition":"no_winner_retain_current"},
+    {"condition":"any selecting evidence insufficient","disposition":"no_winner_insufficient_evidence"},
+    {"condition":"one eligible variant and ergonomics sufficient","disposition":"winner:<that_variant>"},
+    {"condition":"multiple eligible variants; exactly one Pareto-undominated; ergonomics sufficient","disposition":"winner:<undominated_variant>"},
+    {"condition":"multiple Pareto-undominated variants and V1 is among them","disposition":"no_winner_retain_current"},
+    {"condition":"multiple Pareto-undominated variants and V1 is not among them","disposition":"no_winner_incomparable"}
+  ],
+  "tie_semantics":"Retaining V1 on an unresolved comparison is a rollback-safe operational disposition, not proof that Markdown is architecturally superior or permanent.",
+  "rfc_gate":"Only winner:<variant> may support an architecture RFC. no_winner_* retains current production behavior and may support only a revised experiment or bounded hardening proposal."
+}

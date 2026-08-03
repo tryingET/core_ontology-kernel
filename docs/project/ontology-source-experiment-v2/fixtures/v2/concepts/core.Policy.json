@@ -1,0 +1,32 @@
+{
+  "guidance": {
+    "anti_examples": [
+      "Eine vage Guideline ohne Prüfbarkeit"
+    ],
+    "examples": [
+      "CODEOWNERS-required approval for protected paths"
+    ],
+    "sections": [
+      "# Policy (core.Policy)\n\n## Definition\nEine formalisierte Regel, die Verhalten einschränkt oder überprüft.\n\n## Typical usage\n- Used for enforceable rules with explicit scope and checks.\n\n## Common confusions\n- Confused with informal guidelines that cannot be validated.\n"
+    ]
+  },
+  "ont": {
+    "description": "Eine formalisierte Regel, die Verhalten einschränkt oder überprüft.",
+    "id": "core.Policy",
+    "labels": [
+      "Policy"
+    ],
+    "relations": [],
+    "synonyms": [],
+    "type": "concept"
+  },
+  "schema": "rocs-source-experiment.v0",
+  "system4d": {
+    "fog": {
+      "assumptions": [],
+      "debt": [],
+      "exceptions": [],
+      "risks": []
+    }
+  }
+}

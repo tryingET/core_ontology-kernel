@@ -1,0 +1,32 @@
+---
+ont:
+  id: "core.Agent"
+  type: concept
+  labels: ["Agent"]
+  synonyms: []
+  description: "Ein autonom/teilautonom handelnder Software-Akteur (LLM-Agent, Bot)."
+  relations:
+    - type: "core.rel.is_a"
+      target: "core.Actor"
+  examples:
+    - "GitLab MR-Triage Bot"
+  anti_examples:
+    - "Ein Service ohne Entscheidungslogik"
+system4d:
+  fog:
+    risks: []
+    assumptions: []
+    exceptions: []
+    debt: []
+---
+
+# Agent (core.Agent)
+
+## Definition
+Ein autonom/teilautonom handelnder Software-Akteur (LLM-Agent, Bot).
+
+## Typical usage
+- Used to model autonomous actors that take actions (e.g. triage, checks, proposals).
+
+## Common confusions
+- Confused with `core.Service` (a deployed runtime without decision-making autonomy).

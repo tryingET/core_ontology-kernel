@@ -1,0 +1,38 @@
+{
+  "schema": "ontology-source-experiment.complexity-measurement.v1",
+  "observation_count_per_variant": 48,
+  "dimensions": {
+    "hand_maintained_semantic_surfaces_per_term": {
+      "algorithm": "For every actor/task observation, count distinct source artifacts or state surfaces the actor intentionally edits or manually repairs. Generated outputs changed only through the documented atomic authoring command count zero. The variant value is the maximum observation count. A protected/generated-surface manual edit also increments authoring_task_errors.",
+      "required_receipt": "one integer count and edited-path list per observation"
+    },
+    "authoring_task_errors": {
+      "algorithm": "Sum the 0|1 machine-oracle error values across exactly 48 observations for the variant. Error conditions are timeout, invalid source, golden-delta mismatch, unintended semantic change, protected/generated-surface manual edit, merge fact loss, or prohibited cross-variant input. Subjective reviewer votes never change this value.",
+      "required_receipt": "48 ordered 0|1 values keyed actor and task"
+    },
+    "median_paired_task_seconds": {
+      "input": "48 nonnegative integer monotonic elapsed_nanoseconds values per variant; successful and timeout observations are both included; timeout is exactly 900000000000",
+      "algorithm": "Sort ascending as integers. Let median_numerator_ns = sorted[23] + sorted[24]. The exact median is median_numerator_ns / 2000000000 seconds. Pareto comparisons cross-multiply integer numerators; no floating-point rounding is permitted.",
+      "required_receipt": "48 raw nanosecond values, sorted list, median_numerator_ns"
+    },
+    "new_production_semantic_loc": {
+      "required_layout": ["impl-a/src/common/**","impl-a/src/V1/**","impl-a/src/V2/**","impl-a/src/V3/**","impl-a/src/V4/**","impl-b/src/common/**","impl-b/src/V1/**","impl-b/src/V2/**","impl-b/src/V3/**","impl-b/src/V4/**"],
+      "allowed_extensions": [".py",".ts",".mts",".cts",".js",".mjs",".cjs"],
+      "forbidden_under_src": ["generated","vendor","vendored","fixtures","tests","test","snapshots"],
+      "algorithm": "Reject symlinks and every source file outside common or one exact variant directory. For a variant, concatenate lexical POSIX paths from A/common, A/<variant>, B/common, B/<variant>. Decode strict UTF-8, normalize CRLF to LF, split on LF, and count lines whose trim is nonempty and does not begin with #, //, /*, *, or */. Common lines are charged equally to every variant. No generated or vendored exclusion is inferred; forbidden paths make the run invalid.",
+      "required_receipt": "path, byte sha256, physical lines, excluded full-line comments, counted lines for every included file"
+    },
+    "custom_normative_contract_bytes": {
+      "algorithm": "UTF-8 byte count of the exact common section plus exact variant section in variant-contracts.v1.md; V3 additionally includes the full fixtures/v3/shapes.ttl bytes. Section start is the UTF-8 bytes beginning with '## Common constraints' or '## Vn —'; section end is immediately before the next variant heading or '## Projection obligations'. No other inclusion/exclusion is permitted.",
+      "frozen_values": {"V1":2595,"V2":2052,"V3":6878,"V4":2728},
+      "required_receipt": "recomputed section byte counts and equality to frozen values"
+    },
+    "added_direct_runtime_dependencies": {
+      "manifest_required_per_implementation": "dependencies.v1.json",
+      "manifest_schema": {"dependencies":[{"name":"string","locked_version":"string","scope":"common|V1|V2|V3|V4","direct":true}]},
+      "algorithm": "Reject missing locks, duplicate name+scope, transitive entries, unclassified direct dependencies, and direct dependencies absent from the manifest. For each variant, count A direct dependencies with scope common or variant plus B direct dependencies with scope common or variant. Standard-library modules count zero. The package lock and manifest must agree exactly on direct production dependencies.",
+      "required_receipt": "two locked manifests, package-manager direct-dependency projection, equality check, per-variant integer"
+    }
+  },
+  "missing_or_invalid_rule": "Any missing receipt, path ambiguity, unclassified file/dependency, float median, symlink, or frozen-byte mismatch makes selecting evidence insufficient and forces no_winner_insufficient_evidence."
+}

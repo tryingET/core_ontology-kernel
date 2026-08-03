@@ -1,0 +1,18 @@
+{
+  "schema":"ontology-source-experiment.reviewer-presentation.v1",
+  "blind_mapping":{"V1":"Kestrel","V2":"Lantern","V3":"Quartz","V4":"River"},
+  "reviewer_packet_keys_in_order":["schema","blind_variant","actor","task","task_prompt","before_semantic_facts","after_semantic_facts","semantic_diff","source_diff","validation","projection_loss"],
+  "normalization":[
+    "UTF-8 NFC and LF",
+    "replace absolute observation root with <ROOT>",
+    "replace implementation A/B names with <VALIDATOR>",
+    "replace V1/V2/V3/V4 tokens and source-format names in validation prose with blind code",
+    "preserve authored source syntax and filenames because reviewability is being measured",
+    "omit timestamps, durations, model/session ids, dependency data, implementation paths, LOC, and other reviewer output",
+    "sort semantic facts by canonical fact bytes; preserve source diff hunk order"
+  ],
+  "rubric":{"meaning_clear": "0|1","unintended_meaning_absent":"0|1","normative_guidance_boundary_visible":"0|1","generated_authority_status_unambiguous":"0|1","merge_reviewable":"0|1|not_applicable"},
+  "output_keys_in_order":["schema","blind_variant","actor","task","scores","evidence"],
+  "subjective_score_effect":"descriptive_only; never changes correctness, authoring_task_errors, complexity vector, eligibility, dominance, or disposition",
+  "mapping_access":"comparator only; reviewer receives blind code but not this mapping"
+}

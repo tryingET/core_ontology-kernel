@@ -1,0 +1,9 @@
+{
+  "schema":"ontology-source-experiment.validation-help.v2",
+  "common_command":"./experiment validate --variant <assigned exact variant> --root .",
+  "V1":{"editable":"concepts/*.md and relations/*.md only","protected":"experiment, generated/","note":"Normative semantics are closed YAML frontmatter; body is guidance unless exactly marked as a restatement."},
+  "V2":{"editable":"concepts/*.json and relations/*.json only","protected":"experiment, generated/","note":"Each strict JSON record is the sole term source; Markdown is generated."},
+  "V3":{"editable":"ontology.ttl only","protected":"shapes.ttl, experiment, generated/","note":"Use only the frozen RDF profile; shapes and generated guidance are protected."},
+  "V4":{"editable":"term-payload.json only; no object/head file directly","authoring_command":"./experiment author-v4 --root . < term-payload.json","protected":"objects/, head.json, experiment, generated/","note":"Submit one strict JSON payload through the atomic offline authoring command."},
+  "validation_output_contract":{"status":"pass|fail","typed_errors":"ordered array","semantic_digest":"lowercase sha256","changed_semantic_facts":"canonical arrays","protected_surface_edits":"array"}
+}

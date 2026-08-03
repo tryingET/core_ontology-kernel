@@ -1,0 +1,36 @@
+{
+  "schema": "ontology-source-experiment.actor-materials-manifest.v1",
+  "tree_sha256": "f6378e28c7e8e115b71122be3e382acb528eb7d585f03b47ac45ea3a84d8b5ae",
+  "files": [
+    {
+      "path": "actor-system-instructions.txt",
+      "bytes": 983,
+      "sha256": "ba9110bf9851b353c3ad0007f8a9c060e58388af1f2b19de04c40d949fa432a9"
+    },
+    {
+      "path": "reviewer-presentation.v1.json",
+      "bytes": 1435,
+      "sha256": "1b8a974aa501b032e7becc744d93caa04af1d60ebe26d642387884b538518c0c"
+    },
+    {
+      "path": "reviewer-system-instructions.txt",
+      "bytes": 802,
+      "sha256": "2b6408c7d4a6ba85a13ea0f9803d7ad8df1c5ae1964065f657168af6d67ef0e8"
+    },
+    {
+      "path": "tool-allowlist.v1.json",
+      "bytes": 778,
+      "sha256": "83761772d5ac52993c920f5ee4620e70f7b83094c128b563ff44a512e93120ea"
+    },
+    {
+      "path": "validation-help.v1.json",
+      "bytes": 1218,
+      "sha256": "58d84fb65f69d6443f5f3dc144558e4ef812ee25d2ec5ef935b33b77d97564a2"
+    },
+    {
+      "path": "warmup.v1.json",
+      "bytes": 627,
+      "sha256": "65acad9f5483065faf79be65c28dceb6b67c5e8072e319758bc83bca15ed9692"
+    }
+  ]
+}

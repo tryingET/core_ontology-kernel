@@ -1,0 +1,72 @@
+{
+  "schema": "ontology-source-experiment.accepted-input.v1",
+  "case": "deprecation",
+  "variant": "V2",
+  "entrypoint": "virtual_files",
+  "tree_sha256": "41ee47fe3fdc10b28ca03c0191d20ad7371a45355ddccf4eb61903677b6c6ca5",
+  "files": [
+    {
+      "path": "concepts/core.Actor.json",
+      "role": "source",
+      "bytes": 882,
+      "sha256": "37d83ec863db5d77f593c7141748bb1f6910aaa1a127ee652835228a7bbdedac",
+      "content_utf8": "{\n  \"guidance\": {\n    \"anti_examples\": [\n      \"Ein reiner Datensatz ohne Handlungsfähigkeit\"\n    ],\n    \"examples\": [\n      \"Human maintainer or bot acting in GitLab\"\n    ],\n    \"sections\": [\n      \"# Actor (core.Actor)\\n\\n## Definition\\nEin handelndes Subjekt im System (Mensch oder System).\\n\\n## Typical usage\\n- Used as the supertype for entities that can take actions and hold responsibilities.\\n\\n## Common confusions\\n- Confused with passive artifacts (documents, datasets).\\n\"\n    ]\n  },\n  \"ont\": {\n    \"description\": \"Ein handelndes Subjekt im System (Mensch oder System).\",\n    \"id\": \"core.Actor\",\n    \"labels\": [\n      \"Actor\"\n    ],\n    \"relations\": [],\n    \"synonyms\": [],\n    \"type\": \"concept\"\n  },\n  \"schema\": \"rocs-source-experiment.v0\",\n  \"system4d\": {\n    \"fog\": {\n      \"assumptions\": [],\n      \"debt\": [],\n      \"exceptions\": [],\n      \"risks\": []\n    }\n  }\n}\n"
+    },
+    {
+      "path": "concepts/core.Agent.json",
+      "role": "source",
+      "bytes": 1004,
+      "sha256": "77f58008b4aa73d28e33602fd1d034a8ee7a61473132b9721abe7003f55098fa",
+      "content_utf8": "{\n  \"guidance\": {\n    \"anti_examples\": [\n      \"Ein Service ohne Entscheidungslogik\"\n    ],\n    \"examples\": [\n      \"GitLab MR-Triage Bot\"\n    ],\n    \"sections\": [\n      \"# Agent (core.Agent)\\n\\n## Definition\\nEin autonom/teilautonom handelnder Software-Akteur (LLM-Agent, Bot).\\n\\n## Typical usage\\n- Used to model autonomous actors that take actions (e.g. triage, checks, proposals).\\n\\n## Common confusions\\n- Confused with `core.Service` (a deployed runtime without decision-making autonomy).\\n\"\n    ]\n  },\n  \"ont\": {\n    \"description\": \"Ein autonom/teilautonom handelnder Software-Akteur (LLM-Agent, Bot).\",\n    \"id\": \"core.Agent\",\n    \"labels\": [\n      \"Agent\"\n    ],\n    \"relations\": [\n      {\n        \"relation_id\": \"core.rel.is_a\",\n        \"target_id\": \"core.Actor\"\n      }\n    ],\n    \"synonyms\": [],\n    \"type\": \"concept\"\n  },\n  \"schema\": \"rocs-source-experiment.v0\",\n  \"system4d\": {\n    \"fog\": {\n      \"assumptions\": [],\n      \"debt\": [],\n      \"exceptions\": [],\n      \"risks\": []\n    }\n  }\n}\n"
+    },
+    {
+      "path": "concepts/core.DecisionRecord.json",
+      "role": "source",
+      "bytes": 942,
+      "sha256": "b38a96e6070566b40ddf406dc8adc24fab95d9cb415b8ea4b1753454c41cc885",
+      "content_utf8": "{\n  \"guidance\": {\n    \"anti_examples\": [\n      \"An undocumented choice in chat logs\"\n    ],\n    \"examples\": [\n      \"ADR-style decision linked from ontology deprecations\"\n    ],\n    \"sections\": [\n      \"# DecisionRecord (core.DecisionRecord)\\n\\n## Definition\\nA persistent record of a decision, including context, options, and rationale.\\n\\n## Typical usage\\n- Used to justify new IDs, deprecations, and relation additions.\\n\\n## Common confusions\\n- Confused with a proposal; decisions are outcomes.\\n\\n\"\n    ]\n  },\n  \"ont\": {\n    \"description\": \"A persistent record of a decision, including context, options, and rationale.\",\n    \"id\": \"core.DecisionRecord\",\n    \"labels\": [\n      \"DecisionRecord\"\n    ],\n    \"relations\": [],\n    \"synonyms\": [],\n    \"type\": \"concept\"\n  },\n  \"schema\": \"rocs-source-experiment.v0\",\n  \"system4d\": {\n    \"fog\": {\n      \"assumptions\": [],\n      \"debt\": [],\n      \"exceptions\": [],\n      \"risks\": []\n    }\n  }\n}\n"
+    },
+    {
+      "path": "concepts/core.Policy.json",
+      "role": "source",
+      "bytes": 1085,
+      "sha256": "ca3b471b212da66a38b428f05424af895be4628e2d43d8a4fd24c5a2bd4f6c2c",
+      "content_utf8": "{\n  \"guidance\": {\n    \"anti_examples\": [\n      \"Eine vage Guideline ohne Prüfbarkeit\"\n    ],\n    \"examples\": [\n      \"CODEOWNERS-required approval for protected paths\"\n    ],\n    \"sections\": [\n      \"# Policy (core.Policy)\\n\\n## Definition\\nEine formalisierte Regel, die Verhalten einschränkt oder überprüft.\\n\\n## Typical usage\\n- Used for enforceable rules with explicit scope and checks.\\n\\n## Common confusions\\n- Confused with informal guidelines that cannot be validated.\\n\"\n    ]\n  },\n  \"ont\": {\n    \"deprecated\": {\n      \"decision\": \"experiment://decision/deprecate-policy\",\n      \"replaced_by\": \"core.DecisionRecord\",\n      \"since\": \"2026-08-03\"\n    },\n    \"description\": \"Eine formalisierte Regel, die Verhalten einschränkt oder überprüft.\",\n    \"id\": \"core.Policy\",\n    \"labels\": [\n      \"Policy\"\n    ],\n    \"relations\": [],\n    \"status\": \"deprecated\",\n    \"synonyms\": [],\n    \"type\": \"concept\"\n  },\n  \"schema\": \"rocs-source-experiment.v0\",\n  \"system4d\": {\n    \"fog\": {\n      \"assumptions\": [],\n      \"debt\": [],\n      \"exceptions\": [],\n      \"risks\": []\n    }\n  }\n}\n"
+    },
+    {
+      "path": "concepts/core.Release.json",
+      "role": "source",
+      "bytes": 830,
+      "sha256": "7a242751ed70864712ea5c657c9ceb68703b9b6eea1ef50ee0dd5c931ec9616f",
+      "content_utf8": "{\n  \"guidance\": {\n    \"anti_examples\": [\n      \"Ein Commit ohne Tag\"\n    ],\n    \"examples\": [\n      \"Tag v0.1.0 of ontology-kernel\"\n    ],\n    \"sections\": [\n      \"# Release (core.Release)\\n\\n## Definition\\nVersionierter Stand von Artefakten, der referenzierbar ist.\\n\\n## Typical usage\\n- Used to pin versions in manifests and make builds reproducible.\\n\\n## Common confusions\\n- Confused with an untagged commit on main.\\n\"\n    ]\n  },\n  \"ont\": {\n    \"description\": \"Versionierter Stand von Artefakten, der referenzierbar ist.\",\n    \"id\": \"core.Release\",\n    \"labels\": [\n      \"Release\"\n    ],\n    \"relations\": [],\n    \"synonyms\": [],\n    \"type\": \"concept\"\n  },\n  \"schema\": \"rocs-source-experiment.v0\",\n  \"system4d\": {\n    \"fog\": {\n      \"assumptions\": [],\n      \"debt\": [],\n      \"exceptions\": [],\n      \"risks\": []\n    }\n  }\n}\n"
+    },
+    {
+      "path": "concepts/core.Secret.json",
+      "role": "source",
+      "bytes": 837,
+      "sha256": "b71b8642ddd21ad2d20e8fc25aacd033ed4165493dbc8bb815b2073960d27242",
+      "content_utf8": "{\n  \"guidance\": {\n    \"anti_examples\": [\n      \"Ein öffentliches API-Endpoint\"\n    ],\n    \"examples\": [\n      \"PAT_GITLAB token in a local .env\"\n    ],\n    \"sections\": [\n      \"# Secret (core.Secret)\\n\\n## Definition\\nCredential/Token/Key; darf nicht geleakt werden.\\n\\n## Typical usage\\n- Used in policies and CI checks (secret scanning; no-leak constraints).\\n\\n## Common confusions\\n- Confused with public identifiers (URLs, group names).\\n\"\n    ]\n  },\n  \"ont\": {\n    \"description\": \"Credential/Token/Key; darf nicht geleakt werden.\",\n    \"id\": \"core.Secret\",\n    \"labels\": [\n      \"Secret\"\n    ],\n    \"relations\": [],\n    \"synonyms\": [],\n    \"type\": \"concept\"\n  },\n  \"schema\": \"rocs-source-experiment.v0\",\n  \"system4d\": {\n    \"fog\": {\n      \"assumptions\": [],\n      \"debt\": [],\n      \"exceptions\": [],\n      \"risks\": []\n    }\n  }\n}\n"
+    },
+    {
+      "path": "relations/core.rel.conflicts_with.json",
+      "role": "source",
+      "bytes": 1265,
+      "sha256": "bb190c7f5664751dc7b7b189e88a307c8e1593e7fd2c90b4c7e2de72a4b6062e",
+      "content_utf8": "{\n  \"guidance\": {\n    \"anti_examples\": [\n      \"Using conflicts_with to express similarity (use `similar_to`)\"\n    ],\n    \"examples\": [\n      \"core.Policy conflicts_with core.Policy (two rules cannot both hold for the same scope)\"\n    ],\n    \"sections\": [\n      \"## Definition\\n`X conflicts_with Y` means X and Y cannot both be satisfied/true in the same scope (a direct contradiction or incompatibility).\\n\\n## Notes\\n- Keep semantics crisp.\\n- Do not overload one relation with multiple meanings (Lucidity).\\n\\n## Use when\\n- Two statements/constraints cannot both be satisfied in the same scope.\\n\\n## Do not use when\\n- You mean tradeoff/choice history (track in decisions) or simple difference without contradiction.\\n\\n## Domain / Range\\n- Domain: policies/constraints/invariants\\n- Range: policies/constraints/invariants\\n\"\n    ]\n  },\n  \"ont\": {\n    \"axis_default\": \"left\",\n    \"characteristics\": {\n      \"symmetric\": true,\n      \"transitive\": false\n    },\n    \"description\": \"X steht im Konflikt/Widerspruch zu Y\",\n    \"group\": \"opposition\",\n    \"id\": \"core.rel.conflicts_with\",\n    \"inverse\": \"core.rel.conflicts_with\",\n    \"labels\": [\n      \"conflicts_with\"\n    ],\n    \"type\": \"relation\"\n  },\n  \"schema\": \"rocs-source-experiment.v0\",\n  \"system4d\": null\n}\n"
+    },
+    {
+      "path": "relations/core.rel.depends_on.json",
+      "role": "source",
+      "bytes": 1263,
+      "sha256": "99070650202dbd3c404f66fa3f5d6c47b6184934a3954e6061cd80ba59cc4fee",
+      "content_utf8": "{\n  \"guidance\": {\n    \"anti_examples\": [\n      \"Using depends_on for mere 'uses' relationships\"\n    ],\n    \"examples\": [\n      \"core.Service depends_on core.IntegrationEdge (service needs an external integration)\"\n    ],\n    \"sections\": [\n      \"## Definition\\n`X depends_on Y` means X requires Y to function correctly (runtime/build/operational requirement).\\n\\n## Notes\\n- Keep semantics crisp.\\n- Do not overload one relation with multiple meanings (Lucidity).\\n\\n## Use when\\n- X requires Y to function correctly (runtime, build, or operational requirement).\\n\\n## Do not use when\\n- X just uses Y optionally or incidentally (use `uses`), or X is a part of Y (use `part_of`).\\n\\n## Domain / Range\\n- Domain: any system element (`core.Service`, `core.Pipeline`, `core.Repo`)\\n- Range: required element (`core.Service`, `core.IntegrationEdge`, `core.Policy`, etc)\\n\"\n    ]\n  },\n  \"ont\": {\n    \"axis_default\": \"parents\",\n    \"characteristics\": {\n      \"symmetric\": false,\n      \"transitive\": false\n    },\n    \"description\": \"X benötigt Y, um korrekt zu funktionieren\",\n    \"group\": \"dependency\",\n    \"id\": \"core.rel.depends_on\",\n    \"labels\": [\n      \"depends_on\"\n    ],\n    \"type\": \"relation\"\n  },\n  \"schema\": \"rocs-source-experiment.v0\",\n  \"system4d\": null\n}\n"
+    },
+    {
+      "path": "relations/core.rel.is_a.json",
+      "role": "source",
+      "bytes": 1065,
+      "sha256": "c967de577a606e2f14b23a6149fd265bb4ba28d1bd25006d3d78f5fcc5976d07",
+      "content_utf8": "{\n  \"guidance\": {\n    \"anti_examples\": [\n      \"Using is_a for instances/values (use `instance_of`)\"\n    ],\n    \"examples\": [\n      \"core.Agent is_a core.Actor\"\n    ],\n    \"sections\": [\n      \"## Definition\\n`X is_a Y` means X is a subtype of Y (inherits Y’s meaning/constraints); use for taxonomy only.\\n\\n## Notes\\n- Keep semantics crisp.\\n- Do not overload one relation with multiple meanings (Lucidity).\\n\\n## Use when\\n- X is a subtype/specialization of Y (inherits meaning/constraints).\\n\\n## Do not use when\\n- You mean instance/value membership (use `instance_of`) or part-whole (use `part_of`).\\n\\n## Domain / Range\\n- Domain: subtype concept\\n- Range: supertype concept\\n\"\n    ]\n  },\n  \"ont\": {\n    \"axis_default\": \"parents\",\n    \"characteristics\": {\n      \"symmetric\": false,\n      \"transitive\": true\n    },\n    \"description\": \"Untertyp/Unterklasse → Obertyp/Oberklasse\",\n    \"group\": \"taxonomy\",\n    \"id\": \"core.rel.is_a\",\n    \"labels\": [\n      \"is_a\"\n    ],\n    \"type\": \"relation\"\n  },\n  \"schema\": \"rocs-source-experiment.v0\",\n  \"system4d\": null\n}\n"
+    }
+  ]
+}

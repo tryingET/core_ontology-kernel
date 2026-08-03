@@ -1,0 +1,24 @@
+{
+  "schema":"ontology-source-experiment.actor-wrapper-contract.v2",
+  "materialized_path":"experiment",
+  "mode":"0755",
+  "owner":"comparator after implementation A and B locks",
+  "actor_editable":false,
+  "network":"disabled",
+  "validate":{
+    "argv":["./experiment","validate","--variant","<assigned exact variant>","--root","."],
+    "procedure":["invoke locked A validator read-only","invoke locked B validator read-only","normalize each to validation_output_contract","require byte-identical normalized JSON","emit that JSON"],
+    "disagreement":"stop the entire cohort as implementation correctness failure; do not score an actor error",
+    "filesystem_effect":"none"
+  },
+  "author_v4":{
+    "argv":["./experiment","author-v4","--root","."],
+    "stdin":"exact bytes from regular relative term-payload.json under the shell redirection contract",
+    "procedure":["copy the V4 observation source tree to two owned isolated scratch roots","invoke locked A author-v4 in scratch A","invoke locked B author-v4 in scratch B","require byte-identical resulting object bytes, paths, modes, and head.json","if identical, atomically apply the agreed object/head changes to the observation root","retain the input payload and both scratch manifests in evidence","remove term-payload.json from the observation root after evidence copy"],
+    "disagreement":"stop the entire cohort as implementation correctness failure; do not score an actor error",
+    "failure_effect":"observation source tree remains byte-identical to pre-command state",
+    "stdout":"same normalized validation_output_contract as validate"
+  },
+  "wrapper_integrity":"wrapper source, executable bytes, mode, A/B lock digests, and tests are retained in evidence before actors; actor roots receive byte-identical wrapper bytes",
+  "forbidden":"implementation-specific prose, implementation identity, timing data, golden expected delta, cross-variant data, network, partial write, or silent fallback"
+}

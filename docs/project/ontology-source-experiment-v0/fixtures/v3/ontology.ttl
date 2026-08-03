@@ -1,0 +1,94 @@
+@prefix id: <https://ontology.ai-society.invalid/id/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rocs: <https://ontology.ai-society.invalid/schema/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+id:core.Actor rdf:type rocs:Concept .
+id:core.Actor rdfs:label "Actor"@und .
+id:core.Actor skos:definition "Ein handelndes Subjekt im System (Mensch oder System)."@und .
+id:core.Actor rocs:status "active"^^xsd:string .
+id:core.Actor rocs:example "Human maintainer or bot acting in GitLab"@und .
+id:core.Actor rocs:antiExample "Ein reiner Datensatz ohne Handlungsfähigkeit"@und .
+id:core.Actor rocs:guidanceMarkdown "# Actor (core.Actor)\n\n## Definition\nEin handelndes Subjekt im System (Mensch oder System).\n\n## Typical usage\n- Used as the supertype for entities that can take actions and hold responsibilities.\n\n## Common confusions\n- Confused with passive artifacts (documents, datasets).\n"@und .
+id:core.Actor rocs:system4dJson "{\"fog\":{\"assumptions\":[],\"debt\":[],\"exceptions\":[],\"risks\":[]}}"^^xsd:string .
+id:core.Agent rdf:type rocs:Concept .
+id:core.Agent rdfs:label "Agent"@und .
+id:core.Agent skos:definition "Ein autonom/teilautonom handelnder Software-Akteur (LLM-Agent, Bot)."@und .
+id:core.Agent rocs:status "active"^^xsd:string .
+id:core.Agent id:core.rel.is_a id:core.Actor .
+id:core.Agent rocs:example "GitLab MR-Triage Bot"@und .
+id:core.Agent rocs:antiExample "Ein Service ohne Entscheidungslogik"@und .
+id:core.Agent rocs:guidanceMarkdown "# Agent (core.Agent)\n\n## Definition\nEin autonom/teilautonom handelnder Software-Akteur (LLM-Agent, Bot).\n\n## Typical usage\n- Used to model autonomous actors that take actions (e.g. triage, checks, proposals).\n\n## Common confusions\n- Confused with `core.Service` (a deployed runtime without decision-making autonomy).\n"@und .
+id:core.Agent rocs:system4dJson "{\"fog\":{\"assumptions\":[],\"debt\":[],\"exceptions\":[],\"risks\":[]}}"^^xsd:string .
+id:core.DecisionRecord rdf:type rocs:Concept .
+id:core.DecisionRecord rdfs:label "DecisionRecord"@und .
+id:core.DecisionRecord skos:definition "A persistent record of a decision, including context, options, and rationale."@und .
+id:core.DecisionRecord rocs:status "active"^^xsd:string .
+id:core.DecisionRecord rocs:example "ADR-style decision linked from ontology deprecations"@und .
+id:core.DecisionRecord rocs:antiExample "An undocumented choice in chat logs"@und .
+id:core.DecisionRecord rocs:guidanceMarkdown "# DecisionRecord (core.DecisionRecord)\n\n## Definition\nA persistent record of a decision, including context, options, and rationale.\n\n## Typical usage\n- Used to justify new IDs, deprecations, and relation additions.\n\n## Common confusions\n- Confused with a proposal; decisions are outcomes.\n\n"@und .
+id:core.DecisionRecord rocs:system4dJson "{\"fog\":{\"assumptions\":[],\"debt\":[],\"exceptions\":[],\"risks\":[]}}"^^xsd:string .
+id:core.Policy rdf:type rocs:Concept .
+id:core.Policy rdfs:label "Policy"@und .
+id:core.Policy skos:definition "Eine formalisierte Regel, die Verhalten einschränkt oder überprüft."@und .
+id:core.Policy rocs:status "active"^^xsd:string .
+id:core.Policy rocs:example "CODEOWNERS-required approval for protected paths"@und .
+id:core.Policy rocs:antiExample "Eine vage Guideline ohne Prüfbarkeit"@und .
+id:core.Policy rocs:guidanceMarkdown "# Policy (core.Policy)\n\n## Definition\nEine formalisierte Regel, die Verhalten einschränkt oder überprüft.\n\n## Typical usage\n- Used for enforceable rules with explicit scope and checks.\n\n## Common confusions\n- Confused with informal guidelines that cannot be validated.\n"@und .
+id:core.Policy rocs:system4dJson "{\"fog\":{\"assumptions\":[],\"debt\":[],\"exceptions\":[],\"risks\":[]}}"^^xsd:string .
+id:core.Release rdf:type rocs:Concept .
+id:core.Release rdfs:label "Release"@und .
+id:core.Release skos:definition "Versionierter Stand von Artefakten, der referenzierbar ist."@und .
+id:core.Release rocs:status "active"^^xsd:string .
+id:core.Release rocs:example "Tag v0.1.0 of ontology-kernel"@und .
+id:core.Release rocs:antiExample "Ein Commit ohne Tag"@und .
+id:core.Release rocs:guidanceMarkdown "# Release (core.Release)\n\n## Definition\nVersionierter Stand von Artefakten, der referenzierbar ist.\n\n## Typical usage\n- Used to pin versions in manifests and make builds reproducible.\n\n## Common confusions\n- Confused with an untagged commit on main.\n"@und .
+id:core.Release rocs:system4dJson "{\"fog\":{\"assumptions\":[],\"debt\":[],\"exceptions\":[],\"risks\":[]}}"^^xsd:string .
+id:core.Secret rdf:type rocs:Concept .
+id:core.Secret rdfs:label "Secret"@und .
+id:core.Secret skos:definition "Credential/Token/Key; darf nicht geleakt werden."@und .
+id:core.Secret rocs:status "active"^^xsd:string .
+id:core.Secret rocs:example "PAT_GITLAB token in a local .env"@und .
+id:core.Secret rocs:antiExample "Ein öffentliches API-Endpoint"@und .
+id:core.Secret rocs:guidanceMarkdown "# Secret (core.Secret)\n\n## Definition\nCredential/Token/Key; darf nicht geleakt werden.\n\n## Typical usage\n- Used in policies and CI checks (secret scanning; no-leak constraints).\n\n## Common confusions\n- Confused with public identifiers (URLs, group names).\n"@und .
+id:core.Secret rocs:system4dJson "{\"fog\":{\"assumptions\":[],\"debt\":[],\"exceptions\":[],\"risks\":[]}}"^^xsd:string .
+id:core.rel.conflicts_with rdf:type rocs:Relation .
+id:core.rel.conflicts_with rdfs:label "conflicts_with"@und .
+id:core.rel.conflicts_with skos:definition "X steht im Konflikt/Widerspruch zu Y"@und .
+id:core.rel.conflicts_with rocs:status "active"^^xsd:string .
+id:core.rel.conflicts_with rocs:relationGroup "opposition"^^xsd:string .
+id:core.rel.conflicts_with rocs:transitive false .
+id:core.rel.conflicts_with rocs:symmetric true .
+id:core.rel.conflicts_with rdf:type owl:SymmetricProperty .
+id:core.rel.conflicts_with owl:inverseOf id:core.rel.conflicts_with .
+id:core.rel.conflicts_with rocs:axisDefault "left"^^xsd:string .
+id:core.rel.conflicts_with rocs:example "core.Policy conflicts_with core.Policy (two rules cannot both hold for the same scope)"@und .
+id:core.rel.conflicts_with rocs:antiExample "Using conflicts_with to express similarity (use `similar_to`)"@und .
+id:core.rel.conflicts_with rocs:guidanceMarkdown "## Definition\n`X conflicts_with Y` means X and Y cannot both be satisfied/true in the same scope (a direct contradiction or incompatibility).\n\n## Notes\n- Keep semantics crisp.\n- Do not overload one relation with multiple meanings (Lucidity).\n\n## Use when\n- Two statements/constraints cannot both be satisfied in the same scope.\n\n## Do not use when\n- You mean tradeoff/choice history (track in decisions) or simple difference without contradiction.\n\n## Domain / Range\n- Domain: policies/constraints/invariants\n- Range: policies/constraints/invariants\n"@und .
+id:core.rel.depends_on rdf:type rocs:Relation .
+id:core.rel.depends_on rdfs:label "depends_on"@und .
+id:core.rel.depends_on skos:definition "X benötigt Y, um korrekt zu funktionieren"@und .
+id:core.rel.depends_on rocs:status "active"^^xsd:string .
+id:core.rel.depends_on rocs:relationGroup "dependency"^^xsd:string .
+id:core.rel.depends_on rocs:transitive false .
+id:core.rel.depends_on rocs:symmetric false .
+id:core.rel.depends_on rocs:axisDefault "parents"^^xsd:string .
+id:core.rel.depends_on rocs:example "core.Service depends_on core.IntegrationEdge (service needs an external integration)"@und .
+id:core.rel.depends_on rocs:antiExample "Using depends_on for mere 'uses' relationships"@und .
+id:core.rel.depends_on rocs:guidanceMarkdown "## Definition\n`X depends_on Y` means X requires Y to function correctly (runtime/build/operational requirement).\n\n## Notes\n- Keep semantics crisp.\n- Do not overload one relation with multiple meanings (Lucidity).\n\n## Use when\n- X requires Y to function correctly (runtime, build, or operational requirement).\n\n## Do not use when\n- X just uses Y optionally or incidentally (use `uses`), or X is a part of Y (use `part_of`).\n\n## Domain / Range\n- Domain: any system element (`core.Service`, `core.Pipeline`, `core.Repo`)\n- Range: required element (`core.Service`, `core.IntegrationEdge`, `core.Policy`, etc)\n"@und .
+id:core.rel.is_a rdf:type rocs:Relation .
+id:core.rel.is_a rdfs:label "is_a"@und .
+id:core.rel.is_a skos:definition "Untertyp/Unterklasse → Obertyp/Oberklasse"@und .
+id:core.rel.is_a rocs:status "active"^^xsd:string .
+id:core.rel.is_a rocs:relationGroup "taxonomy"^^xsd:string .
+id:core.rel.is_a rocs:transitive true .
+id:core.rel.is_a rocs:symmetric false .
+id:core.rel.is_a rdf:type owl:TransitiveProperty .
+id:core.rel.is_a rocs:axisDefault "parents"^^xsd:string .
+id:core.rel.is_a rocs:example "core.Agent is_a core.Actor"@und .
+id:core.rel.is_a rocs:antiExample "Using is_a for instances/values (use `instance_of`)"@und .
+id:core.rel.is_a rocs:guidanceMarkdown "## Definition\n`X is_a Y` means X is a subtype of Y (inherits Y’s meaning/constraints); use for taxonomy only.\n\n## Notes\n- Keep semantics crisp.\n- Do not overload one relation with multiple meanings (Lucidity).\n\n## Use when\n- X is a subtype/specialization of Y (inherits meaning/constraints).\n\n## Do not use when\n- You mean instance/value membership (use `instance_of`) or part-whole (use `part_of`).\n\n## Domain / Range\n- Domain: subtype concept\n- Range: supertype concept\n"@und .

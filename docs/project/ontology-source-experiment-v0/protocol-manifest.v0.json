@@ -1,0 +1,207 @@
+{
+  "schema": "ontology-source-experiment.protocol-manifest.v0",
+  "digest_algorithm": "sha256 over UTF-8 lines <sha256>__<path>\\n in unsigned UTF-8 path order; __ denotes two ASCII spaces; this manifest excludes itself",
+  "protocol_digest": "d598392e4e1931faf83169a5d85a9fc155417c1533297c42595142a6342de37d",
+  "artifacts": [
+    {
+      "path": "README.md",
+      "bytes": 13216,
+      "sha256": "e188dd1dcd7aaacdca1bb3a47686eba8ae568bbb5e42e4decf78d447eaa70033"
+    },
+    {
+      "path": "baseline-manifest.v0.json",
+      "bytes": 2888,
+      "sha256": "69696929ea3c545c1547595bc76f246de09a5f90a08dd6afdf980bd21ed04e71"
+    },
+    {
+      "path": "decision-rule.v0.json",
+      "bytes": 3763,
+      "sha256": "ae7b7e0c9254d6004c6f5576c1e9c17e695fe411df086b719be6290ec354c46c"
+    },
+    {
+      "path": "field-inventory.v0.json",
+      "bytes": 12557,
+      "sha256": "430a76f756572dd152cb1ab7b987a86933b8ca5e11c9226be0fef53638c0d7d5"
+    },
+    {
+      "path": "fixture-files.v0.json",
+      "bytes": 7438,
+      "sha256": "efa15c11b9b3d93040f6232d34c0d3019e257cb536b37bea08869874d0b48c73"
+    },
+    {
+      "path": "fixtures/v1/concepts/core.Actor.md.fixture",
+      "bytes": 661,
+      "sha256": "69f614cbb1d800b9fff1bf70702ac065dc11d55e23b67dc9e5f6dadfb31b0c06"
+    },
+    {
+      "path": "fixtures/v1/concepts/core.Agent.md.fixture",
+      "bytes": 729,
+      "sha256": "4e473ad56cb0e2e773b10fc6aaeb9af69c9ccbf7fc262e16ba826d49a1e24036"
+    },
+    {
+      "path": "fixtures/v1/concepts/core.DecisionRecord.md.fixture",
+      "bytes": 720,
+      "sha256": "10fe9021c1a6d93b0363021f39e3ce7fe936cafac64debb09e633c306e980c74"
+    },
+    {
+      "path": "fixtures/v1/concepts/core.Policy.md.fixture",
+      "bytes": 677,
+      "sha256": "56682142246dacd2cb4494f881bce66311175db8af69b9b60ebac27576f35ad1"
+    },
+    {
+      "path": "fixtures/v1/concepts/core.Release.md.fixture",
+      "bytes": 609,
+      "sha256": "0a0c4899ce7bdc4cc49a5e7ee4bfc978bc346a529c9c06668fcf1b798d760317"
+    },
+    {
+      "path": "fixtures/v1/concepts/core.Secret.md.fixture",
+      "bytes": 616,
+      "sha256": "aa61785d379d1b3e2fec4104e14fe980bebb2613af801fc8b9ff810cab18674f"
+    },
+    {
+      "path": "fixtures/v1/relations/core.rel.conflicts_with.md.fixture",
+      "bytes": 1025,
+      "sha256": "9fb64778f71dffb6fbab326ed88e12dcfc504a723733188801060e514905cff5"
+    },
+    {
+      "path": "fixtures/v1/relations/core.rel.depends_on.md.fixture",
+      "bytes": 1028,
+      "sha256": "8084b763169985c34d54f630666e94c38aff45ca5da7a96b0a6555609da6e6dd"
+    },
+    {
+      "path": "fixtures/v1/relations/core.rel.is_a.md.fixture",
+      "bytes": 830,
+      "sha256": "3d049ef909281eafb6720e90c3273b04e336fbff2dc30bae262be22391af5ffc"
+    },
+    {
+      "path": "fixtures/v2/concepts/core.Actor.json",
+      "bytes": 882,
+      "sha256": "37d83ec863db5d77f593c7141748bb1f6910aaa1a127ee652835228a7bbdedac"
+    },
+    {
+      "path": "fixtures/v2/concepts/core.Agent.json",
+      "bytes": 1004,
+      "sha256": "77f58008b4aa73d28e33602fd1d034a8ee7a61473132b9721abe7003f55098fa"
+    },
+    {
+      "path": "fixtures/v2/concepts/core.DecisionRecord.json",
+      "bytes": 942,
+      "sha256": "b38a96e6070566b40ddf406dc8adc24fab95d9cb415b8ea4b1753454c41cc885"
+    },
+    {
+      "path": "fixtures/v2/concepts/core.Policy.json",
+      "bytes": 898,
+      "sha256": "84ce466309ef9c4619fb9179511d3d094c918827f99ff15291141e1aa2a2d365"
+    },
+    {
+      "path": "fixtures/v2/concepts/core.Release.json",
+      "bytes": 830,
+      "sha256": "7a242751ed70864712ea5c657c9ceb68703b9b6eea1ef50ee0dd5c931ec9616f"
+    },
+    {
+      "path": "fixtures/v2/concepts/core.Secret.json",
+      "bytes": 837,
+      "sha256": "b71b8642ddd21ad2d20e8fc25aacd033ed4165493dbc8bb815b2073960d27242"
+    },
+    {
+      "path": "fixtures/v2/relations/core.rel.conflicts_with.json",
+      "bytes": 1265,
+      "sha256": "bb190c7f5664751dc7b7b189e88a307c8e1593e7fd2c90b4c7e2de72a4b6062e"
+    },
+    {
+      "path": "fixtures/v2/relations/core.rel.depends_on.json",
+      "bytes": 1263,
+      "sha256": "99070650202dbd3c404f66fa3f5d6c47b6184934a3954e6061cd80ba59cc4fee"
+    },
+    {
+      "path": "fixtures/v2/relations/core.rel.is_a.json",
+      "bytes": 1065,
+      "sha256": "c967de577a606e2f14b23a6149fd265bb4ba28d1bd25006d3d78f5fcc5976d07"
+    },
+    {
+      "path": "fixtures/v3/ontology.ttl",
+      "bytes": 9609,
+      "sha256": "3f5dad8d464835e8bc238c206a08e6b85f604b15e1767759919e001f95a804ce"
+    },
+    {
+      "path": "fixtures/v3/shapes.ttl",
+      "bytes": 2564,
+      "sha256": "a83367af46965cfa54b533b1d58658e474408ab87c52707747de5bc249f8a267"
+    },
+    {
+      "path": "fixtures/v4/head.json",
+      "bytes": 814,
+      "sha256": "989251396e749ba2fc86e6e3451caad46dd8eba6ab2013a62e0362da7bb3ef4a"
+    },
+    {
+      "path": "fixtures/v4/objects/sha256/3e/a03caab9936a3fcc6d09d3caea87845d16265b9b4ee997418664c65231ad37.json",
+      "bytes": 792,
+      "sha256": "23e954b37482fad2e059443f5422460c1af5cd8f3cf4973a9df3cd35de2c3855"
+    },
+    {
+      "path": "fixtures/v4/objects/sha256/49/068009e37039a2b688215347fabc54a05b2ed5f4303655f3961f94db70e7a3.json",
+      "bytes": 731,
+      "sha256": "5c2de6858e76231a7fd90b29e4f0ab1b789f6f23d41a2ad2fd30075ceed2539f"
+    },
+    {
+      "path": "fixtures/v4/objects/sha256/4a/7cee35dd5171a2c91aae3e49418cc38be18f2ebeb8f45ede0aa29ee45d0eee.json",
+      "bytes": 1156,
+      "sha256": "df40b221dbd786a16f02cb67329b35e995129808ddc549a3c7562194d1fc2632"
+    },
+    {
+      "path": "fixtures/v4/objects/sha256/61/9e88ca93c15647e3cdd15546d30beba81c7367884a86e098b27d7c0c82d776.json",
+      "bytes": 836,
+      "sha256": "95fc649998f2d5cb214640079dd7df4f0b4c6b5b5e1105abdb136f7e42944d44"
+    },
+    {
+      "path": "fixtures/v4/objects/sha256/78/059790ba9d9664315bfc63adbf5ac7b582596c954949c609a49959c0b3b7b9.json",
+      "bytes": 724,
+      "sha256": "29bcba7ca95eb1f8b81fb28fcc09506fcfb63d45b6ae5822a31748b7723cfa0c"
+    },
+    {
+      "path": "fixtures/v4/objects/sha256/a7/4ddf6c5560b2fe5a7c38301010b49253268f784d6168c4f2829b741da8cda1.json",
+      "bytes": 958,
+      "sha256": "6133b2605441fce47768e62e54817347db58420575f7c9ba4911c6b339fe10e1"
+    },
+    {
+      "path": "fixtures/v4/objects/sha256/c0/e3d64c8dcb82556442882b17e2fe42e8d45c626419c87d3118aa6c25edca1d.json",
+      "bytes": 859,
+      "sha256": "912f4ae3ab1bac7fa48416857462aa0410bd045da0676f3e88e8541d9617109c"
+    },
+    {
+      "path": "fixtures/v4/objects/sha256/c9/a58c7801e39a96df7f5df60e916e27aa35c16f999bcf2984aa94b72a9aa4b2.json",
+      "bytes": 1152,
+      "sha256": "880e62dbc5405cd4cc8abc140e3afd87171dff280b9318954b0d7a90b1ff6965"
+    },
+    {
+      "path": "fixtures/v4/objects/sha256/e5/58fcc04863c765c66918777c2491487b44cd7ccf61e75dfa815008a6be3ccb.json",
+      "bytes": 776,
+      "sha256": "707fb1c02e183d40c005b7d81758db43fa5514bb2cd0ff3b411530c8780ca0a4"
+    },
+    {
+      "path": "golden-cases.v0.json",
+      "bytes": 35488,
+      "sha256": "fb59218fb896f1dc3f56c07b18e35d98da5cd77395d00b90197fff85f8316758"
+    },
+    {
+      "path": "malformed-cases.v0.json",
+      "bytes": 29760,
+      "sha256": "deac4a58b3646d27519446284364064cbb4af903a28cdc489f3a7272b5cb49c0"
+    },
+    {
+      "path": "runbook.v0.md",
+      "bytes": 12219,
+      "sha256": "c6a3ce678940efb4dffc1b6238c531c13c7f5052d267d4791be1c9858d986b3b"
+    },
+    {
+      "path": "task-fixtures.v0.json",
+      "bytes": 46314,
+      "sha256": "c73c91eec41d43fd990ad83f7ee62eb676a18eca5d9fa3c8bc0f70913f459b1f"
+    },
+    {
+      "path": "variant-contracts.v0.md",
+      "bytes": 10473,
+      "sha256": "32d8cc6a9d44f3fb9fc31ca6737064ffb3dce035e16b103d0f9c08c1134207df"
+    }
+  ]
+}

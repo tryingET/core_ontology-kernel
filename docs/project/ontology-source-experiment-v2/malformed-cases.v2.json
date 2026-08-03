@@ -1,0 +1,490 @@
+{
+  "schema": "ontology-source-experiment.malformed-cases.v2",
+  "error_precedence": {
+    "E_DUPLICATE_KEY": 10,
+    "E_YAML_ALIAS_FORBIDDEN": 20,
+    "E_AMBIGUOUS_SCALAR": 30,
+    "E_UNKNOWN_FIELD": 40,
+    "E_TYPE": 50,
+    "E_UNICODE_COLLISION": 60,
+    "E_DUPLICATE_ID": 70,
+    "E_RELATION_ID_REQUIRED": 80,
+    "E_RESTATEMENT_CONFLICT": 90,
+    "E_UNSUPPORTED_RDF": 100,
+    "E_AUTHORITY_FIELD_FORBIDDEN": 110,
+    "E_PROJECTION_FALSE_COMPLETENESS": 120
+  },
+  "cases": [
+    {
+      "id": "duplicate_key",
+      "description": "Duplicate semantic mapping key before deserialization",
+      "variants": {
+        "V1": {
+          "applicable": true,
+          "entrypoint": "single_source",
+          "source_utf8": "---\nont:\n  id: \"core.Test\"\n  type: concept\n  labels: [\"Test\"]\n  synonyms: []\n  description: \"First.\"\n  description: \"Second.\"\n  relations: []\n  examples: []\n  anti_examples: []\nsystem4d: {}\n---\n\n# Test\n",
+          "source_sha256": "bda94d02097f9a95c43ea2686165402873cb2cf6457c7d6499a66bd39c202484",
+          "expected_disposition": "reject",
+          "expected_error": "E_DUPLICATE_KEY",
+          "error_precedence": 10
+        },
+        "V2": {
+          "applicable": true,
+          "entrypoint": "single_source",
+          "source_utf8": "{\"schema\":\"rocs-source-experiment.v0\",\"ont\":{\"id\":\"core.Test\",\"type\":\"concept\",\"labels\":[\"Test\"],\"synonyms\":[],\"description\":\"First.\",\"description\":\"Second.\",\"relations\":[]},\"guidance\":{\"examples\":[],\"anti_examples\":[]},\"system4d\":{}}\n",
+          "source_sha256": "334ce153eaa9ba381d89b90b010ebb569c55537df73fc145eff49616a5b3bc18",
+          "expected_disposition": "reject",
+          "expected_error": "E_DUPLICATE_KEY",
+          "error_precedence": 10
+        },
+        "V3": {
+          "applicable": true,
+          "entrypoint": "single_source",
+          "source_utf8": "@prefix rocs: <https://ontology.ai-society.invalid/schema/> .\n@prefix id: <https://ontology.ai-society.invalid/id/> .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix skos: <http://www.w3.org/2004/02/skos/core#> .\nid:core.Test rdf:type rocs:Concept ; rdfs:label \"Test\"@und ; rdfs:label \"Test\"@und ; skos:definition \"Test definition.\"@und ; rocs:status \"active\" .\n",
+          "source_sha256": "04e6232a670e8bef891649f408b8b010f68c9f138391bf285ae39d6c93ed87b6",
+          "expected_disposition": "reject",
+          "expected_error": "E_DUPLICATE_KEY",
+          "error_precedence": 10
+        },
+        "V4": {
+          "applicable": true,
+          "entrypoint": "single_source",
+          "source_utf8": "{\"schema\":\"rocs-semantic-object-experiment.v0\",\"term\":{\"id\":\"core.Test\",\"type\":\"concept\",\"labels\":[\"Test\"],\"synonyms\":[],\"description\":\"First.\",\"description\":\"Second.\",\"relations\":[],\"status\":\"active\"},\"guidance\":{\"examples\":[],\"anti_examples\":[],\"system4d\":null}}\n",
+          "source_sha256": "841b5ae3f32e80465648d3b9615c52260e0f3525850bdc78f4f9cb4520fa4a3b",
+          "expected_disposition": "reject",
+          "expected_error": "E_DUPLICATE_KEY",
+          "error_precedence": 10
+        }
+      }
+    },
+    {
+      "id": "yaml_alias_merge",
+      "description": "YAML alias or merge syntax",
+      "variants": {
+        "V1": {
+          "applicable": true,
+          "entrypoint": "single_source",
+          "source_utf8": "---\ndefaults: &d {synonyms: []}\nont:\n  <<: *d\n  id: \"core.Test\"\n  type: concept\n  labels: [\"Test\"]\n  synonyms: []\n  description: \"Test definition.\"\n  relations: []\n  examples: []\n  anti_examples: []\nsystem4d: {}\n---\n\n# Test\n",
+          "source_sha256": "305a74d0d80265bf553f8c4e8c1bc531f2fb9f67d98a79210d84ad5747ce9af3",
+          "expected_disposition": "reject",
+          "expected_error": "E_YAML_ALIAS_FORBIDDEN",
+          "error_precedence": 20
+        },
+        "V2": {
+          "applicable": false,
+          "reason": "not applicable by frozen variant syntax"
+        },
+        "V3": {
+          "applicable": false,
+          "reason": "not applicable by frozen variant syntax"
+        },
+        "V4": {
+          "applicable": false,
+          "reason": "not applicable by frozen variant syntax"
+        }
+      }
+    },
+    {
+      "id": "ambiguous_yaml_scalar",
+      "description": "Implicit date-like scalar where text is required",
+      "variants": {
+        "V1": {
+          "applicable": true,
+          "entrypoint": "single_source",
+          "source_utf8": "---\nont:\n  id: \"core.Test\"\n  type: concept\n  labels: [\"Test\"]\n  synonyms: []\n  description: 2026-08-03\n  relations: []\n  examples: []\n  anti_examples: []\nsystem4d: {}\n---\n\n# Test\n",
+          "source_sha256": "fd4621db9d0380d2a931b47fbe43d939437e23815c8d306cdb3d089ec3c107a5",
+          "expected_disposition": "reject",
+          "expected_error": "E_AMBIGUOUS_SCALAR",
+          "error_precedence": 30
+        },
+        "V2": {
+          "applicable": false,
+          "reason": "not applicable by frozen variant syntax"
+        },
+        "V3": {
+          "applicable": false,
+          "reason": "not applicable by frozen variant syntax"
+        },
+        "V4": {
+          "applicable": false,
+          "reason": "not applicable by frozen variant syntax"
+        }
+      }
+    },
+    {
+      "id": "unknown_field",
+      "description": "Closed source/profile contains unknown semantic field",
+      "variants": {
+        "V1": {
+          "applicable": true,
+          "entrypoint": "single_source",
+          "source_utf8": "---\nont:\n  id: \"core.Test\"\n  type: concept\n  labels: [\"Test\"]\n  synonyms: []\n  description: \"Test definition.\"\n  relations: []\n  mystery: \"x\"\n  examples: []\n  anti_examples: []\nsystem4d: {}\n---\n\n# Test\n",
+          "source_sha256": "8223e7fbd34d952607be432c846b958ef411f4817b38cac52f15b346faf132cd",
+          "expected_disposition": "reject",
+          "expected_error": "E_UNKNOWN_FIELD",
+          "error_precedence": 40
+        },
+        "V2": {
+          "applicable": true,
+          "entrypoint": "single_source",
+          "source_utf8": "{\"schema\":\"rocs-source-experiment.v0\",\"ont\":{\"id\":\"core.Test\",\"type\":\"concept\",\"labels\":[\"Test\"],\"synonyms\":[],\"description\":\"Test definition.\",\"relations\":[],\"mystery\":\"x\"},\"guidance\":{\"examples\":[],\"anti_examples\":[]},\"system4d\":{}}\n",
+          "source_sha256": "cc220cf1f32796475f91d1151395be2deed9a13549f0cebecb86ed9e7f3720d1",
+          "expected_disposition": "reject",
+          "expected_error": "E_UNKNOWN_FIELD",
+          "error_precedence": 40
+        },
+        "V3": {
+          "applicable": true,
+          "entrypoint": "single_source",
+          "source_utf8": "@prefix rocs: <https://ontology.ai-society.invalid/schema/> .\n@prefix id: <https://ontology.ai-society.invalid/id/> .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix skos: <http://www.w3.org/2004/02/skos/core#> .\nid:core.Test rdf:type rocs:Concept ; rdfs:label \"Test\"@und ; skos:definition \"Test definition.\"@und ; rocs:mystery \"x\" ; rocs:status \"active\" .\n",
+          "source_sha256": "9197b7e0f2abce4520775493f033dfd0ddd4ea1fd86dfca84a11280d852fb9d3",
+          "expected_disposition": "reject",
+          "expected_error": "E_UNKNOWN_FIELD",
+          "error_precedence": 40
+        },
+        "V4": {
+          "applicable": true,
+          "entrypoint": "single_source",
+          "source_utf8": "{\"schema\":\"rocs-semantic-object-experiment.v0\",\"term\":{\"id\":\"core.Test\",\"type\":\"concept\",\"labels\":[\"Test\"],\"synonyms\":[],\"description\":\"Test definition.\",\"relations\":[],\"mystery\":\"x\",\"status\":\"active\"},\"guidance\":{\"examples\":[],\"anti_examples\":[],\"system4d\":null}}\n",
+          "source_sha256": "da9377e1e51f26ef0e5c6a0b4d728acf3a5cd67cebed00364fc5bc8caa9c595c",
+          "expected_disposition": "reject",
+          "expected_error": "E_UNKNOWN_FIELD",
+          "error_precedence": 40
+        }
+      }
+    },
+    {
+      "id": "wrong_boolean_type",
+      "description": "Relation characteristic is string rather than boolean",
+      "variants": {
+        "V1": {
+          "applicable": true,
+          "entrypoint": "single_source",
+          "source_utf8": "---\nont:\n  id: \"core.Test\"\n  type: relation\n  labels: [\"Test\"]\n  description: \"Test definition.\"\n  group: \"test\"\n  characteristics: {transitive: \"false\", symmetric: false}\n  axis_default: \"left\"\nexamples: []\nanti_examples: []\nsystem4d: {}\n---\n\n# Test\n",
+          "source_sha256": "37b1e1d7a99bb1fdeed3d68c94e5612563af9dc9dd6c3cd1dfe3974b2c46aa26",
+          "expected_disposition": "reject",
+          "expected_error": "E_TYPE",
+          "error_precedence": 50
+        },
+        "V2": {
+          "applicable": true,
+          "entrypoint": "single_source",
+          "source_utf8": "{\"schema\":\"rocs-source-experiment.v0\",\"ont\":{\"id\":\"core.Test\",\"type\":\"relation\",\"labels\":[\"Test\"],\"description\":\"Test definition.\",\"group\":\"test\",\"characteristics\":{\"transitive\":\"false\",\"symmetric\":false},\"axis_default\":\"left\"},\"guidance\":{\"examples\":[],\"anti_examples\":[]},\"system4d\":{}}\n",
+          "source_sha256": "6894ea4cc93fa5ce0a2060147f2d94654e0ec328464e475670b7eb7bbf7bc88f",
+          "expected_disposition": "reject",
+          "expected_error": "E_TYPE",
+          "error_precedence": 50
+        },
+        "V3": {
+          "applicable": true,
+          "entrypoint": "single_source",
+          "source_utf8": "@prefix rocs: <https://ontology.ai-society.invalid/schema/> .\n@prefix id: <https://ontology.ai-society.invalid/id/> .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix skos: <http://www.w3.org/2004/02/skos/core#> .\nid:core.Test rdf:type rocs:Relation ; rdfs:label \"Test\"@und ; skos:definition \"Test definition.\"@und ; rocs:status true .\n",
+          "source_sha256": "0fcc095ade3b813b70ba254f831d6c7773f595107997a86323eae623bb2c66f6",
+          "expected_disposition": "reject",
+          "expected_error": "E_TYPE",
+          "error_precedence": 50
+        },
+        "V4": {
+          "applicable": true,
+          "entrypoint": "single_source",
+          "source_utf8": "{\"schema\":\"rocs-semantic-object-experiment.v0\",\"term\":{\"id\":\"core.Test\",\"type\":\"relation\",\"labels\":[\"Test\"],\"description\":\"Test definition.\",\"group\":\"test\",\"characteristics\":{\"transitive\":\"false\",\"symmetric\":false},\"axis_default\":\"left\",\"status\":\"active\"},\"guidance\":{\"examples\":[],\"anti_examples\":[],\"system4d\":null}}\n",
+          "source_sha256": "cd4d2e7d911d26817d7c6a224eeca89e3e18ec763eabbb7800a0bda5a36e7590",
+          "expected_disposition": "reject",
+          "expected_error": "E_TYPE",
+          "error_precedence": 50
+        }
+      }
+    },
+    {
+      "id": "unicode_collision",
+      "description": "NFC-equivalent duplicate labels",
+      "variants": {
+        "V1": {
+          "applicable": true,
+          "entrypoint": "single_source",
+          "source_utf8": "---\nont:\n  id: \"core.Test\"\n  type: concept\n  labels: [\"Agént\", \"Agént\"]\n  synonyms: []\n  description: \"Test definition.\"\n  relations: []\n  examples: []\n  anti_examples: []\nsystem4d: {}\n---\n\n# Test\n",
+          "source_sha256": "f748472d1848d01364288f4f8be9068d75ec84deb76403cf8ebaedce92d0616f",
+          "expected_disposition": "reject",
+          "expected_error": "E_UNICODE_COLLISION",
+          "error_precedence": 60
+        },
+        "V2": {
+          "applicable": true,
+          "entrypoint": "single_source",
+          "source_utf8": "{\"schema\":\"rocs-source-experiment.v0\",\"ont\":{\"id\":\"core.Test\",\"type\":\"concept\",\"labels\":[\"Agént\",\"Agént\"],\"synonyms\":[],\"description\":\"Test definition.\",\"relations\":[]},\"guidance\":{\"examples\":[],\"anti_examples\":[]},\"system4d\":{}}\n",
+          "source_sha256": "f932e56aa457082415c1084d28da3f6e0eb0520826f42016a8d1f999934df324",
+          "expected_disposition": "reject",
+          "expected_error": "E_UNICODE_COLLISION",
+          "error_precedence": 60
+        },
+        "V3": {
+          "applicable": true,
+          "entrypoint": "single_source",
+          "source_utf8": "@prefix rocs: <https://ontology.ai-society.invalid/schema/> .\n@prefix id: <https://ontology.ai-society.invalid/id/> .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix skos: <http://www.w3.org/2004/02/skos/core#> .\nid:core.Test rdf:type rocs:Concept ; rdfs:label \"Agént\"@und ; rdfs:label \"Agént\"@und ; skos:definition \"Test definition.\"@und ; rocs:status \"active\" .\n",
+          "source_sha256": "8948e8c28e42a2d246aa18a51e63d55302765712da6e23ba560c12e518cc3f0a",
+          "expected_disposition": "reject",
+          "expected_error": "E_UNICODE_COLLISION",
+          "error_precedence": 60
+        },
+        "V4": {
+          "applicable": true,
+          "entrypoint": "single_source",
+          "source_utf8": "{\"schema\":\"rocs-semantic-object-experiment.v0\",\"term\":{\"id\":\"core.Test\",\"type\":\"concept\",\"labels\":[\"Agént\",\"Agént\"],\"synonyms\":[],\"description\":\"Test definition.\",\"relations\":[],\"status\":\"active\"},\"guidance\":{\"examples\":[],\"anti_examples\":[],\"system4d\":null}}\n",
+          "source_sha256": "269fa06be3c27b153e80cd75e101536909c65edeec62e398302c6fecf30575d5",
+          "expected_disposition": "reject",
+          "expected_error": "E_UNICODE_COLLISION",
+          "error_precedence": 60
+        }
+      }
+    },
+    {
+      "id": "duplicate_id",
+      "description": "Two source records define one stable ID",
+      "variants": {
+        "V1": {
+          "applicable": true,
+          "entrypoint": "virtual_files_json",
+          "source_utf8": "{\"core.TestA.md\":\"---\\nont:\\n  id: \\\"core.Test\\\"\\n  type: concept\\n  labels: [\\\"Test\\\"]\\n  synonyms: []\\n  description: \\\"Test definition.\\\"\\n  relations: []\\n  examples: []\\n  anti_examples: []\\nsystem4d: {}\\n---\\n\\n# Test\\n\",\"core.TestB.md\":\"---\\nont:\\n  id: \\\"core.Test\\\"\\n  type: concept\\n  labels: [\\\"Test\\\"]\\n  synonyms: []\\n  description: \\\"Test definition.\\\"\\n  relations: []\\n  examples: []\\n  anti_examples: []\\nsystem4d: {}\\n---\\n\\n# Test\\n\"}\n",
+          "source_sha256": "36b66d355b03e0b55314821e93202f0aa8d1f2026f5b221a9c6e8a700caa485c",
+          "expected_disposition": "reject",
+          "expected_error": "E_DUPLICATE_ID",
+          "error_precedence": 70
+        },
+        "V2": {
+          "applicable": true,
+          "entrypoint": "virtual_files_json",
+          "source_utf8": "{\"core.TestA.json\":\"{\\\"schema\\\":\\\"rocs-source-experiment.v0\\\",\\\"ont\\\":{\\\"id\\\":\\\"core.Test\\\",\\\"type\\\":\\\"concept\\\",\\\"labels\\\":[\\\"Test\\\"],\\\"synonyms\\\":[],\\\"description\\\":\\\"Test definition.\\\",\\\"relations\\\":[]},\\\"guidance\\\":{\\\"examples\\\":[],\\\"anti_examples\\\":[]},\\\"system4d\\\":{}}\\n\",\"core.TestB.json\":\"{\\\"schema\\\":\\\"rocs-source-experiment.v0\\\",\\\"ont\\\":{\\\"id\\\":\\\"core.Test\\\",\\\"type\\\":\\\"concept\\\",\\\"labels\\\":[\\\"Test\\\"],\\\"synonyms\\\":[],\\\"description\\\":\\\"Test definition.\\\",\\\"relations\\\":[]},\\\"guidance\\\":{\\\"examples\\\":[],\\\"anti_examples\\\":[]},\\\"system4d\\\":{}}\\n\"}\n",
+          "source_sha256": "4195b2ae2cf3c9ed99a15e5b88a6c3057faead91acf2365fb3d3fd220f32c967",
+          "expected_disposition": "reject",
+          "expected_error": "E_DUPLICATE_ID",
+          "error_precedence": 70
+        },
+        "V3": {
+          "applicable": false,
+          "reason": "not applicable by frozen variant syntax"
+        },
+        "V4": {
+          "applicable": true,
+          "entrypoint": "virtual_files_json",
+          "source_utf8": "{\"object-a.json\":\"{\\\"schema\\\":\\\"rocs-semantic-object-experiment.v0\\\",\\\"term\\\":{\\\"id\\\":\\\"core.Test\\\",\\\"type\\\":\\\"concept\\\",\\\"labels\\\":[\\\"Test\\\"],\\\"synonyms\\\":[],\\\"description\\\":\\\"Test definition.\\\",\\\"relations\\\":[],\\\"status\\\":\\\"active\\\"},\\\"guidance\\\":{\\\"examples\\\":[],\\\"anti_examples\\\":[],\\\"system4d\\\":null}}\\n\",\"object-b.json\":\"{\\\"schema\\\":\\\"rocs-semantic-object-experiment.v0\\\",\\\"term\\\":{\\\"id\\\":\\\"core.Test\\\",\\\"type\\\":\\\"concept\\\",\\\"labels\\\":[\\\"Test\\\"],\\\"synonyms\\\":[],\\\"description\\\":\\\"Test definition.\\\",\\\"relations\\\":[],\\\"status\\\":\\\"active\\\"},\\\"guidance\\\":{\\\"examples\\\":[],\\\"anti_examples\\\":[],\\\"system4d\\\":null}}\\n\"}\n",
+          "source_sha256": "e738f7e8d12dcbe9c55581578b15c6864fcfb704d5195c4da765ee761774b1d8",
+          "expected_disposition": "reject",
+          "expected_error": "E_DUPLICATE_ID",
+          "error_precedence": 70
+        }
+      }
+    },
+    {
+      "id": "relation_label_reference",
+      "description": "Assertion uses relation label rather than stable ID",
+      "variants": {
+        "V1": {
+          "applicable": true,
+          "entrypoint": "single_source",
+          "source_utf8": "---\nont:\n  id: \"core.Test\"\n  type: concept\n  labels: [\"Test\"]\n  synonyms: []\n  description: \"Test definition.\"\n  relations: [{type: \"is_a\", target: \"core.Actor\"}]\n  examples: []\n  anti_examples: []\nsystem4d: {}\n---\n\n# Test\n",
+          "source_sha256": "2c22191dc5453c035ea33d8d424de589c44dcaf0b9e20fe1c854bbcaff91e1a3",
+          "expected_disposition": "reject",
+          "expected_error": "E_RELATION_ID_REQUIRED",
+          "error_precedence": 80
+        },
+        "V2": {
+          "applicable": true,
+          "entrypoint": "single_source",
+          "source_utf8": "{\"schema\":\"rocs-source-experiment.v0\",\"ont\":{\"id\":\"core.Test\",\"type\":\"concept\",\"labels\":[\"Test\"],\"synonyms\":[],\"description\":\"Test definition.\",\"relations\":[{\"relation_id\":\"is_a\",\"target_id\":\"core.Actor\"}]},\"guidance\":{\"examples\":[],\"anti_examples\":[]},\"system4d\":{}}\n",
+          "source_sha256": "cc69cfce7ba069023a3694a76494bec0b3c649b670afa32ccbd07e68f0f2d1d8",
+          "expected_disposition": "reject",
+          "expected_error": "E_RELATION_ID_REQUIRED",
+          "error_precedence": 80
+        },
+        "V3": {
+          "applicable": false,
+          "reason": "not applicable by frozen variant syntax"
+        },
+        "V4": {
+          "applicable": true,
+          "entrypoint": "single_source",
+          "source_utf8": "{\"schema\":\"rocs-semantic-object-experiment.v0\",\"term\":{\"id\":\"core.Test\",\"type\":\"concept\",\"labels\":[\"Test\"],\"synonyms\":[],\"description\":\"Test definition.\",\"relations\":[{\"relation_id\":\"is_a\",\"target_id\":\"core.Actor\"}],\"status\":\"active\"},\"guidance\":{\"examples\":[],\"anti_examples\":[],\"system4d\":null}}\n",
+          "source_sha256": "ca9d1c6ae4cb32739e3a86a73bc6ec2f93d2952316a25d98d854e75b166947be",
+          "expected_disposition": "reject",
+          "expected_error": "E_RELATION_ID_REQUIRED",
+          "error_precedence": 80
+        }
+      }
+    },
+    {
+      "id": "marked_restatement_conflict",
+      "description": "Marked Markdown restatement differs from normative definition",
+      "variants": {
+        "V1": {
+          "applicable": true,
+          "entrypoint": "single_source",
+          "source_utf8": "---\nont:\n  id: \"core.Test\"\n  type: concept\n  labels: [\"Test\"]\n  synonyms: []\n  description: \"Test definition.\"\n  relations: []\n  examples: []\n  anti_examples: []\nsystem4d: {}\n---\n\n# Test\n\n## Definition\n<!-- rocs:restates ont.description -->\nDifferent definition.\n",
+          "source_sha256": "3daf9af4f5ebdb804b3d63c7cdfeabbf5266cefda6ffec9096093bce14b39d72",
+          "expected_disposition": "reject",
+          "expected_error": "E_RESTATEMENT_CONFLICT",
+          "error_precedence": 90
+        },
+        "V2": {
+          "applicable": false,
+          "reason": "not applicable by frozen variant syntax"
+        },
+        "V3": {
+          "applicable": false,
+          "reason": "not applicable by frozen variant syntax"
+        },
+        "V4": {
+          "applicable": false,
+          "reason": "not applicable by frozen variant syntax"
+        }
+      }
+    },
+    {
+      "id": "unsupported_owl",
+      "description": "OWL union construct outside profile",
+      "variants": {
+        "V1": {
+          "applicable": false,
+          "reason": "not applicable by frozen variant syntax"
+        },
+        "V2": {
+          "applicable": false,
+          "reason": "not applicable by frozen variant syntax"
+        },
+        "V3": {
+          "applicable": true,
+          "entrypoint": "single_source",
+          "source_utf8": "@prefix rocs: <https://ontology.ai-society.invalid/schema/> .\n@prefix id: <https://ontology.ai-society.invalid/id/> .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix skos: <http://www.w3.org/2004/02/skos/core#> .\nid:core.Test rdf:type rocs:Concept ; rdfs:label \"Test\"@und ; skos:definition \"Test definition.\"@und ; rocs:status \"active\" .\nid:core.Test <http://www.w3.org/2002/07/owl#unionOf> id:core.Other .\n",
+          "source_sha256": "37a0f14435fb9ae501c6153e4182ec4aa98343c2c2386db652fec0efae415d49",
+          "expected_disposition": "reject",
+          "expected_error": "E_UNSUPPORTED_RDF",
+          "error_precedence": 100
+        },
+        "V4": {
+          "applicable": false,
+          "reason": "not applicable by frozen variant syntax"
+        }
+      }
+    },
+    {
+      "id": "authority_field",
+      "description": "Semantic source claims approval/currentness",
+      "variants": {
+        "V1": {
+          "applicable": true,
+          "entrypoint": "single_source",
+          "source_utf8": "---\nont:\n  id: \"core.Test\"\n  type: concept\n  labels: [\"Test\"]\n  synonyms: []\n  description: \"Test definition.\"\n  relations: []\n  examples: []\n  anti_examples: []\napproval: true\nsystem4d: {}\n---\n\n# Test\n",
+          "source_sha256": "01a7a2bc65b042e92e1353bf23049c0a5ca0a79cc8835514d48916234c78a16e",
+          "expected_disposition": "reject",
+          "expected_error": "E_AUTHORITY_FIELD_FORBIDDEN",
+          "error_precedence": 110
+        },
+        "V2": {
+          "applicable": true,
+          "entrypoint": "single_source",
+          "source_utf8": "{\"schema\":\"rocs-source-experiment.v0\",\"ont\":{\"id\":\"core.Test\",\"type\":\"concept\",\"labels\":[\"Test\"],\"synonyms\":[],\"description\":\"Test definition.\",\"relations\":[]},\"guidance\":{\"examples\":[],\"anti_examples\":[]},\"approval\":true,\"system4d\":{}}\n",
+          "source_sha256": "7020580f28bebb88cb9e689f087905be1474e1bf8ee14a2b4a366bddbd843623",
+          "expected_disposition": "reject",
+          "expected_error": "E_AUTHORITY_FIELD_FORBIDDEN",
+          "error_precedence": 110
+        },
+        "V3": {
+          "applicable": true,
+          "entrypoint": "single_source",
+          "source_utf8": "@prefix rocs: <https://ontology.ai-society.invalid/schema/> .\n@prefix id: <https://ontology.ai-society.invalid/id/> .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix skos: <http://www.w3.org/2004/02/skos/core#> .\nid:core.Test rdf:type rocs:Concept ; rdfs:label \"Test\"@und ; skos:definition \"Test definition.\"@und ; rocs:approved true ; rocs:status \"active\" .\n",
+          "source_sha256": "56ff5bb502e9bb2f347d5816bb35679c1532a387bb898e094bca1895c422421a",
+          "expected_disposition": "reject",
+          "expected_error": "E_AUTHORITY_FIELD_FORBIDDEN",
+          "error_precedence": 110
+        },
+        "V4": {
+          "applicable": true,
+          "entrypoint": "single_source",
+          "source_utf8": "{\"schema\":\"rocs-semantic-object-experiment.v0\",\"term\":{\"id\":\"core.Test\",\"type\":\"concept\",\"labels\":[\"Test\"],\"synonyms\":[],\"description\":\"Test definition.\",\"relations\":[],\"status\":\"active\"},\"approval\":true,\"guidance\":{\"examples\":[],\"anti_examples\":[],\"system4d\":null}}\n",
+          "source_sha256": "505517e88e52c6edee4e98e172f26674e3b16b289a6ca6627d0ad0ea11a36654",
+          "expected_disposition": "reject",
+          "expected_error": "E_AUTHORITY_FIELD_FORBIDDEN",
+          "error_precedence": 110
+        }
+      }
+    },
+    {
+      "id": "false_projection_completeness",
+      "description": "Projection claims semantic completeness while declaring omitted facts",
+      "variants": {
+        "V1": {
+          "applicable": true,
+          "entrypoint": "projection_metadata",
+          "source_utf8": "{\"status\":\"semantically_complete\",\"semantic_digest\":\"0000000000000000000000000000000000000000000000000000000000000000\",\"included_fact_kinds\":[\"term\"],\"omitted_semantic_fact_kinds\":[\"definition\"],\"omitted_guidance_paths\":[],\"authority\":\"non_authoritative_projection\"}\n",
+          "source_sha256": "02044f47c5be95a5b764cbd9d3129fb6711b9373f7a68b7112b7cb331ffad176",
+          "expected_disposition": "reject",
+          "expected_error": "E_PROJECTION_FALSE_COMPLETENESS",
+          "error_precedence": 120
+        },
+        "V2": {
+          "applicable": true,
+          "entrypoint": "projection_metadata",
+          "source_utf8": "{\"status\":\"semantically_complete\",\"semantic_digest\":\"0000000000000000000000000000000000000000000000000000000000000000\",\"included_fact_kinds\":[\"term\"],\"omitted_semantic_fact_kinds\":[\"definition\"],\"omitted_guidance_paths\":[],\"authority\":\"non_authoritative_projection\"}\n",
+          "source_sha256": "02044f47c5be95a5b764cbd9d3129fb6711b9373f7a68b7112b7cb331ffad176",
+          "expected_disposition": "reject",
+          "expected_error": "E_PROJECTION_FALSE_COMPLETENESS",
+          "error_precedence": 120
+        },
+        "V3": {
+          "applicable": true,
+          "entrypoint": "projection_metadata",
+          "source_utf8": "{\"status\":\"semantically_complete\",\"semantic_digest\":\"0000000000000000000000000000000000000000000000000000000000000000\",\"included_fact_kinds\":[\"term\"],\"omitted_semantic_fact_kinds\":[\"definition\"],\"omitted_guidance_paths\":[],\"authority\":\"non_authoritative_projection\"}\n",
+          "source_sha256": "02044f47c5be95a5b764cbd9d3129fb6711b9373f7a68b7112b7cb331ffad176",
+          "expected_disposition": "reject",
+          "expected_error": "E_PROJECTION_FALSE_COMPLETENESS",
+          "error_precedence": 120
+        },
+        "V4": {
+          "applicable": true,
+          "entrypoint": "projection_metadata",
+          "source_utf8": "{\"status\":\"semantically_complete\",\"semantic_digest\":\"0000000000000000000000000000000000000000000000000000000000000000\",\"included_fact_kinds\":[\"term\"],\"omitted_semantic_fact_kinds\":[\"definition\"],\"omitted_guidance_paths\":[],\"authority\":\"non_authoritative_projection\"}\n",
+          "source_sha256": "02044f47c5be95a5b764cbd9d3129fb6711b9373f7a68b7112b7cb331ffad176",
+          "expected_disposition": "reject",
+          "expected_error": "E_PROJECTION_FALSE_COMPLETENESS",
+          "error_precedence": 120
+        }
+      }
+    },
+    {
+      "id": "precedence_duplicate_before_authority",
+      "description": "Two defects must return controlling first error",
+      "variants": {
+        "V1": {
+          "applicable": true,
+          "entrypoint": "single_source",
+          "source_utf8": "---\nont:\n  id: \"core.Test\"\n  type: concept\n  labels: [\"Test\"]\n  synonyms: []\n  description: \"First.\"\n  description: \"Second.\"\n  relations: []\n  examples: []\n  anti_examples: []\napproval: true\nsystem4d: {}\n---\n\n# Test\n",
+          "source_sha256": "19d6dca62afb0888ebca1cd4afff6ad7a22b013f0ad3a2d595f06c26d7e68f7f",
+          "expected_disposition": "reject",
+          "expected_error": "E_DUPLICATE_KEY",
+          "error_precedence": 10
+        },
+        "V2": {
+          "applicable": true,
+          "entrypoint": "single_source",
+          "source_utf8": "{\"schema\":\"rocs-source-experiment.v0\",\"ont\":{\"id\":\"core.Test\",\"type\":\"concept\",\"labels\":[\"Test\"],\"synonyms\":[],\"description\":\"First.\",\"description\":\"Second.\",\"relations\":[]},\"guidance\":{\"examples\":[],\"anti_examples\":[]},\"approval\":true,\"system4d\":{}}\n",
+          "source_sha256": "1e90c689adcfa6396b866fe0ec0adbf0984dd9d6e8305e976b7254235ae85ee1",
+          "expected_disposition": "reject",
+          "expected_error": "E_DUPLICATE_KEY",
+          "error_precedence": 10
+        },
+        "V3": {
+          "applicable": false,
+          "reason": "not applicable by frozen variant syntax"
+        },
+        "V4": {
+          "applicable": true,
+          "entrypoint": "single_source",
+          "source_utf8": "{\"schema\":\"rocs-semantic-object-experiment.v0\",\"term\":{\"id\":\"core.Test\",\"type\":\"concept\",\"labels\":[\"Test\"],\"synonyms\":[],\"description\":\"First.\",\"description\":\"Second.\",\"relations\":[],\"status\":\"active\"},\"approval\":true,\"guidance\":{\"examples\":[],\"anti_examples\":[],\"system4d\":null}}\n",
+          "source_sha256": "04e2b4b85a1df5e8f298f37980693cf20aac617f2dab9a81fce4ba874cddc19e",
+          "expected_disposition": "reject",
+          "expected_error": "E_DUPLICATE_KEY",
+          "error_precedence": 10
+        }
+      }
+    }
+  ]
+}

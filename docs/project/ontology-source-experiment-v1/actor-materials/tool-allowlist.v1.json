@@ -1,0 +1,11 @@
+{
+  "schema":"ontology-source-experiment.tool-allowlist.v1",
+  "actor_tools":["read","edit","write","bash"],
+  "reviewer_tools":["read"],
+  "actor_path_policy":"read/write only inside supplied observation root; read one supplied validation-help file outside root; all other paths denied",
+  "reviewer_path_policy":"read only the supplied normalized packet",
+  "bash_allowlist":["pwd","git status --short","git diff -- <supplied-source-paths>","./experiment validate --variant <V1|V2|V3|V4> --root <observation-root>"],
+  "bash_forbidden":["network","package installation","process signaling","filesystem traversal outside observation root","reading environment secrets","git commit","git push","AK/ROCS/Prompt Vault mutation"],
+  "network":"disabled",
+  "timeout_seconds":900
+}
