@@ -9,17 +9,17 @@ type: "reference"
 
 ## Corpus observation
 
-A bounded local audit of tracked reference documents at the proposal baseline found:
+A bounded audit of the committed tree at `56d044687ffb2815ef2e79f0d7b077c9b0123036` found:
 
-- 32 concepts and 12 relations;
-- every concept stores `examples` and `anti_examples` under `ont`;
-- every relation stores `examples` and `anti_examples` at top level;
-- all 32 concepts carry top-level `system4d.fog` guidance; relations do not;
-- five concept edges use unique relation labels (`instance_of`, `is_a`) rather than relation IDs;
-- two concept `## Definition` sections differ textually from `ont.description`;
-- all 12 relation `## Definition` sections elaborate beyond or differ from `ont.description`.
+- 31 tracked concept documents and 12 tracked relation documents;
+- every tracked concept stores `examples` and `anti_examples` under `ont`;
+- every tracked relation stores `examples` and `anti_examples` at top level;
+- all 31 tracked concepts carry top-level `system4d.fog` guidance; relations do not;
+- five tracked concept edges use unique relation labels (`instance_of`, `is_a`) rather than relation IDs;
+- two tracked concept `## Definition` sections differ textually from `ont.description`;
+- all 12 tracked relation `## Definition` sections elaborate beyond or differ from `ont.description`.
 
-These are shape observations, not evidence that one representation is semantically superior.
+The dirty worktree separately contained untracked `ontology/src/reference/concepts/core.AgentExperience.md`, yielding 32 concept documents for workspace-based ROCS commands. It is not part of the committed baseline or this decision. These are shape observations, not evidence that one representation is semantically superior.
 
 ## ROCS observation
 
