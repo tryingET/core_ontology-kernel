@@ -9,7 +9,7 @@ type: "proposal"
 
 ## Status
 
-Revised proposal after [semantic-owner review r1](ontology-markdown-rocs-contract-v1-review-semantic-r1.md). This RFC does not authorize implementation.
+Revised proposal after [semantic-owner review r1](ontology-markdown-rocs-contract-v1-review-semantic-r1.md) and the controlling [review synthesis r2](ontology-markdown-rocs-contract-v1-review-synthesis-r2.md). This RFC does not authorize implementation.
 
 The governance path is one cross-repo AK decision covering `core/ontology-kernel` and `core/rocs-cli`, with semantic-owner and ROCS-owner review tracks. Implementation becomes lawful only after a complete review set closes `ready_for_adr`, the cross-repo ADR is recorded, post-ADR plans are attached, and separately scoped AK tasks in each repository are created and claimed. Review readiness or an ontology-kernel artifact alone cannot authorize a ROCS package release.
 
@@ -75,6 +75,8 @@ A v1 reference document obeys this closed envelope:
 
 ROCS validator and semantic snapshot paths must use one parser or behaviorally identical independent parsers for this profile. A caller-selected lower operation budget may return `resource_exhausted`; it does not redefine which source bytes are schema-valid.
 
+Corpus membership is closed. Under each selected layer source root, `reference/concepts/README.md` and `reference/relations/README.md` are optional narrative files and are excluded. Every other direct-child `*.md` file in those two directories is a reference document and must pass this contract. Subdirectories, symlinks, and other regular files in those directories fail admission; no malformed definition may escape by classification.
+
 ### 3. Identity and path grammar
 
 - `ont.id` is a string matching `[A-Za-z0-9_-]+(\.[A-Za-z0-9_-]+)+`.
@@ -105,6 +107,18 @@ YAML implicit coercion does not satisfy a string or boolean requirement.
 | `characteristics` | forbidden | required | exact mapping of boolean `transitive` and `symmetric` |
 | `axis_default` | forbidden | required | exact `parents`, `children`, or `left` |
 | `inverse` | forbidden | optional | non-empty relation-label string resolving uniquely and reciprocally |
+
+Every admitted field has one owner classification:
+
+| Classification | Fields/surfaces | Change and projection rule |
+|---|---|---|
+| semantic normative | `id`, `type`, `labels`, `description`, `synonyms`, `relations`, `group`, `characteristics`, `inverse` | changes authored meaning or semantic reference behavior; projections must preserve or explicitly omit |
+| lifecycle normative | `status`, `deprecated` | changes semantic-owner lifecycle declaration but never Decision 53 publication/adoption/currentness; projections must preserve or explicitly omit |
+| retrieval/authoring guidance | `examples`, `anti_examples`, `system4d`, Markdown body | may affect retrieval or human interpretation; never overrides semantic fields; omission must be explicit |
+| presentation | `axis_default` | affects default visualization/layout only; no semantic consequence; omission must be explicit |
+| lint metadata | `lint_ignore` | v1 admits only `[]`; carries no meaning or authority |
+
+`labels` include the primary relation path/reference token; changing that token requires an explicit reference and filename migration. This classification is normative for v1 and does not inherit broader conclusions from the source-format experiments.
 
 Additional invariants:
 
@@ -147,7 +161,22 @@ relations:
 
 Stable relation-ID edges remain a possible future migration. No current wrong-answer consequence justifies a breaking fleet-wide change in this wave.
 
-### 7. Operation projection and identity
+### 7. Opt-in and compatibility boundary
+
+V1 is activated per layer by exact manifest declaration:
+
+```yaml
+rocs:
+  source_contract: ontology-markdown-v1
+```
+
+A layer without that selector retains the pre-v1 ROCS source behavior. The selector is read from the manifest adjacent to that layer's `src` root, so mixed resolved views dispatch each layer through its declared contract before cross-layer identity/reference checks. This wave opts in only `ontology-kernel`; it does not silently change other consumers or ref layers.
+
+Every command that opens reference documents must use the same per-layer contract dispatcher. The affected public set is `validate`, `build`, `summary`, `lint`, `diff`, `graph`, `check-inverses`, `normalize`, `pack`, bound `pack`, and `discover`, plus any internal helper they call. `rules` may describe rules without opening documents; `explain` must use the dispatcher when it opens a document.
+
+Unbound interactive `pack` remains supported and emits its existing human/JSON shape after v1 admission. Bound `pack` remains the semantic-discovery-v0 snapshot-bound protocol operation. The RFC does not merge their identities or output contracts. Because the new grammar is opt-in, the tooling release is a minor `0.3.0` capability addition; any future default-on or legacy-removal change requires a new breaking-policy decision.
+
+### 8. Operation projection and identity
 
 The raw identities below normatively reuse `semantic-discovery-protocol-v0`: SHA-256 over exact raw document bytes, and RFC 8785/JCS object digests with the protocol's digest-omitted pseudotypes. Corpus-snapshot and bound-pack preimages, field sets, algorithm IDs, ordering, and error envelopes remain those of that protocol. They are raw/protocol identities, not semantic equivalence or authority.
 
@@ -157,11 +186,12 @@ The raw identities below normatively reuse `semantic-discovery-protocol-v0`: SHA
 | `summary` | complete v1 grammar and references | IDs, kinds, layers | layers and counts | all document fields and body |
 | `build` | complete v1 grammar and references | fields required by documented generated schemas | ID index, summary/counts, authority-ceiling receipts | guidance, body, and fields absent from generated schemas |
 | lexical `discover` | complete v1 grammar and references | ID, labels, synonyms, description, relation references, examples, anti-examples | protocol candidate identity, score, matched query tokens, bounded field/rule evidence, raw document digest | source field values, status/deprecation, lint metadata, relation metadata, `system4d`, body |
-| exact/bound `pack` | fresh complete v1 admission and snapshot binding | exact selected source bytes | exact selected source bytes plus closed pack metadata | only unselected documents, explicit in config/document list |
+| unbound `pack` | complete v1 admission | selected exact source text and traversal metadata | existing interactive text/JSON pack shape | unselected documents according to pack configuration |
+| bound `pack` | fresh complete v1 admission and semantic-discovery-v0 snapshot binding | exact selected source bytes | closed semantic-discovery-v0 pack protocol | only unselected documents, explicit in config/document list |
 
 Lexical source values are scoring inputs, not automatic prompt injection. Full source content appears only through explicit exact/bound pack output. A known omission cannot be reinterpreted as absence or permission to invent meaning.
 
-### 8. Error precedence
+### 9. Error precedence
 
 For one operation, the first applicable class wins:
 
@@ -175,15 +205,40 @@ For one operation, the first applicable class wins:
 
 Validator findings may use operation-specific rule IDs, while semantic discovery uses its closed error envelope. Both must classify the same source as accepted or rejected when run with sufficient operation budgets.
 
-### 9. Consumer wiring
+### 10. Reproducible tooling release and rollback
 
-`ontology-kernel` is a ROCS `required` consumer with nested `ontology/` layout.
+The canonical `rocs-cli` tooling release identity is the tuple:
+
+```text
+SemVer + immutable Git commit + pyproject SHA-256 + uv.lock SHA-256
++ VENDORED_HASHES schema/version + bundle_manifest_digest
+```
+
+The release is built from a clean tagged commit under Python 3.12 / Unicode 15.0.0 with `uv sync --frozen`; runtime dependency trees come only from that lock-resolved environment. `VENDORED_HASHES.json` records the source commit, lock digest, every included path digest, and `bundle_manifest_digest`, defined as SHA-256 over RFC 8785/JCS bytes of the sorted path-to-digest mapping plus release identity fields, excluding only `bundle_manifest_digest`. Two isolated builds from the same commit and lock must be byte-identical before release acceptance.
+
+The tag is immutable. Rollback is a consumer repin to a previously accepted exact bundle/manifest or a forward corrective release; neither a published version nor tag is rewritten or represented as retracted by reverting a source commit.
+
+### 11. Consumer wiring and executable acceptance
+
+`ontology-kernel` is a ROCS `required` consumer with nested `ontology/` layout. Its manifest adds:
+
+```yaml
+rocs:
+  layer: core
+  source_contract: ontology-markdown-v1
+  profiles:
+    default: kernel-v1
+    kernel-v1:
+      include_layers: [core]
+```
 
 - Checked-in `tools/rocs-cli` is the reproducible CI/hook dependency.
 - `scripts/ci/full.sh` is the standalone acceptance entry point.
-- `.gitlab-ci.yml` invokes `scripts/ci/full.sh`, not a workspace launcher.
-- A workspace launcher may exist only as non-authoritative developer convenience.
-- Acceptance includes a clean detached worktree or clone with no sibling `core/rocs-cli` checkout available.
+- `.gitlab-ci.yml` uses Python 3.12 and invokes `scripts/ci/full.sh`, not a workspace launcher.
+- A checked-in semantic-discovery-v0 request fixture uses profile `kernel-v1` and development-snapshot identity.
+- The gate derives the adopted-runtime tool-manifest digest from the verified vendored manifest, runs discovery with `--json --no-index-cache --no-env-file`, and uses the returned corpus/document digests to exercise bound pack; it separately exercises unbound pack.
+- Acceptance runs from a clean detached worktree or clone whose parent contains no sibling `core/rocs-cli` checkout and with `ROCS_WORKSPACE_ROOT` unset.
+- The matrix covers `vendored-check`, `validate`, `build`, `summary`, `lint`, `graph`, `check-inverses`, `normalize` dry-run/no-write behavior, unbound pack, discover, bound pack, generated hook, and CI script. `diff` is covered by ROCS package tests using two v1 fixtures because it requires two corpus states.
 - Hook generation is verified; `core.hooksPath` activation remains an explicit local operator action.
 - `ontology_repo` convergence is forbidden for this nested layout.
 
@@ -196,23 +251,26 @@ Validator findings may use operation-specific rule IDs, while semantic discovery
 - **Switch edges to relation IDs now:** deferred; current unique-label resolution is deterministic and a fleet break is unjustified.
 - **Allow general YAML:** rejected; parser divergence and expansion hazards defeat closed admission.
 - **Allow non-empty `lint_ignore`:** deferred until a separately reviewed, versioned advisory-rule registry exists.
+- **Change all ROCS consumers at once:** rejected; the manifest selector makes adoption explicit and preserves legacy behavior elsewhere.
+- **Treat ambient vendoring as a release identity:** rejected; self-consistency is not reproducibility.
 
 ## Implementation consequences
 
 If accepted by the cross-repo decision and ADR:
 
 1. Attach implementation and validation/rollout/rollback plans.
-2. Create and claim a scoped `rocs-cli` task to implement the shared parser/grammar, validator/snapshot parity, operation-loss documentation, and adversarial fixtures.
-3. After ROCS-owner validation, create and claim a separate release task for the approved SemVer bump. This is a tooling release only.
-4. Create and claim a scoped `ontology-kernel` task to relocate relation guidance, update schema docs, converge as `required`, and rewire CI.
-5. Vendor the exact released ROCS bundle and verify its manifest.
-6. Prove clean-worktree and no-sibling validator, build, summary, pack, discovery, generated-gate, hook, and CI behavior.
+2. Create and claim a scoped `rocs-cli` task to implement the opt-in shared parser/grammar dispatcher across every affected operation, validator/snapshot parity, deterministic bundle identity, operation-loss documentation, and adversarial/legacy-compatibility fixtures.
+3. After ROCS-owner validation and isolated double-build proof, create and claim a separate release task for tooling release `0.3.0`, update the lock, commit, tag the exact source commit, and preserve the release manifest evidence.
+4. Create and claim a scoped `ontology-kernel` task to relocate relation guidance, add the selector/profile/request fixture, update schema docs, converge as `required`, rewire CI to Python 3.12 and the generated gate, and remove the workspace launcher from acceptance.
+5. Vendor the exact released bundle and verify its source commit, lock, file hashes, and bundle-manifest digest.
+6. Prove the executable acceptance matrix in a clean no-sibling environment.
 
 ## Rollback
 
-- Revert the ROCS implementation/release commit.
-- Revert the kernel corpus/schema/convergence commit.
-- Restore the previously pinned vendored ROCS bundle and CI commands.
+- Before publication, abandon/revert the candidate implementation normally.
+- After an immutable tooling release exists, do not rewrite its commit or tag; issue a forward corrective release if package bytes are defective.
+- Revert the kernel schema/corpus/selector/convergence commit and repin its complete vendored tree to the previously accepted exact manifest.
+- Restore the prior CI commands only with that previous vendored pin.
 - Never use an unpinned sibling checkout as rollback.
 
 ## Decision requested
