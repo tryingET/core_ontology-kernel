@@ -21,6 +21,8 @@ This analysis applies the Prompt Vault `first-principles`, `telescopic`, `simpli
 - `ontology-source-architecture-greats-adjudication.md`; and
 - the historical `ontology-source-architecture-comparative-experiment.md`.
 
+A later implementation probe, recorded in `ontology-editor-guarded-lens-probe-v0-result.md`, inspected `modeldriven-hu/ontology-diagram-editor` v1.6.0 at commit `039b8d9cbe4be1552c0efd29e3ffd5afa2904a6d`. The pinned editor reads ontology facts but writes only `.odiagram` presentation state. It exposes no semantic-edit operation, semantic proposal delta, native semantic-contract/profile/base-digest enforcement, loss receipt, stale-base rejection, or semantic-reference validation against loaded ontology content. The semantic-proposal role is therefore rejected for this pin. Only a conditional, externally guarded read-only visualization role remains feasible.
+
 It does not authorize a production semantic IR, source migration, ROCS change, ontology mutation, editor adoption, Decision 53 mutation, publication, activation, release, or source-format RFC/ADR.
 
 ## The mistake behind the original question
@@ -188,18 +190,18 @@ ROCS candidate semantic boundary
             |
             +--------------------------+
             |                          |
-            | validate/explain/pack    | loss-declared projection
+            | validate/explain/pack    | adapter-produced projection
             |                          v
-            |                 editor projection bundle
-            |                 RDF/OWL profile + base digest
+            |                 external read-only adapter
+            |                 immutable RDF/OWL bytes
+            |                 semantic-base/profile/loss receipt
+            |                 confined dependency paths
             |                          |
             |                          v
             |                 ontology-diagram-editor
-            |                 visual work + .odiagram layout
-            |                          |
-            |                          v
-            +<---------------- semantic proposal delta
-                               never a source write
+            |                 reads projected ontology facts
+            |                 writes .odiagram presentation state only
+            |                 no semantic reverse path
 
 Decision 53 owner facts -------------------> action-time policy join
 (separate authority/currentness plane)       never compiler output
@@ -216,7 +218,7 @@ This is a candidate boundary model, not an assertion that production ROCS alread
 
 ### ROCS
 
-- Is the natural executor of the versioned semantic contract: compile, validate, explain, pack, project, and decode proposals.
+- Is the natural executor of the versioned semantic contract: compile, validate, explain, pack, and project.
 - Emits typed failures rather than silently dropping unsupported fields.
 - Carries semantic contract identity and declares projection loss.
 - Does not manufacture Decision 53 authority facts.
@@ -224,16 +226,28 @@ This is a candidate boundary model, not an assertion that production ROCS alread
 
 These are proposed responsibilities; production changes require their own decision and evidence.
 
-### Ontology diagram editor
+### Ontology diagram editor — probe-adjudicated role
 
-If separately tested and authorized, an editor could serve as a replaceable projection consumer and proposal UI under these candidate responsibilities:
+At pinned v1.6.0 (`039b8d9cbe4be1552c0efd29e3ffd5afa2904a6d`), the editor is semantically read-only. It parses referenced RDF/OWL, projects selected existing entities and relationships, and persists canvas materialization, layout, styling, notes, and export state in `.odiagram`.
 
-- consume only a pinned, closed RDF/OWL projection profile;
-- keep `.odiagram` layout separate from semantic facts;
-- return an exact export and layout receipt plus a proposed semantic delta; and
-- never write ontology source directly or become source or lifecycle authority.
+Adding or removing a canvas node or edge does not add or remove an ontology fact. The relevant commands materialize or hide facts already present in the loaded ontology. The editor exposes no native semantic proposal delta or reverse semantic export.
 
-## The editor boundary is a guarded asymmetric lens
+It also exposes no native semantic-contract identifier, projection-profile identifier, base semantic digest, loss/editability declaration, stale-base rejection, or loaded-ontology reference-existence check. Unknown JSON-compatible `.odiagram` fields may round-trip through its passthrough schema, but upstream does not interpret or enforce them.
+
+Consequently, the pinned editor cannot serve as the proposed guarded semantic lens. Its only supported candidate role is a read-only visualization consumer behind an external adapter. “Read-only” applies to ontology semantics, not `.odiagram` presentation state. Production integration and editor adoption remain unauthorized.
+
+## Guarded asymmetric proposal lens — not implemented by the pinned editor
+
+The following equations remain a valid abstract contract for a future tool or adapter that exposes a genuine semantic-edit surface. They are not capabilities of the pinned editor. The probe failed at capability discovery because no supported semantic-edit operation or semantic proposal export exists.
+
+| Probe case | Correct interpretation |
+|---|---|
+| C1 | Same-serializer parse/stringify was byte-stable for the generated fixture, and ontology bytes were unchanged. This is narrow presentation-persistence evidence, not full VS Code UI proof. |
+| C2 | The tested action materialized an existing subclass fact in `.odiagram`; it was not a semantic edit. Source inspection confirms capability absence rather than a failed semantic-delta algorithm. |
+| C3 | `.odiagram` accepted an unresolved ontology reference whose prefix existed. This establishes missing semantic-reference validation, not the original unsupported RDF fact-kind law. |
+| C4 | The ontology dependency refreshed after its facts changed without bound-receipt rejection. This establishes missing native freshness enforcement; no stale-proposal decoder existed to test. |
+
+The probe's source SHA-256 values are raw-byte hashes, not semantic digests under a versioned semantic contract. Its receipt contains no included/omitted/unsupported/editable loss declaration and is not an editor-issued projection receipt.
 
 For semantic contract \(K\) and projection profile \(P\), let:
 
@@ -318,27 +332,24 @@ proof receipt
 
 The packet is more durable than a format choice because it states exactly which capability is being claimed.
 
-## Smallest falsifiable successor
+## Probe disposition and successor
 
-Do not rerun the four-format tournament and do not implement a normalized source digest.
+The guarded semantic-proposal probe is complete for the pinned editor and failed at capability discovery. Repeating semantic-edit, stale-proposal, or unsupported-edit cases against the same pin is not justified because the required semantic surface does not exist.
 
-If the ontology owner wants visual change proposals, the smallest useful experiment is one isolated **editor guarded-lens probe**:
+If an ontology owner later names a read-only visual exploration operation, the next bounded protocol is an **external read-only projection-adapter test**, not another semantic-proposal experiment. It must:
 
-1. Pin one editor revision and one minimal RDF/OWL profile.
-2. Freeze a tiny semantic fixture and its base semantic digest.
-3. Generate one loss-declared editor bundle.
-4. Test exactly four cases:
-   - open/export without semantic change;
-   - one supported semantic edit;
-   - one unsupported or omitted fact-kind edit;
-   - one proposal against a stale base.
-5. Decode only to a `non_authoritative_proposal` delta.
-6. Independently score the six lens requirements.
-7. Stop on the first mismatch; do not repair the frozen oracle in place.
+1. generate immutable RDF/OWL projection bytes under a pinned profile;
+2. issue an external receipt binding semantic contract, base semantic digest, raw projection hash, profile, exact loss declaration, adapter version, and editor commit;
+3. declare semantic editability as `none`;
+4. confine ontology paths to an adapter-owned directory;
+5. validate every `.odiagram` ontology reference against the pinned projection;
+6. reject changed projection bytes or a stale semantic base;
+7. classify all `.odiagram` changes as presentation state only; and
+8. obtain separate owner authorization before adoption.
 
-Passing would support only that pinned profile and those operations. It would not select a source format, authorize editor adoption, prove full ontology coverage, or open a source-format RFC/ADR.
+Passing would support only read-only visualization for that profile. It would not establish a semantic proposal path, select a source format, or create Decision 53 authority/currentness facts.
 
-If no owner names the visual proposal operation, perform no experiment. The correct move is subtraction.
+No owner-approved read-only value case exists now, so no further editor experiment follows.
 
 ## Prompt Vault synthesis
 
@@ -355,7 +366,7 @@ The recommended candidate relationship is not Markdown versus RDF versus objects
 
 - **Markdown/frontmatter remains the observed current authoring frontend without superiority status.**
 - **ROCS would, only if later authorized, execute a format-neutral semantic contract whose evidence remains bounded to the frozen v2 scope until expanded.**
-- **A diagram editor could, only if separately tested and authorized, act as a loss-declared, digest-bound proposal surface behind a guarded asymmetric lens.**
+- **The pinned editor is only a conditional semantically read-only visualization consumer. It is not natively loss-declared, digest-bound, freshness-guarded, or referentially closed; those controls would have to be supplied externally. No semantic proposal integration or editor adoption follows.**
 - **Raw byte identity, bounded semantic identity, and owner-issued authority/currentness remain separate.**
 - **For the independently reviewed bounded consumer, normalized source/debug identity is `not_needed`; Stage B and normalized-digest implementation do not follow.**
 - **Future evidence should target one producer-consumer capability at a time; no tournament or migration proceeds by default.**

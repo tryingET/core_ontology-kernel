@@ -1,0 +1,48 @@
+{
+  "schema": "ontology-editor-guarded-lens-probe.v0",
+  "upstream": {
+    "repository": "https://github.com/modeldriven-hu/ontology-diagram-editor.git",
+    "commit": "039b8d9cbe4be1552c0efd29e3ffd5afa2904a6d",
+    "version": "1.6.0"
+  },
+  "fixture": {
+    "initial_source_sha256": "004d3f3e7ce5742cd1545576bf975d7e256d3e6eb8fa06c0cf7791423153317b",
+    "changed_source_sha256": "6b303e8ce6831d1767e3bca1700b14d100e3909a36eebf41e7121269bf8befe7",
+    "initial_diagram_sha256": "7bad48f34b69321a9ec333966eae82bfb6c3681c60380a243f1f56ed4fa0c053",
+    "materialized_diagram_sha256": "e2ec5671ea72a900bb36c12ee690b3177a2117ace2fa2964b0859b8c7c88da80",
+    "class_count_before": 2,
+    "class_count_after": 3
+  },
+  "cases": [
+    {
+      "id": "C1_NO_OP",
+      "expected": "No semantic delta and stable diagram persistence.",
+      "observed": "The .odiagram parse/stringify round trip was byte-stable and ontology bytes were unchanged.",
+      "result": "pass_for_read_only_projection"
+    },
+    {
+      "id": "C2_SUPPORTED_SEMANTIC_EDIT",
+      "expected": "A supported editor action yields a semantic proposal delta.",
+      "observed": "Creating the existing subclass edge changed only .odiagram presentation state; ontology bytes and facts were unchanged.",
+      "result": "fail_capability_absent"
+    },
+    {
+      "id": "C3_UNSUPPORTED_REFERENCE",
+      "expected": "An unsupported or unresolved ontology reference fails closed.",
+      "observed": "The .odiagram schema accepted and round-tripped ex:Missing without checking it against the loaded ontology.",
+      "result": "fail_without_external_adapter"
+    },
+    {
+      "id": "C4_STALE_BASE",
+      "expected": "A changed semantic base is rejected against a bound receipt.",
+      "observed": "The ontology reloaded from two to three classes while .odiagram stayed unchanged and carried no semantic-contract, profile, or base-digest binding.",
+      "result": "fail_capability_absent"
+    }
+  ],
+  "disposition": {
+    "semantic_proposal_lens": "fail",
+    "read_only_visual_projection": "feasible_with_external_loss_and_freshness_receipts",
+    "editor_adoption": "not_authorized",
+    "source_format_selection": "not_addressed"
+  }
+}
