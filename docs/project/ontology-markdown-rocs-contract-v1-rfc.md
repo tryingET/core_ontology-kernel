@@ -9,7 +9,7 @@ type: "proposal"
 
 ## Status
 
-Revised proposal after [semantic-owner review r1](ontology-markdown-rocs-contract-v1-review-semantic-r1.md) and the controlling [review synthesis r2](ontology-markdown-rocs-contract-v1-review-synthesis-r2.md). This RFC does not authorize implementation.
+Revised proposal after [semantic-owner review r1](ontology-markdown-rocs-contract-v1-review-semantic-r1.md), [review synthesis r2](ontology-markdown-rocs-contract-v1-review-synthesis-r2.md), and [review synthesis r3](ontology-markdown-rocs-contract-v1-review-synthesis-r3.md). This RFC does not authorize implementation.
 
 The governance path is one cross-repo AK decision covering `core/ontology-kernel` and `core/rocs-cli`, with semantic-owner and ROCS-owner review tracks. Implementation becomes lawful only after a complete review set closes `ready_for_adr`, the cross-repo ADR is recorded, post-ADR plans are attached, and separately scoped AK tasks in each repository are created and claimed. Review readiness or an ontology-kernel artifact alone cannot authorize a ROCS package release.
 
@@ -172,13 +172,15 @@ rocs:
 
 A layer without that selector retains the pre-v1 ROCS source behavior. The selector is read from the manifest adjacent to that layer's `src` root, so mixed resolved views dispatch each layer through its declared contract before cross-layer identity/reference checks. This wave opts in only `ontology-kernel`; it does not silently change other consumers or ref layers.
 
-Every command that opens reference documents must use the same per-layer contract dispatcher. The affected public set is `validate`, `build`, `summary`, `lint`, `diff`, `graph`, `check-inverses`, `normalize`, `pack`, bound `pack`, and `discover`, plus any internal helper they call. `rules` may describe rules without opening documents; `explain` must use the dispatcher when it opens a document.
+Every command that opens reference documents must use the same per-layer contract dispatcher. The affected public set is `validate`, `build`, `summary`, `lint`, `diff`, `graph`, `check-inverses`, `normalize`, `pack`, bound `pack`, `discover`, `route`, and the source-loading paths of `transaction.prepare`, `transaction.simulate`, `transaction.apply`, `transaction.verify`, and `transaction.rollback`, plus any internal helper they call. `rules` may describe rules without opening documents; `explain` must use the dispatcher when it opens a document. Kernel acceptance never executes a mutating transaction; transaction coverage uses disposable package fixtures.
 
 Unbound interactive `pack` remains supported and emits its existing human/JSON shape after v1 admission. Bound `pack` remains the semantic-discovery-v0 snapshot-bound protocol operation. The RFC does not merge their identities or output contracts. Because the new grammar is opt-in, the tooling release is a minor `0.3.0` capability addition; any future default-on or legacy-removal change requires a new breaking-policy decision.
 
 ### 8. Operation projection and identity
 
 The raw identities below normatively reuse `semantic-discovery-protocol-v0`: SHA-256 over exact raw document bytes, and RFC 8785/JCS object digests with the protocol's digest-omitted pseudotypes. Corpus-snapshot and bound-pack preimages, field sets, algorithm IDs, ordering, and error envelopes remain those of that protocol. They are raw/protocol identities, not semantic equivalence or authority.
+
+V1's per-document 10,000-item grammar ceiling is a maximum valid-document shape. Semantic-discovery v0 separately enforces its existing corpus-wide 10,000-item operation budget, including manifests and profiles; exceeding that lower aggregate capacity returns `resource_exhausted` rather than reclassifying valid source.
 
 | Operation | Required admission | Internal field use | Emitted projection | Declared omission |
 |---|---|---|---|---|
@@ -207,14 +209,32 @@ Validator findings may use operation-specific rule IDs, while semantic discovery
 
 ### 10. Reproducible tooling release and rollback
 
-The canonical `rocs-cli` tooling release identity is the tuple:
+The canonical `rocs-cli` tooling release identity is schema-3 `VENDORED_HASHES.json` with exactly this object shape:
 
-```text
-SemVer + immutable Git commit + pyproject SHA-256 + uv.lock SHA-256
-+ VENDORED_HASHES schema/version + bundle_manifest_digest
+```json
+{
+  "schema_version": 3,
+  "artifact": "rocs-cli-self-contained",
+  "upstream_project": "ai-society/core/rocs-cli",
+  "upstream_version": "0.3.0",
+  "source_commit": "<40 lowercase hex>",
+  "build_target": {
+    "os": "linux",
+    "architecture": "x86_64",
+    "python": "3.12.12",
+    "unicode_data": "15.0.0",
+    "uv": "<exact SemVer>"
+  },
+  "pyproject_sha256": "<64 lowercase hex>",
+  "uv_lock_sha256": "<64 lowercase hex>",
+  "files": {"<safe relative path>": "<64 lowercase hex>"},
+  "bundle_manifest_digest": "sha256:<64 lowercase hex>"
+}
 ```
 
-The release is built from a clean tagged commit under Python 3.12 / Unicode 15.0.0 with `uv sync --frozen`; runtime dependency trees come only from that lock-resolved environment. `VENDORED_HASHES.json` records the source commit, lock digest, every included path digest, and `bundle_manifest_digest`, defined as SHA-256 over RFC 8785/JCS bytes of the sorted path-to-digest mapping plus release identity fields, excluding only `bundle_manifest_digest`. Two isolated builds from the same commit and lock must be byte-identical before release acceptance.
+`files` is lexicographically key-ordered for presentation and contains every regular bundle file except `VENDORED_HASHES.json`; directories, symlinks, special files, missing paths, and extra paths fail verification. The digest preimage is the exact object above with `bundle_manifest_digest` omitted; its digest is SHA-256 over RFC 8785/JCS bytes. This closes field names, nesting, algorithm, and self-reference.
+
+The release is built from the clean commit named by immutable tag `v0.3.0` on the exact Linux x86_64 target above with `uv sync --frozen`; runtime dependency trees come only from that lock-resolved environment. `source_commit`, version files, tag, lock package version, and manifest version must agree. Two isolated builds from the same commit and lock must produce byte-identical file mappings and manifest bytes before release acceptance.
 
 The tag is immutable. Rollback is a consumer repin to a previously accepted exact bundle/manifest or a forward corrective release; neither a published version nor tag is rewritten or represented as retracted by reverting a source commit.
 
@@ -236,9 +256,9 @@ rocs:
 - `scripts/ci/full.sh` is the standalone acceptance entry point.
 - `.gitlab-ci.yml` uses Python 3.12 and invokes `scripts/ci/full.sh`, not a workspace launcher.
 - A checked-in semantic-discovery-v0 request fixture uses profile `kernel-v1` and development-snapshot identity.
-- The gate derives the adopted-runtime tool-manifest digest from the verified vendored manifest, runs discovery with `--json --no-index-cache --no-env-file`, and uses the returned corpus/document digests to exercise bound pack; it separately exercises unbound pack.
+- After `vendored-check`, the gate computes a raw SHA-256 of exact `VENDORED_HASHES.json` bytes and supplies it only as the non-authoritative prepared-runtime manifest binding for `--tool-kind development_runtime`. It never uses or claims `adopted_runtime`, trust, or adoption. Discovery runs with `--json --no-index-cache --no-env-file`; returned corpus/document digests drive bound pack, while unbound pack is exercised separately.
 - Acceptance runs from a clean detached worktree or clone whose parent contains no sibling `core/rocs-cli` checkout and with `ROCS_WORKSPACE_ROOT` unset.
-- The matrix covers `vendored-check`, `validate`, `build`, `summary`, `lint`, `graph`, `check-inverses`, `normalize` dry-run/no-write behavior, unbound pack, discover, bound pack, generated hook, and CI script. `diff` is covered by ROCS package tests using two v1 fixtures because it requires two corpus states.
+- The matrix covers `vendored-check`, `validate`, `build`, `summary`, `lint`, `graph`, `check-inverses`, `normalize` dry-run/no-write behavior, unbound pack, discover, bound pack, route, generated hook, and CI script. `diff` and every transaction path are covered by ROCS package tests using disposable v1 fixtures; consumer acceptance does not mutate the ontology.
 - Hook generation is verified; `core.hooksPath` activation remains an explicit local operator action.
 - `ontology_repo` convergence is forbidden for this nested layout.
 
