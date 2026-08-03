@@ -9,7 +9,7 @@ type: "proposal"
 
 ## Status
 
-Revised proposal after [semantic-owner review r1](ontology-markdown-rocs-contract-v1-review-semantic-r1.md), [review synthesis r2](ontology-markdown-rocs-contract-v1-review-synthesis-r2.md), and [review synthesis r3](ontology-markdown-rocs-contract-v1-review-synthesis-r3.md). This RFC does not authorize implementation.
+Revised proposal after [semantic-owner review r1](ontology-markdown-rocs-contract-v1-review-semantic-r1.md) and controlling review syntheses [r2](ontology-markdown-rocs-contract-v1-review-synthesis-r2.md), [r3](ontology-markdown-rocs-contract-v1-review-synthesis-r3.md), and [r4](ontology-markdown-rocs-contract-v1-review-synthesis-r4.md). This RFC does not authorize implementation.
 
 The governance path is one cross-repo AK decision covering `core/ontology-kernel` and `core/rocs-cli`, with semantic-owner and ROCS-owner review tracks. Implementation becomes lawful only after a complete review set closes `ready_for_adr`, the cross-repo ADR is recorded, post-ADR plans are attached, and separately scoped AK tasks in each repository are created and claimed. Review readiness or an ontology-kernel artifact alone cannot authorize a ROCS package release.
 
@@ -21,6 +21,7 @@ The governance path is one cross-repo AK decision covering `core/ontology-kernel
 - [Transcendent synthesis](ontology-source-architecture-transcendent-synthesis.md)
 - `core/rocs-cli/docs/project/semantic-discovery-protocol-v0.md`
 - `core/rocs-cli/docs/adr/2026-07-13-semantic-release-and-single-canary-adoption.md` (Decision 53)
+- `softwareco/owned/dspx/docs/project/dspx-verdict-classification-and-source-owner-contract.md` (classification precedent only; not ontology or ROCS authority)
 
 ## Problem
 
@@ -54,6 +55,20 @@ This is a supersedable contract for the observed current frontend, not evidence 
 Decision 53 remains normative for authority separation. This contract issues no facts for semantic publication, withdrawal, revocation, desired state, consumer intent or acceptance, adoption, activation, deactivation, rollback, use, currentness, or AK decision/task/evidence lineage. Git state, validation, builds, raw digests, generated artifacts, and this decision cannot issue those facts.
 
 The SemVer release described here is an executable `rocs-cli` package release for deterministic tooling. It is not Decision 53 semantic-release publication or consumer adoption.
+
+The DSPx source-owner contract supplies a useful classification procedure without owning this decision. Applied here:
+
+| Question | Bound answer |
+|---|---|
+| proposition | does an exact source document/corpus satisfy `ontology-markdown-v1`? |
+| consumer | ontology-kernel maintainers, CI, and named ROCS source-reading operations |
+| source owner | ontology-kernel for field meaning and source grammar |
+| subjects/access | exact selected layer bytes under the profile and raw/protocol identities declared below |
+| evaluator | ROCS structural/source-contract validator and operation-specific parser |
+| maximum claim | source-contract/schema/reference conformance for the exact corpus and operation |
+| next transition | local validation/build/retrieval evidence or a separately governed package/publication/activation decision |
+
+This is not a generic semantic verdict. Schema/source-contract conformance does not establish broad semantic correctness; lexical discovery/route results do not establish conformance; package release does not establish semantic publication or activation; AK lifecycle state does not become ontology meaning.
 
 ### 2. File and YAML profile
 
@@ -174,6 +189,8 @@ A layer without that selector retains the pre-v1 ROCS source behavior. The selec
 
 Every command that opens reference documents must use the same per-layer contract dispatcher. The affected public set is `validate`, `build`, `summary`, `lint`, `diff`, `graph`, `check-inverses`, `normalize`, `pack`, bound `pack`, `discover`, `route`, and the source-loading paths of `transaction.prepare`, `transaction.simulate`, `transaction.apply`, `transaction.verify`, and `transaction.rollback`, plus any internal helper they call. `rules` may describe rules without opening documents; `explain` must use the dispatcher when it opens a document. Kernel acceptance never executes a mutating transaction; transaction coverage uses disposable package fixtures.
 
+`context.create` is deliberately different: it performs contract-agnostic raw capture/custody of caller-selected UTF-8 bytes. Its maximum claim is that the captured bytes were retained under its context contract. It does not emit source-contract or semantic conformance. Any later ROCS operation that interprets captured ontology bytes must pass them through the declared layer contract before use. Package tests preserve this boundary.
+
 Unbound interactive `pack` remains supported and emits its existing human/JSON shape after v1 admission. Bound `pack` remains the semantic-discovery-v0 snapshot-bound protocol operation. The RFC does not merge their identities or output contracts. Because the new grammar is opt-in, the tooling release is a minor `0.3.0` capability addition; any future default-on or legacy-removal change requires a new breaking-policy decision.
 
 ### 8. Operation projection and identity
@@ -207,9 +224,11 @@ For one operation, the first applicable class wins:
 
 Validator findings may use operation-specific rule IDs, while semantic discovery uses its closed error envelope. Both must classify the same source as accepted or rejected when run with sufficient operation budgets.
 
-### 10. Reproducible tooling release and rollback
+### 10. Package-owner and consumer-materialization boundary
 
-The canonical `rocs-cli` tooling release identity is schema-3 `VENDORED_HASHES.json` with exactly this object shape:
+`rocs-cli` owns executable package release under its separate release contract. This ontology source-contract decision neither defines one canonical package artifact for every builder nor treats package publication as semantic publication.
+
+For the kernel consumer, schema-3 `VENDORED_HASHES.json` is a **materialization receipt** for one exact checked-in bundle. It contains exactly:
 
 ```json
 {
@@ -218,25 +237,15 @@ The canonical `rocs-cli` tooling release identity is schema-3 `VENDORED_HASHES.j
   "upstream_project": "ai-society/core/rocs-cli",
   "upstream_version": "0.3.0",
   "source_commit": "<40 lowercase hex>",
-  "build_target": {
-    "os": "linux",
-    "architecture": "x86_64",
-    "python": "3.12.12",
-    "unicode_data": "15.0.0",
-    "uv": "<exact SemVer>"
-  },
-  "pyproject_sha256": "<64 lowercase hex>",
   "uv_lock_sha256": "<64 lowercase hex>",
   "files": {"<safe relative path>": "<64 lowercase hex>"},
   "bundle_manifest_digest": "sha256:<64 lowercase hex>"
 }
 ```
 
-`files` is lexicographically key-ordered for presentation and contains every regular bundle file except `VENDORED_HASHES.json`; directories, symlinks, special files, missing paths, and extra paths fail verification. The digest preimage is the exact object above with `bundle_manifest_digest` omitted; its digest is SHA-256 over RFC 8785/JCS bytes. This closes field names, nesting, algorithm, and self-reference.
+`files` contains every regular bundle file except `VENDORED_HASHES.json`; missing, extra, symlink, and special paths fail. The digest preimage is the exact object with `bundle_manifest_digest` omitted; its digest is SHA-256 over RFC 8785/JCS bytes. The receipt's maximum claim is exact bundle byte identity, source/lock provenance, and local verification. It does not claim that every builder would materialize the same bytes, that the package is semantically correct, or that it is published/adopted/current.
 
-The release is built from the clean commit named by immutable tag `v0.3.0` on the exact Linux x86_64 target above with `uv sync --frozen`; runtime dependency trees come only from that lock-resolved environment. `source_commit`, version files, tag, lock package version, and manifest version must agree. Two isolated builds from the same commit and lock must produce byte-identical file mappings and manifest bytes before release acceptance.
-
-The tag is immutable. Rollback is a consumer repin to a previously accepted exact bundle/manifest or a forward corrective release; neither a published version nor tag is rewritten or represented as retracted by reverting a source commit.
+The package owner may issue `0.3.0` only through a separately scoped ROCS release task after implementation validation. The kernel then pins the one resulting exact receipt and bytes. Rollback is consumer repin to a previously accepted exact materialization or a forward corrective package release; no tag or published artifact is rewritten.
 
 ### 11. Consumer wiring and executable acceptance
 
@@ -259,6 +268,7 @@ rocs:
 - After `vendored-check`, the gate computes a raw SHA-256 of exact `VENDORED_HASHES.json` bytes and supplies it only as the non-authoritative prepared-runtime manifest binding for `--tool-kind development_runtime`. It never uses or claims `adopted_runtime`, trust, or adoption. Discovery runs with `--json --no-index-cache --no-env-file`; returned corpus/document digests drive bound pack, while unbound pack is exercised separately.
 - Acceptance runs from a clean detached worktree or clone whose parent contains no sibling `core/rocs-cli` checkout and with `ROCS_WORKSPACE_ROOT` unset.
 - The matrix covers `vendored-check`, `validate`, `build`, `summary`, `lint`, `graph`, `check-inverses`, `normalize` dry-run/no-write behavior, unbound pack, discover, bound pack, route, generated hook, and CI script. `diff` and every transaction path are covered by ROCS package tests using disposable v1 fixtures; consumer acceptance does not mutate the ontology.
+- `context.create` package tests prove raw-capture custody and the absence of a conformance claim; downstream interpretation tests prove mandatory v1 admission.
 - Hook generation is verified; `core.hooksPath` activation remains an explicit local operator action.
 - `ontology_repo` convergence is forbidden for this nested layout.
 
@@ -272,15 +282,15 @@ rocs:
 - **Allow general YAML:** rejected; parser divergence and expansion hazards defeat closed admission.
 - **Allow non-empty `lint_ignore`:** deferred until a separately reviewed, versioned advisory-rule registry exists.
 - **Change all ROCS consumers at once:** rejected; the manifest selector makes adoption explicit and preserves legacy behavior elsewhere.
-- **Treat ambient vendoring as a release identity:** rejected; self-consistency is not reproducibility.
+- **Make the ontology contract own canonical package publication:** rejected; package release belongs to the ROCS package owner, while the kernel pins one exact materialization receipt.
 
 ## Implementation consequences
 
 If accepted by the cross-repo decision and ADR:
 
 1. Attach implementation and validation/rollout/rollback plans.
-2. Create and claim a scoped `rocs-cli` task to implement the opt-in shared parser/grammar dispatcher across every affected operation, validator/snapshot parity, deterministic bundle identity, operation-loss documentation, and adversarial/legacy-compatibility fixtures.
-3. After ROCS-owner validation and isolated double-build proof, create and claim a separate release task for tooling release `0.3.0`, update the lock, commit, tag the exact source commit, and preserve the release manifest evidence.
+2. Create and claim a scoped `rocs-cli` task to implement the opt-in shared parser/grammar dispatcher across every affected operation, validator/snapshot parity, exact materialization receipts, operation-loss documentation, raw-capture separation, and adversarial/legacy-compatibility fixtures.
+3. After ROCS-owner validation, create and claim a separate package-owner release task for tooling release `0.3.0`, update the lock, commit/tag under the existing release contract, and preserve the exact produced materialization receipt.
 4. Create and claim a scoped `ontology-kernel` task to relocate relation guidance, add the selector/profile/request fixture, update schema docs, converge as `required`, rewire CI to Python 3.12 and the generated gate, and remove the workspace launcher from acceptance.
 5. Vendor the exact released bundle and verify its source commit, lock, file hashes, and bundle-manifest digest.
 6. Prove the executable acceptance matrix in a clean no-sibling environment.
