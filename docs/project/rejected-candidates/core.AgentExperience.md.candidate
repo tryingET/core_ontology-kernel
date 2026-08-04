@@ -1,0 +1,62 @@
+---
+ont:
+  id: core.AgentExperience
+  type: concept
+  labels:
+    - Agent Experience
+    - AX
+  synonyms:
+    - agent-facing experience
+    - agent experience
+    - AX
+  description: The design category for agent-facing interfaces, artifacts,
+    protocols, and feedback loops across both structured machine consumers and
+    token-sensitive harnessed LLMs. AX includes structured projections such as
+    JSON for parsers and compact projections for LLM/harness contexts; durable
+    truth should remain in authoritative artifacts rather than token-heavy
+    prose.
+  lint_ignore: []
+  relations: []
+  examples:
+    - A JSON run artifact or report projection consumed by deterministic
+      parsers, CI systems, dashboards, or programmatic agents.
+    - A compact line-oriented projection such as --compact or doctor --machine
+      for harnessed LLMs where token budget and next-action clarity matter.
+    - An actionable evidence-closure packet that gives an agent the target
+      files, commands, evidence basis, and completion criteria for the next safe
+      step.
+  anti_examples:
+    - Human-first visual interface polish by itself; that is UX unless it is
+      specifically shaping an agent-facing surface.
+    - Developer ergonomics for library authors by itself; that is DX unless it
+      defines agent-facing artifacts or projections.
+    - Raw verbose JSON dumped into an LLM context when a compact projection
+      would preserve the same action semantics with fewer tokens.
+system4d:
+  fog:
+    risks: []
+    assumptions: []
+    exceptions: []
+    debt: []
+---
+
+# Agent Experience (core.AgentExperience)
+
+## Definition
+The design category for agent-facing interfaces, artifacts, protocols, and feedback loops across both structured machine consumers and token-sensitive harnessed LLMs. AX includes structured projections such as JSON for parsers and compact projections for LLM/harness contexts; durable truth should remain in authoritative artifacts rather than token-heavy prose.
+
+## Examples
+- A JSON run artifact or report projection consumed by deterministic parsers, CI systems, dashboards, or programmatic agents.
+- A compact line-oriented projection such as --compact or doctor --machine for harnessed LLMs where token budget and next-action clarity matter.
+- An actionable evidence-closure packet that gives an agent the target files, commands, evidence basis, and completion criteria for the next safe step.
+
+## Anti-examples
+- Human-first visual interface polish by itself; that is UX unless it is specifically shaping an agent-facing surface.
+- Developer ergonomics for library authors by itself; that is DX unless it defines agent-facing artifacts or projections.
+- Raw verbose JSON dumped into an LLM context when a compact projection would preserve the same action semantics with fewer tokens.
+
+## Notes
+- Rationale: UX and DX already name human and developer experience. ai-society needs a shared term for agent-facing usability without collapsing structured machine contracts and compact harnessed-LLM projections into one format.
+- Use UX for human-facing experience and DX for developer-facing experience.
+- Use AX as the umbrella; --json and --compact can both be AX projections when they serve agent consumers.
+- Prefer --json for structured machine consumers and --compact for token-sensitive harnessed LLMs.
