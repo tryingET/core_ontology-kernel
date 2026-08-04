@@ -1,5 +1,5 @@
 ---
-summary: "Cross-owner closeout of the accepted Agent interaction direction through candidate isolation, authority correction, two read-only projection pilots, independent review, and rollback dogfood."
+summary: "Cross-owner closeout of the review-directed Agent interaction work through candidate isolation, authority correction, two read-only projection pilots, independent review, and rollback dogfood."
 read_when:
   - "When deciding whether the Agent interaction pilots satisfied rollout gate G3"
   - "When considering a future engineering-core Agent Interaction discipline RFC"
@@ -11,8 +11,8 @@ architecture_disposition: "bounded_corrections_and_pilots_complete_g3_gate_hold"
 
 # Agent interaction direction — implementation and dogfood closeout
 
-- Architecture review: [`agent-experience-grand-architecture-review.md`](agent-experience-grand-architecture-review.md)
-- Semantic review: [`core-AgentExperience-semantic-review.md`](core-AgentExperience-semantic-review.md)
+- Architecture review: [`2026-08-04-agent-experience-grand-architecture-review.md`](2026-08-04-agent-experience-grand-architecture-review.md)
+- Semantic review: [`2026-08-04-core-AgentExperience-semantic-review.md`](2026-08-04-core-AgentExperience-semantic-review.md)
 - Core candidate disposition: AK task `4654`
 - `ts-quality` correction and P1: AK task `4655`
 - Agent Kernel P2: AK task `4656`
@@ -21,7 +21,7 @@ architecture_disposition: "bounded_corrections_and_pilots_complete_g3_gate_hold"
 
 ## Verdict
 
-**The bounded corrections and named pilot executions are implemented and dogfooded. G3 canary exit remains on hold because the full accepted read-effect, authorization, and redaction matrix is not closed.**
+**The bounded corrections and named pilot executions are implemented and dogfooded. G3 canary exit remains on hold because the full review-defined read-effect, authorization, and redaction matrix is not closed.**
 
 Completed:
 
@@ -51,11 +51,11 @@ Not completed or authorized:
 | G1A — candidate/retrieval separation | Pass | exact archive digest, source absence, 31/12/43 ROCS corpus, negative pack, container full gate, independent review |
 | G1B — `ts-quality` authority correction | Pass | active contract/docs correction, repo verification, independent review |
 | G2 — local vocabulary decision | Pass | retire umbrella/bare acronym from active guidance; no repo ontology insertion |
-| G3 — named reversible read-only pilots | **Hold after pilot execution** | executable P1/P2 evidence and rollback exist, but accepted read-effect, caller-authorization, and redaction canary-exit checks remain incomplete |
+| G3 — named reversible read-only pilots | **Hold after pilot execution** | executable P1/P2 evidence and rollback exist, but review-defined read-effect, caller-authorization, and redaction canary-exit checks remain incomplete |
 | G4 — Softwareco proposal | Hold | independent product convergence not established |
 | G5 — core proposal | No-go | cross-company minimal implementation-neutral semantics not established |
 
-The two named experiments completed their implementation/dogfood slices, but that is not a G3 pass. The accepted architecture ties canary exit to the applicable acceptance matrix. Command-intent evidence, source-subset checks, and explicit caveats do not substitute for unclosed read-effect, caller-authorization, or cross-owner redaction proof. Their labels, protocols, dimensions, and measurements remain local experimental evidence.
+The two named experiments completed their implementation/dogfood slices, but that is not a G3 pass. The architecture review ties canary exit to the applicable acceptance matrix. Command-intent evidence, source-subset checks, and explicit caveats do not substitute for unclosed read-effect, caller-authorization, or cross-owner redaction proof. Their labels, protocols, dimensions, and measurements remain local experimental evidence.
 
 # G1A — ontology candidate disposition
 

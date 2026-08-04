@@ -432,7 +432,7 @@ Choose either:
 - retire the umbrella term; or
 - incubate it as descriptive product language.
 
-Create a repo ontology concept only if a concrete retrieval/validation need survives review. Use the revision contract from `core-AgentExperience-semantic-review.md`.
+Create a repo ontology concept only if a concrete retrieval/validation need survives review. Use the revision contract from `2026-08-04-core-AgentExperience-semantic-review.md`.
 
 **Gate G2:** owner review accepts one kind, boundary, name, and actual local need.
 

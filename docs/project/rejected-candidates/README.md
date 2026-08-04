@@ -17,8 +17,8 @@ Files here are **not admitted ontology**, are not ROCS source documents, and mus
 - Disposition: rejected for core admission; routed to owner-local terminology and read-only projection pilots.
 - Original active-source-relative path: `ontology/src/reference/concepts/core.AgentExperience.md`.
 - Preserved SHA-256: `297441bf8dbdd14736183488742fcf4b5b36ce5036039bc4935744a3263bbe12`.
-- Semantic review: [`../core-AgentExperience-semantic-review.md`](../core-AgentExperience-semantic-review.md).
-- Grand architecture review: [`../agent-experience-grand-architecture-review.md`](../agent-experience-grand-architecture-review.md).
+- Semantic review: [`../2026-08-04-core-AgentExperience-semantic-review.md`](../2026-08-04-core-AgentExperience-semantic-review.md).
+- Grand architecture review: [`../2026-08-04-agent-experience-grand-architecture-review.md`](../2026-08-04-agent-experience-grand-architecture-review.md).
 - Custody action: AK task `4654`.
 
 Restoring this file into `ontology/src/` would make it part of that exact filesystem corpus. Such a restoration is not admission and requires a new ontology-owner decision.
