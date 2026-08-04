@@ -9,10 +9,10 @@ ont:
     transitive: false
     symmetric: false
   axis_default: "left"
-examples:
-  - "core.Policy precedes core.Release (policy approval happens before release)"
-anti_examples:
-  - "Using precedes for dependency (use `depends_on`)"
+  examples:
+    - "core.Policy precedes core.Release (policy approval happens before release)"
+  anti_examples:
+    - "Using precedes for dependency (use `depends_on`)"
 ---
 
 ## Definition

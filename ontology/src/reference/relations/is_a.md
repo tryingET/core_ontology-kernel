@@ -9,10 +9,10 @@ ont:
     transitive: true
     symmetric: false
   axis_default: "parents"
-examples:
-  - "core.Agent is_a core.Actor"
-anti_examples:
-  - "Using is_a for instances/values (use `instance_of`)"
+  examples:
+    - "core.Agent is_a core.Actor"
+  anti_examples:
+    - "Using is_a for instances/values (use `instance_of`)"
 ---
 
 ## Definition

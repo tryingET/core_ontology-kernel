@@ -9,10 +9,10 @@ ont:
     transitive: true
     symmetric: false
   axis_default: "parents"
-examples:
-  - "core.IntegrationEdge part_of core.Service (integration is part of a service boundary)"
-anti_examples:
-  - "Using part_of when you mean depends_on"
+  examples:
+    - "core.IntegrationEdge part_of core.Service (integration is part of a service boundary)"
+  anti_examples:
+    - "Using part_of when you mean depends_on"
 ---
 
 ## Definition

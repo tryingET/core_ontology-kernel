@@ -3,7 +3,7 @@ stages:
 
 kernel:validate:
   stage: validate
-  image: ghcr.io/astral-sh/uv:python3.11-bookworm-slim
+  image: ghcr.io/astral-sh/uv:python3.12-bookworm
   tags:
     - runner::mr
   rules:
@@ -12,9 +12,8 @@ kernel:validate:
     - python --version
     - uv --version
     - uvx --version
-    - uvx -n --from ./tools/rocs-cli rocs vendored-check --vendored-dir ./tools/rocs-cli
-    - uvx -n --from ./tools/rocs-cli rocs validate --repo . --strict-placeholders
-    - uvx -n --from ./tools/rocs-cli rocs build --repo .
+    - chmod +x ./scripts/ci/full.sh
+    - env -u ROCS_REPO -u ROCS_WORKSPACE_ROOT -u ROCS_WORKSPACE_REF_MODE ROCS_CI_PROFILE=main-strict ./scripts/ci/full.sh
   artifacts:
     when: always
     paths:

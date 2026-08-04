@@ -9,10 +9,10 @@ ont:
     transitive: false
     symmetric: false
   axis_default: "parents"
-examples:
-  - "core.Policy constrains core.Repo (e.g. no-secrets policy applies to a repo)"
-anti_examples:
-  - "Using constrains when you mean depends_on"
+  examples:
+    - "core.Policy constrains core.Repo (e.g. no-secrets policy applies to a repo)"
+  anti_examples:
+    - "Using constrains when you mean depends_on"
 ---
 
 ## Definition

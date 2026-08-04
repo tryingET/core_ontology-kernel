@@ -9,10 +9,10 @@ ont:
     transitive: false
     symmetric: false
   axis_default: "children"
-examples:
-  - "core.Pipeline produces core.Release"
-anti_examples:
-  - "Using produces for ordering without outcome (use `precedes`)"
+  examples:
+    - "core.Pipeline produces core.Release"
+  anti_examples:
+    - "Using produces for ordering without outcome (use `precedes`)"
 ---
 
 ## Definition

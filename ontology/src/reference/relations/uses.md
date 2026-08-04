@@ -9,10 +9,10 @@ ont:
     transitive: false
     symmetric: false
   axis_default: "children"
-examples:
-  - "core.Service uses core.IntegrationEdge"
-anti_examples:
-  - "Using uses for mandatory requirement (use `depends_on`)"
+  examples:
+    - "core.Service uses core.IntegrationEdge"
+  anti_examples:
+    - "Using uses for mandatory requirement (use `depends_on`)"
 ---
 
 ## Definition

@@ -1,0 +1,19 @@
+{
+  "schema": "semantic-discovery-request.v0",
+  "query": "agent authority",
+  "identity_selector": {
+    "kind": "development_snapshot"
+  },
+  "profile": "kernel-v1",
+  "algorithm": "rocs-lexical-v0",
+  "limits": {
+    "query_bytes": 16384,
+    "corpus_files": 5000,
+    "corpus_bytes": 33554432,
+    "file_bytes": 1048576,
+    "parser_depth": 32,
+    "collection_items": 10000,
+    "candidates": 12,
+    "result_bytes": 65536
+  }
+}

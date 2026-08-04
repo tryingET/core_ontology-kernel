@@ -10,10 +10,10 @@ ont:
     transitive: false
     symmetric: true
   axis_default: "left"
-examples:
-  - "core.Debt similar_to core.Exception (both represent intentional deviation from ideal state)"
-anti_examples:
-  - "Using similar_to for subtype (use `is_a`) or containment (use `part_of`)"
+  examples:
+    - "core.Debt similar_to core.Exception (both represent intentional deviation from ideal state)"
+  anti_examples:
+    - "Using similar_to for subtype (use `is_a`) or containment (use `part_of`)"
 ---
 
 ## Definition

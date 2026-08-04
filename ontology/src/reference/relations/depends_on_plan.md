@@ -9,11 +9,11 @@ ont:
     transitive: false
     symmetric: false
   axis_default: "parents"
-examples:
-  - "core.WorkItem depends_on_plan core.WorkItem (issue A depends on issue B)"
-  - "core.Milestone depends_on_plan core.Milestone (milestone ordering dependency)"
-anti_examples:
-  - "Using depends_on_plan for runtime/build requirements (use `core.rel.depends_on`)"
+  examples:
+    - "core.WorkItem depends_on_plan core.WorkItem (issue A depends on issue B)"
+    - "core.Milestone depends_on_plan core.Milestone (milestone ordering dependency)"
+  anti_examples:
+    - "Using depends_on_plan for runtime/build requirements (use `core.rel.depends_on`)"
 ---
 
 ## Definition

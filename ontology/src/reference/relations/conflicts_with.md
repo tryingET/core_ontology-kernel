@@ -10,10 +10,10 @@ ont:
     transitive: false
     symmetric: true
   axis_default: "left"
-examples:
-  - "core.Policy conflicts_with core.Policy (two rules cannot both hold for the same scope)"
-anti_examples:
-  - "Using conflicts_with to express similarity (use `similar_to`)"
+  examples:
+    - "core.Policy conflicts_with core.Policy (two rules cannot both hold for the same scope)"
+  anti_examples:
+    - "Using conflicts_with to express similarity (use `similar_to`)"
 ---
 
 ## Definition

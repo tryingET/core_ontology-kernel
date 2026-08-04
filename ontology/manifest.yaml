@@ -1,5 +1,10 @@
 rocs:
   layer: core
+  source_contract: ontology-markdown-v1
+  profiles:
+    default: kernel-v1
+    kernel-v1:
+      include_layers: [core]
   id: "ai-society.core"
   version: "0.1.0"
   created: "2026-01-07"

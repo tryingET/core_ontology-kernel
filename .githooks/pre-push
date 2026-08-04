@@ -1,0 +1,9 @@
+#!/bin/sh
+set -eu
+PATH=/usr/local/bin:/usr/bin:/bin; export PATH
+unset PYTHONPATH
+repo="$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)"
+export ROCS_REPO="${ROCS_REPO:-$repo}"
+export ROCS_CI_PROFILE="${ROCS_CI_PROFILE:-local-dev}"
+cd "$repo"
+exec scripts/ci/full.sh

@@ -9,10 +9,10 @@ ont:
     transitive: false
     symmetric: false
   axis_default: "parents"
-examples:
-  - "core.Service depends_on core.IntegrationEdge (service needs an external integration)"
-anti_examples:
-  - "Using depends_on for mere 'uses' relationships"
+  examples:
+    - "core.Service depends_on core.IntegrationEdge (service needs an external integration)"
+  anti_examples:
+    - "Using depends_on for mere 'uses' relationships"
 ---
 
 ## Definition

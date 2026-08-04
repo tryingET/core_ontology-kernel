@@ -9,10 +9,10 @@ ont:
     transitive: false
     symmetric: false
   axis_default: "children"
-examples:
-  - "core.AuditEvent triggers core.Policy (audit event causes a policy review)"
-anti_examples:
-  - "Using triggers for deterministic outputs (use `produces`)"
+  examples:
+    - "core.AuditEvent triggers core.Policy (audit event causes a policy review)"
+  anti_examples:
+    - "Using triggers for deterministic outputs (use `produces`)"
 ---
 
 ## Definition

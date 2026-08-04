@@ -9,10 +9,10 @@ ont:
     transitive: false
     symmetric: false
   axis_default: "parents"
-examples:
-  - "core.DataClass.Public instance_of core.DataClassification"
-anti_examples:
-  - "Using instance_of where taxonomy/subtype is intended (use `is_a`)"
+  examples:
+    - "core.DataClass.Public instance_of core.DataClassification"
+  anti_examples:
+    - "Using instance_of where taxonomy/subtype is intended (use `is_a`)"
 ---
 
 ## Definition
