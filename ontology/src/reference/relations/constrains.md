@@ -29,5 +29,5 @@ ont:
 - You mean a runtime/build dependency (use `depends_on`) or simple usage (use `uses`).
 
 ## Domain / Range
-- Domain: `core.Constraint` / `core.Policy`
+- Domain: `core.Constraint` / `core.Policy` / `core.Authority` (a recognized mandate limits what may be verified, decided, or promoted)
 - Range: any constrained concept (commonly `core.Repo`, `core.Service`)
