@@ -6,7 +6,7 @@ rocs:
     kernel-v1:
       include_layers: [core]
   id: "ai-society.core"
-  version: "0.1.0"
+  version: "0.2.0"
   created: "2026-01-07"
   owners:
     - "@mjpa"
