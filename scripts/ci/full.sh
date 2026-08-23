@@ -17,9 +17,26 @@ if [[ -n "${ROCS_REPO:-}" ]]; then
 fi
 export ROCS_REPO="$repo"
 artifact="$repo/tools/rocs-cli"
-python_bin="python3"
+python_bin=""
+if command -v python3.12 >/dev/null 2>&1; then
+  python_bin="$(command -v python3.12)"
+elif command -v uv >/dev/null 2>&1; then
+  python_bin="$(uv python find --no-project 3.12 2>/dev/null || true)"
+fi
+if [[ -z "$python_bin" || ! -x "$python_bin" ]]; then
+  echo "ROCS validation requires an installed Python 3.12 interpreter" >&2
+  exit 2
+fi
+"$python_bin" -I -S -B - <<'PY'
+import sys
+if sys.version_info[:2] != (3, 12):
+    raise SystemExit("ROCS validation requires Python 3.12.x")
+PY
 export ROCS_WORKSPACE_ROOT="${ROCS_WORKSPACE_ROOT:-$repo}"
 export PYTHONDONTWRITEBYTECODE=1
+
+# Keep the cross-owner handoff observation contract executable in the full gate.
+"$python_bin" -I -S -B "$repo/tests/test_verify_commit_handoff.py"
 
 # Verify with the standard library before importing or executing any bundled byte.
 "$python_bin" -I -S -B - "$artifact" <<'PY'
@@ -84,11 +101,16 @@ read -r snapshot_digest document_digest < <(
   "$python_bin" -I -S -B - "$gate_tmp/discover.json" <<'PY'
 import json, sys
 payload = json.load(open(sys.argv[1], encoding="utf-8"))
-if payload.get("retrieval") != "unique_candidate":
-    raise SystemExit("expected one unique discovery candidate")
-candidate = payload["candidates"][0]
-if candidate.get("ont_id") != "core.Agent":
-    raise SystemExit("expected core.Agent discovery candidate")
+candidates = payload.get("candidates")
+if payload.get("retrieval") != "multiple_candidates" or payload.get("truncated") is not False:
+    raise SystemExit("expected complete multiple-candidate discovery")
+if not isinstance(candidates, list) or len(candidates) != 2:
+    raise SystemExit("expected exactly two discovery candidates")
+identities = [(candidate.get("ont_id"), candidate.get("kind")) for candidate in candidates]
+expected = {("core.Agent", "concept"), ("core.Authority", "concept")}
+if len(set(identities)) != len(identities) or set(identities) != expected:
+    raise SystemExit("expected exact core.Agent and core.Authority discovery candidates")
+candidate = next(candidate for candidate in candidates if candidate.get("ont_id") == "core.Agent")
 print(payload["corpus_snapshot_digest"], candidate["document_digest"])
 PY
 )
