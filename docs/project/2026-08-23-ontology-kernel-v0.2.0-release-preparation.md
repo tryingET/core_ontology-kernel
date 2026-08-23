@@ -9,6 +9,22 @@ task_id: 4881
 
 # Ontology-kernel v0.2.0 release preparation
 
+## Later procedure correction
+
+AK `4890` later recorded GitHub PR `#2` merged at
+`d50c7ef8127afc7967db6d025287d2c69ea2858e` without a tag or Release. AK `4905` then found that
+the tag-first procedure preserved in pre-correction merge commit
+`d50c7ef8127afc7967db6d025287d2c69ea2858e` could not satisfy its own pre-creation protection
+gate for the private origin, where repository rulesets were unavailable. The current canonical
+[`RELEASING.md`](../../RELEASING.md) supersedes that flow with owner-evidenced GitHub Release
+immutability, separately authorized draft preparation, separately authorized publication, and
+post-publication attestation plus exact tag/OID verification.
+
+This note does not retroactively turn this historical AK `4881` candidate into release authority,
+select a final release OID, or claim that either repository setting is enabled. The correction
+itself changes the eventual release OID and must merge and pass exact-OID gates before any draft is
+prepared.
+
 ## Scope and exact anchors
 
 AK task `4881` authorizes only a pre-merge candidate changing the manifest version, release
@@ -33,39 +49,48 @@ source change. At the base and in this candidate, `ontology/src` has Git tree OI
 - This is not a final release OID, release authorization, tag, publication, or readiness/adoption
   claim.
 
-The AK 4881 PR sequence requires an externally supplied, AK-reviewed, 40-hex `CANDIDATE_OID`
-and asserts local `HEAD` equals it; `HEAD` does not supply its own authority. The fail-closed
-procedure in [`RELEASING.md`](../../RELEASING.md) also proves the assessment base is an ancestor of
-live `origin/main`, binds the live merge base and exact three-path PR diff, and requires exact review
-ref `refs/heads/release/ontology-kernel-v0.2.0-prep` absent. Only then may later parent execution
-make one non-force exact-OID push to the origin URL. Exactly one live
-`candidate_oid<TAB>candidate_ref` line must be observed before PR creation. Absence, mismatch,
-duplication, lookup failure, or any earlier failure requires revised authority; no silent retry,
-rebase, or amend is allowed. This candidate does not execute that publication procedure.
+At candidate commit `e3951cce8137a94fdcb7dccb80ff18c2cf6da57d`, the AK `4881` PR
+sequence required an externally supplied, AK-reviewed, 40-hex `CANDIDATE_OID` and asserted local
+`HEAD` equaled it; `HEAD` did not supply its own authority. The pre-correction runbook preserved at
+merge commit `d50c7ef8127afc7967db6d025287d2c69ea2858e` proved the assessment base was an ancestor
+of live `origin/main`, bound the live merge base and exact three-path PR diff, and required exact
+review ref `refs/heads/release/ontology-kernel-v0.2.0-prep` absent before one non-force exact-OID
+push. Exactly one live `candidate_oid<TAB>candidate_ref` line had to be observed before PR
+creation. AK `4890` records that sequence completed; the current `RELEASING.md` intentionally does
+not retain it as executable current guidance.
 
 ## Post-merge release procedure
 
-After review and merge to `main`, select the full reviewed merge OID, use a clean checkout at that
-OID, rerun the strict repository and docs gates, and follow the complete procedure in
-`RELEASING.md`. Before tag creation, owner evidence for each destination must record repository
-URL, ruleset/control identity, observation time, matching ref/pattern, enforcement, protected
-update/deletion operations, bypasses, and owner acceptance. Missing, stale, inaccessible,
-ambiguous, or unaccepted evidence fails closed.
+After this correction is reviewed and merged to `main`, select that resulting full OID, use a clean
+checkout at the exact commit, rerun the strict repository and docs gates, and follow
+`RELEASING.md`. Before any draft, both exact GitHub `main` refs must equal the release OID and an
+owner must record current **Enable release immutability** receipts from each repository's
+**Settings → General → Releases** control. The repository switch was not exposed by the supported
+REST/GraphQL surfaces observed in AK `4905`; it must not be inferred from ruleset capability or
+from a draft's expected `immutable: false` value.
 
-Only then may the executor create the annotated `v0.2.0` tag, push exact
-`refs/tags/v0.2.0:refs/tags/v0.2.0` refspecs to both named URLs, and assert exactly one live direct
-line equals the local annotated tag-object OID and exactly one peeled line equals the release OID.
-`verify_commit_handoff.py` remains an additional mandatory OID-only check. Lookup/transport/auth
-failure is never tag absence.
+A draft-preparation task may then create exactly one fixed-title, fixed-body, empty-asset draft for
+`v0.2.0` at each destination. It must record both numeric draft IDs, exact body digest, full target
+OID, and whether GitHub left the draft tag absent or created the expected unprotected lightweight
+ref. Draft preparation is not publication. A separate publication task must bind those exact
+drafts, fresh setting receipts, publication order, an exclusive writer window, and explicit
+acceptance of the non-atomic check/publish race.
 
-Before each release push, its URL is added to a duplicate-checked `attempted` array. On any push
-or verification failure, every attempted URL—including an indeterminate failed-push URL—is queried
-immediately and classified as exact direct-plus-peeled match, absent, mismatch, or unavailable;
-push return code never implies publication state. Stop and preserve those observations and exact
-local OIDs. Do not delete or move the tag. Resumption requires fresh owner authority and fresh
-protection/current-state checks for exact matches plus protection/absence checks for absent
-locations; mismatch or unavailable state remains stopped. Authority may permit only identical-tag
-publication to a missing destination or a separately authorized forward corrective release.
+Publication changes each exact draft to published state through GitHub's Release API; it does not
+create or push a local annotated tag. Success requires a fresh Release response with `draft:
+false`, `immutable: true`, the authorized numeric ID/content/target and no assets; one live
+lightweight `refs/tags/v0.2.0` line equal to the full release OID; a successful
+`verify_commit_handoff.py` check; and a successful `gh release verify v0.2.0` signed-attestation
+check at **both** repositories.
+
+On any draft or publication command failure, query both numeric Release IDs, authenticated
+matching-Release lists, both `main` refs, and both tag refs; do not infer state from return code or
+retry a mutation mechanically. Bounded read-only polling may resolve propagation delay without
+repeating publication. A verified immutable Release may remain while fresh authority permits
+publishing the already prepared exact draft at the other repository. A nonimmutable, mismatched,
+changed, or cryptographically invalid published state requires a forward corrective release. Never
+move or delete a published tag, and do not publish the second destination after the first fails
+verification.
 
 ## Preliminary implementation-time validation
 
@@ -81,20 +106,21 @@ for that post-commit AK evidence.
 
 ## Rollback
 
-Before merge, prove the reviewed candidate is not an ancestor of live `origin/main`, close and
-verify closure of the AK 4881 PR, and require the live review branch equals the same externally
-supplied `CANDIDATE_OID`. Deletion is compare-and-swap only, using
-`--force-with-lease="${candidate_ref}:${candidate_oid}"` with the deletion refspec scoped to exact
-branch `refs/heads/release/ontology-kernel-v0.2.0-prep`; a fresh query must return `2` absence. The
-lease/force never applies to `main` or tags. Any failed proof stops for revised authority; do not
-retry, silently rebase/amend, or delete another ref.
+The original pre-merge rollback is historical: AK `4890` records the candidate merged, so PR
+closure or review-branch deletion cannot roll back `main`. Any source rollback now requires a
+separate reviewed revert while preserving AK and Git history; it would change the prospective
+release OID and invalidate every prior exact-OID gate or draft.
 
-After a partial publication, do not delete or move any published tag. Preserve exact observations,
-stop, and follow the fresh-authority/protection/absence/current-state recovery rules above.
-Preserve AK and Git evidence in every case.
+A draft remains unprotected and is not safe to delete or edit merely because publication has not
+occurred. Preserve exact draft/tag observations and obtain separate cleanup authority. After any
+publication attempt, do not delete or move a published tag or Release. Preserve exact observations
+and follow the forward-only recovery rules in `RELEASING.md`; GitHub documents that an immutable
+Release's tag name cannot be reused even if the Release is deleted.
 
 ## Nonclaims
 
-This artifact does not claim exact-final-candidate validation, final-OID selection, review, merge,
-server protection, tag creation, publication, destination parity, consumer adoption, activation,
-use, or AK completion. It grants no permission to mutate remotes, tags, branches, PRs, or AK state.
+The original AK `4881` evidence made no exact-final-candidate, final-OID, server-protection, tag,
+publication, destination-parity, adoption, activation, or use claim. The later note records AK
+`4890`'s merge fact but does not itself establish release readiness or grant mutation authority.
+This artifact grants no permission to mutate remotes, tags, Releases, settings, branches, PRs, or
+AK state.
