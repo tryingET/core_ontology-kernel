@@ -34,6 +34,26 @@ unresolved, and the intended remote set and immutable-tag controls are not expli
 intended release remote, secure transport remains blocked by AK `4861`; AK `4852` covers branch
 parity only and grants no tag-publication authority.
 
+## Later disposition and procedure correction
+
+This section records later facts without changing the assessment-time verdict or exact assessed
+OID. The operator subsequently excluded NAS from `v0.2.0`. AK `4881` prepared, and AK `4890`
+recorded GitHub PR `#2` merged at `d50c7ef8127afc7967db6d025287d2c69ea2858e`, setting manifest
+version `0.2.0` and naming exactly the two GitHub repositories as destinations without creating a
+tag or Release.
+
+AK `4905` later found the merged direct-tag procedure unsatisfiable for the private origin because
+its required pre-creation ruleset protection was unavailable. The current
+[`RELEASING.md`](../../RELEASING.md) supersedes the tag-first sequence below. It requires owner
+receipts for GitHub's **Enable release immutability** setting at both repositories, exact `main`
+OID parity, separately authorized fixed drafts, separately authorized publication, and immediate
+verification of `immutable: true`, the exact lightweight tag/OID, OID-only handoff, and GitHub's
+signed release attestation.
+
+None of those later facts selects the final OID: the procedure-correction merge itself changes that
+OID. They also do not prove either setting enabled, create draft/publication authority, establish a
+Release, or establish consumer adoption.
+
 ## Authority and scope
 
 - Execution authority: AK task `4880`.
@@ -227,10 +247,11 @@ supported route. AK `4852` remains deferred behind it but authorizes only the tw
 recorded in that task—not a release tag. The current URL must not be used, and no credential should
 be placed in plaintext transport.
 
-`RELEASING.md` says to push an exact tag refspec to “each intended remote” but does not enumerate
-that set. The two configured GitHub remotes already differ in tag population. Release execution
-therefore needs an explicit intended-remote list and evidence of tag immutability/protection for
-each destination rather than inferring policy from remote names.
+At assessment time, `RELEASING.md` said to push an exact tag refspec to “each intended remote” but
+did not enumerate that set. The configured GitHub remotes already differed in tag population.
+Later AK `4881` enumerated the two GitHub destinations, and AK `4905` superseded direct tag pushes
+with the immutable-Release flow summarized above. The assessment-time observation remains evidence
+of why aliases and unprotected tag transport were insufficient.
 
 ## Readiness matrix
 
@@ -241,12 +262,12 @@ each destination rather than inferring policy from remote names.
 | Proposed SemVer | Provisional semantic-surface recommendation | `v0.2.0`; repository compatibility and owner approval remain open |
 | Strict gate at assessed OID | Pass | Clean detached exact-OID receipt |
 | Source-contract conformance | Pass | Complete for 49-document corpus |
-| Release execution authority | **Blocked** | AK `4880` authorizes assessment only |
-| Final release OID | **Blocked** | Must follow owner disposition and any version-metadata change |
-| Version metadata disposition | **Blocked** | Manifest remains `0.1.0` |
-| Intended remotes and immutable-tag controls | **Blocked** | Not explicitly enumerated/proven |
-| Secure NAS release transport | **Conditionally blocked** | AK `4861` if NAS is an intended release remote; AK `4852` is branch parity only |
-| Candidate release tag | Not created (expected) | A separate task must authorize creation and exact destinations |
+| Release execution authority | **Blocked** | AK `4880` authorizes assessment only; later preparation/correction tasks also stop before publication |
+| Final release OID | **Blocked** | Must be selected after the procedure correction merges and pass exact-OID gates |
+| Version metadata disposition | Resolved later, not at assessed OID | AK `4890` records manifest `0.2.0` merged at `d50c7ef…` |
+| Intended remotes and immutable controls | Partially resolved later | Two GitHub URLs are explicit; setting receipts and per-release proof remain absent |
+| NAS release transport | Not applicable to `v0.2.0` after later owner disposition | NAS is excluded from the complete destination set |
+| Candidate release tag | Not created (expected) | A separate publication task must authorize the exact drafts and publish transition |
 | Consumer pins and validation | Not assessed | Must be separate consumer-owner work |
 
 ## Consumer-pin implications
@@ -262,19 +283,23 @@ selects and publishes an immutable tag, each consumer owner should:
 No consumer inventory was performed by this repo-local task. Publication, handoff verification,
 and this assessment do not establish any consumer's adoption or currentness.
 
-## Minimum next legal sequence
+## Current minimum next legal sequence
 
-1. Obtain owner disposition on this assessment and the proposed `v0.2.0` classification.
-2. Create a separately scoped release task or decision that names the version, final full commit
-   OID, allowed metadata changes, intended remotes, immutable-tag controls, and rollback boundary.
-3. Resolve the manifest-version question and re-run the strict gate plus independent review at the
-   resulting exact release OID in a clean checkout.
-4. If NAS is an intended release remote, resolve AK `4861`. Complete AK `4852` separately for its
-   exact branch-parity refspecs; do not treat it as tag authority.
-5. Under the separate release authority, create the exact annotated tag at the selected OID, push
-   explicit tag refspecs to every explicitly intended remote, and verify each live tag ref and
-   peeled commit.
-6. Hand adoption to consumer owners; do not close their work from ontology-kernel publication.
+1. Review and merge the bounded AK `4905` procedure correction under separate merge authority; do
+   not treat its open PR as release authority.
+2. Select the resulting reviewed `main` commit as the proposed release OID and rerun the strict
+   repository/docs gates plus independent review in a clean exact-OID checkout.
+3. Under separately scoped GitHub branch-parity authority, make both exact destination `main` refs
+   equal that OID and verify each live full OID. This is transport preparation, not publication.
+4. Have an owner enable GitHub Release immutability at both repositories and record current manual
+   setting receipts. If either control is unavailable or unproven, stop.
+5. Under a draft-only task, prove the tag and Release absent and create the two exact fixed-content,
+   empty-asset drafts. Record their numeric IDs, target OID, content digest, and live tag state.
+6. Under separate publication authority binding those receipts and drafts, publish in the accepted
+   order and immediately require `immutable: true`, exact lightweight tag/OID equality, OID-only
+   handoff success, and `gh release verify` attestation success at each destination. Any failure is
+   forward-only recovery; never move or delete a published tag.
+7. Hand adoption to consumer owners; do not close their work from ontology-kernel publication.
 
 ## Rollback and nonclaims
 
