@@ -1,10 +1,12 @@
 ---
-summary: "Exact-OID assessment of ontology-kernel readiness for its next immutable release after v0.1.0."
+summary: "Historical exact-OID readiness assessment made before the completed ontology-kernel v0.2.0 publication."
 read_when:
-  - "Selecting the next ontology-kernel release version or release OID."
-  - "Publishing ontology-kernel tags or handing a release to consumers."
+  - "Auditing the pre-v0.2.0 version recommendation, blockers, or exact-OID evidence chain."
+  - "Reviewing why the final release procedure superseded this assessment-time posture."
 type: evidence
 status: final
+lifecycle: historical_assessment_superseded_by_v0.2.0_publication
+superseded_by: "AK evidence 7484 and the completed-state banner in RELEASING.md"
 task_id: 4880
 ---
 

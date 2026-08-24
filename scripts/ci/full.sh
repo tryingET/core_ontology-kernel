@@ -39,33 +39,17 @@ export PYTHONDONTWRITEBYTECODE=1
 "$python_bin" -I -S -B "$repo/tests/test_verify_commit_handoff.py"
 
 # Verify with the standard library before importing or executing any bundled byte.
-"$python_bin" -I -S -B - "$artifact" <<'PY'
-import hashlib, json, os, stat, sys
-from pathlib import Path
-root = Path(sys.argv[1]).resolve(strict=True)
-lock = root / "VENDORED_HASHES.json"
-trusted_lock_digest = "c7bf413cc0edb5fec30eb5aadfa5bc2f30c366a36b8aa392936be821a5912ad7"
-try:
-    lock_bytes = lock.read_bytes()
-    if hashlib.sha256(lock_bytes).hexdigest() != trusted_lock_digest:
-        raise ValueError("lock digest does not match generated trust anchor")
-    payload = json.loads(lock_bytes)
-    expected = payload["files"]
-except Exception as exc:
-    raise SystemExit(f"ROCS bundled runtime lock invalid: {exc}")
-actual = {}
-for path in sorted(root.rglob("*")):
-    if path == lock:
-        continue
-    mode = path.lstat().st_mode
-    if stat.S_ISLNK(mode) or (not stat.S_ISREG(mode) and not stat.S_ISDIR(mode)):
-        raise SystemExit(f"ROCS bundled runtime has invalid file type: {path.relative_to(root)}")
-    if stat.S_ISREG(mode):
-        actual[path.relative_to(root).as_posix()] = hashlib.sha256(path.read_bytes()).hexdigest()
-if actual != expected:
-    raise SystemExit("ROCS bundled runtime verification failed closed")
-PY
-rocs=("$python_bin" -I -S -B "$artifact/rocs.py")
+# Execute only the private snapshot populated from no-follow file descriptors
+# while those exact copied bytes are hashed against the checked-in lock.
+scratch_root="${TMPDIR:-$(dirname -- "$repo")}"
+mkdir -p "$scratch_root"
+gate_tmp="$(mktemp -d "$scratch_root/rocs-kernel-gate.XXXXXX")"
+trap 'rm -rf -- "$gate_tmp"' EXIT HUP INT TERM
+verified_artifact="$gate_tmp/verified-rocs"
+"$python_bin" -I -S -B "$repo/tests/test_verify_vendored_rocs.py"
+"$python_bin" -I -S -B "$repo/scripts/verify_vendored_rocs.py" \
+  "$artifact" --snapshot-dir "$verified_artifact"
+rocs=("$python_bin" -I -S -B "$verified_artifact/rocs.py")
 profile="${ROCS_CI_PROFILE:-local-dev}"
 case "$profile" in
   local-dev) resolve=(--only path) ;;
@@ -75,7 +59,7 @@ esac
 "${rocs[@]}" cleanup --repo "$repo"
 "${rocs[@]}" validate --repo "$repo" --json "${resolve[@]}"
 "${rocs[@]}" build --repo "$repo" --json "${resolve[@]}"
-"${rocs[@]}" vendored-check --vendored-dir "$artifact"
+"${rocs[@]}" vendored-check --vendored-dir "$verified_artifact"
 "${rocs[@]}" summary --repo "$repo" --profile kernel-v1 --json "${resolve[@]}"
 "${rocs[@]}" lint --repo "$repo" --profile kernel-v1 --json "${resolve[@]}"
 "${rocs[@]}" graph --repo "$repo" --profile kernel-v1 --json "${resolve[@]}"
@@ -83,10 +67,6 @@ esac
 "${rocs[@]}" normalize --repo "$repo" --profile kernel-v1
 "${rocs[@]}" pack core.Agent --repo "$repo" --profile kernel-v1 --json "${resolve[@]}"
 
-scratch_root="${TMPDIR:-$(dirname -- "$repo")}"
-mkdir -p "$scratch_root"
-gate_tmp="$(mktemp -d "$scratch_root/rocs-kernel-gate.XXXXXX")"
-trap 'rm -rf -- "$gate_tmp"' EXIT
 # Raw SHA-256 of the exact verified VENDORED_HASHES.json bytes. This is only
 # non-authoritative prepared-runtime invocation metadata.
 manifest_digest="sha256:c7bf413cc0edb5fec30eb5aadfa5bc2f30c366a36b8aa392936be821a5912ad7"
@@ -144,7 +124,7 @@ git_env=(
 "${git_env[@]}" /usr/bin/git -C "$owner_root" commit -q -m 'synthetic route authority'
 owner_revision="$("${git_env[@]}" /usr/bin/git -C "$owner_root" rev-parse HEAD)"
 "$python_bin" -I -S -B - \
-  "$artifact" "$owner_root" "$owner_revision" "$policy_root" <<'PY'
+  "$verified_artifact" "$owner_root" "$owner_revision" "$policy_root" <<'PY'
 import hashlib, json, sys
 from pathlib import Path
 artifact, owner, revision, policy_root = map(Path, sys.argv[1:])

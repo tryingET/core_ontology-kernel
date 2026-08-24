@@ -2,6 +2,14 @@
 
 Goal: stable, reproducible meaning.
 
+> [!IMPORTANT]
+> `v0.2.0` is already published at the sole destination. AK evidence `7484` records GitHub Release
+> ID `375502095`, server response `immutable: true`, protected lightweight tag `v0.2.0`, and exact
+> release OID `76f31bc5d42a77bc2c0fd24c8b30708f907fbd44`. The version-specific preflight, draft,
+> publication, and recovery commands below are the preserved execution contract for that completed
+> release and **must not be replayed**. A future version requires a fresh owner decision, task,
+> version/OID, and reviewed procedure; this document grants none.
+
 ## Release contract
 
 - OIDs are durable content identities. Release tag refs must be protected against update and
@@ -35,9 +43,9 @@ Owner decision of 2026-08-24 (AK `4911` evidence `7442`): the public
 `tryingET/core_ontology-kernel` is the sole destination because it carries the holding naming
 schema. The two-destination set recorded at `90106efeb7893ec26093ed359ab647e9bf21c007` — which
 also named `https://github.com/tryingET/ontology-kernel.git` — is superseded and must not be
-executed. `tryingET/ontology-kernel` remains the private PR/review surface until its owner
-separately archives or deletes it; it is not a v0.2.0 destination, and this contract grants no
-archival or deletion authority.
+executed. AK `4937` subsequently preserved the required history and deleted the superseded private
+`tryingET/ontology-kernel` repository under separate authority. It is not a `v0.2.0` destination;
+do not recreate or target it.
 
 NAS is not required for `v0.2.0` and is not a release destination. Do not infer, add, replace, or
 skip a destination from configured remote aliases; aliases are convenience only, not authority.
@@ -52,7 +60,7 @@ or Release. Git preserves the exact pre-correction runbook at merge commit
 summarizes its scope and evidence. Any later branch cleanup or source revert requires separate
 authority; neither is release publication.
 
-## `v0.2.0` GitHub immutable-release preflight
+## Completed `v0.2.0` GitHub immutable-release preflight contract — do not replay
 
 GitHub Release immutability, not a direct tag push, is the selected protection transition for this
 release. GitHub documents that the associated tag and assets become immutable only when a Release
@@ -96,7 +104,7 @@ asset set, the current setting receipts, residual-race acceptance, and the forwa
 boundary. A branch, draft, setting, prior assessment, or protection observation is not
 publication authority.
 
-## Draft preparation under separate authority
+## Completed `v0.2.0` draft-preparation contract — do not replay
 
 The release has no uploaded assets; GitHub-generated source archives are not Release assets. Use a
 fixed title and body rather than generated notes. Run the following only from the clean exact-OID
@@ -355,7 +363,7 @@ bounded receipts have been exported to AK. Preserve each numeric draft ID, fresh
 observation, exact body bytes/digest, and command receipt. Do not publish, delete, or edit a draft
 or its tag without revised authority.
 
-## Publication and immutable verification under later authority
+## Completed `v0.2.0` publication and immutable-verification contract — do not replay
 
 The publisher must receive the numeric draft ID through AK, not discover and self-authorize it.
 Immediately before the publish transition, revalidate the destination `main` ref and the
@@ -736,7 +744,7 @@ asset, or publish from a remote alias. `gh release verify` validates GitHub's si
 attestation; it supplements, and does not replace, the exact live tag/OID and per-release
 `immutable: true` checks.
 
-## Partial publication and forward-only recovery
+## Preserved `v0.2.0` partial-publication and forward-recovery contract
 
 A publish command can fail after taking effect. On any command or verification failure, query
 the numeric Release ID, authenticated matching-Release list, the `main` ref, and the exact tag

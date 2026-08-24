@@ -1,9 +1,12 @@
 ---
-summary: "Pre-merge v0.2.0 release-preparation candidate for AK task 4881."
+summary: "Historical pre-merge v0.2.0 preparation candidate retained after the completed publication."
 read_when:
-  - "Reviewing or executing the bounded ontology-kernel v0.2.0 release preparation."
+  - "Auditing AK 4881's pre-merge candidate, superseded procedure, or authority boundaries."
+  - "Reviewing why the completed v0.2.0 procedure must not be replayed."
 type: evidence
 status: candidate
+lifecycle: historical_candidate_superseded_by_v0.2.0_publication
+superseded_by: "AK evidence 7484 and the completed-state banner in RELEASING.md"
 task_id: 4881
 ---
 
