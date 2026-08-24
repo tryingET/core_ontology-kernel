@@ -6,6 +6,8 @@ read_when:
 type: "analysis"
 status: final
 task_id: 4996
+closeout_readiness_task_id: 5003
+closeout_gate_task_id: 5010
 review:
   cognitive: "ACCEPT dispatch-1787594172013"
   factual: "PASS dispatch-1787594172023"
@@ -29,8 +31,8 @@ Evidence is bound to:
 - `docs/project/vision.md`, `docs/project/product_posture.md`, and the accepted Markdown/ROCS
   contract;
 - `ontology/src/system4d.yaml` and the source-architecture experiments;
-- AK-native `SF1`, `IW1`, `IW2`, `IW3`, tasks `4852`, `4861`, `4996`–`4998`, and evidence
-  `7488`, `7632`–`7635`;
+- AK-native `SF1`, `IW1`, `IW2`, `IW3`, tasks `4852`, `4861`, `4996`–`4998`, closeout-readiness
+  task `5003`, close-or-continue gate task `5010`, and evidence `7488`, `7632`–`7635`;
 - evidence `7635`'s dated declaration inventory, which is explicitly not adoption or use; and
 - the normal in-place repository gate, not only a sterile-worktree proxy.
 
@@ -256,20 +258,23 @@ Evidence is bound to:
 | Context | Dominant school | Current-horizon disposition | Condition that changes dominance |
 |---|---|---|---|
 | Editing System4D bytes now | Conservative semantic stewardship | Keep bytes unchanged; label environment-specific currentness unproved. | Ontological purification may dominate after an accepted standalone contract, owner decision, and consumer-impact/migration proof. |
-| Current `SF1` posture | Constitutional finite-state truth | AK records `SF1` active stewardship and finite `IW3`; do not infer product closure. | Closure discipline dominates only when an accountable owner and lawful closeout path establish a terminal disposition. |
+| Current `SF1` posture | Constitutional finite-state truth | AK records `SF1` active stewardship, `IW1` and `IW2` done, and `IW3` active at an explicit close-or-continue gate after tasks `4996`–`4998` recorded accepted outcomes. | Closure discipline dominates for `IW3` only after closeout readiness, an explicit operator selection, and a lawful apply receipt; `SF1` closure remains separate. |
 | Current task `4852` execution | Constitutional finite-state truth | Dependency `4861` and active deferral `241` block execution. Evidence `7632` recommends fresh owner intent, secure reachability, and current-ref scope before any resume; it installs no task guardrail. | Closure or replacement dominates after the owner decides general NAS intent and chooses a truthful expressible transition. |
 | Provider adoption claim | Bounded diffusion | Claim exactly the three evidence-`7488` consumers; treat evidence `7635` as declarations only. | Universal convergence dominates inside a separately governed consumer registry whose owners authorize migration and acceptance gates. |
 | Vendored runtime execution | Fail-closed reproducibility | Preserve exact equality; use no-follow descriptor traversal and execute only a private verified snapshot. | Pragmatism controls latency, diagnostics, and wrapper UX, but never which bytes are admitted. |
 | Historical release bodies | Archival fidelity | Preserve dated assessment and command bodies. | Current operator truth controls frontmatter, headings, and the dominant completed/non-replay banner. |
 | Future releases | Current operator truth plus archival fidelity | Never replay `v0.2.0`; create a fresh version/OID/task/procedure while retaining prior evidence. | No automatic transition; every release requires new authority. |
 
-### Current AK and evidence posture
+### AK and evidence posture at the finite-wave gate
 
 These are observed owner-surface facts, not authority created by this candidate analysis:
 
-- `SF1` is active with state detail naming active stewardship and finite `IW3`.
-- `IW3` has one execution controller, task `4996`; tasks `4997` and `4998` are completed dependencies
-  and completion evidence. `ak direction check` passes.
+- `SF1` remains active stewardship. `IW1` and `IW2` are done; `IW3` remains active even though tasks
+  `4996`–`4998` recorded accepted outcomes, because outcome completion is not lifecycle closure.
+- Tasks `4996`, `4997`, and `4998` record the accepted `IW3` outcomes. Readiness task `5003` aligns
+  durable posture with the live gate and records that closeout status still has missing domain rows.
+  Task `5010` holds the explicit close-or-continue choice; generic proceed does not select it.
+- `ak direction check` passes with one current execution task; no lifecycle close is claimed.
 - Task `4852` remains pending with dependency `4861` and active deferral `241`; evidence `7632` is a
   scope-currentness audit and resume recommendation, not an enforcing task re-scope.
 - Task `4997` and evidence `7633` record the landed verified-snapshot/operator-truth repair.
@@ -286,8 +291,8 @@ These are observed owner-surface facts, not authority created by this candidate 
 - Whether any particular mutable, older-tag, or local-path declaration is live remains a consumer
   fact.
 
-The current action is nevertheless precise: do not mutate, execute, or claim those facts without
-moving through the owner condition named in the matrix.
+The durable disposition is nevertheless precise: do not mutate, execute, or claim those facts
+without moving through the owner condition named in the matrix.
 
 ## Practical consequence
 
@@ -301,5 +306,8 @@ Taking the adjudication seriously means:
 5. execute ROCS only from the verified private snapshot and retain strict bundle equality; and
 6. preserve historical release evidence while making completed state and non-replay dominant.
 
-Task `4996` binds this reviewed analysis to its landing evidence and completion record. The
-analysis does not itself mutate semantic, lifecycle, release, or consumer authority.
+Task `4996` binds this reviewed analysis to its landing evidence and completion record. Readiness
+task `5003` records the durable-posture alignment and the unresolved closeout gate; it does not close
+`IW3`. Gate task `5010` requires an explicit close-or-continue selection before any lifecycle apply.
+None of these tasks mutates semantic, release, or consumer authority, and any future `IW3` completion
+would still not close `SF1` or the product.
