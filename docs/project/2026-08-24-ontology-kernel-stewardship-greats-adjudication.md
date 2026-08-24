@@ -8,6 +8,11 @@ status: final
 task_id: 4996
 closeout_readiness_task_id: 5003
 closeout_gate_task_id: 5010
+post_closeout_discovery_task_id: 5026
+projection_refresh_task_id: 5029
+lifecycle_apply_evidence_id: 7678
+result_correction_evidence_id: 7679
+post_closeout_validation_evidence_id: 7683
 review:
   cognitive: "ACCEPT dispatch-1787594172013"
   factual: "PASS dispatch-1787594172023"
@@ -32,9 +37,19 @@ Evidence is bound to:
   contract;
 - `ontology/src/system4d.yaml` and the source-architecture experiments;
 - AK-native `SF1`, `IW1`, `IW2`, `IW3`, tasks `4852`, `4861`, `4996`–`4998`, closeout-readiness
-  task `5003`, close-or-continue gate task `5010`, and evidence `7488`, `7632`–`7635`;
+  task `5003`, close-or-continue gate task `5010`, post-closeout discovery task `5026`, and evidence
+  `7488`, `7632`–`7635`, `7678`, `7679`, `7683`, and `7686`;
 - evidence `7635`'s dated declaration inventory, which is explicitly not adoption or use; and
 - the normal in-place repository gate, not only a sterile-worktree proxy.
+
+> **Post-adjudication lifecycle update:** The analysis below was decided while `IW3` was at its
+> explicit close-or-continue gate. The gate subsequently resolved through the authorized
+> same-frame path. Canonical apply evidence `7678` records `IW3` done, `SF1` still active, no
+> successor frame or implementation wave, and return to SF-level discovery; evidence `7683`
+> validates that state. Task `5010`'s result array retained unrelated concurrent evidence ID
+> `7675`; correction evidence `7679` supersedes that slot and identifies `7678` as the apply
+> receipt. This update refreshes current-status projections without rewriting the schools' original
+> arguments or changing ontology, release, consumer, KES, remote, or NAS state.
 
 ## Mode 1 — Many of the Greats
 
@@ -258,23 +273,27 @@ Evidence is bound to:
 | Context | Dominant school | Current-horizon disposition | Condition that changes dominance |
 |---|---|---|---|
 | Editing System4D bytes now | Conservative semantic stewardship | Keep bytes unchanged; label environment-specific currentness unproved. | Ontological purification may dominate after an accepted standalone contract, owner decision, and consumer-impact/migration proof. |
-| Current `SF1` posture | Constitutional finite-state truth | AK records `SF1` active stewardship, `IW1` and `IW2` done, and `IW3` active at an explicit close-or-continue gate after tasks `4996`–`4998` recorded accepted outcomes. | Closure discipline dominates for `IW3` only after closeout readiness, an explicit operator selection, and a lawful apply receipt; `SF1` closure remains separate. |
+| Current `SF1` posture | Constitutional finite-state truth | AK records `SF1` active stewardship and `IW1`, `IW2`, and `IW3` done. Evidence `7678` is the lawful same-frame apply receipt; no implementation wave is active, and task `5026` selected only a bounded repository-projection refresh from SF-level discovery. | Another implementation wave requires demonstrated demand and a separately bounded route. `SF1` closure remains separate and is neither implied nor authorized. |
 | Current task `4852` execution | Constitutional finite-state truth | Dependency `4861` and active deferral `241` block execution. Evidence `7632` recommends fresh owner intent, secure reachability, and current-ref scope before any resume; it installs no task guardrail. | Closure or replacement dominates after the owner decides general NAS intent and chooses a truthful expressible transition. |
 | Provider adoption claim | Bounded diffusion | Claim exactly the three evidence-`7488` consumers; treat evidence `7635` as declarations only. | Universal convergence dominates inside a separately governed consumer registry whose owners authorize migration and acceptance gates. |
 | Vendored runtime execution | Fail-closed reproducibility | Preserve exact equality; use no-follow descriptor traversal and execute only a private verified snapshot. | Pragmatism controls latency, diagnostics, and wrapper UX, but never which bytes are admitted. |
 | Historical release bodies | Archival fidelity | Preserve dated assessment and command bodies. | Current operator truth controls frontmatter, headings, and the dominant completed/non-replay banner. |
 | Future releases | Current operator truth plus archival fidelity | Never replay `v0.2.0`; create a fresh version/OID/task/procedure while retaining prior evidence. | No automatic transition; every release requires new authority. |
 
-### AK and evidence posture at the finite-wave gate
+### AK and evidence posture after the finite-wave closeout
 
 These are observed owner-surface facts, not authority created by this candidate analysis:
 
-- `SF1` remains active stewardship. `IW1` and `IW2` are done; `IW3` remains active even though tasks
-  `4996`–`4998` recorded accepted outcomes, because outcome completion is not lifecycle closure.
-- Tasks `4996`, `4997`, and `4998` record the accepted `IW3` outcomes. Readiness task `5003` aligns
-  durable posture with the live gate and records that closeout status still has missing domain rows.
-  Task `5010` holds the explicit close-or-continue choice; generic proceed does not select it.
-- `ak direction check` passes with one current execution task; no lifecycle close is claimed.
+- `SF1` remains active stewardship. `IW1`, `IW2`, and `IW3` are done; evidence `7678` records the
+  explicit same-frame apply, and evidence `7683` validates that no implementation wave is active.
+- Tasks `4996`, `4997`, and `4998` record the accepted `IW3` outcomes. Readiness task `5003` aligned
+  durable posture with the gate; task `5010` then applied the operator-selected close route without
+  closing `SF1` or creating a successor wave. Task `5026` completed SF-level discovery and selected
+  only the bounded projection refresh recorded in evidence `7686`.
+- Task `5010`'s result-array value `7675` is not task evidence. Correction evidence `7679` explicitly
+  supersedes that slot; governance receipt `11294` and task-linked evidence identify `7678` as the
+  canonical apply receipt. The historical result is preserved rather than silently rewritten.
+- `ak direction check` passes; no `SF1` lifecycle close is claimed.
 - Task `4852` remains pending with dependency `4861` and active deferral `241`; evidence `7632` is a
   scope-currentness audit and resume recommendation, not an enforcing task re-scope.
 - Task `4997` and evidence `7633` record the landed verified-snapshot/operator-truth repair.
@@ -299,7 +318,8 @@ without moving through the owner condition named in the matrix.
 Taking the adjudication seriously means:
 
 1. preserve ontology meaning and the `v0.2.0` tag/Release;
-2. keep `SF1` active while using finite waves for real work;
+2. keep `SF1` active, retain `IW1`–`IW3` as done, and open another finite wave only for
+   demonstrated work;
 3. keep `4852` blocked by its actual dependency/deferral and treat evidence `7632` as recorded review
    guidance, not a technical guardrail it did not install;
 4. keep adoption exactly bounded unless consumer owners establish a registry and gates;
@@ -307,7 +327,9 @@ Taking the adjudication seriously means:
 6. preserve historical release evidence while making completed state and non-replay dominant.
 
 Task `4996` binds this reviewed analysis to its landing evidence and completion record. Readiness
-task `5003` records the durable-posture alignment and the unresolved closeout gate; it does not close
-`IW3`. Gate task `5010` requires an explicit close-or-continue selection before any lifecycle apply.
-None of these tasks mutates semantic, release, or consumer authority, and any future `IW3` completion
-would still not close `SF1` or the product.
+task `5003` recorded the durable-posture alignment and the then-unresolved closeout gate. Gate task
+`5010` later applied the explicit same-frame selection in evidence `7678`: `IW3` is done, `SF1`
+remains active, and no successor wave exists. Evidence `7679` is the explicit correction for the
+unrelated ID retained in the task result, and task `5026` selected only a bounded repository-
+projection refresh. None of these tasks mutates semantic, release, consumer, or knowledge authority,
+and `IW3` completion does not close `SF1` or the product.

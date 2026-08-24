@@ -17,6 +17,10 @@ evidence_ids:
   - "7633"
   - "7634"
   - "7635"
+  - "7678"
+  - "7679"
+  - "7683"
+  - "7686"
 evidence_paths:
   - "README.md"
   - "docs/project/vision.md"
@@ -40,15 +44,19 @@ evidence_paths:
 > `76f31bc5d42a77bc2c0fd24c8b30708f907fbd44`, which is also local tag `v0.2.0`.
 > Its ontology source tree is `266409404a9570ab4bfe48002f91d1bdef0e5764`; ROCS summary reports
 > 37 concepts and 12 relations, while exact-release gate evidence records 11 compiled edges. AK
-> records `IW1` and `IW2` done while `IW3` remains active at explicit close-or-continue gate
-> task `5010`; completed implementation outcomes and lifecycle closure remain distinct. `SF1`
-> remains active stewardship. AK evidence `7484` records the published GitHub Release reporting
-> `immutable: true`; evidence `7488` records three
-> bounded consumer pins and acceptance gates. Task `4852` remains blocked by dependency `4861` and
-> active deferral `241`; evidence `7632` records a scope-currentness audit and recommended resume
-> checks but does not install a new task guardrail. Those records remain their owners' authority;
-> this document is a maturity projection. This posture changes no ontology source, release tag,
-> consumer pin, activation, use, or currentness fact.
+> records `IW1`, `IW2`, and `IW3` done while `SF1` remains active stewardship. Evidence `7678`
+> is the canonical same-frame-continuation apply receipt: it moved `IW3` to done, kept `SF1`
+> active, and created no successor frame or implementation wave. Evidence `7683` records the
+> passing post-closeout readback, and task `5026` evidence `7686` selects only this bounded
+> repository-projection refresh from SF-level discovery. Task `5010`'s result array retained an
+> erroneous concurrent evidence ID (`7675`); correction evidence `7679` supersedes that slot and
+> identifies `7678` as the apply receipt. AK evidence `7484` records the published GitHub Release
+> reporting `immutable: true`; evidence `7488` records three bounded consumer pins and acceptance
+> gates. Task `4852` remains blocked by dependency `4861` and active deferral `241`; evidence `7632`
+> records a scope-currentness audit and recommended resume checks but does not install a new task
+> guardrail. Those records remain their owners' authority; this document is a maturity projection.
+> This posture changes no ontology source, release tag, consumer pin, activation, use, or
+> currentness fact.
 
 ## Posture in one sentence
 
@@ -68,7 +76,7 @@ meaning.
 | Release identity | AK evidence `7484` records GitHub Release `v0.2.0` at sole destination `tryingET/core_ontology-kernel`, Release ID `375502095`, server response `immutable: true`, protected lightweight tag at exact OID `76f31bc5…`, signed attestation, and no assets. | One unambiguous destination and forward-only publication whose semantic delta, exact OID, content, tag protection, server immutability state, and attestation are independently verifiable. | The successful `v0.2.0` procedure does not pre-authorize later releases. Each release needs fresh owner authority, exact-OID gates, setting/readback evidence, and consumer handoff. |
 | Consumer adoption | AK evidence `7488` records protected `v0.2.0` pins and acceptance gates for the bounded Softwareco infra, fork, and ontology consumers. Evidence `7635` records 64 declaration lines but explicitly classifies them as inventory—not adoption, activation, use, currentness, or live-repo status. | Every consumer that chooses the kernel resolves a protected release through an explicit path, passes its owner gate, and records its own adoption. | Whole-holding adoption is not a current product claim or provider-owned migration target. A future fleet claim requires an owner-defined registry and consumer receipts; template defaults and manifest declarations alone are not adoption. |
 | System4D baseline | `ontology/src/system4d.yaml` defines shared baseline guidance but also retains baseline version `0.1`, an environment-specific GitLab edge and owner handle, rollout state, workflow particulars, and enforcement debt. The file is outside the admitted concept/relation corpus. | A source-owner-reviewed boundary that separates durable shared guidance from operational overlays without treating either as currentness or authority. | Reviewed IW3 analysis recommends keeping the bytes unchanged and treating environment-specific entries as unproved currentness. Any split, deletion, owner/endpoint update, or version change requires a separate semantic-owner contract and consumer-impact review; this posture does not authorize it. |
-| Direction and lifecycle | AK-native `SF1` remains the active stewardship frame. `IW1` and `IW2` are done. Accepted implementation outcomes from tasks `4996`–`4998` have landed, but `IW3` remains active at close-or-continue gate task `5010`: closeout status has missing domain rows, and generic proceed authorizes neither closure nor invented owner facts. Task `4852` remains pending with dependency `4861` and active deferral `241`. Evidence `7632` records that fresh owner intent, secure reachable transport, and current-ref scope should precede any resume; it did not re-scope the task. | Durable stewardship uses finite waves only for real work, closes them through truthful evidence and explicit lifecycle choice, and permits quiet SF-level discovery between waves. | `IW3` is not done until closeout readiness, an explicit close selection, and a lawful apply receipt exist. `SF1` lifecycle remains separate and AK-owned. General NAS replication intent remains an owner question; task execution is blocked by the recorded dependency and deferral. |
+| Direction and lifecycle | AK-native `SF1` remains the active stewardship frame. `IW1`, `IW2`, and `IW3` are done; evidence `7678` is the lawful `IW3` same-frame-continuation receipt, and evidence `7683` validates the resulting state. No implementation wave is active. SF-level discovery task `5026` selected only a bounded repository-projection refresh and opened no successor wave. Task `4852` remains pending with dependency `4861` and active deferral `241`; evidence `7632` records recommended resume checks but did not re-scope the task. | Durable stewardship uses finite waves only for demonstrated work, closes them through truthful evidence and explicit lifecycle choice, and permits quiet SF-level discovery between waves. | Preserve quiet stewardship until named demand justifies another bounded task or wave. `SF1` lifecycle remains separate and AK-owned. General NAS replication intent remains an owner question; task execution is blocked by the recorded dependency and deferral. |
 | Local operator truth | The checked-in wrapper verifies the exact vendored ROCS bundle before import, copies opened bytes into a private snapshot, executes only that snapshot, and suppresses bytecode. CI shares the verifier, reports classified drift, and passes in the normal checkout after verified ignored-bytecode cleanup. Completed `v0.2.0` release guidance is explicitly non-replayable. | Git-clean and bundle-clean states are distinguishable, the standard local path stays bytecode-free, and historical mutation procedures cannot masquerade as current work. | Accidental direct imports outside the wrapper can still create cache files; strict equality intentionally fails and names the cleanup boundary rather than ignoring executable ambient bytes. |
 
 ## What is strong now
@@ -96,9 +104,12 @@ meaning.
 3. **NAS parity intent is unresolved and currently blocked.** Task `4852` remains pending behind
    dependency `4861` and active deferral `241`. Evidence `7632` records recommended current-scope
    checks; it is not itself an enforcing re-scope or prohibition.
-4. **IW3 closure is deliberately gated.** Tasks `4996`–`4998` have accepted outcomes, but AK closeout
-   readiness still reports missing domain rows and requires an explicit close-or-continue choice.
-   Task `5010` holds that route; neither generic proceed nor a documentation claim can close the wave.
+4. **IW3 is closed without implying product or frame completion.** Task `5010` applied the explicit
+   same-frame route in evidence `7678`: `IW3` is done, `SF1` remains active, and no successor wave
+   exists. Its completed result retained erroneous evidence ID `7675`; evidence `7679` explicitly
+   supersedes that result-array slot, while governance receipt `11294` binds completion to canonical
+   apply evidence `7678`. The historical task result is not rewritten. Task `5026` subsequently
+   selected this two-document projection refresh and no new implementation wave.
 5. **Conformance is deliberately bounded.** ROCS proves admitted source-contract, schema, and
    reference behavior for named operations; it does not prove universal semantic correctness.
 6. **Representation remains supersedable.** No accepted evidence selects a permanent universal
@@ -124,9 +135,11 @@ uses contextual dominance to explain—not replace—the current owner surfaces:
 
 - System4D bytes are unchanged. Environment-specific currentness remains unproved; any migration
   requires a separate semantic-owner contract and consumer-impact review.
-- AK records `SF1` as active stewardship, `IW1` and `IW2` done, and `IW3` active at close-or-continue
-  gate task `5010`. The wave's accepted outcomes do not substitute for closeout readiness, explicit
-  operator choice, or a lifecycle apply receipt. `SF1` closure remains a separate AK-owned question.
+- AK records `SF1` as active stewardship and `IW1`, `IW2`, and `IW3` done. Evidence `7678` records
+  the explicit same-frame apply; evidence `7683` validates no active implementation wave; and
+  evidence `7679` makes the task `5010` result-reference correction explicit without rewriting
+  history. Task `5026` selected only this bounded projection refresh. `SF1` closure remains a
+  separate AK-owned question.
 - Task `4852` remains pending behind dependency `4861` and deferral `241`. Evidence `7632` records
   recommended owner, transport, and current-scope checks but installs no new task guardrail.
 - Adoption claims remain exactly bounded to consumer-owner receipts. Evidence `7635` is a declaration
