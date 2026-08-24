@@ -13,9 +13,14 @@ evidence_ids:
   - "7484"
   - "7488"
   - "7603"
+  - "7632"
+  - "7633"
+  - "7634"
+  - "7635"
 evidence_paths:
   - "README.md"
   - "docs/project/vision.md"
+  - "docs/project/2026-08-24-ontology-kernel-stewardship-greats-adjudication.md"
   - "docs/ontology-schema.md"
   - "docs/adr/2026-08-03-ontology-markdown-rocs-contract-v1.md"
   - "docs/project/ontology-source-polaris-model.md"
@@ -25,6 +30,8 @@ evidence_paths:
   - "RELEASING.md"
   - "ontology/manifest.yaml"
   - "ontology/src/system4d.yaml"
+  - "scripts/rocs.sh"
+  - "scripts/verify_vendored_rocs.py"
 ---
 
 # Product Posture
@@ -33,19 +40,22 @@ evidence_paths:
 > `76f31bc5d42a77bc2c0fd24c8b30708f907fbd44`, which is also local tag `v0.2.0`.
 > Its ontology source tree is `266409404a9570ab4bfe48002f91d1bdef0e5764`; ROCS summary reports
 > 37 concepts and 12 relations, while exact-release gate evidence records 11 compiled edges. AK
-> records `IW1` and `IW2` done. AK evidence `7484` records the published GitHub Release reporting
-> `immutable: true`; evidence `7488` records three bounded consumer pins and acceptance gates. Those
-> AK and consumer records remain their owners' authority; this document is a maturity projection.
-> Adding this file and the vision changes no ontology source, release tag, consumer pin, activation,
-> use, or currentness fact.
+> records `IW1` and `IW2` done and bounds the active `IW3` stewardship repair. AK evidence `7484`
+> records the published GitHub Release reporting `immutable: true`; evidence `7488` records three
+> bounded consumer pins and acceptance gates. Task `4852` remains blocked by dependency `4861` and
+> active deferral `241`; evidence `7632` records a scope-currentness audit and recommended resume
+> checks but does not install a new task guardrail. Those records remain their owners' authority;
+> this document is a maturity projection. This posture changes no ontology source, release tag,
+> consumer pin, activation, use, or currentness fact.
 
 ## Posture in one sentence
 
 `ontology-kernel` is a released, deterministic, minimal shared semantic kernel with a published
 GitHub Release reporting `immutable: true`, a protected `v0.2.0` tag bound to an exact OID, and
-bounded validated consumer adoption; it is in stewardship rather than terminal completion, with
-whole-holding adoption coverage, System4D baseline currentness, and the parent strategic-frame
-disposition still requiring explicit owner evidence or decision.
+exactly bounded validated consumer adoption; it is in active stewardship rather than terminal
+completion, with System4D uncertainty explicitly bounded, historical NAS scope currently blocked by
+its AK dependency and deferral, and the normal local ROCS path repaired without changing ontology
+meaning.
 
 ## Product maturity map
 
@@ -54,9 +64,10 @@ disposition still requiring explicit owner evidence or decision.
 | Shared semantic kernel | Exact-release gate evidence records 37 concepts, 12 relations, and 11 compiled edges. `v0.2.0` added evidence, authority, and planning vocabulary without removing released IDs or edges. | A small, stable cross-company meta-language that grows only from demonstrated shared demand. | No finite kernel proves conceptual completeness. Closure for any new gap requires a named consumer operation, owner review, compatible semantic delta, and exact-corpus validation. |
 | Source and validation contract | The repository opts into `ontology-markdown-v1`, profile `kernel-v1`, and an exact vendored ROCS materialization. The strict gate admits the corpus without a sibling checkout. | Deterministic, offline-first authoring and validation with typed failures, stable IDs, explicit deprecation, bounded summaries, and reproducible packs. | Existing proof is operation-qualified conformance, not generic semantic correctness. Future contract/tool changes must preserve that ceiling and pass exact-OID owner gates. |
 | Release identity | AK evidence `7484` records GitHub Release `v0.2.0` at sole destination `tryingET/core_ontology-kernel`, Release ID `375502095`, server response `immutable: true`, protected lightweight tag at exact OID `76f31bc5…`, signed attestation, and no assets. | One unambiguous destination and forward-only publication whose semantic delta, exact OID, content, tag protection, server immutability state, and attestation are independently verifiable. | The successful `v0.2.0` procedure does not pre-authorize later releases. Each release needs fresh owner authority, exact-OID gates, setting/readback evidence, and consumer handoff. |
-| Consumer adoption | AK evidence `7488` records protected `v0.2.0` pins and acceptance gates for the bounded Softwareco infra, fork, and ontology consumers. AK tasks `4959`–`4964` and `4973` separately record convergence of current Copier defaults and parent baselines. | Every declared consumer resolves a protected release through an explicit path, passes its owner gate, and records its own adoption. | No complete whole-holding consumer inventory, activation census, or use/currentness proof exists. Closure requires an owner-defined inventory and consumer-owned receipts; template defaults alone are not adoption. |
-| System4D baseline | `ontology/src/system4d.yaml` defines the shared baseline boundaries, constraints, invariants, lifecycle, risks, and debt. It also retains baseline version `0.1`, an environment-specific self-hosted GitLab edge, a GitLab owner handle, and explicit debt that not all repos enforce policies. | A source-owner-reviewed baseline whose shared facts are current, whose environment-specific facts live at the correct layer, and whose lifecycle/version relationship is explicit. | The `v0.2.0` release did not establish or record those entries as current. Closure requires a separate semantic-owner review and, if needed, a versioned ontology change—not an editorial posture rewrite. |
-| Direction and lifecycle | AK-native `SF1` remains active while child waves `IW1` and `IW2` are done and no ready repo task is present. Task `4852` remains pending, actively deferred, and linked as a historical branch-parity anchor; its scope predates the owner decision excluding NAS from `v0.2.0`. | Product posture, AK direction, and live tasks tell the same bounded story without treating a completed release as terminal product completion. | The owner disposition of `SF1` and task `4852` remains unresolved. This document neither selects execution, cancellation, supersession, nor archival. |
+| Consumer adoption | AK evidence `7488` records protected `v0.2.0` pins and acceptance gates for the bounded Softwareco infra, fork, and ontology consumers. Evidence `7635` records 64 declaration lines but explicitly classifies them as inventory—not adoption, activation, use, currentness, or live-repo status. | Every consumer that chooses the kernel resolves a protected release through an explicit path, passes its owner gate, and records its own adoption. | Whole-holding adoption is not a current product claim or provider-owned migration target. A future fleet claim requires an owner-defined registry and consumer receipts; template defaults and manifest declarations alone are not adoption. |
+| System4D baseline | `ontology/src/system4d.yaml` defines shared baseline guidance but also retains baseline version `0.1`, an environment-specific GitLab edge and owner handle, rollout state, workflow particulars, and enforcement debt. The file is outside the admitted concept/relation corpus. | A source-owner-reviewed boundary that separates durable shared guidance from operational overlays without treating either as currentness or authority. | Reviewed IW3 analysis recommends keeping the bytes unchanged and treating environment-specific entries as unproved currentness. Any split, deletion, owner/endpoint update, or version change requires a separate semantic-owner contract and consumer-impact review; this posture does not authorize it. |
+| Direction and lifecycle | AK-native `SF1` remains the active stewardship frame. `IW1` and `IW2` are done; finite `IW3` owns the current posture/operator-truth repair. Task `4852` remains pending with dependency `4861` and active deferral `241`. Evidence `7632` records that fresh owner intent, secure reachable transport, and current-ref scope should precede any resume; it did not re-scope the task. | Durable stewardship uses finite waves for real work and makes historical scope visible without inventing a terminal transition. | `SF1` and `IW3` lifecycle remain AK-owned. General NAS replication intent remains an owner question; current execution is blocked by the recorded dependency and deferral. |
+| Local operator truth | The checked-in wrapper verifies the exact vendored ROCS bundle before import, copies opened bytes into a private snapshot, executes only that snapshot, and suppresses bytecode. CI shares the verifier, reports classified drift, and passes in the normal checkout after verified ignored-bytecode cleanup. Completed `v0.2.0` release guidance is explicitly non-replayable. | Git-clean and bundle-clean states are distinguishable, the standard local path stays bytecode-free, and historical mutation procedures cannot masquerade as current work. | Accidental direct imports outside the wrapper can still create cache files; strict equality intentionally fails and names the cleanup boundary rather than ignoring executable ambient bytes. |
 
 ## What is strong now
 
@@ -73,13 +84,16 @@ disposition still requiring explicit owner evidence or decision.
 
 ## Current gaps and accepted limitations
 
-1. **Fleet scope is bounded.** The three adoptions recorded in AK evidence `7488` and protected
-   template defaults do not establish whole-holding adoption, activation, use, or currentness.
-2. **System4D currentness is not established.** Environment-specific GitLab, owner, baseline-version,
-   and rollout-debt entries survived unchanged into `v0.2.0`; semantic-owner adjudication is still
-   required before treating them as current shared facts.
-3. **Direction closure is undecided.** Completed work waves prove their accepted outcomes, not
-   automatic closure of active `SF1` or cancellation of linked historical tasks.
+1. **Fleet scope is deliberately bounded.** The three adoptions recorded in AK evidence `7488` and
+   protected template defaults do not establish whole-holding adoption, activation, use, or
+   currentness. Existing mutable declarations are consumer-owner candidates, not a kernel-owned
+   migration queue.
+2. **System4D remains a mixed guidance artifact.** Environment-specific endpoint, owner,
+   baseline-version, rollout, and workflow entries are not established as current. The reviewed IW3
+   recommendation is containment and explicit nonclaim, not an unreviewed semantic rewrite.
+3. **NAS parity intent is unresolved and currently blocked.** Task `4852` remains pending behind
+   dependency `4861` and active deferral `241`. Evidence `7632` records recommended current-scope
+   checks; it is not itself an enforcing re-scope or prohibition.
 4. **Conformance is deliberately bounded.** ROCS proves admitted source-contract, schema, and
    reference behavior for named operations; it does not prove universal semantic correctness.
 5. **Representation remains supersedable.** No accepted evidence selects a permanent universal
@@ -98,22 +112,26 @@ disposition still requiring explicit owner evidence or decision.
 5. An agent can retrieve only the concepts and relations needed for its operation, with source,
    projection loss, provenance, and authority ceilings visible.
 
-## Open maturity questions
+## Current stewardship dispositions
 
-These questions identify product-level uncertainty; they are not an executable sequence, queue, or
-lifecycle authorization:
+The reviewed [Many-of-the-Greats analysis](2026-08-24-ontology-kernel-stewardship-greats-adjudication.md)
+uses contextual dominance to explain—not replace—the current owner surfaces:
 
-- Does the semantic owner affirm the currentness and layer placement of the environment-specific
-  entries in `ontology/src/system4d.yaml`, or is a separately versioned ontology change warranted?
-- Should active `SF1` remain the durable stewardship frame now that `IW1` and `IW2` are done, or does
-  the accountable owner intend a different AK lifecycle disposition?
-- Does pending, deferred task `4852` still represent desired branch-parity work after NAS was
-  excluded from `v0.2.0`, and what owner action—if any—should reconcile its historical scope?
-- Is whole-holding adoption a desired claim? If so, which owner-defined consumer inventory and
-  consumer receipts would be sufficient rather than inferring adoption from template defaults?
+- System4D bytes are unchanged. Environment-specific currentness remains unproved; any migration
+  requires a separate semantic-owner contract and consumer-impact review.
+- AK currently records `SF1` as active stewardship and `IW3` as the finite repair wave. Their future
+  lifecycle remains AK-owned; this document does not close either node.
+- Task `4852` remains pending behind dependency `4861` and deferral `241`. Evidence `7632` records
+  recommended owner, transport, and current-scope checks but installs no new task guardrail.
+- Adoption claims remain exactly bounded to consumer-owner receipts. Evidence `7635` is a declaration
+  inventory, not authority for a provider-owned mass migration.
+- Evidence `7633` records exact vendored-bundle equality plus a deterministic private-snapshot
+  operator path; permissive cache admission was rejected.
+- Every future semantic release remains separately authorized exact-OID work; the completed
+  `v0.2.0` commands are historical and non-replayable.
 
-Until owners answer those questions, new semantic work remains demand-led: add or deprecate meaning
-only for named cross-domain operations, and authorize every future release independently.
+New semantic work remains demand-led: add or deprecate meaning only for named cross-domain
+operations, and authorize every future release independently.
 
 ## Hard rules for status language
 
@@ -121,7 +139,7 @@ only for named cross-domain operations, and authorize every future release indep
 - Say **adopted** only for a consumer whose owner recorded a pin and passing acceptance evidence.
 - Say **current** or **used** only when the relevant owner surface supplies fresh evidence.
 - Say **conformant** only with the exact ROCS operation, profile, corpus, and evidence boundary.
-- Do not translate `IW1`/`IW2` completion into product completion or `SF1` closure.
+- Do not translate completion of any finite implementation wave into product completion or `SF1` closure.
 - Do not use this file as a roadmap, queue, task mirror, release log, or semantic authority.
 
 ## Authority and freshness
