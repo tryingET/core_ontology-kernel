@@ -53,6 +53,10 @@ signed release attestation.
 None of those later facts selects the final OID: the procedure-correction merge itself changes that
 OID. They also do not prove either setting enabled, create draft/publication authority, establish a
 Release, or establish consumer adoption.
+Superseded 2026-08-24: the owner decision recorded in AK `4911` evidence `7442` reduced the
+complete destination set to exactly `https://github.com/tryingET/core_ontology-kernel.git`.
+All two-destination wording in this assessment and its later-facts sections is historical; the
+current [`RELEASING.md`](../../RELEASING.md) is authoritative.
 
 ## Authority and scope
 
@@ -300,6 +304,10 @@ and this assessment do not establish any consumer's adoption or currentness.
    handoff success, and `gh release verify` attestation success at each destination. Any failure is
    forward-only recovery; never move or delete a published tag.
 7. Hand adoption to consumer owners; do not close their work from ontology-kernel publication.
+Steps 3-6 above are two-destination-era wording, superseded 2026-08-24 by the sole-destination
+owner decision (AK `4911` evidence `7442`): apply each step to exactly
+`https://github.com/tryingET/core_ontology-kernel.git` with one setting receipt, one draft, and
+one publication, per the current `RELEASING.md`.
 
 ## Rollback and nonclaims
 
