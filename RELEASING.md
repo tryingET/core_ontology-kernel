@@ -25,12 +25,19 @@ Goal: stable, reproducible meaning.
 - Kernel changes are PR-only; no silent redefines.
 - Meaning change = new `ont.id` + mark old one deprecated + decision reference.
 
-## `v0.2.0` destinations
+## `v0.2.0` destination
 
-The complete intended release destination set is exactly:
+The complete intended release destination set is exactly one repository:
 
-1. `https://github.com/tryingET/ontology-kernel.git`
-2. `https://github.com/tryingET/core_ontology-kernel.git`
+1. `https://github.com/tryingET/core_ontology-kernel.git`
+
+Owner decision of 2026-08-24 (AK `4911` evidence `7442`): the public
+`tryingET/core_ontology-kernel` is the sole destination because it carries the holding naming
+schema. The two-destination set recorded at `90106efeb7893ec26093ed359ab647e9bf21c007` — which
+also named `https://github.com/tryingET/ontology-kernel.git` — is superseded and must not be
+executed. `tryingET/ontology-kernel` remains the private PR/review surface until its owner
+separately archives or deletes it; it is not a v0.2.0 destination, and this contract grants no
+archival or deletion authority.
 
 NAS is not required for `v0.2.0` and is not a release destination. Do not infer, add, replace, or
 skip a destination from configured remote aliases; aliases are convenience only, not authority.
@@ -50,24 +57,30 @@ authority; neither is release publication.
 GitHub Release immutability, not a direct tag push, is the selected protection transition for this
 release. GitHub documents that the associated tag and assets become immutable only when a Release
 is **published**; a draft is not protected. GitHub's repository setting applies only to future
-releases. The REST and GraphQL Release objects expose the resulting per-release `immutable` value,
-but no supported API field observed during AK `4905` exposed the repository-level switch.
+releases. The REST and GraphQL Release objects expose the resulting per-release `immutable`
+value. The repository-level switch is also observable through
+`gh api repos/{owner}/{repo}/immutable-releases` (observed 2026-08-24; it was not known during
+AK `4905`). Reading it corroborates a receipt; changing it requires separate owner authority that
+this procedure does not grant.
 
-Before creating either draft, all of the following must hold:
+Before creating the draft, all of the following must hold:
 
 1. Select the final reviewed `main` commit as a full OID. In a clean checkout at that exact OID,
    run `ROCS_CI_PROFILE=main-strict ./scripts/ci/full.sh` and strict docs validation. Record the
    exact command receipts and prove the checkout remains clean.
-2. Prove `refs/heads/main` at **both** destination URLs resolves to that exact OID. A commit that is
-   absent from either GitHub repository is not a valid release target. Any required branch-parity
-   publication needs its own authority and verification before release-draft work.
-3. For each exact repository, an owner must navigate to **Settings → General → Releases**, select
-   **Enable release immutability**, and record a current owner receipt naming repository, observed
-   control label/state, actor, UTC time, and evidence location. If the setting is unavailable,
-   unchecked, stale, or cannot be evidenced, stop. Do not infer it from plan level, ruleset
-   availability, a remote alias, or a draft's `immutable: false` value.
+2. Prove `refs/heads/main` at the destination URL resolves to that exact OID. A commit that is
+   absent from the destination repository is not a valid release target. Any required
+   branch-parity publication needs its own authority and verification before release-draft work.
+3. For the exact destination repository, an owner must navigate to **Settings → General →
+   Releases**, select **Enable release immutability**, and record a current owner receipt naming
+   repository, observed control label/state, actor, UTC time, and evidence location. If the
+   setting is unavailable, unchecked, stale, or cannot be evidenced, stop. Do not infer it from
+   plan level, ruleset availability, a remote alias, or a draft's `immutable: false` value.
+   Corroborate the receipt with a current read-only
+   `gh api repos/tryingET/core_ontology-kernel/immutable-releases` returning `enabled: true`.
 4. Prove `refs/tags/v0.2.0` and every draft or published Release whose `tag_name` is `v0.2.0` are
-   absent at both repositories. Return code `2` from `git ls-remote --exit-code` means ref absence;
+   absent at the destination repository. Return code `2` from `git ls-remote --exit-code` means
+   ref absence;
    every other nonzero result is an error, not absence. Release-list pagination and authenticated
    visibility of drafts are mandatory.
 5. Establish an exclusive publication window: every owner-accepted actor or automation able to
@@ -76,11 +89,11 @@ Before creating either draft, all of the following must hold:
    draft publication. The later publication authority must explicitly accept this residual race;
    a check does not prove that the race is impossible.
 
-Draft preparation and publication are separate effects. Draft authority may create only the two
-exact drafts below. Later publication authority must name `v0.2.0`, the final full OID, both exact
-repository URLs, both numeric draft IDs, the expected title/body digest and empty asset set, the
-current setting receipts, publication order, residual-race acceptance, and the forward-only
-recovery boundary. A branch, draft, setting, prior assessment, or protection observation is not
+Draft preparation and publication are separate effects. Draft authority may create only the
+exact single draft below. Later publication authority must name `v0.2.0`, the final full OID, the
+exact destination repository URL, the numeric draft ID, the expected title/body digest and empty
+asset set, the current setting receipts, residual-race acceptance, and the forward-only recovery
+boundary. A branch, draft, setting, prior assessment, or protection observation is not
 publication authority.
 
 ## Draft preparation under separate authority
@@ -99,17 +112,17 @@ draft_authority="${DRAFT_AUTHORITY:?set the exact AK draft authority reference}"
 tag_name="v0.2.0"
 tag_ref="refs/tags/$tag_name"
 repositories=(
-  "tryingET/ontology-kernel"
   "tryingET/core_ontology-kernel"
 )
 urls=(
-  "https://github.com/tryingET/ontology-kernel.git"
   "https://github.com/tryingET/core_ontology-kernel.git"
 )
 setting_receipts=(
-  "${ORIGIN_IMMUTABILITY_RECEIPT:?set the accepted origin setting receipt}"
-  "${SECONDARY_IMMUTABILITY_RECEIPT:?set the accepted secondary setting receipt}"
+  "${DESTINATION_IMMUTABILITY_RECEIPT:?set the accepted destination setting receipt}"
 )
+test "${#repositories[@]}" -eq 1
+test "${#urls[@]}" -eq "${#repositories[@]}"
+test "${#setting_receipts[@]}" -eq "${#repositories[@]}"
 release_title="ontology-kernel v0.2.0"
 printf -v release_body \
   'Immutable ontology-kernel v0.2.0 release.\n\nRelease commit: `%s`.\n' \
@@ -120,10 +133,10 @@ release_body_sha256=$(printf '%s' "$release_body" | sha256sum | awk '{print $1}'
 test "$(git rev-parse --verify 'HEAD^{commit}')" = "$release_oid"
 test ! -e "$receipt_root"
 mkdir -m 700 -- "$receipt_root"
-created_ids=("" "")
+created_ids=("")
 observation_round=0
-printf 'draft_authority=%s setting_receipts=%s,%s body_sha256=%s\n' \
-  "$draft_authority" "${setting_receipts[0]}" "${setting_receipts[1]}" \
+printf 'draft_authority=%s setting_receipts=%s body_sha256=%s\n' \
+  "$draft_authority" "${setting_receipts[0]}" \
   "$release_body_sha256"
 
 require_push_visibility() {
@@ -307,7 +320,7 @@ create_and_verify_draft() {
   return 0
 }
 
-# Complete the effect-free preflight for both repositories before either POST.
+# Complete the effect-free preflight for the destination repository before the POST.
 for i in "${!repositories[@]}"; do
   if global_preflight_one "${repositories[$i]}" "${urls[$i]}"; then
     preflight_rc=0
@@ -331,12 +344,12 @@ for i in "${!repositories[@]}"; do
     exit 1
   fi
 done
-printf 'draft_ids=%s,%s receipt_root=%s\n' \
-  "${created_ids[0]}" "${created_ids[1]}" "$receipt_root"
+printf 'draft_ids=%s receipt_root=%s\n' \
+  "${created_ids[0]}" "$receipt_root"
 ```
 
-A failed draft call is effect-indeterminate. Query both repositories immediately; do not infer
-absence from the command's return code and do not retry mechanically. The procedure retains raw and
+A failed draft call is effect-indeterminate. Query the destination repository immediately; do
+not infer absence from the command's return code and do not retry mechanically. The procedure retains raw and
 normalized responses in the caller-supplied durable receipt directory; do not delete it until the
 bounded receipts have been exported to AK. Preserve each numeric draft ID, fresh response, tag
 observation, exact body bytes/digest, and command receipt. Do not publish, delete, or edit a draft
@@ -344,13 +357,12 @@ or its tag without revised authority.
 
 ## Publication and immutable verification under later authority
 
-The publisher must receive the two numeric draft IDs through AK, not discover and self-authorize
-them. Immediately before each publish transition, revalidate both `main` refs and every destination:
-prior destinations must still be published, exact, immutable, and attested; the current and later
-destinations must still be exact empty-asset drafts with an absent or exact lightweight tag. Bind
-fresh owner setting-receipt references as explicit inputs. The publication invocation must use a
-new no-clobber receipt directory, separate from the retained draft directory. Any drift stops the
-sequence.
+The publisher must receive the numeric draft ID through AK, not discover and self-authorize it.
+Immediately before the publish transition, revalidate the destination `main` ref and the
+destination: it must still be an exact empty-asset draft with an absent or exact lightweight tag.
+Bind fresh owner setting-receipt references as explicit inputs. The publication invocation must
+use a new no-clobber receipt directory, separate from the retained draft directory. Any drift
+stops the sequence.
 
 ```bash
 set -euo pipefail
@@ -362,21 +374,21 @@ publication_authority="${PUBLICATION_AUTHORITY:?set the exact AK publication aut
 tag_name="v0.2.0"
 tag_ref="refs/tags/$tag_name"
 repositories=(
-  "tryingET/ontology-kernel"
   "tryingET/core_ontology-kernel"
 )
 urls=(
-  "https://github.com/tryingET/ontology-kernel.git"
   "https://github.com/tryingET/core_ontology-kernel.git"
 )
 draft_ids=(
-  "${ORIGIN_DRAFT_ID:?set the authorized origin draft ID}"
-  "${SECONDARY_DRAFT_ID:?set the authorized secondary draft ID}"
+  "${DESTINATION_DRAFT_ID:?set the authorized destination draft ID}"
 )
 setting_receipts=(
-  "${ORIGIN_IMMUTABILITY_RECEIPT:?set the accepted origin setting receipt}"
-  "${SECONDARY_IMMUTABILITY_RECEIPT:?set the accepted secondary setting receipt}"
+  "${DESTINATION_IMMUTABILITY_RECEIPT:?set the accepted destination setting receipt}"
 )
+test "${#repositories[@]}" -eq 1
+test "${#urls[@]}" -eq "${#repositories[@]}"
+test "${#draft_ids[@]}" -eq "${#repositories[@]}"
+test "${#setting_receipts[@]}" -eq "${#repositories[@]}"
 release_title="ontology-kernel v0.2.0"
 printf -v release_body \
   'Immutable ontology-kernel v0.2.0 release.\n\nRelease commit: `%s`.\n' \
@@ -394,8 +406,8 @@ verify_sequence=0
 observation_round=0
 read_deadline_epoch=0
 readonly VERIFY_TRANSIENT=10 VERIFY_MISMATCH=20
-printf 'publication_authority=%s setting_receipts=%s,%s body_sha256=%s draft_receipts=%s publication_receipts=%s\n' \
-  "$publication_authority" "${setting_receipts[0]}" "${setting_receipts[1]}" \
+printf 'publication_authority=%s setting_receipts=%s body_sha256=%s draft_receipts=%s publication_receipts=%s\n' \
+  "$publication_authority" "${setting_receipts[0]}" \
   "$release_body_sha256" "$draft_receipt_root" "$receipt_root"
 
 run_read() {
@@ -705,7 +717,7 @@ for i in "${!repositories[@]}"; do
   fi
 done
 
-# Final simultaneous read-only proof after both irreversible transitions.
+# Final read-only proof after the irreversible transition.
 for i in "${!repositories[@]}"; do
   if verify_published_once "$i"; then
     final_rc=0
@@ -726,23 +738,22 @@ attestation; it supplements, and does not replace, the exact live tag/OID and pe
 
 ## Partial publication and forward-only recovery
 
-A publish command can fail after taking effect. On any command or verification failure, query both
-numeric Release IDs, authenticated matching-Release lists, both `main` refs, and both exact tag refs
-immediately, as `observe_all` does. Classify each repository as draft/absent-tag, draft/exact-tag,
-published-and-exact-immutable, published-but-nonimmutable-or-mismatched, or unavailable. Never
-infer state from a PATCH return code, never retry publication mechanically, and never publish the
-second destination after the first destination fails verification. The procedure may poll only
-read surfaces for at most 120 seconds in five-second intervals; it never repeats the PATCH.
+A publish command can fail after taking effect. On any command or verification failure, query
+the numeric Release ID, authenticated matching-Release list, the `main` ref, and the exact tag
+ref immediately, as `observe_all` does. Classify the destination as draft/absent-tag,
+draft/exact-tag, published-and-exact-immutable, published-but-nonimmutable-or-mismatched, or
+unavailable. Never infer state from a PATCH return code and never retry publication
+mechanically. The procedure may poll only read surfaces for at most 120 seconds in five-second
+intervals; it never repeats the PATCH.
 
-Resume only under fresh owner authority after fresh setting receipts and exact state observations.
-A published-and-exact immutable Release may remain while authority permits publishing the already
-prepared exact draft at the missing destination. If the immutable Release and tag are exact but a
-read surface or attestation was temporarily unavailable, fresh authority may permit read-only
-reverification; it must not republish. A published nonimmutable or mismatched Release, changed
-content, unexpected asset, tag drift, or cryptographically invalid attestation requires a
-separately authorized forward corrective release. Do not move, delete, recreate, or force a
-published tag. Deleting an immutable Release is not rollback: GitHub documents that its tag name
-cannot be reused even after deletion.
+Resume only under fresh owner authority after fresh setting receipts and exact state
+observations. If the immutable Release and tag are exact but a read surface or attestation was
+temporarily unavailable, fresh authority may permit read-only reverification; it must not
+republish. A published nonimmutable or mismatched Release, changed content, unexpected asset,
+tag drift, or cryptographically invalid attestation requires a separately authorized forward
+corrective release. Do not move, delete, recreate, or force a published tag. Deleting an
+immutable Release is not rollback: GitHub documents that its tag name cannot be reused even
+after deletion.
 
 ## Historical AK 4881 rollback boundary
 

@@ -41,8 +41,11 @@ source change. At the base and in this candidate, `ontology/src` has Git tree OI
 ## Decisions and pre-merge posture
 
 - Version: `v0.2.0`, matching manifest `rocs.version: "0.2.0"`.
-- Complete destination set: exactly `https://github.com/tryingET/ontology-kernel.git` and
-  `https://github.com/tryingET/core_ontology-kernel.git`.
+- Complete destination set (superseded 2026-08-24): originally exactly
+  `https://github.com/tryingET/ontology-kernel.git` and
+  `https://github.com/tryingET/core_ontology-kernel.git`. The owner decision recorded in AK
+  `4911` evidence `7442` reduced the destination set to exactly
+  `https://github.com/tryingET/core_ontology-kernel.git`; see the current `RELEASING.md`.
 - NAS is not required for `v0.2.0` and is excluded. Remote aliases are not authority.
 - OIDs are durable content identities. Tag refs are described only as currently protected against
   update/deletion under time-bounded, recorded, owner-accepted controls—not permanently immutable.
@@ -63,14 +66,17 @@ not retain it as executable current guidance.
 
 After this correction is reviewed and merged to `main`, select that resulting full OID, use a clean
 checkout at the exact commit, rerun the strict repository and docs gates, and follow
-`RELEASING.md`. Before any draft, both exact GitHub `main` refs must equal the release OID and an
-owner must record current **Enable release immutability** receipts from each repository's
-**Settings → General → Releases** control. The repository switch was not exposed by the supported
-REST/GraphQL surfaces observed in AK `4905`; it must not be inferred from ruleset capability or
-from a draft's expected `immutable: false` value.
+`RELEASING.md`. (Superseded 2026-08-24: the destination is the sole
+`https://github.com/tryingET/core_ontology-kernel.git`, whose `main` ref must equal the release
+OID.) An owner must record a current **Enable release immutability** receipt from the
+destination's **Settings → General → Releases** control. The repository switch was not exposed
+by the supported REST/GraphQL surfaces observed in AK `4905` (it has been observable since
+2026-08-24 through `gh api repos/{owner}/{repo}/immutable-releases`); it must not be inferred from
+ruleset capability or from a draft's expected `immutable: false` value.
 
-A draft-preparation task may then create exactly one fixed-title, fixed-body, empty-asset draft for
-`v0.2.0` at each destination. It must record both numeric draft IDs, exact body digest, full target
+A draft-preparation task may then create exactly one fixed-title, fixed-body, empty-asset draft
+for `v0.2.0` at the destination. It must record the numeric draft ID, exact body digest, full
+target
 OID, and whether GitHub left the draft tag absent or created the expected unprotected lightweight
 ref. Draft preparation is not publication. A separate publication task must bind those exact
 drafts, fresh setting receipts, publication order, an exclusive writer window, and explicit
@@ -81,16 +87,13 @@ create or push a local annotated tag. Success requires a fresh Release response 
 false`, `immutable: true`, the authorized numeric ID/content/target and no assets; one live
 lightweight `refs/tags/v0.2.0` line equal to the full release OID; a successful
 `verify_commit_handoff.py` check; and a successful `gh release verify v0.2.0` signed-attestation
-check at **both** repositories.
+check at the destination repository.
 
-On any draft or publication command failure, query both numeric Release IDs, authenticated
-matching-Release lists, both `main` refs, and both tag refs; do not infer state from return code or
+On any draft or publication command failure, query the numeric Release ID, authenticated
+matching-Release list, the `main` ref, and the tag ref; do not infer state from return code or
 retry a mutation mechanically. Bounded read-only polling may resolve propagation delay without
-repeating publication. A verified immutable Release may remain while fresh authority permits
-publishing the already prepared exact draft at the other repository. A nonimmutable, mismatched,
-changed, or cryptographically invalid published state requires a forward corrective release. Never
-move or delete a published tag, and do not publish the second destination after the first fails
-verification.
+repeating publication. A nonimmutable, mismatched, changed, or cryptographically invalid
+published state requires a forward corrective release. Never move or delete a published tag.
 
 ## Preliminary implementation-time validation
 
