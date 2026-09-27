@@ -8,6 +8,8 @@ ont:
   relations:
     - type: is_a
       target: core.Relief
+    - type: instance_of
+      target: core.UfoCategory.Situation
   examples:
     - "A requirement's waiver authority releases one release from a test requirement; the requirement stays"
 system4d:
@@ -29,6 +31,10 @@ Relief from meeting a requirement that leaves the commitment unchanged: the item
 ## Common confusions
 - Not a change: changing the commitment goes through change control.
 - NASA calls a waiver both 'a documented agreement' (handbook p. 149) and 'a documented authorization' (glossary p. 196); in AI Society it is granted, not agreed.
+
+## Category
+- UFO situation (`core.UfoCategory.Situation`). Required: the requirement, its waiver authority, scope, expiry.
+- Reference model: `docs/reference-model/governance-core.md`.
 
 ## Source and mapping
 - Combination strategy §3, §4, §5 (waiver ≠ change).

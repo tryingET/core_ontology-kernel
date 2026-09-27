@@ -5,7 +5,9 @@ ont:
   labels: ["Receipt"]
   synonyms: []
   description: "Durable, integrity-checkable record binding an action or artifact to actor, time, and content digest."
-  relations: []
+  relations:
+    - type: instance_of
+      target: core.UfoCategory.Kind
   examples:
     - "A release evidence archive plus checksum attached to an immutable tag"
     - "A custody record binding an evidence closure to a task ID and revision"
@@ -33,3 +35,7 @@ Durable, integrity-checkable record binding an action or artifact to actor, time
 - Confused with verification: a receipt proves presence and integrity of bytes; it says nothing about whether those bytes are correct, safe, or meaningful.
 - Confused with authority: recording who did something does not establish that they were allowed to.
 - Custody is not causality: holding a receipt for X does not prove X caused anything.
+
+## Category
+- UFO kind (`core.UfoCategory.Kind`). Required: the action or artefact, actor, time, content digest.
+- Reference model: `docs/reference-model/governance-core.md`.

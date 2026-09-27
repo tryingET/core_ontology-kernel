@@ -5,7 +5,9 @@ ont:
   labels: ["process audit"]
   synonyms: []
   description: "An audit of whether a process is carried out as its process standard describes (Binner)."
-  relations: []
+  relations:
+    - type: instance_of
+      target: core.UfoCategory.Event
   examples:
     - "Checking that task closes follow the documented close procedure"
 system4d:
@@ -23,6 +25,10 @@ An audit of whether a process is carried out as its process standard describes (
 
 ## Common confusions
 - Not a conformance audit (whether a product matches its requirements).
+
+## Category
+- UFO event (`core.UfoCategory.Event`). Required: the process and its process standard.
+- Reference model: `docs/reference-model/governance-core.md`.
 
 ## Source and mapping
 - Combination strategy §4 review row: process audit (Binner).

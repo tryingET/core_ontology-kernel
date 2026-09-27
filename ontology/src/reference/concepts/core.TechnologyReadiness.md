@@ -5,7 +5,9 @@ ont:
   labels: ["technology readiness"]
   synonyms: ["TRL"]
   description: "How far a technology has been demonstrated, rated as a technology readiness level (TRL)."
-  relations: []
+  relations:
+    - type: instance_of
+      target: core.UfoCategory.Quality
   examples:
     - "A technology demonstrated in a relevant environment (TRL 6)"
 system4d:
@@ -23,6 +25,10 @@ How far a technology has been demonstrated, rated as a technology readiness leve
 
 ## Common confusions
 - Not maturity (MITO) and not readiness (preflight or readiness review).
+
+## Category
+- UFO quality (`core.UfoCategory.Quality`). Required: the technology, the TRL scale, the environment it was shown in.
+- Reference model: `docs/reference-model/governance-core.md`.
 
 ## Source and mapping
 - Combination strategy §4 maturity row.

@@ -5,7 +5,9 @@ ont:
   labels: ["Proposal"]
   synonyms: []
   description: "A concrete change request with rationale, scope, and acceptance criteria."
-  relations: []
+  relations:
+    - type: instance_of
+      target: core.UfoCategory.Kind
   examples:
     - "Add a new kernel relation with clear semantics and tests"
   anti_examples:
@@ -29,3 +31,6 @@ A concrete change request with rationale, scope, and acceptance criteria.
 ## Common confusions
 - Confused with a decision; proposals can be rejected or revised.
 
+## Category
+- UFO kind (`core.UfoCategory.Kind`). Required: proposer, change, rationale, scope, acceptance criteria.
+- Reference model: `docs/reference-model/governance-core.md`.

@@ -5,7 +5,9 @@ ont:
   labels: ["driver"]
   synonyms: []
   description: "A situation that calls for a response: what is happening, its effect, and why it matters (S3)."
-  relations: []
+  relations:
+    - type: instance_of
+      target: core.UfoCategory.Situation
   examples:
     - "Agents read one word in different senses, so decisions are carried out wrongly"
 system4d:
@@ -27,6 +29,10 @@ A situation that calls for a response: what is happening, its effect, and why it
 ## Common confusions
 - Not a motive (S3 itself uses both senses).
 - NASA's 'design driver' is a dominant constraint.
+
+## Category
+- UFO situation (`core.UfoCategory.Situation`). Required: what is happening, its effect, why it matters.
+- Reference model: `docs/reference-model/governance-core.md`.
 
 ## Source and mapping
 - Combination strategy §3 spine row 1; Combination strategy §4 driver row; controlled-vocabulary adjudication (S3 drift).

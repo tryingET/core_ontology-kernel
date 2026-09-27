@@ -5,7 +5,9 @@ ont:
   labels: ["Objection"]
   synonyms: []
   description: "A reasoned concern that blocks consent until addressed."
-  relations: []
+  relations:
+    - type: instance_of
+      target: core.UfoCategory.Mode
   examples:
     - "This change weakens a safety invariant; propose an alternative"
   anti_examples:
@@ -29,3 +31,6 @@ A reasoned concern that blocks consent until addressed.
 ## Common confusions
 - Confused with disagreement; objections must be actionable and reasoned.
 
+## Category
+- UFO mode (`core.UfoCategory.Mode`). Required: who holds it, the proposal it objects to, its reasons.
+- Reference model: `docs/reference-model/governance-core.md`.

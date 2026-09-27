@@ -5,7 +5,9 @@ ont:
   labels: ["AuditEvent"]
   synonyms: []
   description: "Nachvollziehbares Ereignis (wer tat was wann warum)."
-  relations: []
+  relations:
+    - type: instance_of
+      target: core.UfoCategory.Event
   examples:
     - "Merge Request merged (who/what/when/why)"
   anti_examples:
@@ -28,3 +30,7 @@ Nachvollziehbares Ereignis (wer tat was wann warum).
 
 ## Common confusions
 - Confused with unstructured log lines that lack actor/intent.
+
+## Category
+- UFO event (`core.UfoCategory.Event`). Required: who, what, when, why.
+- Reference model: `docs/reference-model/governance-core.md`.
