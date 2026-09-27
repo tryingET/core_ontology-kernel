@@ -84,12 +84,18 @@ payload = json.load(open(sys.argv[1], encoding="utf-8"))
 candidates = payload.get("candidates")
 if payload.get("retrieval") != "multiple_candidates" or payload.get("truncated") is not False:
     raise SystemExit("expected complete multiple-candidate discovery")
-if not isinstance(candidates, list) or len(candidates) != 2:
-    raise SystemExit("expected exactly two discovery candidates")
+if not isinstance(candidates, list) or len(candidates) < 2:
+    raise SystemExit("expected at least two discovery candidates")
 identities = [(candidate.get("ont_id"), candidate.get("kind")) for candidate in candidates]
+if len(set(identities)) != len(identities):
+    raise SystemExit("expected unique discovery candidates")
+# Concepts whose text mentions "agent" or "authority" rank below the two exact
+# id/label matches; the gate pins the top two, not the size of the corpus.
+top_two = {(candidate.get("ont_id"), candidate.get("kind"))
+           for candidate in sorted(candidates, key=lambda candidate: candidate.get("rank"))[:2]}
 expected = {("core.Agent", "concept"), ("core.Authority", "concept")}
-if len(set(identities)) != len(identities) or set(identities) != expected:
-    raise SystemExit("expected exact core.Agent and core.Authority discovery candidates")
+if top_two != expected:
+    raise SystemExit("expected core.Agent and core.Authority as the top two discovery candidates")
 candidate = next(candidate for candidate in candidates if candidate.get("ont_id") == "core.Agent")
 print(payload["corpus_snapshot_digest"], candidate["document_digest"])
 PY
