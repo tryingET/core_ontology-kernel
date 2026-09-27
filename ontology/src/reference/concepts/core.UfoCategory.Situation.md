@@ -25,7 +25,7 @@ The UFO category of states of affairs: portions of reality, made of other entiti
 
 ## Typical usage
 - Test question: Does it hold or not hold at a given time?
-- Governance-core concepts in this category: core.Driver, core.Exception, core.Relief, core.Waiver.
+- Governance-core concepts in this category: core.ConsentState, core.Driver, core.Exception, core.Relief, core.VerificationVerdict, core.Waiver.
 
 ## Source and mapping
 - Guizzardi, Falbo, Guizzardi (2008), Grounding Software Domain Ontologies in UFO, IDEAS 2008 (UFO-C), §2. Checked on the page images on 2026-09-27.

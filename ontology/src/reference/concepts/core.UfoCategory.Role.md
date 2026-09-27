@@ -27,7 +27,7 @@ The UFO category of anti-rigid types that apply to an instance only through a re
 
 ## Typical usage
 - Test question: Which relation makes the instance play it?
-- Governance-core concepts in this category: none yet.
+- Governance-core concepts in this category: core.EvidenceRole, core.SocialRole.
 
 ## Common confusions
 - Not core.Role, the kernel's older role-or-permission concept, which AK 5987 splits.

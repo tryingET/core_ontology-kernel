@@ -25,7 +25,7 @@ The UFO category of rigid types that give their instances identity and persisten
 
 ## Typical usage
 - Test question: Could an instance stop being one and still exist?
-- Governance-core concepts in this category: core.DecisionRecord, core.Dissent, core.Proposal, core.Receipt.
+- Governance-core concepts in this category: core.DecisionRecord, core.Dissent, core.Proposal, core.Receipt, core.RetainedArtefact.
 
 ## Source and mapping
 - Guizzardi et al. (2022), UFO: Unified Foundational Ontology, Applied Ontology 17(1), p. 173. Checked on the page images on 2026-09-27.

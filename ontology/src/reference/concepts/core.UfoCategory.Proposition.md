@@ -25,7 +25,7 @@ The UFO category of propositional contents: abstract representations of the situ
 
 ## Typical usage
 - Test question: Can a situation satisfy it?
-- Governance-core concepts in this category: core.Goal.
+- Governance-core concepts in this category: core.Claim, core.Goal.
 
 ## Source and mapping
 - Guizzardi, Falbo, Guizzardi (2008), Grounding Software Domain Ontologies in UFO, IDEAS 2008 (UFO-C), §4 and Fig. 3. Checked on the page images on 2026-09-27.
