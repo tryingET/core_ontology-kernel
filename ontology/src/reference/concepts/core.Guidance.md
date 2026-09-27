@@ -5,7 +5,9 @@ ont:
   labels: ["guidance"]
   synonyms: []
   description: "Advice in text that may be customized freely, such as a Prompt Vault procedure; it binds no one."
-  relations: []
+  relations:
+    - type: instance_of
+      target: core.UfoCategory.NormativeDescription
   examples:
     - "A Prompt Vault procedure for writing a letter to an author"
 system4d:
@@ -23,6 +25,10 @@ Advice in text that may be customized freely, such as a Prompt Vault procedure; 
 
 ## Common confusions
 - Not a directive: departing from guidance needs no relief.
+
+## Category
+- UFO normative description (`core.UfoCategory.NormativeDescription`). Required: its owner; it binds no one.
+- Reference model: `docs/reference-model/governance-core.md`.
 
 ## Source and mapping
 - Combination strategy §4 directive row.

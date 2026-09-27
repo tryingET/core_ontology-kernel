@@ -5,7 +5,9 @@ ont:
   labels: ["role review"]
   synonyms: []
   description: "A review of how someone performs a role, by the people they work with (S3 peer review)."
-  relations: []
+  relations:
+    - type: instance_of
+      target: core.UfoCategory.Event
   examples:
     - "Colleagues giving feedback to the holder of a steward role"
 system4d:
@@ -23,6 +25,10 @@ A review of how someone performs a role, by the people they work with (S3 peer r
 
 ## Common confusions
 - 'Review' is never bare.
+
+## Category
+- UFO event (`core.UfoCategory.Event`). Required: the role, its holder, the reviewers.
+- Reference model: `docs/reference-model/governance-core.md`.
 
 ## Source and mapping
 - Combination strategy §4 review row: role review (S3 peer review).

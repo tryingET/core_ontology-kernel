@@ -8,6 +8,8 @@ ont:
   relations:
     - type: is_a
       target: core.DecisionGate
+    - type: instance_of
+      target: core.UfoCategory.Event
   examples:
     - "Checking, against criteria set in advance, that a migration may start"
 system4d:
@@ -25,6 +27,10 @@ A decision gate that checks, against criteria set in advance, whether an item is
 
 ## Common confusions
 - 'Review' is never bare.
+
+## Category
+- UFO event (`core.UfoCategory.Event`). Required: decider, criteria set in advance, the item.
+- Reference model: `docs/reference-model/governance-core.md`.
 
 ## Source and mapping
 - Combination strategy §4 review row; Combination strategy §5: one of four review archetypes kept from NASA.

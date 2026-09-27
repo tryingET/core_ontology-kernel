@@ -5,7 +5,9 @@ ont:
   labels: ["artefact status"]
   synonyms: ["NASA document states"]
   description: "The state of a document or other artefact: approach, preliminary, baseline or update (NASA's document states)."
-  relations: []
+  relations:
+    - type: instance_of
+      target: core.UfoCategory.Phase
   examples:
     - "A document in preliminary status"
 system4d:
@@ -23,6 +25,10 @@ The state of a document or other artefact: approach, preliminary, baseline or up
 
 ## Common confusions
 - Not maturity (MITO process maturity).
+
+## Category
+- UFO phase (`core.UfoCategory.Phase`). Required: the artefact; approach, preliminary, baseline and update partition its life.
+- Reference model: `docs/reference-model/governance-core.md`.
 
 ## Source and mapping
 - Combination strategy §4 maturity row.

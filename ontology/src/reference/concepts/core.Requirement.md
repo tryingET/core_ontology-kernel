@@ -5,7 +5,9 @@ ont:
   labels: ["requirement"]
   synonyms: ["shall statement"]
   description: "A binding statement: one verifiable 'shall' with an owner, a verification method, a waiver authority and a trace to its parent (or flagged as self-derived)."
-  relations: []
+  relations:
+    - type: instance_of
+      target: core.UfoCategory.NormativeDescription
   examples:
     - "The item contract shall record the tool version used for each check."
   anti_examples:
@@ -29,6 +31,10 @@ A binding statement: one verifiable 'shall' with an owner, a verification method
 
 ## Common confusions
 - S3's requirement → goal; Binner's Anforderung → stakeholder expectation.
+
+## Category
+- UFO normative description (`core.UfoCategory.NormativeDescription`). Required: owner, verification method, waiver authority, parent or self-derived flag.
+- Reference model: `docs/reference-model/governance-core.md`.
 
 ## Source and mapping
 - Combination strategy §3 spine row 6 (NASA p. 132); Combination strategy §4 requirement row.

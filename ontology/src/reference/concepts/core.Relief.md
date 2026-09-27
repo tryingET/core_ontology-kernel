@@ -8,6 +8,8 @@ ont:
   relations:
     - type: is_a
       target: core.Exception
+    - type: instance_of
+      target: core.UfoCategory.Situation
   examples:
     - "The owner of a coding rule exempts one legacy module, recorded in the relief ledger"
 system4d:
@@ -25,6 +27,10 @@ Release from a binding rule, granted by the rule's owner and recorded in a ledge
 
 ## Common confusions
 - Not customization: how a practice is done may be changed without approval; relief from a binding rule needs the rule owner.
+
+## Category
+- UFO situation (`core.UfoCategory.Situation`). Required: the rule, its owner who granted the relief, scope, ledger entry; the granting is an authorization.
+- Reference model: `docs/reference-model/governance-core.md`.
 
 ## Source and mapping
 - Combination strategy §3 (commitment; NASA p. 34); Combination strategy §4 deviation row.

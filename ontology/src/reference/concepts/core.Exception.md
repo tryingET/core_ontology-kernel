@@ -5,7 +5,9 @@ ont:
   labels: ["Exception"]
   synonyms: []
   description: "Bewusste Ausnahme von einer Regel (mit Begründung und Scope)."
-  relations: []
+  relations:
+    - type: instance_of
+      target: core.UfoCategory.Situation
   examples:
     - "Incident hotfix bypass approved with scope and end date"
   anti_examples:
@@ -28,3 +30,7 @@ Bewusste Ausnahme von einer Regel (mit Begründung und Scope).
 
 ## Common confusions
 - Confused with an accidental failure (bug/incident).
+
+## Category
+- UFO situation (`core.UfoCategory.Situation`). Required: the rule, the scope, the justification.
+- Reference model: `docs/reference-model/governance-core.md`.

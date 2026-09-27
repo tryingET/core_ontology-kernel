@@ -5,7 +5,9 @@ ont:
   labels: ["goal"]
   synonyms: ["S3 requirement"]
   description: "What is needed to respond to a driver: assessable, not necessarily quantified (S3's 'requirement')."
-  relations: []
+  relations:
+    - type: instance_of
+      target: core.UfoCategory.Proposition
   examples:
     - "Agents find the controlled meaning of a word where they act"
 system4d:
@@ -24,6 +26,10 @@ What is needed to respond to a driver: assessable, not necessarily quantified (S
 ## Common confusions
 - Not a requirement (one binding, verifiable 'shall').
 - Quote S3 with its mapping: "S3 requirement (goal)".
+
+## Category
+- UFO proposition (`core.UfoCategory.Proposition`). Required: the agent whose intention it is, and the driver it responds to.
+- Reference model: `docs/reference-model/governance-core.md`.
 
 ## Source and mapping
 - Combination strategy §3 spine row 2; Combination strategy §4 requirement row; owner decision 1 of 2026-09-26.

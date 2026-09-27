@@ -8,6 +8,8 @@ ont:
   relations:
     - type: depends_on
       target: core.Authority
+    - type: instance_of
+      target: core.UfoCategory.Event
   examples:
     - "The Holding Owner authorizes a class-C change; the record names act, grantor, grantee, scope and basis."
   anti_examples:
@@ -32,6 +34,10 @@ An act: a sign-off by someone holding the authority, which grants a permission t
 ## Common confusions
 - Confused with consent: consent is a state a round reaches; authorization is one act by a holder of authority.
 - Confused with authority: authority is the mandate; an authorization is one use of it.
+
+## Category
+- UFO event (`core.UfoCategory.Event`). Required: grantor (holding the authority), grantee, scope, basis; it founds a permission.
+- Reference model: `docs/reference-model/governance-core.md`.
 
 ## Source and mapping
 - Combination strategy §4: approval / concurrence / consent are three acts; owner sign-off → authorization.

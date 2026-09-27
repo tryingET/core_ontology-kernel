@@ -8,6 +8,8 @@ ont:
   relations:
     - type: part_of
       target: core.DecisionRecord
+    - type: instance_of
+      target: core.UfoCategory.Kind
   examples:
     - "An objection still standing when the owner authorized the change anyway, kept in the decision record."
   anti_examples:
@@ -30,6 +32,10 @@ A record of a disagreement with a decision, kept with the decision: who objected
 
 ## Common confusions
 - Confused with an objection: an objection blocks consent until it is addressed; dissent is what stays on record when a decision goes ahead over one.
+
+## Category
+- UFO kind (`core.UfoCategory.Kind`). Required: the objection it keeps and the decision that went ahead over it.
+- Reference model: `docs/reference-model/governance-core.md`.
 
 ## Source and mapping
 - Combination strategy §4 and §5: recorded disagreement → dissent; NASA's decision report records dissent.

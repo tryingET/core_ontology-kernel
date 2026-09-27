@@ -10,6 +10,8 @@ ont:
       target: core.Verification
     - type: depends_on
       target: core.Policy
+    - type: instance_of
+      target: core.UfoCategory.Mode
   examples:
     - "A maintainer's mandate to merge to main under the lane's main-first policy"
     - "An owner's exclusive authority to accept a bounded proposal or approve a release"
@@ -37,3 +39,7 @@ A recognized mandate to decide, attest, or promote within a stated scope. Author
 - Confused with capability: being able to do X is not being authorized to do X.
 - Confused with verification: an authority may attest that a check ran; the attestation does not replace the check.
 - Scope is part of the mandate; authority over one repository or surface does not transfer to another.
+
+## Category
+- UFO mode (`core.UfoCategory.Mode`). Required: its holder, its scope, and the norm or delegation that created it.
+- Reference model: `docs/reference-model/governance-core.md`.

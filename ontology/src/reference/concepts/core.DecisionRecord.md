@@ -5,7 +5,9 @@ ont:
   labels: ["DecisionRecord"]
   synonyms: []
   description: "A persistent record of a decision, including context, options, and rationale."
-  relations: []
+  relations:
+    - type: instance_of
+      target: core.UfoCategory.Kind
   examples:
     - "ADR-style decision linked from ontology deprecations"
   anti_examples:
@@ -29,3 +31,6 @@ A persistent record of a decision, including context, options, and rationale.
 ## Common confusions
 - Confused with a proposal; decisions are outcomes.
 
+## Category
+- UFO kind (`core.UfoCategory.Kind`). Required: the decision and its consent, authorization and dissent records.
+- Reference model: `docs/reference-model/governance-core.md`.

@@ -5,7 +5,9 @@ ont:
   labels: ["metric"]
   synonyms: ["Binner Kennzahl", "NASA MOE", "NASA MOP"]
   description: "A defined, measurable quantity with a calculation rule, compared with a target to show how well a goal or requirement is met (Binner's Kennzahl; NASA's measures of effectiveness and performance)."
-  relations: []
+  relations:
+    - type: instance_of
+      target: core.UfoCategory.Quality
   examples:
     - "Share of AK tasks closed with evidence, per month, target 100 %"
 system4d:
@@ -27,6 +29,10 @@ A defined, measurable quantity with a calculation rule, compared with a target t
 ## Common confusions
 - 'Measure' is never bare.
 - Say which kind: an effectiveness metric (NASA MOE) or a performance metric (NASA MOP); NASA itself mixes the two (handbook p. 69 vs glossary p. 205).
+
+## Category
+- UFO quality (`core.UfoCategory.Quality`). Required: what it measures, calculation rule, unit, target.
+- Reference model: `docs/reference-model/governance-core.md`.
 
 ## Source and mapping
 - Combination strategy §3 spine rows 3 and 6; Combination strategy §4 measure row.

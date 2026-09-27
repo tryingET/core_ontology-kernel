@@ -5,7 +5,9 @@ ont:
   labels: ["schema check"]
   synonyms: ["schema validation"]
   description: "A check that a record or file conforms to its schema."
-  relations: []
+  relations:
+    - type: instance_of
+      target: core.UfoCategory.Event
   examples:
     - "Checking a concept file against the ontology-markdown-v1 grammar"
 system4d:
@@ -23,6 +25,10 @@ A check that a record or file conforms to its schema.
 
 ## Common confusions
 - Not validation (fitness for purpose) and not verification against a requirement: a passing schema check proves conformance to the schema only.
+
+## Category
+- UFO event (`core.UfoCategory.Event`). Required: the record or file, the schema.
+- Reference model: `docs/reference-model/governance-core.md`.
 
 ## Source and mapping
 - Combination strategy §4 validation row: schema validation → schema check.

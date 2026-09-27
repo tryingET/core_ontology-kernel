@@ -8,6 +8,8 @@ ont:
   relations:
     - type: produces
       target: core.Rueckmeldung
+    - type: instance_of
+      target: core.UfoCategory.Event
   examples:
     - "The monthly bootstrap Leitung review of the vocabulary loop"
 system4d:
@@ -28,6 +30,10 @@ A review in the Leitung segment of whether a process or system does the right th
 
 ## Common confusions
 - 'Review' is never bare.
+
+## Category
+- UFO event (`core.UfoCategory.Event`). Required: the process or system reviewed, the effectiveness question.
+- Reference model: `docs/reference-model/governance-core.md`.
 
 ## Source and mapping
 - Combination strategy §4 review row; MITO model definition (Leitung: review, audit, compliance, improvement).

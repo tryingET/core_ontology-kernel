@@ -5,7 +5,9 @@ ont:
   labels: ["Policy"]
   synonyms: []
   description: "Eine formalisierte Regel, die Verhalten einschränkt oder überprüft."
-  relations: []
+  relations:
+    - type: instance_of
+      target: core.UfoCategory.NormativeDescription
   examples:
     - "CODEOWNERS-required approval for protected paths"
   anti_examples:
@@ -28,3 +30,7 @@ Eine formalisierte Regel, die Verhalten einschränkt oder überprüft.
 
 ## Common confusions
 - Confused with informal guidelines that cannot be validated.
+
+## Category
+- UFO normative description (`core.UfoCategory.NormativeDescription`). Required: whom it binds and its owner.
+- Reference model: `docs/reference-model/governance-core.md`.

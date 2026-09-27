@@ -8,6 +8,8 @@ ont:
   relations:
     - type: is_a
       target: core.Policy
+    - type: instance_of
+      target: core.UfoCategory.NormativeDescription
   examples:
     - "'Never use /tmp for worktrees' in the workspace AGENTS.md"
 system4d:
@@ -25,6 +27,10 @@ A binding rule in text, such as an AK decision or a 'must' in AGENTS.md; it can 
 
 ## Common confusions
 - Not direction (AK strategy) and not guidance (Prompt Vault advice, freely customizable).
+
+## Category
+- UFO normative description (`core.UfoCategory.NormativeDescription`). Required: whom it binds and its owner; tailoring only by relief.
+- Reference model: `docs/reference-model/governance-core.md`.
 
 ## Source and mapping
 - Combination strategy §4 directive row; Combination strategy §3 planning artefacts.
