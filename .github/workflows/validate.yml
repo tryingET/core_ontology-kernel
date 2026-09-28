@@ -1,0 +1,19 @@
+name: validate
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  full:
+    # ubuntu-24.04 ships /usr/bin/python3.12, which scripts/ci/full.sh requires.
+    # full.sh resets PATH to /usr/local/bin:/usr/bin:/bin, so setup-python would not be seen.
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+      - name: Main-strict full.sh
+        run: env -u ROCS_REPO -u ROCS_WORKSPACE_ROOT -u ROCS_WORKSPACE_REF_MODE ROCS_CI_PROFILE=main-strict ./scripts/ci/full.sh
