@@ -3,7 +3,7 @@ ont:
   id: "core.MitoLevel.Taktisch"
   type: concept
   labels: ["taktisch"]
-  synonyms: ["tactical level"]
+  synonyms: []
   description: "The second MITO level: the main processes (Hauptprozesse), owned by the main-process owner; in AI Society a repo or domain owner."
   relations:
     - type: instance_of

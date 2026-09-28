@@ -3,7 +3,7 @@ ont:
   id: "core.TaskClaim"
   type: concept
   labels: ["task claim"]
-  synonyms: ["AK task claim"]
+  synonyms: []
   description: "An agent's commitment to the requester, made by claiming an AK task, to do the work within the lease; the agent releases it when it stops."
   relations:
     - type: instance_of

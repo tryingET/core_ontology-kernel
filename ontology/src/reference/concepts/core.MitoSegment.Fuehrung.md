@@ -3,7 +3,7 @@ ont:
   id: "core.MitoSegment.Fuehrung"
   type: concept
   labels: ["Führung"]
-  synonyms: ["Führung segment", "Management-Führung", "Act 1"]
+  synonyms: ["Management-Führung", "Act 1"]
   description: "The first MITO segment (Act 1): it sets requirements, strategy, goals, tasks, responsibilities and interfaces, and issues the Vorgabe for the level below."
   relations:
     - type: instance_of

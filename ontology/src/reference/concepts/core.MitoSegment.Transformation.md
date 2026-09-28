@@ -3,8 +3,8 @@ ont:
   id: "core.MitoSegment.Transformation"
   type: concept
   labels: ["Transformation segment"]
-  synonyms: ["Transformation", "Do"]
-  description: "The third MITO segment (Do): the core value-creating work, steered by the process owners."
+  synonyms: ["Transformation", "PDCA Do"]
+  description: "The third MITO segment (PDCA Do): the core value-creating work, steered by the process owners."
   relations:
     - type: instance_of
       target: core.MitoSegment
@@ -23,7 +23,7 @@ system4d:
 # Transformation segment (core.MitoSegment.Transformation)
 
 ## Definition
-The third MITO segment (Do): the core value-creating work, steered by the process owners.
+The third MITO segment (PDCA Do): the core value-creating work, steered by the process owners.
 
 ## Typical usage
 - Actions are carried out here; in AI Society the work happens in AK tasks.

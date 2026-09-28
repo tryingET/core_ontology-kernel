@@ -3,7 +3,7 @@ ont:
   id: "core.MitoLevel.Operativ"
   type: concept
   labels: ["operativ"]
-  synonyms: ["operative level"]
+  synonyms: []
   description: "The lowest MITO level: the work-system processes (Arbeitssystemprozesse), done by the process staff; in AI Society an agent session executing a claimed task."
   relations:
     - type: instance_of

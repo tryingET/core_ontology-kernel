@@ -3,7 +3,7 @@ ont:
   id: "core.MitoSegment.Input"
   type: concept
   labels: ["Input segment"]
-  synonyms: ["Input", "plan", "Plan"]
+  synonyms: ["Input", "plan", "PDCA Plan"]
   description: "The second MITO segment (Plan): it provides resources, competence and information, plans the processes, and fixes the plan figures that Output measures against."
   relations:
     - type: instance_of

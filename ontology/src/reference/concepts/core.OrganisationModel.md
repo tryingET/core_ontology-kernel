@@ -3,7 +3,7 @@ ont:
   id: "core.OrganisationModel"
   type: concept
   labels: ["organisation model"]
-  synonyms: ["Binner MITO-Modell"]
+  synonyms: []
   description: "The model of how an organisation is structured and run; in AI Society, Binner's MITO model, his metamodel of organisation development and design, which a company configures into a goal system, a process model and a leadership system."
   relations: []
   examples:
