@@ -8,7 +8,8 @@ This repository contains the **Core (shared) ontology** and **System4D baseline*
 - [Product posture](docs/project/product_posture.md) — current maturity, evidence boundaries, and
   stewardship decisions.
 - [Ontology schema](docs/ontology-schema.md) — accepted source grammar and conformance ceiling.
-- [Release procedure](RELEASING.md) — protected tag/OID and publication contract.
+- [Release procedure](RELEASING.md) — protected tag/OID and publication contract, versioning rule;
+  steps for releases after v0.2.0 in [docs/release-procedure.md](docs/release-procedure.md).
 
 ## Local operator path
 

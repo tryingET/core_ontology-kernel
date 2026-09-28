@@ -8,7 +8,9 @@ Goal: stable, reproducible meaning.
 > release OID `76f31bc5d42a77bc2c0fd24c8b30708f907fbd44`. The version-specific preflight, draft,
 > publication, and recovery commands below are the preserved execution contract for that completed
 > release and **must not be replayed**. A future version requires a fresh owner decision, task,
-> version/OID, and reviewed procedure; this document grants none.
+> version/OID, and reviewed procedure; this document grants none. Releases after `v0.2.0` follow
+> [docs/release-procedure.md](docs/release-procedure.md) and `scripts/release/`, which derive from
+> the command blocks below with the version as an input; they grant nothing either.
 
 ## Release contract
 
@@ -32,6 +34,19 @@ Goal: stable, reproducible meaning.
   release, publication authority, adoption, or AK evidence.
 - Kernel changes are PR-only; no silent redefines.
 - Meaning change = new `ont.id` + mark old one deprecated + decision reference.
+
+## Versioning rule
+
+- A version names one `ontology/` tree. Cut one only when that tree differs from every tagged
+  tree. Changes outside `ontology/` (tooling, docs, CI, engineering-core pins) get no version:
+  rocs-cli 0.4.5 resolves a pinned ref by its `ontology/` tree, so they reach no consumer.
+  `v0.2.1` (tree identical to `v0.2.0`, cut without an AK task) is the recorded exception.
+- The tag is `v` plus `ontology/manifest.yaml`'s `version`; the release's prep PR sets it.
+- Minor: added or deprecated concepts or relations, or added, removed or retargeted edges. Patch:
+  changes that keep every identifier, its meaning and every edge (wording, examples, synonyms).
+  Identifiers are never removed (CORE-INV-002). `1.0.0` needs its own owner decision.
+- Every release carries its semantic delta: `rocs diff` against the previous Release, plus each
+  deprecation with its successors and decision note.
 
 ## `v0.2.0` destination
 
