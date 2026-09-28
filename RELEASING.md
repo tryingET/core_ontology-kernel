@@ -38,9 +38,10 @@ Goal: stable, reproducible meaning.
 ## Versioning rule
 
 - A version names one `ontology/` tree. Cut one only when that tree differs from every tagged
-  tree. Changes outside `ontology/` (tooling, docs, CI, engineering-core pins) get no version:
-  rocs-cli 0.4.5 resolves a pinned ref by its `ontology/` tree, so they reach no consumer.
-  `v0.2.1` (tree identical to `v0.2.0`, cut without an AK task) is the recorded exception.
+  tree in more than `ontology/manifest.yaml`, and number it above every existing tag. Changes
+  outside `ontology/` (tooling, docs, CI, engineering-core pins) get no version: in strict
+  workspace-ref mode rocs-cli 0.4.5 resolves a pinned ref by its `ontology/` tree, so they reach
+  no consumer. `v0.2.1` (tree identical to `v0.2.0`, cut without an AK task) is the exception.
 - The tag is `v` plus `ontology/manifest.yaml`'s `version`; the release's prep PR sets it.
 - Minor: added or deprecated concepts or relations, or added, removed or retargeted edges. Patch:
   changes that keep every identifier, its meaning and every edge (wording, examples, synonyms).

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Publish one drafted ontology-kernel Release and verify it is immutable. This
 # is the completed v0.2.0 publication block of RELEASING.md with the version as
-# input, derived title and body, and the manifest-version check;
+# input, derived title and body, and added checks that fail closed;
 # docs/release-procedure.md lists every difference. Running it grants nothing:
 # it needs a separate publication authority that names the draft ID.
 set -euo pipefail
@@ -12,7 +12,10 @@ draft_receipt_root="${DRAFT_RECEIPT_DIR:?set the durable draft receipt directory
 receipt_root="${PUBLICATION_RECEIPT_DIR:?set a new publication-session receipt directory}"
 publication_authority="${PUBLICATION_AUTHORITY:?set the exact AK publication authority reference}"
 tag_name="${RELEASE_VERSION:?set the authorized release version, such as v0.3.0}"
-[[ "$tag_name" =~ ^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]
+[[ "$tag_name" =~ ^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]] || {
+  printf 'RELEASE_VERSION must be vMAJOR.MINOR.PATCH, got %s\n' "$tag_name" >&2
+  exit 1
+}
 tag_ref="refs/tags/$tag_name"
 repositories=(
   "tryingET/core_ontology-kernel"
@@ -38,10 +41,22 @@ release_body_sha256=$(printf '%s' "$release_body" | sha256sum | awk '{print $1}'
 [[ "$release_body_sha256" =~ ^[0-9a-f]{64}$ ]]
 [[ "$release_oid" =~ ^[0-9a-f]{40}$ ]]
 test "$(git rev-parse --verify 'HEAD^{commit}')" = "$release_oid"
-# Versioning rule (RELEASING.md): the tag is "v" plus the manifest version.
-manifest_version=$(sed -n 's/^  version: "\(.*\)"$/\1/p' ontology/manifest.yaml)
+# Versioning rule (RELEASING.md), read from the release commit, not the working
+# tree: the tag is "v" plus the manifest version.
+manifest_version=$(git show "$release_oid:ontology/manifest.yaml" \
+  | sed -n 's/^  version: "\(.*\)"$/\1/p')
 test "v$manifest_version" = "$tag_name" || {
   printf 'manifest version %s does not match %s\n' "$manifest_version" "$tag_name" >&2
+  exit 1
+}
+# A clean checkout, and receipt directories given as absolute paths, because
+# this script runs from the checkout root.
+test -z "$(git status --porcelain)" || {
+  printf 'the release checkout is not clean\n' >&2
+  exit 1
+}
+[[ "$draft_receipt_root" == /* && "$receipt_root" == /* ]] || {
+  printf 'DRAFT_RECEIPT_DIR and PUBLICATION_RECEIPT_DIR must be absolute paths\n' >&2
   exit 1
 }
 test -d "$draft_receipt_root" || exit 1
