@@ -7,7 +7,7 @@ ont:
   description: "A recognized mandate to decide, attest, or promote within a stated scope."
   relations:
     - type: constrains
-      target: core.Verification
+      target: core.VerificationEvent
     - type: depends_on
       target: core.Policy
     - type: instance_of

@@ -5,6 +5,11 @@ ont:
   labels: ["Verification"]
   synonyms: []
   description: "The act and outcome of checking a claim against evidence under declared criteria."
+  status: deprecated
+  deprecated:
+    since: "2026-09-27"
+    replaced_by: "core.VerificationEvent"
+    decision: "ontology/decisions/2026-09-27-governance-core-splits.md"
   relations:
     - type: uses
       target: core.Evidence
@@ -25,6 +30,8 @@ system4d:
 ---
 
 # Verification (core.Verification)
+
+> Deprecated on 2026-09-27 (AK 5987): this concept named two categories. It is split into verification (core.VerificationEvent) and verification verdict (core.VerificationVerdict). Use `core.VerificationEvent` where the main meaning is meant. Decision note: `ontology/decisions/2026-09-27-governance-core-splits.md`.
 
 ## Definition
 The act and outcome of checking a claim against evidence under declared criteria. The criteria — what would count as support, falsification, or insufficient evidence — are part of the verification, declared before or at check time, not negotiated after the result.

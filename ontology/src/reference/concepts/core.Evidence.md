@@ -5,6 +5,11 @@ ont:
   labels: ["Evidence"]
   synonyms: []
   description: "Digest-bound, provenance-bearing material offered in support of a claim."
+  status: deprecated
+  deprecated:
+    since: "2026-09-27"
+    replaced_by: "core.EvidenceRole"
+    decision: "ontology/decisions/2026-09-27-governance-core-splits.md"
   relations:
     - type: depends_on
       target: core.Observation
@@ -23,6 +28,8 @@ system4d:
 ---
 
 # Evidence (core.Evidence)
+
+> Deprecated on 2026-09-27 (AK 5987): this concept named two categories. It is split into evidence (core.EvidenceRole) and retained artefact (core.RetainedArtefact). Use `core.EvidenceRole` where the main meaning is meant. Decision note: `ontology/decisions/2026-09-27-governance-core-splits.md`.
 
 ## Definition
 Digest-bound, provenance-bearing material offered in support of a claim. Evidence carries what was captured, where it came from, when, and how its bytes can be re-verified — it does not carry the conclusion.
