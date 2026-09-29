@@ -29,7 +29,7 @@ v0.3.0 carries the owner's core vocabulary. AK 6167 is the release task; the sco
 - **Edges:** 94 added, 2 removed. 11 → 103.
   - Added by type: 68 `instance_of`, 6 `precedes`, 6 `produces`, 5 `depends_on`, 4 `is_a`, 3 `uses`, 1 `part_of`, 1 `constrains`.
   - Removed: `core.Authority constrains core.Verification` and `core.Claim precedes core.Verification`. Both were retargeted to `core.VerificationEvent`, so a consumer that walks these edges sees the successor.
-- **Corpus:** `rocs validate` reports `sha256:8da179a6c587ef26775b9c881311963baceec0e7a7d4746d98d5c6f50862d7b8` on the prep branch. The release commit's own digest is recorded at the checks.
+- **Corpus:** the release commit's corpus digest, as `rocs validate` reports it, is recorded on AK 6167 with the checks at that commit.
 
 Under the versioning rule in [RELEASING.md](../../RELEASING.md), added and deprecated concepts and retargeted edges make this a minor version.
 
