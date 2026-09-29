@@ -3,7 +3,7 @@ ont:
   id: "core.ConsentRound"
   type: concept
   labels: ["consent round"]
-  synonyms: []
+  synonyms: ["NASA concurrence"]
   description: "An event: the holders of the affected domains are asked, blind and in parallel, whether they object to a proposal; each objection is tested as an argument and ends integrated, withdrawn or standing."
   relations:
     - type: instance_of
@@ -35,6 +35,7 @@ An event: the holders of the affected domains are asked, blind and in parallel, 
 ## Source and mapping
 - Owner decision 2 of 2026-09-26 (combination strategy §9).
 - ADR-0008 §8, records by class.
+- Synonym 'NASA concurrence': a signature, an act, so it maps to the round, not to the state (Holding Owner, 2026-09-28; AK 6167): `ontology/decisions/2026-09-28-v0.3.0-pre-release-corrections.md`.
 - Decision note: `ontology/decisions/2026-09-27-governance-core-splits.md`.
 
 Admitted: AK task 5987, 2026-09-27

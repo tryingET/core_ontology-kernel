@@ -3,8 +3,8 @@ ont:
   id: "core.MitoSegment.Input"
   type: concept
   labels: ["Input segment"]
-  synonyms: ["Input", "plan", "Plan"]
-  description: "The second MITO segment (Plan): it provides resources, competence and information, plans the processes, and fixes the plan figures that Output measures against."
+  synonyms: ["Input", "plan", "PDCA Plan"]
+  description: "The second MITO segment (PDCA Plan): it provides resources, competence and information, plans the processes, and fixes the plan figures that Output measures against."
   relations:
     - type: instance_of
       target: core.MitoSegment
@@ -23,7 +23,7 @@ system4d:
 # Input segment (core.MitoSegment.Input)
 
 ## Definition
-The second MITO segment (Plan): it provides resources, competence and information, plans the processes, and fixes the plan figures that Output measures against.
+The second MITO segment (PDCA Plan): it provides resources, competence and information, plans the processes, and fixes the plan figures that Output measures against.
 
 ## Typical usage
 - In our own text, bare 'plan' means this segment; NASA's plans are named by their kind (for example 'verification plan').

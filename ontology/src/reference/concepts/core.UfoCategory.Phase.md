@@ -25,7 +25,7 @@ The UFO category of anti-rigid types that apply to an instance through an intrin
 
 ## Typical usage
 - Test question: Does the instance enter it by changing itself, with no other party involved?
-- Governance-core concepts in this category: core.ArtefactStatus, core.OperationsMode.
+- Governance-core concepts in this category: core.OperationsMode.
 
 ## Source and mapping
 - Guizzardi et al. (2022), UFO: Unified Foundational Ontology, Applied Ontology 17(1), p. 173. Checked on the page images on 2026-09-27.

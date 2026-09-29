@@ -57,7 +57,7 @@ Commitments and claims are externally dependent modes in UFO-A (UFO2022, p. 172)
 | `core.RoleReview` | UFO event | the role, its holder, the reviewers | Is it about how a role is performed, not about a product? Yes. |
 | `core.SchemaCheck` | UFO event | the record or file, the schema | Does a pass say anything beyond the schema? No. |
 | `core.Validation` | UFO event | the receiver who judges, the effectiveness metric, the product | Who judged it? It must be the receiver, never the producer. |
-| `core.VerificationEvent` | UFO event | the claim or requirement, the criteria, the evidence used, the verifier | Can it change after it happened? No: a new check is a new event. |
+| `core.VerificationEvent` | UFO event | the product, the requirement or DoD row, the criteria, the evidence used, the verifier | Can it change after it happened? No: a new check is a new event. |
 | `core.WorkProductInspection` | UFO event | the work product and inspectors other than its author | Is the author among the inspectors? No. |
 | `core.DecisionRecord` | UFO kind | the decision and its consent, authorization and dissent records | Is it a record rather than the decision itself? Yes. |
 | `core.Dissent` | UFO kind | the objection it keeps and the decision that went ahead over it | Does dissent exist without a decision that went ahead? No. |
@@ -73,10 +73,10 @@ Commitments and claims are externally dependent modes in UFO-A (UFO2022, p. 172)
 | `core.Guidance` | UFO normative description | its owner; it binds no one | May someone depart from it without relief? Yes. |
 | `core.Policy` | UFO normative description | whom it binds and its owner | Which rules does it define? |
 | `core.Requirement` | UFO normative description | owner, verification method, waiver authority, parent or self-derived flag | Can it be verified? It must be. |
-| `core.ArtefactStatus` | UFO phase | the artefact; approach, preliminary, baseline and update partition its life | Is the artefact in exactly one status at a time? Yes. |
 | `core.OperationsMode` | UFO phase | the live system | Is the system live while it changes? Yes. |
 | `core.Claim` | UFO proposition | who asserts it, and its scope | Is it an assertion rather than a commitment? Yes. |
 | `core.Goal` | UFO proposition | the agent whose intention it is, and the driver it responds to | Whose goal is it? There must be an answer. |
+| `core.ArtefactStatus` | UFO quality | the artefact, its value on the scale approach, preliminary, baseline, update | Which of the four values does the artefact hold now? |
 | `core.Metric` | UFO quality | what it measures, calculation rule, unit, target | Which value would count as met? |
 | `core.TechnologyReadiness` | UFO quality | the technology, the TRL scale, the environment it was shown in | Which level, shown in which environment? |
 | `core.EvidenceRole` | UFO role | the record, the claim it is offered for or against, who offered it | Which claim is this record evidence for? |
@@ -85,7 +85,7 @@ Commitments and claims are externally dependent modes in UFO-A (UFO2022, p. 172)
 | `core.Driver` | UFO situation | what is happening, its effect, why it matters | Can you point to it happening? You must be able to. |
 | `core.Exception` | UFO situation | the rule, the scope, the justification | Does the rule still hold outside the scope? Yes. |
 | `core.Relief` | UFO situation | the rule, its owner who granted the relief, scope, ledger entry; the granting is an authorization | Does the rule change? No. |
-| `core.VerificationVerdict` | UFO situation | the verification that produced it, the claim, the criteria | Which check produced it, and has a later one superseded it? |
+| `core.VerificationVerdict` | UFO situation | the verification that produced it, the requirement or DoD row, the criteria | Which check produced it, and has a later one superseded it? |
 | `core.Waiver` | UFO situation | the requirement, its waiver authority, scope, expiry | Does the commitment change? No. |
 
 ## Open

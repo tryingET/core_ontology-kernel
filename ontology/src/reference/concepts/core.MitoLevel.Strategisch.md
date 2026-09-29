@@ -3,7 +3,7 @@ ont:
   id: "core.MitoLevel.Strategisch"
   type: concept
   labels: ["strategisch"]
-  synonyms: ["strategic level"]
+  synonyms: []
   description: "The top MITO level: the end-to-end enterprise process, owned by the management (Geschäftsführung); in AI Society the Holding Owner, with AK strategy and directions."
   relations:
     - type: instance_of

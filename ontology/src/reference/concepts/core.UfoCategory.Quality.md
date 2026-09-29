@@ -25,7 +25,7 @@ The UFO category of moments whose values lie in a quality structure, so that a t
 
 ## Typical usage
 - Test question: On which scale is it measured, and what value counts as met?
-- Governance-core concepts in this category: core.Metric, core.TechnologyReadiness.
+- Governance-core concepts in this category: core.ArtefactStatus, core.Metric, core.TechnologyReadiness.
 
 ## Source and mapping
 - Guizzardi et al. (2022), UFO: Unified Foundational Ontology, Applied Ontology 17(1), p. 172. Checked on the page images on 2026-09-27.

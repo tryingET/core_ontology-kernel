@@ -3,7 +3,7 @@ ont:
   id: "core.MitoSegment.Leitung"
   type: concept
   labels: ["Leitung"]
-  synonyms: ["Leitung segment", "Management-Leitung", "Act 2"]
+  synonyms: ["Management-Leitung", "Act 2"]
   description: "The fifth MITO segment (Act 2): it reviews effectiveness, 'doing the right things', through review, audit, compliance and improvement, and returns the Rückmeldung that feeds the next Führung."
   relations:
     - type: instance_of

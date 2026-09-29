@@ -3,8 +3,8 @@ ont:
   id: "core.MitoSegment.Output"
   type: concept
   labels: ["Output segment"]
-  synonyms: ["Output", "Check"]
-  description: "The fourth MITO segment (Check): it measures results against the plan figures and factual goals, that is efficiency, 'doing the things right'."
+  synonyms: ["Output", "PDCA Check"]
+  description: "The fourth MITO segment (PDCA Check): it measures results against the plan figures and factual goals, that is efficiency, 'doing the things right'."
   relations:
     - type: instance_of
       target: core.MitoSegment
@@ -23,7 +23,7 @@ system4d:
 # Output segment (core.MitoSegment.Output)
 
 ## Definition
-The fourth MITO segment (Check): it measures results against the plan figures and factual goals, that is efficiency, 'doing the things right'.
+The fourth MITO segment (PDCA Check): it measures results against the plan figures and factual goals, that is efficiency, 'doing the things right'.
 
 ## Typical usage
 - Measuring points and verification feed this segment.

@@ -3,7 +3,7 @@ ont:
   id: "core.ConsentState"
   type: concept
   labels: ["consent"]
-  synonyms: []
+  synonyms: ["group outcome"]
   description: "A situation: a consent round has ended with no objection standing, so the proposal it considered may proceed; it always names that round."
   relations:
     - type: instance_of
@@ -40,6 +40,7 @@ A situation: a consent round has ended with no objection standing, so the propos
 ## Source and mapping
 - Split from core.Consent, 'a governance state' (decision note below).
 - Vocabulary card: consent [a state: a consent round ended with no objection standing].
+- Synonym 'group outcome': ADR-0008 data file, core_words.authority (combination strategy §4 consent row).
 - Decision note: `ontology/decisions/2026-09-27-governance-core-splits.md`.
 
 Admitted: AK task 5987, 2026-09-27
