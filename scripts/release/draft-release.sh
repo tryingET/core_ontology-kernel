@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Draft one immutable ontology-kernel GitHub Release. This is the completed
 # v0.2.0 draft block of RELEASING.md with the version as input, derived title
-# and body, and the versioning-rule checks; docs/release-procedure.md lists
+# and body, and added checks that fail closed; docs/release-procedure.md lists
 # every difference. Running it grants nothing: it needs a draft authority.
 set -euo pipefail
 cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../.."
@@ -10,7 +10,10 @@ release_oid="${RELEASE_OID:?set the authorized full release commit OID}"
 receipt_root="${DRAFT_RECEIPT_DIR:?set a new durable task-owned draft receipt directory}"
 draft_authority="${DRAFT_AUTHORITY:?set the exact AK draft authority reference}"
 tag_name="${RELEASE_VERSION:?set the authorized release version, such as v0.3.0}"
-[[ "$tag_name" =~ ^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]
+[[ "$tag_name" =~ ^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]] || {
+  printf 'RELEASE_VERSION must be vMAJOR.MINOR.PATCH, got %s\n' "$tag_name" >&2
+  exit 1
+}
 tag_ref="refs/tags/$tag_name"
 repositories=(
   "tryingET/core_ontology-kernel"
@@ -32,26 +35,56 @@ release_body_sha256=$(printf '%s' "$release_body" | sha256sum | awk '{print $1}'
 [[ "$release_body_sha256" =~ ^[0-9a-f]{64}$ ]]
 [[ "$release_oid" =~ ^[0-9a-f]{40}$ ]]
 test "$(git rev-parse --verify 'HEAD^{commit}')" = "$release_oid"
-# Versioning rule (RELEASING.md): the tag is "v" plus the manifest version, and
-# no existing destination tag carries this ontology tree. A tag object missing
-# from this checkout fails closed; fetch the destination's tags first.
-manifest_version=$(sed -n 's/^  version: "\(.*\)"$/\1/p' ontology/manifest.yaml)
+# Versioning rule (RELEASING.md), read from the release commit, not the working
+# tree: the tag is "v" plus the manifest version.
+manifest_version=$(git show "$release_oid:ontology/manifest.yaml" \
+  | sed -n 's/^  version: "\(.*\)"$/\1/p')
 test "v$manifest_version" = "$tag_name" || {
   printf 'manifest version %s does not match %s\n' "$manifest_version" "$tag_name" >&2
   exit 1
 }
-release_tree=$(git rev-parse --verify 'HEAD:ontology')
+# A clean checkout, and a receipt directory given as an absolute path, because
+# this script runs from the checkout root.
+test -z "$(git status --porcelain)" || {
+  printf 'the release checkout is not clean\n' >&2
+  exit 1
+}
+[[ "$receipt_root" == /* ]] || {
+  printf 'DRAFT_RECEIPT_DIR must be an absolute path\n' >&2
+  exit 1
+}
+# The version is above every destination v* tag, and ontology/ differs from
+# every tagged commit in more than ontology/manifest.yaml. A tag commit missing
+# from this checkout fails closed; fetch the destination's tags first.
 remote_tags=$(git ls-remote --tags "${urls[0]}" 'refs/tags/v*')
+tagged_names=$(awk '{print $2}' <<<"$remote_tags" | sed 's#^refs/tags/##; s#\^{}$##' | sort -u)
+if grep -qxF -- "$tag_name" <<<"$tagged_names"; then
+  printf '%s is already a destination tag\n' "$tag_name" >&2
+  exit 1
+fi
+highest_name=$(printf '%s\n' "$tagged_names" "$tag_name" | sort -V | tail -n 1)
+test "$highest_name" = "$tag_name" || {
+  printf '%s is not above the destination tag %s\n' "$tag_name" "$highest_name" >&2
+  exit 1
+}
 while read -r tagged_oid tagged_ref; do
   test -n "$tagged_oid" || continue
-  tagged_tree=$(git rev-parse --verify "${tagged_oid}^{commit}:ontology") || {
+  git rev-parse --verify --quiet "${tagged_oid}^{commit}" >/dev/null || {
     printf 'fetch tags first: %s (%s) is absent here\n' "$tagged_ref" "$tagged_oid" >&2
     exit 1
   }
-  test "$tagged_tree" != "$release_tree" || {
-    printf 'ontology tree %s is already tagged by %s\n' "$release_tree" "$tagged_ref" >&2
-    exit 1
-  }
+  if git diff --quiet "${tagged_oid}^{commit}" "$release_oid" -- ontology \
+      ':(exclude)ontology/manifest.yaml'; then
+    content_rc=0
+  else
+    content_rc=$?
+  fi
+  case "$content_rc" in
+    0) printf 'ontology/ equals %s apart from the manifest\n' "$tagged_ref" >&2; exit 1 ;;
+    1) ;;
+    *) printf 'content comparison with %s failed, rc=%s\n' "$tagged_ref" "$content_rc" >&2
+       exit 1 ;;
+  esac
 done <<<"$remote_tags"
 test ! -e "$receipt_root"
 mkdir -m 700 -- "$receipt_root"
