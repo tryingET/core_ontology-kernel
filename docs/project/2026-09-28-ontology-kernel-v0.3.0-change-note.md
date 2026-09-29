@@ -51,10 +51,10 @@ Decision note: `ontology/decisions/2026-09-27-governance-core-splits.md`.
 
 The independent inspection (AK 6188) found two problems that would have needed new identifiers after an immutable release. The Holding Owner corrected them in place, because none of these identifiers had been released. Decision note: `ontology/decisions/2026-09-28-v0.3.0-pre-release-corrections.md`.
 
-- **`core.VerificationEvent`:** narrowed to a check that a product meets a requirement or a DoD row. Schema and replay checks are not verifications.
+- **`core.VerificationEvent`:** narrowed to a check that a product meets a requirement or a DoD row. Schema and replay checks are not verifications. `core.VerificationVerdict` follows: a verdict is for the requirement or DoD row checked.
 - **`core.ArtefactStatus`:** recategorised from UFO phase to UFO quality, with the values approach, preliminary, baseline and update.
 - **Synonyms:** aligned with the ADR-0008 data file.
-  - Added: 'group outcome' and 'NASA concurrence'.
+  - Added: 'group outcome' on `core.ConsentState`, 'NASA concurrence' on `core.ConsentRound`.
   - Qualified: 'PDCA Plan', 'PDCA Do' and 'PDCA Check'.
   - Removed: nine extras.
 

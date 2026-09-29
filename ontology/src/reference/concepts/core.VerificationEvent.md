@@ -15,7 +15,7 @@ ont:
     - type: produces
       target: core.Receipt
   examples:
-    - "Recomputing artifact checksums against a retained manifest before tagging"
+    - "Checking a delivered change against each row of its DoD and recording the outcome"
     - "Running a declared test gate and recording its outcome for a release decision"
   anti_examples:
     - "Restating the claim with more confidence"

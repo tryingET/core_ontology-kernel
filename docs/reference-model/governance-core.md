@@ -85,7 +85,7 @@ Commitments and claims are externally dependent modes in UFO-A (UFO2022, p. 172)
 | `core.Driver` | UFO situation | what is happening, its effect, why it matters | Can you point to it happening? You must be able to. |
 | `core.Exception` | UFO situation | the rule, the scope, the justification | Does the rule still hold outside the scope? Yes. |
 | `core.Relief` | UFO situation | the rule, its owner who granted the relief, scope, ledger entry; the granting is an authorization | Does the rule change? No. |
-| `core.VerificationVerdict` | UFO situation | the verification that produced it, the claim, the criteria | Which check produced it, and has a later one superseded it? |
+| `core.VerificationVerdict` | UFO situation | the verification that produced it, the requirement or DoD row, the criteria | Which check produced it, and has a later one superseded it? |
 | `core.Waiver` | UFO situation | the requirement, its waiver authority, scope, expiry | Does the commitment change? No. |
 
 ## Open

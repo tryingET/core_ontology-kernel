@@ -4,7 +4,7 @@ ont:
   type: concept
   labels: ["verification verdict"]
   synonyms: ["verification outcome"]
-  description: "The outcome of a verification (pass, fail or insufficient evidence) for the claim it checked under its criteria; a later verification can supersede it."
+  description: "The outcome of a verification (pass, fail or insufficient evidence) for the requirement or DoD row it checked under its criteria; a later verification can supersede it."
   relations:
     - type: instance_of
       target: core.UfoCategory.Situation
@@ -23,13 +23,13 @@ system4d:
 # verification verdict (core.VerificationVerdict)
 
 ## Definition
-The outcome of a verification (pass, fail or insufficient evidence) for the claim it checked under its criteria; a later verification can supersede it.
+The outcome of a verification (pass, fail or insufficient evidence) for the requirement or DoD row it checked under its criteria; a later verification can supersede it.
 
 ## Common confusions
 - A verdict without the verification that produced it cannot be cited.
 
 ## Category
-- UFO situation (`core.UfoCategory.Situation`). Required: the verification that produced it, the claim, the criteria.
+- UFO situation (`core.UfoCategory.Situation`). Required: the verification that produced it, the requirement or DoD row, the criteria.
 - Reference model: `docs/reference-model/governance-core.md`.
 
 ## Source and mapping

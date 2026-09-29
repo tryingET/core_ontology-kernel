@@ -9,7 +9,7 @@ ont:
     - type: instance_of
       target: core.UfoCategory.Quality
   examples:
-    - "A document in preliminary status"
+    - "Preliminary: the value a design document holds while it is still being worked out"
 system4d:
   fog:
     risks: []
@@ -27,7 +27,7 @@ The state of a document or other artefact: approach, preliminary, baseline or up
 - Not maturity (MITO process maturity).
 
 ## Category
-- UFO quality (`core.UfoCategory.Quality`). Required: the artefact it inheres in, and its value on the scale approach, preliminary, baseline, update.
+- UFO quality (`core.UfoCategory.Quality`). Required: the artefact, its value on the scale approach, preliminary, baseline, update.
 - Reference model: `docs/reference-model/governance-core.md`.
 
 ## Source and mapping
