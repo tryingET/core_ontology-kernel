@@ -10,7 +10,9 @@ Goal: stable, reproducible meaning.
 > release and **must not be replayed**. A future version requires a fresh owner decision, task,
 > version/OID, and reviewed procedure; this document grants none. Releases after `v0.2.0` follow
 > [docs/release-procedure.md](docs/release-procedure.md) and `scripts/release/`, which derive from
-> the command blocks below with the version as an input; they grant nothing either.
+> the command blocks below with the version as an input; they grant nothing either. `v0.3.0` was
+> published that way on 2026-09-30: Release ID `399375883`, `immutable: true`, lightweight tag at
+> `a6d38f56dd9b91e0a03b96444385402aecf1b9b0` (AK 6167, evidence `11546`).
 
 ## Release contract
 

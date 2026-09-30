@@ -19,6 +19,11 @@ meta-language needed to describe actors, authority, evidence, policy, risk, work
 other concerns that genuinely cross domain boundaries. Company and repository overlays own their
 specialized meaning.
 
+It is also the home of the Holding Owner's controlled vocabulary. The core words of ADR-0008
+(governance-kernel `docs/dev/decisions/0008-per-repo-vocabulary-loop.md`) are defined here and
+nowhere else, and the governance core states the UFO category of what each word names, so that
+two parties who use a word cannot mean different kinds of thing by it.
+
 ## Intended experience
 
 1. A maintainer starts from a named consumer need and decides whether the meaning is truly shared
@@ -46,8 +51,12 @@ specialized meaning.
   semantics stay in overlays.
 - **Stable identity before convenience.** IDs survive code and file refactors. Breaking meaning
   changes use deprecation, replacement, and an explicit decision trail.
-- **Slow, reviewable evolution.** Kernel changes are demand-led, independently reviewed, and
-  versioned according to their semantic surface.
+- **Slow, reviewable evolution.** Kernel changes are demand-led or set by the owner's Vorgabe route
+  (ADR-0008 §4), independently checked before they are released, and versioned by their
+  `ontology/` tree.
+- **One meaning, one home.** A meaning has one identifier in one layer; lower layers narrow it and
+  never redefine it. A split or deprecation keeps the old identifier and names its successors in a
+  decision note.
 - **Deterministic local proof.** Validation, build, retrieval, and handoff work from explicit local
   inputs without hidden remote fallback.
 - **Relation-specific canonicality.** Authored bytes, bounded semantic identity, projections,

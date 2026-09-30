@@ -9,7 +9,7 @@ task_id: 6167
 
 # ontology-kernel v0.3.0 change note
 
-v0.3.0 carries the owner's core vocabulary. AK 6167 is the release task; the scope is AK evidence 11274, the content freeze is 11275, and the procedure is [docs/release-procedure.md](../release-procedure.md). This note describes the content of the prep PR. The release commit is that PR's merge commit, named in the owner's authorization. A version exists only once the Release is published.
+v0.3.0 carries the owner's core vocabulary. It was published on 2026-09-30 as Release 399375883, `immutable: true`, tag `v0.3.0` at `a6d38f56dd9b91e0a03b96444385402aecf1b9b0` (AK 6167, evidence 11546). AK 6167 is the release task; the scope is AK evidence 11274, the content freeze is 11275, and the procedure is [docs/release-procedure.md](../release-procedure.md). The release commit is the prep PR's merge commit, named in the owner's authorization (evidence 11418).
 
 ## Content
 
@@ -62,8 +62,8 @@ The independent inspection (AK 6188) found two problems that would have needed n
 
 - **Pinned to v0.2.x:** nothing changes until they repin. After repinning, they see the added concepts, the deprecations and the two retargeted edges; every v0.2.0 identifier still resolves. rocs-cli ≥ 0.4.5 is needed, so that a pin keeps resolving to the v0.3.0 tree after `main` moves.
 - **Pinned to `@main`:** they have read this content since 2026-09-27, except for the pre-release corrections. The versioning rule asks them to pin the tag.
-- **FCOS layer:** `holdingco/fcos-control-board`, the ADR-0008 pilot, is the first consumer. It passes `rocs validate` against this branch (122 concepts, 12 relations, 106 edges); against v0.2.1 it failed with `ONT008 core.VerificationEvent`. Its repin is AK 6190.
-- **ADR-0008 data file:** it still lists 'NASA concurrence' under consent and has no PDCA terms. Its holder aligns it in governance-kernel.
+- **FCOS layer:** `holdingco/fcos-control-board`, the ADR-0008 pilot, is the first consumer. It pins v0.3.0 since 2026-09-30 (commit `2ff1230`, AK 6190, adoption evidence 11548): `rocs validate` in strict mode is ok (122 concepts, 12 relations, 106 edges) and `just test-core` passes. Against v0.2.1 it failed with `ONT008 core.VerificationEvent`.
+- **ADR-0008 data file:** aligned on 2026-09-29 (governance-kernel `6e965a6`, AK 6202): 'NASA concurrence' under consent round, the PDCA terms on Input, Transformation and Output.
 
 ## What this release does not claim
 

@@ -1,156 +1,98 @@
 ---
-summary: "Evidence-bound ontology-kernel product posture after the published v0.2.0 release and bounded consumer convergence."
+summary: "Evidence-bound ontology-kernel product posture after the published v0.3.0 release: the owner's core vocabulary and UFO category layer, two immutable Releases, and the first ADR-0008 consumer pinned."
 read_when:
   - "When deciding where ontology-kernel stands relative to its durable vision."
   - "When selecting or reviewing a semantic, stewardship, release, or adoption maturity move."
   - "When checking whether release completion is being confused with product completion."
 type: "reference"
-as_of: "2026-08-24"
-last_validated: "2026-08-24"
-evidence_baseline_commit: "76f31bc5d42a77bc2c0fd24c8b30708f907fbd44"
+as_of: "2026-09-30"
+last_validated: "2026-09-30"
+evidence_baseline_commit: "a6d38f56dd9b91e0a03b96444385402aecf1b9b0"
 evidence_ids:
-  - "7471"
   - "7484"
   - "7488"
-  - "7603"
-  - "7632"
-  - "7633"
-  - "7634"
-  - "7635"
-  - "7678"
-  - "7679"
-  - "7683"
-  - "7686"
+  - "11274"
+  - "11275"
+  - "11307"
+  - "11332"
+  - "11336"
+  - "11417"
+  - "11418"
+  - "11440"
+  - "11441"
+  - "11545"
+  - "11546"
+  - "11548"
+  - "11549"
 evidence_paths:
   - "README.md"
-  - "docs/project/vision.md"
-  - "docs/project/2026-08-24-ontology-kernel-stewardship-greats-adjudication.md"
-  - "docs/ontology-schema.md"
-  - "docs/adr/2026-08-03-ontology-markdown-rocs-contract-v1.md"
-  - "docs/project/ontology-source-polaris-model.md"
-  - "docs/project/ontology-source-identity-purpose-gate.md"
-  - "docs/project/2026-08-23-ontology-kernel-release-readiness.md"
-  - "docs/project/2026-08-23-ontology-kernel-v0.2.0-release-preparation.md"
   - "RELEASING.md"
+  - "docs/release-procedure.md"
+  - "docs/project/vision.md"
+  - "docs/project/2026-09-28-ontology-kernel-v0.3.0-change-note.md"
+  - "docs/reference-model/governance-core.md"
+  - "ontology/decisions/2026-09-27-governance-core-splits.md"
+  - "ontology/decisions/2026-09-28-v0.3.0-pre-release-corrections.md"
   - "ontology/manifest.yaml"
   - "ontology/src/system4d.yaml"
-  - "scripts/rocs.sh"
-  - "scripts/verify_vendored_rocs.py"
+  - ".github/workflows/validate.yml"
 ---
 
 # Product Posture
 
-> **Validation state:** This posture was prepared against exact baseline commit
-> `76f31bc5d42a77bc2c0fd24c8b30708f907fbd44`, which is also local tag `v0.2.0`.
-> Its ontology source tree is `266409404a9570ab4bfe48002f91d1bdef0e5764`; ROCS summary reports
-> 37 concepts and 12 relations, while exact-release gate evidence records 11 compiled edges. AK
-> records `IW1`, `IW2`, and `IW3` done while `SF1` remains active stewardship. Evidence `7678`
-> is the canonical same-frame-continuation apply receipt: it moved `IW3` to done, kept `SF1`
-> active, and created no successor frame or implementation wave. Evidence `7683` records the
-> passing post-closeout readback, and task `5026` evidence `7686` selects only this bounded
-> repository-projection refresh from SF-level discovery. Task `5010`'s result array retained an
-> erroneous concurrent evidence ID (`7675`); correction evidence `7679` supersedes that slot and
-> identifies `7678` as the apply receipt. AK evidence `7484` records the published GitHub Release
-> reporting `immutable: true`; evidence `7488` records three bounded consumer pins and acceptance
-> gates. Task `4852` remains blocked by dependency `4861` and active deferral `241`; evidence `7632`
-> records a scope-currentness audit and recommended resume checks but does not install a new task
-> guardrail. Those records remain their owners' authority; this document is a maturity projection.
-> This posture changes no ontology source, release tag, consumer pin, activation, use, or
-> currentness fact.
+> **Validation state:**
+> - **Baseline:** exact commit `a6d38f56dd9b91e0a03b96444385402aecf1b9b0`, which is tag `v0.3.0`. Its ontology tree is `05ce7edb7a7b220d075206ca217df85e517e6a78`. ROCS reports 113 concepts, 12 relation types and 103 edges, and the corpus digest is `sha256:5dae5a62f0382fab72f39bda4e68b6f3fd1b5b5cd6a68e14a54b502ca0a1a5dd`.
+> - **Release:** AK evidence 11546 records GitHub Release `399375883` reporting `immutable: true`, a verified signed release attestation, and no assets. Evidence 7484 still records the v0.2.0 Release.
+> - **Adoption:** evidence 11548 records the FCOS layer pinned to v0.3.0 with passing checks.
+> - **Authority:** these records remain their owners' authority; this document is a maturity projection. It changes no ontology source, tag, pin, activation, use or currentness fact.
 
 ## Posture in one sentence
 
-`ontology-kernel` is a released, deterministic, minimal shared semantic kernel with a published
-GitHub Release reporting `immutable: true`, a protected `v0.2.0` tag bound to an exact OID, and
-exactly bounded validated consumer adoption; it is in active stewardship rather than terminal
-completion, with System4D uncertainty explicitly bounded, historical NAS scope currently blocked by
-its AK dependency and deferral, and the normal local ROCS path repaired without changing ontology
-meaning.
+`ontology-kernel` is a deterministic shared semantic kernel with two immutable, version-addressed GitHub Releases. v0.3.0 carries the Holding Owner's core vocabulary and a UFO category layer for the governance core, it was checked independently before release, and its first ADR-0008 consumer is pinned. It remains in active stewardship: most consumers still pin `@main`, System4D keeps known-stale entries, and the stewardship roles that would take over the core layer do not exist yet.
 
 ## Product maturity map
 
 | Area | Current posture | Target posture | Main gap and proof of closure |
 |---|---|---|---|
-| Shared semantic kernel | Exact-release gate evidence records 37 concepts, 12 relations, and 11 compiled edges. `v0.2.0` added evidence, authority, and planning vocabulary without removing released IDs or edges. | A small, stable cross-company meta-language that grows only from demonstrated shared demand. | No finite kernel proves conceptual completeness. Closure for any new gap requires a named consumer operation, owner review, compatible semantic delta, and exact-corpus validation. |
-| Source and validation contract | The repository opts into `ontology-markdown-v1`, profile `kernel-v1`, and an exact vendored ROCS materialization. The strict gate admits the corpus without a sibling checkout. | Deterministic, offline-first authoring and validation with typed failures, stable IDs, explicit deprecation, bounded summaries, and reproducible packs. | Existing proof is operation-qualified conformance, not generic semantic correctness. Future contract/tool changes must preserve that ceiling and pass exact-OID owner gates. |
-| Release identity | AK evidence `7484` records GitHub Release `v0.2.0` at sole destination `tryingET/core_ontology-kernel`, Release ID `375502095`, server response `immutable: true`, protected lightweight tag at exact OID `76f31bc5…`, signed attestation, and no assets. | One unambiguous destination and forward-only publication whose semantic delta, exact OID, content, tag protection, server immutability state, and attestation are independently verifiable. | The successful `v0.2.0` procedure does not pre-authorize later releases. Each release needs fresh owner authority, exact-OID gates, setting/readback evidence, and consumer handoff. |
-| Consumer adoption | AK evidence `7488` records protected `v0.2.0` pins and acceptance gates for the bounded Softwareco infra, fork, and ontology consumers. Evidence `7635` records 64 declaration lines but explicitly classifies them as inventory—not adoption, activation, use, currentness, or live-repo status. | Every consumer that chooses the kernel resolves a protected release through an explicit path, passes its owner gate, and records its own adoption. | Whole-holding adoption is not a current product claim or provider-owned migration target. A future fleet claim requires an owner-defined registry and consumer receipts; template defaults and manifest declarations alone are not adoption. |
-| System4D baseline | `ontology/src/system4d.yaml` defines shared baseline guidance but also retains baseline version `0.1`, an environment-specific GitLab edge and owner handle, rollout state, workflow particulars, and enforcement debt. The file is outside the admitted concept/relation corpus. | A source-owner-reviewed boundary that separates durable shared guidance from operational overlays without treating either as currentness or authority. | Reviewed IW3 analysis recommends keeping the bytes unchanged and treating environment-specific entries as unproved currentness. Any split, deletion, owner/endpoint update, or version change requires a separate semantic-owner contract and consumer-impact review; this posture does not authorize it. |
-| Direction and lifecycle | AK-native `SF1` remains the active stewardship frame. `IW1`, `IW2`, and `IW3` are done; evidence `7678` is the lawful `IW3` same-frame-continuation receipt, and evidence `7683` validates the resulting state. No implementation wave is active. SF-level discovery task `5026` selected only a bounded repository-projection refresh and opened no successor wave. Task `4852` remains pending with dependency `4861` and active deferral `241`; evidence `7632` records recommended resume checks but did not re-scope the task. | Durable stewardship uses finite waves only for demonstrated work, closes them through truthful evidence and explicit lifecycle choice, and permits quiet SF-level discovery between waves. | Preserve quiet stewardship until named demand justifies another bounded task or wave. `SF1` lifecycle remains separate and AK-owned. General NAS replication intent remains an owner question; task execution is blocked by the recorded dependency and deferral. |
-| Local operator truth | The checked-in wrapper verifies the exact vendored ROCS bundle before import, copies opened bytes into a private snapshot, executes only that snapshot, and suppresses bytecode. CI shares the verifier, reports classified drift, and passes in the normal checkout after verified ignored-bytecode cleanup. Completed `v0.2.0` release guidance is explicitly non-replayable. | Git-clean and bundle-clean states are distinguishable, the standard local path stays bytecode-free, and historical mutation procedures cannot masquerade as current work. | Accidental direct imports outside the wrapper can still create cache files; strict equality intentionally fails and names the cleanup boundary rather than ignoring executable ambient bytes. |
+| Shared semantic kernel | 113 concepts, 12 relation types, 103 edges. v0.3.0 added 76 concepts: the authority, MITO structure, governance, commitment and check words (AK 6147), and `core.UfoCategory` with 12 categories (AK 5986). It deprecated five overloaded concepts with named successors (AK 5987). No released identifier was removed. | A small, stable cross-company meta-language that grows from demonstrated shared demand and the owner's Vorgabe route (ADR-0008). | Ten governance-core concepts still carry no category, and the non-blocking inspection findings are open (AK 6218). Closure needs owner decisions and a later version. |
+| Source and validation contract | `ontology-markdown-v1`, profile `kernel-v1`, vendored ROCS 0.3.0; the workspace rocs-cli 0.4.5 also passes. GitHub Actions runs main-strict `full.sh` on every PR and on `main`. | Deterministic, offline-first validation with hosted corroboration. | The grammar request for a retired status, several successors and cross-layer mappings is AK 6087. Conformance stays a schema and reference claim, not proof that meaning is right. |
+| Release identity | v0.2.0 (`76f31bc`) and v0.3.0 (`a6d38f5`) are immutable Releases at the one destination. The versioning rule ties a version to one `ontology/` tree, and `docs/release-procedure.md` with `scripts/release/` carries every release after v0.2.0. v0.1.0 and v0.2.1 are tags without Releases, and no tag ruleset exists. | Every version is an immutable Release bound to an exact OID, cut only when the ontology tree changes. | v0.2.1's tree equals v0.2.0's; it is recorded as the exception, and its consumers move to v0.3.0 (AK 6220). A `v*` tag ruleset is an owner setting that has not been made. |
+| Consumer adoption | The FCOS layer pins v0.3.0 (evidence 11548). Two bounded v0.2.0 adoptions (evidence 7488) remain, and softwareco/ontology moved to v0.2.1. About 60 live manifests pin `@main`, including three company layers and two company copier templates. The L0 template and softwareco/copier default to v0.2.1. | Every consumer pins a protected release and records its own adoption. | AK 6220 moves the company layers and template defaults. Repo manifests follow through template propagation, not a kernel-owned mass repin. Consumers need rocs-cli ≥ 0.4.5. |
+| System4D baseline | `ontology/src/system4d.yaml` is unchanged since v0.2.0. Its GitLab edge (`http://192.168.161.10:8929`) and GitLab contact are now known to be stale, because GitLab is retired (AK 6118). The file sits outside the admitted corpus. | A source-owner-reviewed boundary between shared guidance and operational overlays. | A change needs its own contract and a version. The v0.3.0 change note states the staleness as a nonclaim. |
+| Direction and lifecycle | AK records SF1 as active stewardship, with route-wait task 5030 pending. The v0.3.0 content came through the owner's class-C route under ADR-0008 (AK 6147, 5986, 5987), and the release through AK 6167, outside any implementation wave. The NAS tasks 4852 and 4861 were closed as superseded. | Stewardship through bounded tasks or waves with truthful evidence. The ADR-0008 stewardship roles take over the core layer after the handover. | Whether this work reframes SF1 is AK-owned (5030). The stewardship roles are AK 5985. Until the handover the Holding Owner holds the core layer. |
+| Local operator truth | The verified private-snapshot launcher is unchanged. Release dry runs need a read-only `gh` guard: a guardless dry run created an unauthorized draft on 2026-09-28, which was removed under the owner's authority (evidence 11307, 11332). The draft script tolerates Release-list lag on read-back. | Historical procedures cannot masquerade as current work, and dry runs cannot write. | A dry-run switch that stops before any POST or PATCH, whatever PATH holds, is idea R2 in AK 6218. |
 
 ## What is strong now
 
-- The public semantic surface is small enough to inspect and retrieve in bounded packs.
-- IDs, lifecycle fields, references, source grammar, and conformance ceilings are explicit.
-- The validator path is deterministic and self-contained for the released kernel corpus.
-- Semantic content, exact bytes, projections, provenance, release, adoption, and authority are kept
-  separate rather than collapsed into Git or generated-artifact status.
-- The published Release, protected tag, and bounded consumer pins establish a reproducible adoption
-  path for the consumers actually tested.
-- The frozen v2 source-format experiment selected no winner; current Markdown remains an operational
-  frontend. Normalized authored-form identity was not needed for the reviewed bounded consumer and
-  therefore was not implemented.
+- The owner's controlled vocabulary lives in the kernel as retrievable concepts with preferred labels, mapped source synonyms and an `Admitted:` line. It is no longer only a hand-written card.
+- The governance core states each concept's UFO category and required relata in a textual reference model.
+- Meaning changes stay explicit. The five splits keep their old identifiers as deprecated tombstones with a decision note. The owner's pre-release corrections were recorded as a class-C decision before the first release.
+- Content was checked by an independent work-product inspection (AK 6188), and the release procedure by two independent checks (AK 6191, 6199), before anything became immutable.
+- Both Releases are immutable, attested and bound to exact OIDs. Hosted CI now corroborates every change.
 
 ## Current gaps and accepted limitations
 
-1. **Fleet scope is deliberately bounded.** The three adoptions recorded in AK evidence `7488` and
-   protected template defaults do not establish whole-holding adoption, activation, use, or
-   currentness. Existing mutable declarations are consumer-owner candidates, not a kernel-owned
-   migration queue.
-2. **System4D remains a mixed guidance artifact.** Environment-specific endpoint, owner,
-   baseline-version, rollout, and workflow entries are not established as current. The reviewed IW3
-   recommendation is containment and explicit nonclaim, not an unreviewed semantic rewrite.
-3. **NAS parity intent is unresolved and currently blocked.** Task `4852` remains pending behind
-   dependency `4861` and active deferral `241`. Evidence `7632` records recommended current-scope
-   checks; it is not itself an enforcing re-scope or prohibition.
-4. **IW3 is closed without implying product or frame completion.** Task `5010` applied the explicit
-   same-frame route in evidence `7678`: `IW3` is done, `SF1` remains active, and no successor wave
-   exists. Its completed result retained erroneous evidence ID `7675`; evidence `7679` explicitly
-   supersedes that result-array slot, while governance receipt `11294` binds completion to canonical
-   apply evidence `7678`. The historical task result is not rewritten. Task `5026` subsequently
-   selected this two-document projection refresh and no new implementation wave.
-5. **Conformance is deliberately bounded.** ROCS proves admitted source-contract, schema, and
-   reference behavior for named operations; it does not prove universal semantic correctness.
-6. **Representation remains supersedable.** No accepted evidence selects a permanent universal
-   source format or a semantic-editing diagram tool.
+1. **Most consumers still read `@main`.** Only FCOS pins v0.3.0. AK 6220 carries the company layers and template defaults.
+2. **Categories and findings are open.** Ten governance-core concepts have no category, and the non-blocking inspection findings are listed in AK 6218.
+3. **System4D is a mixed guidance artifact with known-stale GitLab entries.** They are not changed without a separate contract.
+4. **Stewardship roles do not exist yet** (AK 5985). Every change to a core concept stays class C, with the Holding Owner as holder.
+5. **Tooling follow-ups:** the ROCS drift checks and lookup (AK 5988), the vocabulary card generated from the kernel (AK 6088) and the grammar request (AK 6087) are outside this repository or still open.
+6. **Conformance is deliberately bounded:** ROCS proves source-contract, schema and reference behaviour for named operations, not universal semantic correctness.
 
 ## Target product experience
 
-1. A maintainer can decide quickly whether proposed meaning belongs in the shared kernel or an
-   overlay, with stable-ID and deprecation consequences made explicit.
-2. A reviewer can inspect the exact semantic delta separately from guidance, tooling, release, and
-   authority changes.
-3. A release owner can publish one protected, version-addressed GitHub Release bound to an exact
-   OID and hand consumers an OID-bound contract without relying on remote aliases or mutable branches.
-4. A consumer can pin, resolve, validate, summarize, and pack the release from explicit inputs and
-   record adoption through its own authority surface.
-5. An agent can retrieve only the concepts and relations needed for its operation, with source,
-   projection loss, provenance, and authority ceilings visible.
+1. A maintainer can decide quickly whether proposed meaning belongs in the kernel or an overlay, and whether it is a core word under ADR-0008, with stable-ID and deprecation consequences made explicit.
+2. A reviewer can inspect the exact semantic delta (`rocs diff` plus deprecations) separately from guidance, tooling, release and authority changes.
+3. A release owner can publish one immutable, version-addressed Release bound to an exact OID through the checked procedure. Each effect needs its own authority.
+4. A consumer can pin, resolve, validate, summarize and pack a release from explicit inputs and record its own adoption.
+5. An agent can retrieve only the concepts and relations its operation needs, with source, category, provenance and authority ceilings visible.
 
 ## Current stewardship dispositions
 
-The reviewed [Many-of-the-Greats analysis](2026-08-24-ontology-kernel-stewardship-greats-adjudication.md)
-uses contextual dominance to explain—not replace—the current owner surfaces:
-
-- System4D bytes are unchanged. Environment-specific currentness remains unproved; any migration
-  requires a separate semantic-owner contract and consumer-impact review.
-- AK records `SF1` as active stewardship and `IW1`, `IW2`, and `IW3` done. Evidence `7678` records
-  the explicit same-frame apply; evidence `7683` validates no active implementation wave; and
-  evidence `7679` makes the task `5010` result-reference correction explicit without rewriting
-  history. Task `5026` selected only this bounded projection refresh. `SF1` closure remains a
-  separate AK-owned question.
-- Task `4852` remains pending behind dependency `4861` and deferral `241`. Evidence `7632` records
-  recommended owner, transport, and current-scope checks but installs no new task guardrail.
-- Adoption claims remain exactly bounded to consumer-owner receipts. Evidence `7635` is a declaration
-  inventory, not authority for a provider-owned mass migration.
-- Evidence `7633` records exact vendored-bundle equality plus a deterministic private-snapshot
-  operator path; permissive cache admission was rejected.
-- Every future semantic release remains separately authorized exact-OID work; the completed
-  `v0.2.0` commands are historical and non-replayable.
-
-New semantic work remains demand-led: add or deprecate meaning only for named cross-domain
-operations, and authorize every future release independently.
+- **Future versions:** follow the versioning rule in `RELEASING.md` and `docs/release-procedure.md`. Changes outside `ontology/` get no version.
+- **v0.2.0 and v0.3.0:** complete, and their procedures are not replayed. Every later release needs fresh owner authority and its own AK task.
+- **The 2026-08-24 stewardship adjudication** still holds for fail-closed ROCS execution, archival fidelity, System4D bytes and bounded adoption claims. Its premise of quiet, demand-led growth was overtaken by the owner's ADR-0008 route. Its NAS question was closed by GitLab's retirement.
+- **Adoption claims** stay exactly bounded to consumer-owner receipts.
 
 ## Hard rules for status language
 
@@ -158,21 +100,22 @@ operations, and authorize every future release independently.
 - Say **adopted** only for a consumer whose owner recorded a pin and passing acceptance evidence.
 - Say **current** or **used** only when the relevant owner surface supplies fresh evidence.
 - Say **conformant** only with the exact ROCS operation, profile, corpus, and evidence boundary.
-- Do not translate completion of any finite implementation wave into product completion or `SF1` closure.
+- Do not translate completion of any finite task or wave into product completion or `SF1` closure.
 - Do not use this file as a roadmap, queue, task mirror, release log, or semantic authority.
 
 ## Authority and freshness
 
 - Durable product direction: `docs/project/vision.md`
 - Product maturity bridge: this file
-- Authored semantic and System4D source: `ontology/src/`, under ontology owner review
+- Authored semantic and System4D source: `ontology/src/`, held by the Holding Owner until the ADR-0008 handover
+- Core word list, holders and reserved identifiers: governance-kernel `docs/dev/decisions/0008-vocabulary-loop.data.yaml`
 - Source grammar and conformance ceiling: `docs/ontology-schema.md` and Decision 110 ADR
 - Compiled/generated projections: `ontology/dist/`; reproducible evidence, not authored authority
 - ROCS implementation and package lifecycle: `core/rocs-cli`
-- Release procedure and exact release evidence: `RELEASING.md`, GitHub Release state, and AK evidence
+- Release procedure and exact release evidence: `RELEASING.md`, `docs/release-procedure.md`, GitHub Release state, and AK evidence
 - Live tasks, direction, decisions, and execution evidence: Agent Kernel
 - Consumer adoption, activation, use, and currentness: each consumer's owner surface
 
 Refresh this document when a semantic release, source-contract boundary, System4D adjudication,
-material consumer-adoption boundary, or AK strategic-frame posture changes. A passing gate or one
+material consumer-adoption boundary, or AK strategic-frame posture changes. A passing check or one
 completed task is not sufficient reason to rewrite product maturity.
