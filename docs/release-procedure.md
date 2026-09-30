@@ -146,8 +146,15 @@ contract, with the version substituted. Never move, delete or re-create a publis
 - Fetch the new tag into the shared workspace clone: `git -C ~/ai-society/core/ontology-kernel
   fetch --tags origin`. GitHub creates the tag when the Release is published, and a consumer's
   strict check fails with "not in the local clone" until the clone has it.
-- Consumers repin through their own tasks, the named first consumer first (ADR-0008 §7: admit
-  above, cut the version, consumers repin, deprecate below).
+- Consumers repin automatically, the named first consumer first (ADR-0008 §7: admit above, cut
+  the version, consumers repin, deprecate below). This is a standing owner decision of 2026-09-30
+  (AK 6288), so a repin needs no per-release approval:
+  - template-propagator moves the L0 default and, through the ordinary L1 refresh, the company
+    templates;
+  - each company and repo layer repins where its repo's own check passes, and its holder or
+    template-propagator records the adoption on that repo's task;
+  - a repo that cannot pass its own check, or has no clean way to commit, gets an AK task instead.
+  A defect in a release is fixed by the next version, never by holding repins back.
 - Refresh `docs/project/product_posture.md`.
 - The holder of the core layer lifts the content freeze.
 
