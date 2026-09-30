@@ -263,11 +263,23 @@ create_and_verify_draft() {
      .name == $name and .body == $body and .draft == true and
      .prerelease == false and .immutable == false and (.assets | length) == 0' \
     <<<"$fresh" >/dev/null || return 1
-  matches=$(matching_releases "$repo") || return 1
-  count=$(jq -er 'length' <<<"$matches") || return 1
-  only_id=$(jq -er '.[0].id' <<<"$matches") || return 1
-  test "$count" -eq 1 || return 1
-  test "$only_id" = "$release_id" || return 1
+  # The Release list can lag the create by a moment (AK 6167, evidence 11441).
+  # Poll this read-only list for at most 60 seconds and never repeat the POST.
+  # Only "the new draft is not listed yet" is retried; any other answer stops.
+  local list_attempt=0
+  while true; do
+    matches=$(matching_releases "$repo") || return 1
+    count=$(jq -er 'length' <<<"$matches") || return 1
+    if test "$count" -eq 1; then
+      only_id=$(jq -er '.[0].id' <<<"$matches") || return 1
+      test "$only_id" = "$release_id" || return 1
+      break
+    fi
+    test "$count" -eq 0 || return 1
+    list_attempt=$((list_attempt + 1))
+    test "$list_attempt" -lt 12 || return 1
+    sleep 5
+  done
   verify_draft_tag_state "$url" || return 1
   jq '{id,node_id,html_url,tag_name,target_commitish,name,body,draft,
        prerelease,immutable,assets}' "$receipt_root/$i.fresh.json" \

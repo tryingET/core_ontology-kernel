@@ -107,6 +107,8 @@ The script then:
 - checks push permission, that destination `main` equals the release OID, and that the tag and
   every Release for it are absent;
 - creates exactly one draft with a fixed title and body and no assets;
+- reads the draft back and waits, read-only and for at most 60 seconds, until the Release list
+  shows it, because the list can lag the create by a moment; it never repeats the POST;
 - keeps the raw and normalized responses in the receipt directory.
 
 A failed call is effect-indeterminate. Read the destination's state and never retry mechanically;
@@ -141,6 +143,9 @@ contract, with the version substituted. Never move, delete or re-create a publis
 ## 6. After publication
 
 - Record the Release ID, `immutable: true`, the tag and the OID on the release task.
+- Fetch the new tag into the shared workspace clone: `git -C ~/ai-society/core/ontology-kernel
+  fetch --tags origin`. GitHub creates the tag when the Release is published, and a consumer's
+  strict check fails with "not in the local clone" until the clone has it.
 - Consumers repin through their own tasks, the named first consumer first (ADR-0008 §7: admit
   above, cut the version, consumers repin, deprecate below).
 - Refresh `docs/project/product_posture.md`.
@@ -160,6 +165,8 @@ immutable tag `v0.2.0`. These are the only changes:
 - both scripts read `ontology/manifest.yaml` from the release commit, not the working tree, and
   check that its `version` equals the version without `v`;
 - both scripts require a clean checkout and absolute receipt directories;
+- after the POST, the draft script polls the Release list read-only for at most 60 seconds until
+  the new draft is listed, and stops on any other mismatch;
 - the draft script also checks two things against every destination `v*` tag:
   - the version is new and above all of them, which keeps the hard-coded `make_latest=true` right;
   - `ontology/` differs from each tagged commit in more than `ontology/manifest.yaml`.
