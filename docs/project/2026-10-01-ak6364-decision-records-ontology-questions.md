@@ -40,9 +40,9 @@ not rule.
 |---|---|---|
 | 1 | What is an argument that fails the objection test? | Name the raised argument, S3's *possible objection*. The test decides whether it is an objection. If it fails, it is not an objection, though it may reveal a concern (Q7). |
 | 2 | When does dissent exist, and is *overruled* an end state? | One end-state set: integrated, withdrawn, standing. Dissent exists once a decision has gone ahead over a standing objection. Before that, the objection is *escalated*. |
-| 3 | Which concept is "the decision that went ahead"? | Admit `core.Decision` as the umbrella act. Authorization, refusal, revocation and decision gate are kinds of it. |
-| 4 | Are a refusal and a revocation authorizations? | No. They are acts of their own and kinds of decision; `core.Authorization` stays the grant. |
-| 5 | What is the decision class, and is it `core.ConsentTier`? | It is **not** ConsentTier, which classifies paths by who must consent. Admit the decision class as its own concept; the owner names it (decision class or autonomy level). ConsentTier's category is a separate, later question. |
+| 3 | Which concept is "the decision that went ahead"? | Follow Guizzardi's *Core Ontology on Decision Making*. A decision is an **intention** (a mode) created by a **deliberation** (an act) and manifested in a **decision-resulting action**. Authorization, refusal and revocation are such actions; a decision gate is a deliberation. |
+| 4 | Are a refusal and a revocation authorizations? | No. They are acts of their own: decision-resulting actions beside `core.Authorization`, which stays the grant. |
+| 5 | What is the decision class, and is it `core.ConsentTier`? | It is **not** ConsentTier. Following Guizzardi's multi-level theory, the decision class is a **type of types**: it categorises proposed changes into class-A, B and C change, each a role. "Autonomy level" is a different concept on the agent's side (delegated capacity), for later. |
 | 6 | Does a permission lapse? | It may end at a time its authorization states. A review date ends nothing. |
 | 7 | Do S3 concerns get an identifier? | Yes, `core.Concern`. |
 
@@ -130,39 +130,63 @@ would carry dissent from an outcome that agreed with the objector. In both optio
   dissent" (a §5 ruling, given the synonym "recorded disagreement");
 - in governance-kernel: consent-change-control, ADR-0008 §4 and the adjudication's wording (class C).
 
-### Q3. "The decision that went ahead": `core.Decision` and its taxonomy
+### Q3. "The decision that went ahead": what a decision is
 
 **Kernel today.**
 - `core.Dissent` requires "the decision that went ahead over it".
 - `core.DecisionRecord` requires "the decision and its consent, authorization and dissent records".
 - `core.DecisionGate` is "an act: a named authority decides, against criteria set in advance, whether
   work may proceed".
-- No concept is the decision. *decision* is a core word whose definition is the Holding Owner's
-  (ADR-0008 §1.5).
+- `core.Goal` is a proposition, "the agent whose intention it is".
+- No concept is the decision, and none is an intention or a deliberation. *decision* is a core word
+  whose definition is the Holding Owner's (ADR-0008 §1.5).
 
-**Sources.**
-- The adjudication §5 (NASA): "decision analysis recommends and never decides"; the decision-maker "is
-  always free to select any alternative".
-- The combination strategy §5: "do nothing" is always an alternative, and the decision record names
-  the decider.
+**What Guizzardi says.** UFO's authors have a core ontology for exactly this (R. Guizzardi, Carneiro,
+Porello, G. Guizzardi, "A Core Ontology on Decision Making", ONTOBRAS 2020, CEUR-WS 2728).
+- **Decision.** "A DECISION is an INTENTION created by a DELIBERATION." An intention is a mental moment,
+  a UFO mode, which "is the world as the AGENT commits to bringing about by executing ACTIONS". Its
+  propositional content is a goal.
+- **Deliberation.** It is the action that creates the decision. An agent performs it "due to a certain
+  (motivating) INTENTION", weighing alternatives by preference and criteria.
+- **Manifestation.** The decision "can eventually manifest in the performing of another ACTION termed a
+  DECISION RESULTING ACTION, whose result is termed a CONSEQUENCE", a situation. "A DECISION is thus
+  associated to two ACTIONS": a creation with respect to the deliberation, and a manifestation with
+  respect to the resulting action.
+- **Criterion.** A criterion is a quality type or mode type the agent takes into account (for example
+  price or efficiency), not a mental moment.
+- **Documentation.** The paper's own application is decision documentation. Its template is the
+  motivating intention, the intentions by priority, the alternatives, each criterion and its value,
+  and the decision. That is `core.DecisionRecord`'s job.
+
+**Mapped onto the governance core:**
+- the **decision** is the decider's intention: a mode, not an event;
+- a **deliberation** is the act of deciding. `core.DecisionGate` is a deliberation by a named authority
+  against criteria set in advance;
+- **authorization, refusal and revocation** are decision-resulting actions. They are institutional
+  acts: they create, withhold or end a permission (UFO-L: a legal relation with the permission as a
+  position in it);
+- "**the decision that went ahead**" over a standing objection is a decision whose resulting action
+  happened while the objection stood. AK's dissent points at that action (the grant), which
+  manifests the decision;
+- the paper is about an individual agent's decision. It leaves "social capacities (acquired through
+  delegation relations)" to future work, so collective decision making beyond this mapping is not
+  covered.
 
 **Options.**
-- (a) Admit `core.Decision` as the umbrella act, and make the taxonomy explicit:
-  - `core.Authorization`, `core.Refusal` and `core.Revocation` (Q4) are kinds of decision;
-  - so is `core.DecisionGate` (one against criteria set in advance);
-  - `core.DecisionRecord` and `core.Dissent` depend on it.
-- (b) A decision is a complex event whose parts are the consent round and the authorization.
-- (c) Point `core.Dissent` at `core.Authorization` and admit no `core.Decision` now. This works for
-  dissent, because going ahead over a standing qualified objection always takes the owner's grant
-  (adjudication clashes 1 and 5). But `core.DecisionRecord` and governance-kernel 6013's spine still
-  name a decision.
+- (a) Follow the decision-making ontology: admit `core.Decision` (mode, an intention) and
+  `core.Deliberation` (event, `produces core.Decision`). `core.DecisionGate is_a core.Deliberation`.
+  Authorization, refusal and revocation relate to the decision they manifest.
+- (b) The earlier draft of this packet: a decision as the umbrella act. Guizzardi's analysis rejects
+  this: it collapses the intention, the deliberation and the resulting act into one.
+- (c) No `core.Decision` now: `core.Dissent` points at the authorization that went ahead.
 
-**Recommendation: (a).** It gives every act a home, and AK's dissent pointer (to the grant) is then a
-pointer to a decision. Option (b) also fits; the owner may prefer it. The definition is the owner's;
-§4 drafts one.
-- **One word, two meanings (ADR-0008 §1.3).** AK's `decisions` row is not an act: it has a workflow
-  state (proposed … unblocked, superseded). AK qualifies its label, for example "decision case", and
-  maps that row to `core.DecisionRecord`.
+**Recommendation: (a).** It is the published UFO analysis, and it keeps three things apart: what the
+decider intends, the act of deciding, and the act that carries the decision out. This is the same
+discipline the kernel already applies elsewhere (the AK 5987 splits).
+- **New relation type.** The kernel has no relation for *manifests* (UFO-B manifestation). Add one, or
+  use `depends_on` until it exists. Either way it is a ruling.
+- **AK's `decisions` row** is neither the intention nor an act: it has a workflow state. AK qualifies
+  its label ("decision case", ADR-0008 §1.3) and maps it to `core.DecisionRecord`.
 
 ### Q4. Refusal and revocation
 
@@ -178,7 +202,7 @@ pointer to a decision. Option (b) also fits; the owner may prefer it. The defini
 - (a) Widen `core.Authorization` to "grants or refuses". That is a new identifier, and the grant
   loses its own.
 - (b) Two acts of their own: a refusal founds no permission, and a revocation ends one. Under Q3(a)
-  both are kinds of decision.
+  both are decision-resulting actions, like the grant.
 - (c) An authorization *record* (a kind, like Dissent) holding an outcome: a grant, a refusal or not
   required.
 
@@ -195,49 +219,62 @@ pointer to a decision. Option (b) also fits; the owner may prefer it. The defini
 
 **Kernel today.** `core.ConsentTier` (reserved): "A governance tier defining who must consent for a
 change". Its example is "Kernel tier requires holding owners; project tier requires project owners". It
-has no category. The reference model lists it as open.
+has no category.
 
-**What the evidence shows.**
-- consent-change-control keeps two things apart:
-  - consent **tiers by path** (Core / Org / Project), with who must approve;
-  - **decision classes** A / B / C.
+**Evidence that the two differ.**
+- consent-change-control keeps consent **tiers by path** (Core / Org / Project) apart from **decision
+  classes** A / B / C. Its MR template asks for both.
+- On 2026-09-30 the Holding Owner asked (evidence 11507): "the decision class is that really a
+  ConsentTier? or not something different? like AutonomyLevel or something like this?".
+- AK 5991's design note made the same conflation; it is corrected in agent-kernel.
 
-  Its MR template asks for both, as separate fields, and its class-C scope cites "core definitions
-  (Core tier)".
-- On 2026-09-30 the Holding Owner asked, verbatim (evidence 11507): "the decision class is that really a
-  ConsentTier? or not something different? like AutonomyLevel or something like this?". FCOS's design
-  (D11) then mapped `decision_class` to no concept.
-- AK 5991's design note §7 also wrote "decision class (core.ConsentTier)". That conflation is
-  corrected in agent-kernel (§7 below).
+**What a decision class is.** A class is assigned by applying the class rules to a proposed change:
+- class C: the Holding Owner's scope, plus anything that cannot be made reversible;
+- class B: reversible changes that reach several domains, and one-way changes once made reversible;
+- class A: reversible, one domain.
 
-**What a decision class is.**
-- **Class C** is the Holding Owner's reserved scope: vision; holdingco matters; creating or retiring
-  entities; changing authority or domains; outward-binding acts; and anything that cannot be made
-  reversible.
-- **Class B** covers reversible changes that reach several domains, and technical one-way changes once
-  they have been made reversible.
-- **Class A** is reversible and stays in one domain.
+A change can move between classes, for example when it is made reversible.
 
-So a class is assigned by applying the class rules (a directive) to a proposed change. It is not
-measured from the change alone, and it changes when the change is made reversible.
+**What Guizzardi says.** His multi-level theory (MLT, with Carvalho, Almeida and Fonseca), built into
+UFO and OntoUML 2, separates two levels. Sources: Carvalho, Almeida, Fonseca, Guizzardi,
+"Multi-level ontology-based conceptual modeling", DKE 109 (2017); Fonseca et al., "Incorporating Types
+of Types in Ontology-Driven Conceptual Modeling", ER 2022.
+- **The classes are types, at the first level.** "Class-A change", "class-B change" and "class-C
+  change" are types whose instances are individual changes. They are anti-rigid, since a change can
+  leave one class for another.
+  - The test for which anti-rigid type: a **phase** is entered through an intrinsic change of its
+    bearer, while a **role** holds through a relation.
+  - Here membership depends on the domains the change reaches and on the class rules, so each class is
+    a **role**.
+- **"Decision class" is a type of types, one level up.** Its instances are those three types, not
+  changes. MLT calls this a **high-order type** that *categorises* the base type, the powertype
+  pattern (the paper's example: *Bird Species*, whose instances are *Emperor Penguin*, *American
+  Eagle*).
+- **Quality is the wrong category.** A quality takes a value in a quality space and is intrinsic to its
+  bearer; a class is a classification by rule.
+- **"Autonomy level" names something else.** It describes how far an *agent* may decide without the
+  owner: a property of the agent's delegated capacity. The decision-making ontology defers this to
+  "social capacities (acquired through delegation relations)". It is the counterpart of the decision
+  class, not another name for it. A class-C change is one that no delegated capacity below the Holding
+  Owner covers.
 
-**Options for the category.**
-- **Quality.** Rejected: a UFO quality is intrinsic to its bearer, and the class depends on the rules
-  and on the domains reached.
-- **Phase.** Rejected: phases are entered by intrinsic change alone.
-- **Role.** Anti-rigid, and held through a relation: here, between the change and the class rules that
-  classify it. The reference model's test fits: "Which relation makes the instance play it?" The class
-  rule applying to it.
+**Options.**
+- (a) Model it as MLT does:
+  - admit the three class roles and `core.DecisionClass` as a high-order type that categorises proposed
+    changes;
+  - add *high-order type* to the reference model's categories, which is a foundational-category
+    ruling;
+  - leave autonomy level for when delegation is modelled.
+- (b) Admit only the three class roles. "Decision class" then names their partition in prose, with no
+  identifier.
+- (c) A single concept with category quality or role. Guizzardi's analysis rejects this as mixing the
+  two levels.
 
-**Recommendation.**
-- Admit the decision class as its own concept, a UFO role held by a proposed change in relation to the
-  class rules. Required relata: the change, the rule that classifies it, and who applied it.
-- **The label is the owner's.** "Decision class" is the term in governance-kernel and AK. "Autonomy
-  level" is the owner's framing: how far a decision may go without the owner.
-- Leave `core.ConsentTier` as it is. Its own category (a path classification) is a separate question
-  with no consumer waiting on it.
-- Which records each class requires is governance-kernel's rule and the owner's (AK 6366). It stays out
-  of the concept.
+**Recommendation: (a).** It is the published account and keeps the levels apart. If the owner wants no
+new foundational category yet, (b) is the safe subset; (a) can follow.
+- `core.ConsentTier` stays unchanged. It is the path-based tier, and its category is a separate,
+  later question.
+- Which records each class requires stays governance-kernel's and the owner's (AK 6366).
 
 ### Q6. Does a permission lapse?
 
@@ -303,23 +340,28 @@ question.
 - **Source:** S3 glossary *concern*.
 - **Diagnostic question:** "Could it block consent? Never."
 
-**`core.Decision`** (the owner's word)
-- **Description:** "An act: a decider holding the authority chooses one alternative, doing nothing
-  included, and commits the domain to it."
-- **Category:** UFO event.
-- **Relations:** `depends_on core.Authority`.
-- **Required relata:** the decider, the driver, the alternatives considered, the alternative chosen,
-  the basis, the time.
-- **Sources:** combination strategy §5; adjudication §5.
-- **New edges in other files:**
-  - `core.Authorization is_a core.Decision`;
-  - `core.Refusal is_a core.Decision`;
-  - `core.Revocation is_a core.Decision`;
-  - `core.DecisionGate is_a core.Decision`;
-  - `core.DecisionRecord depends_on core.Decision`;
-  - `core.Dissent depends_on core.Decision`.
+**`core.Decision`** (the owner's word; after the decision-making ontology)
+- **Description:** "A mode: the intention a decider forms by deliberating, whose content is the
+  alternative chosen (doing nothing included) and which the decider commits to bring about."
+- **Category:** UFO mode (an intention).
+- **Required relata:** the decider (its bearer), the goal it commits to, the deliberation that created
+  it, the alternatives and criteria weighed.
+- **Source:** R. Guizzardi et al. 2020, §3.
 
-  ADR-0008 §1.6 says a plain edge does not count as touching a reserved identifier.
+**`core.Deliberation`**
+- **Description:** "An act: an agent weighs alternatives against criteria and preferences and so
+  creates a decision."
+- **Category:** UFO event (an action).
+- **Relations:** `produces core.Decision`.
+- **Required relata:** the agent, the motivating intention, the alternatives, the criteria, the
+  decision created.
+- **Source:** R. Guizzardi et al. 2020, §3.
+- **New edges in other files:**
+  - `core.DecisionGate is_a core.Deliberation`;
+  - `core.DecisionRecord depends_on core.Decision`;
+  - `core.Dissent depends_on core.Decision`;
+  - `core.Authorization`, `core.Refusal` and `core.Revocation` each `manifests` (or, until that relation
+    exists, `depends_on`) `core.Decision`.
 
 **`core.Refusal`**
 - **Description:** "An act: the holder of the authority refuses a permission that was asked for; the
@@ -338,13 +380,15 @@ question.
 - **Required relata:** the authorizations it ends, the revoker, the basis.
 - **Source:** reference-model row for `core.Authorization`.
 
-**The decision class** (label: "decision class" or "autonomy level")
-- **Description:** "The class a proposed change holds under the class rules (A, B or C), which says
-  whether a consent round and the Holding Owner's authorization are needed; it can change when the
-  change is made reversible."
-- **Category:** UFO role, played through the classification relation.
-- **Required relata:** the change, the class, the rule applied, who applied it.
-- **Sources:** consent-change-control; the adjudication §6.
+**The decision class** (after MLT; option (a) of Q5)
+- **`core.ClassAChange`, `core.ClassBChange`, `core.ClassCChange`.** Each is "A role a proposed change
+  plays under the class rules: …" (one line per class, from consent-change-control).
+- **Category:** UFO role.
+- **Required relata:** the change, the rule that classifies it, who applied it.
+- **`core.DecisionClass`.** "A high-order type that categorises proposed changes; its instances are
+  the three class roles; a change holds exactly one at a time."
+- **Category:** high-order type, a new reference-model category (MLT).
+- **Sources:** consent-change-control; the adjudication §6; Carvalho et al. 2017; Fonseca et al. 2022.
 
 **`core.Permission`** (typical-usage line; §5 ruling)
 - "Its scope may say when it ends; it then ends without a revocation. An agreement review date does
@@ -369,14 +413,25 @@ question.
    - Under (a), `core.Dissent`'s typical-usage line: **in place or new**, given its synonym "recorded
      disagreement".
    - The governance-kernel wording changes (class C).
-3. **Q3.** Option (a) or (b), and the owner's definition of `core.Decision`.
+3. **Q3.**
+   - Option (a): the decision as an intention, per the decision-making ontology, or (c).
+   - The owner's wording of `core.Decision`.
+   - A `manifests` relation type, or `depends_on` meanwhile.
 4. **Q4.** `core.Refusal` and `core.Revocation`, and whether revocation also covers delegations.
 5. **Q5.**
-   - Admit the decision class and choose its label.
-   - Accept the role category.
+   - Option (a): the three class roles plus `core.DecisionClass` as a high-order type, which adds the
+     high-order-type category; or option (b): the roles only.
    - Leave `core.ConsentTier` unchanged.
+   - Autonomy level later, with delegation.
 6. **Q6.** Option (b), and `core.Permission`'s line: **in place or new**.
 7. **Release.** The adopted changes go into v0.4.0, which the owner publishes.
+
+### Rulings given so far
+
+- **2026-10-01, Q1: possible objection** (option b).
+- **2026-10-01, Q2: dissent only after a decision went ahead** (option a).
+- **Q3 and Q5:** the owner asked what Giancarlo Guizzardi would say. Q3 and Q5 now carry that analysis
+  and are open again.
 
 ## 6. Records of this decision (class C)
 
@@ -437,3 +492,9 @@ finding and what this revision did with it:
 | 8–9 | draft-text defects; reserved list and core words incomplete | relata, sources and diagnostic questions fixed; the Objection draft no longer names two categories; Permission and ConsentRound added; core words listed |
 | 10–11 | §8 records and consumer table incomplete | conformance receipt, driver and review date; pilot expiry; consumer table extended |
 | nits | quote attributions, N6 provenance, wording | fixed |
+
+After the owner's question "what would Giancarlo Guizzardi say?" (2026-10-01), Q3 and Q5 were redone
+from his published work. Q3 now follows the Core Ontology on Decision Making (a decision is an intention
+created by a deliberation). Q5 now follows MLT (the decision class is a high-order type over the class
+roles; autonomy level belongs to the agent's delegated capacity). The earlier "umbrella act" and
+"role" recommendations are withdrawn.
