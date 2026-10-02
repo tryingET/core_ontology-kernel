@@ -32,7 +32,7 @@ An act: the holder of the authority refuses a permission that was asked for; the
 
 ## Typical usage
 - The authorization part of a decision record holds a grant, a refusal, or "not required" (which follows from the decision class).
-- A refusal leaves no dissent: the decision did not go ahead.
+- A refusal leaves no dissent: the proposal did not go ahead.
 
 ## Common confusions
 - Not an authorization: an authorization grants a permission; a refusal founds none.

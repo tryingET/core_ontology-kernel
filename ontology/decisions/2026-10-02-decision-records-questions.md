@@ -8,9 +8,9 @@ type: "decision"
 
 # Ontology questions from AK's decision records, 2026-10-02
 
-**Decision.** The Holding Owner decided AK 6364 on 2026-10-01 and 2026-10-02. The rulings are AK
-evidence 12130 (Q1, Q2), 12179 (Q3 to Q6), 12209 (in-place readings; prepare the version) and 12211
-(`core.Objection` in place).
+**Decision.** The Holding Owner ruled on AK 6364's questions on 2026-10-01 and 2026-10-02. The
+rulings are AK evidence 12130 (Q1, Q2), 12179 (Q3 to Q6), 12209 (in-place readings; prepare the
+version) and 12211 (`core.Objection` in place). This note records the change drafted from them.
 - **Class.** C: every question touches a reserved identifier or the core word *decision* (ADR-0008
   §1.5, §1.6, §4).
 - **Driver.** AK 5991's decision records needed closed vocabularies, and AK routed the questions it
@@ -18,35 +18,55 @@ evidence 12130 (Q1, Q2), 12179 (Q3 to Q6), 12209 (in-place readings; prepare the
 - **Consent.** Reserved identifiers and foundational categories go to the Holding Owner after the
   stewardship consent round (ADR-0008 §4). The stewardship roles are not held yet, and during the
   pilot the owner answers consent rounds for the FCOS layer (§6), so every holder asked is the
-  Holding Owner. The FCOS pilot session and the AK session are objection sources, not holders.
-- **Dissent.** None.
+  Holding Owner. The FCOS pilot and AK sessions are invited as objection sources (packet §6); the
+  round is pending.
+- **Authorization.** Pending. The Holding Owner authorizes the final content before the PR is opened.
+- **Dissent.** None recorded; dissent exists only once a decision has gone ahead.
+- **Conformance receipt.** The corpus digest at the commit that is authorized (to be filled).
+- **Review date.** 2027-04-01 (proposed).
 
 ## What changed
 
 | Identifier | Change |
 |---|---|
-| `core.PossibleObjection` | new, UFO mode: an argument raised against a proposal, agreement or activity, offered as an objection before it is tested |
-| `core.Objection` | reworded in place: a possible objection that qualified; `is_a core.PossibleObjection` (a subkind) |
+| `core.PossibleObjection` | new, UFO mode: an argument raised against a proposal, agreement or activity, offered as an objection whether or not it qualifies |
+| `core.Objection` | reworded in place: a possible objection, raised against a proposal in a consent round, that qualified; `is_a core.PossibleObjection` (a subkind) |
 | `core.Concern` | new, UFO mode: S3's concern; it never blocks consent and never becomes dissent |
 | `core.ConsentRound` | reworded in place: each *possible* objection is tested; each objection ends integrated, withdrawn or standing |
 | `core.Dissent` | typical usage extended in place: before a decision goes ahead, a standing objection is escalated, not yet dissent; edge `depends_on core.Decision` |
-| `core.Decision` | new, UFO mode: the intention a deliberation creates (Core Ontology on Decision Making) |
+| `core.Decision` | new, UFO mode: the intention a deliberation creates (Core Ontology on Decision Making); wording drafted after ruling Q3, pending the owner's adoption |
 | `core.Deliberation` | new, UFO event: `produces core.Decision` |
 | `core.DecisionGate` | edge `is_a core.Deliberation` |
 | `core.DecisionRecord` | edge `depends_on core.Decision` |
-| `core.Authorization` | edges `manifests core.Decision`, `precedes core.Revocation`; typical-usage line |
+| `core.Authorization` | edges `manifests core.Decision`, `precedes core.Revocation` |
 | `core.Refusal` | new, UFO event: the holder of the authority refuses a permission asked for |
 | `core.Revocation` | new, UFO event: ends permissions or a delegated authority; one concept for both |
 | `core.Permission` | typical usage extended in place: its scope may say when it ends; a review date ends nothing |
 | `core.ClassAChange`, `core.ClassBChange`, `core.ClassCChange` | new, UFO roles: the class a proposed change holds under the class rules |
-| `core.DecisionClass` | new, high-order type: its instances are the three class roles |
-| `core.UfoCategory.HighOrderType` | new foundational category (MLT) |
+| `core.DecisionClass` | new, high-order type: partitions proposed changes; its instances are the three class roles |
+| `core.UfoCategory.HighOrderType` | new foundational category (MLT), a sibling of the UFO categories |
 | relation `manifests` | new relation type (UFO-B manifestation) |
 | `core.ConsentTier` | unchanged: it is the path tier, not the decision class; its category stays open |
 
 The reference model (`docs/reference-model/governance-core.md`) gains the category row, a row per new
-concept, the single end-state question for `core.Objection` (inspector finding N6, AK 6218), and a
+concept, the single end-state question for `core.Objection` (inspector finding N6, AK 6218), an open
+row for the class roles' base type, the decision-making and MLT papers in its sources, and a
 corrected reason in the open row for `core.ConsentTier`.
+
+## Open points
+
+- **`core.DecisionGate`'s diagnostic question.** "Does it create or change a permission or commitment?
+  If not, it is a check, not a decision gate." Under `is_a core.Deliberation` a decision gate creates
+  a decision, an intention; the permission comes from the authorization that manifests it. The
+  question is left unchanged; the owner decides whether the question or the edge moves.
+- **The class roles' base type.** `core.DecisionClass` partitions proposed changes, and no concept
+  names a proposed change. Pending the owner's ruling (base type: `core.Proposal` or a new concept);
+  listed in the reference model's Open table.
+- **Sibling category.** The kernel adds high-order type beside the UFO categories. In OntoUML with
+  high-order types, a high-order type specialises the UFO category of its instances (Fonseca et al.
+  2022, §4.4), so `core.DecisionClass` would specialise UFO Role.
+- **`core.Decision`'s wording.** Drafted after ruling Q3, pending the owner's adoption. The draft also
+  proposes "(doing nothing included)" after "the alternative chosen"; it is not in the description.
 
 ## In-place readings
 
@@ -70,6 +90,7 @@ v0.3.0. The owner read each change as keeping the concept's meaning, so the iden
     `core.Objection`.
   - `act` keys to `core.Authorization`, `core.Refusal` or `core.Revocation`.
   - Concerns gain a home.
+  - Grants may carry an optional end (Q6).
   - The AK decision row is a decision case, mapped to `core.DecisionRecord`.
   - The append-only CHECK constants mean a forward migration, never a rewrite.
   - AK 6366 waits on `core.DecisionClass`, not on `core.ConsentTier`.
@@ -85,5 +106,8 @@ v0.3.0. The owner read each change as keeping the concept's meaning, so the iden
   - consent-change-control and the ADR-0008 §4 and §8 wording read "escalated objection" before a
     decision, and "dissent" after one.
   - human-on-the-loop-consent reads `declined` as a refusal.
+  - The vocabulary card's authorization / consent / dissent line follows these words.
+- **org-handbook.** The consent-tier SOPs stay on `core.ConsentTier`; class wording follows the decision
+  class.
 - **Company and repo layers.** pi-extensions and the other layers repin to the version that carries
   this note (ADR-0008 §7; standing repin decision, AK 6288).

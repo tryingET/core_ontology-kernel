@@ -65,9 +65,11 @@ not rule.
     evidence to qualify as an objection to those who are considering it".
 
   An argument is tested. If it qualifies, it is an objection to resolve. Otherwise "not all arguments
-  raised are objections, but they **might reveal** concerns": a failed argument may be a preference or
-  a misconception, and is then neither. The line "is sometimes dependent on context" (S3 guide,
-  *Objections*; *Test If Arguments Qualify as Objections*; glossary).
+  raised are objections, but they **might reveal** concerns" (emphasis added): a failed argument may
+  be a preference or a misconception, and is then neither. The line "is sometimes dependent on
+  context" (S3 practical guide, local edition
+  `holdingco/governance-kernel/external/s3-0-practical-guide`: *Objections*; *Test If Arguments
+  Qualify as Objections*; `glossary.yaml`).
 - **The adjudication and consent-change-control** speak of "qualified objections" and "how each was
   tested". **ADR-0008 §8** lists concerns in the class-B consent record.
 - **FCOS** (`fcos.consent-record.v1`) puts every raised argument in `objections`, with a disposition
@@ -237,8 +239,8 @@ A change can move between classes, for example when it is made reversible.
 
 **What Guizzardi says.** His multi-level theory (MLT, with Carvalho, Almeida and Fonseca), built into
 UFO and OntoUML 2, separates two levels. Sources: Carvalho, Almeida, Fonseca, Guizzardi,
-"Multi-level ontology-based conceptual modeling", DKE 109 (2017); Fonseca et al., "Incorporating Types
-of Types in Ontology-Driven Conceptual Modeling", ER 2022.
+"Multi-level ontology-based conceptual modeling", DKE 109 (2017), pp. 3–24; Fonseca et al.,
+"Incorporating Types of Types in Ontology-Driven Conceptual Modeling", ER 2022, LNCS 13607, pp. 18–34.
 - **The classes are types, at the first level.** "Class-A change", "class-B change" and "class-C
   change" are types whose instances are individual changes. They are anti-rigid, since a change can
   leave one class for another.
@@ -248,8 +250,9 @@ of Types in Ontology-Driven Conceptual Modeling", ER 2022.
     a **role**.
 - **"Decision class" is a type of types, one level up.** Its instances are those three types, not
   changes. MLT calls this a **high-order type** that *categorises* the base type, the powertype
-  pattern (the paper's example: *Bird Species*, whose instances are *Emperor Penguin*, *American
-  Eagle*).
+  pattern. Examples from the papers: *Species*, whose instances include *Emperor Penguin* and *Dog*
+  (Fonseca et al. 2022, Fig. 3); *Person Role*, with instances *Manager* and *Researcher*, which
+  categorizes *Person* (Carvalho et al. 2017, Fig. 5).
 - **Quality is the wrong category.** A quality takes a value in a quality space and is intrinsic to its
   bearer; a class is a classification by rule.
 - **"Autonomy level" names something else.** It describes how far an *agent* may decide without the
@@ -428,8 +431,8 @@ question.
 
 ### Rulings given so far
 
-- **2026-10-01, Q1: possible objection** (option b).
-- **2026-10-01, Q2: dissent only after a decision went ahead** (option a).
+- **2026-10-01, Q1: possible objection** (option b; evidence 12130).
+- **2026-10-01, Q2: dissent only after a decision went ahead** (option a; evidence 12130).
 - **2026-10-01, Q3: follow the decision-making ontology** (option a): `core.Decision` is an intention
   created by `core.Deliberation`.
 - **2026-10-01, Q5: full MLT** (option a): the class roles plus `core.DecisionClass` as a high-order
@@ -438,7 +441,14 @@ question.
   delegated authority.
 - **2026-10-01, Q6: a permission may end at a time its authorization states;** a review date ends
   nothing.
-- **Open:** the in-place-or-new rulings (§5) and the release.
+- Q3 to Q6: evidence 12179.
+- **2026-10-02, in place** (evidence 12209): the `core.ConsentRound`, `core.Dissent` and
+  `core.Permission` changes keep their identifiers; prepare v0.4.0.
+- **2026-10-02, `core.Objection` in place** (evidence 12211), after the owner asked for Guizzardi's
+  view on type identity.
+- Release prep is under way: the change is drafted in
+  `ontology/decisions/2026-10-02-decision-records-questions.md`; the owner authorizes the final
+  content and publishes the release.
 
 ## 6. Records of this decision (class C)
 

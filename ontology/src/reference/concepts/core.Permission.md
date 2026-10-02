@@ -28,7 +28,6 @@ What a party may do within a stated scope, granted by an authorization or by a r
 
 ## Typical usage
 - Its scope may say when it ends; it then ends without a revocation. An agreement review date does not end it.
-- A revocation ends a permission before then.
 
 ## Category
 - UFO mode (`core.UfoCategory.Mode`). Required: the holder, what it allows, the scope, the authorization or rule that grants it.

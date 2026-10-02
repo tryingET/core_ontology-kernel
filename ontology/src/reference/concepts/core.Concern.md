@@ -31,7 +31,7 @@ A mode held by a party: an assumption about a proposal, agreement or activity th
 - A concern never becomes dissent.
 
 ## Common confusions
-- Not an objection: "Concerns don't prevent proposals becoming agreements, only objections do" (S3).
+- Not an objection: "Concerns don't prevent proposals becoming agreements, only objections do" (S3, `objection.md`, section "Concerns").
 - Not every failed possible objection: a failed argument might reveal a concern, or be only a preference.
 
 ## Category
@@ -39,9 +39,9 @@ A mode held by a party: an assumption about a proposal, agreement or activity th
 - Reference model: `docs/reference-model/governance-core.md`.
 
 ## Source and mapping
-- S3 glossary, concern: "An assumption that cannot (for now at least) be backed up by reasoning or enough evidence to qualify as an objection to those who are considering it."
-- S3 practical guide, "Objections" (section "Concerns").
-- Holding Owner rulings Q1 and Q7, 2026-10-01 (AK 6364, evidence 12130).
+- S3 practical guide, local edition `holdingco/governance-kernel/external/s3-0-practical-guide` (v2024-04-18a, upstream commit af63a1d), `glossary.yaml`, concern (glossary entry): "An assumption that cannot (for now at least) be backed up by reasoning or enough evidence to qualify as an objection to those who are considering it."
+- Same edition, `src/making-sense-of-organizations/objection.md`, section "Concerns".
+- Holding Owner ruling Q1, 2026-10-01 (AK 6364, evidence 12130), which admitted `core.Concern`.
 - Decision note: `ontology/decisions/2026-10-02-decision-records-questions.md`.
 
 Admitted: AK task 6364, 2026-10-02

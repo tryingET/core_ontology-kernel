@@ -3,7 +3,7 @@ ont:
   id: "core.rel.manifests"
   type: relation
   labels: ["manifests"]
-  description: "X manifests Y: the event X realises the disposition or intention Y (UFO-B manifestation)"
+  description: "X manifestiert Y: das Ereignis X verwirklicht die Disposition oder Intention Y (UFO-B-Manifestation)"
   group: "causality"
   characteristics:
     transitive: false

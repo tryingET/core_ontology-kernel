@@ -34,7 +34,7 @@ An act: a decider weighs alternatives against criteria and preferences and so cr
 - Criteria are the quality or mode types the decider weighs (for example cost or reversibility), not mental moments.
 
 ## Category
-- UFO event (`core.UfoCategory.Event`), an action of its agent. Required: the agent, the motivating intention, the alternatives, the criteria, the decision created.
+- UFO event (`core.UfoCategory.Event`), an action of the decider. Required: the decider, the motivating intention, the alternatives, the criteria, the decision created.
 - Reference model: `docs/reference-model/governance-core.md`.
 
 ## Source and mapping

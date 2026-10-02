@@ -29,7 +29,7 @@ system4d:
 An event: the holders of the affected domains are asked, blind and in parallel, whether they object to a proposal; each possible objection is tested as an argument, and each that qualifies as an objection ends integrated, withdrawn or standing.
 
 ## Category
-- UFO event (`core.UfoCategory.Event`). Required: the proposal, the holders asked, each possible objection with its test result, each objection with its disposition, the concerns raised, the end date.
+- UFO event (`core.UfoCategory.Event`). Required: the proposal, the holders asked, each possible objection with its test result, each objection with its disposition, the end date.
 - Reference model: `docs/reference-model/governance-core.md`.
 
 ## Source and mapping

@@ -11,7 +11,7 @@ ont:
     - type: instance_of
       target: core.DecisionClass
   examples:
-    - "A schema migration with a verified paired backup, a rollback plan and a rehearsal"
+    - "A schema migration made reversible first: a verified backup, a written rollback plan, and a check that proves the result"
   anti_examples:
     - "A schema migration that cannot be made reversible (class C)"
 system4d:

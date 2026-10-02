@@ -4,7 +4,7 @@ ont:
   type: concept
   labels: ["decision"]
   synonyms: []
-  description: "A mode: the intention a decider forms by deliberating, whose content is the alternative chosen (doing nothing included) and which the decider commits to bring about."
+  description: "A mode: the intention a decider forms by deliberating, whose content is the alternative chosen and which the decider commits to bring about."
   relations:
     - type: instance_of
       target: core.UfoCategory.Mode
@@ -25,11 +25,11 @@ system4d:
 # decision (core.Decision)
 
 ## Definition
-A mode: the intention a decider forms by deliberating, whose content is the alternative chosen (doing nothing included) and which the decider commits to bring about.
+A mode: the intention a decider forms by deliberating, whose content is the alternative chosen and which the decider commits to bring about.
 
 ## Typical usage
-- A deliberation creates a decision (`core.Deliberation produces core.Decision`). The decision is manifested in a decision-resulting action: an authorization, a refusal or a revocation (`manifests`). A decision record documents it.
-- "The decision that went ahead" over a standing objection is a decision whose resulting action happened while the objection stood; that is what dissent keeps.
+- A deliberation creates a decision (`core.Deliberation produces core.Decision`). A decision-resulting action manifests it (`manifests`); in the governance core, authorizations, refusals and revocations are such actions, though not the only ones. A decision record documents it.
+- "The decision that went ahead" over a standing objection is a decision whose resulting action grants what the objection was raised against: an authorization. That is what dissent keeps. A refusal never produces dissent: the proposal did not go ahead.
 
 ## Common confusions
 - Not an act: the act of deciding is the deliberation, and the act that carries the decision out is a decision-resulting action.
@@ -41,7 +41,8 @@ A mode: the intention a decider forms by deliberating, whose content is the alte
 
 ## Source and mapping
 - R. Guizzardi, B. G. Carneiro, D. Porello, G. Guizzardi (2020), A Core Ontology on Decision Making, ONTOBRAS 2020, CEUR-WS 2728, pp. 9–21, §3: "a DECISION is an INTENTION created by a DELIBERATION"; it "can eventually manifest in the performing of another ACTION termed a DECISION RESULTING ACTION".
-- Core word *decision*, defined by the Holding Owner (ADR-0008 §1.5): ruling Q3, 2026-10-01 (AK 6364, evidence 12179).
+- Drafted after ruling Q3 (AK 6364, evidence 12179); wording pending the owner's adoption. *Decision* is a core word, and its definition is the Holding Owner's (ADR-0008 §1.5).
+- Draft for the owner, not adopted: after "the alternative chosen", the words "(doing nothing included)". They are the drafter's, not the paper's.
 - Decision note: `ontology/decisions/2026-10-02-decision-records-questions.md`.
 
 Admitted: AK task 6364, 2026-10-02

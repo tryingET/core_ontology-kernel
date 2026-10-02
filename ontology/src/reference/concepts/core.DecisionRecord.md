@@ -29,7 +29,6 @@ A persistent record of a decision, including context, options, and rationale.
 
 ## Typical usage
 - Used to justify new IDs, deprecations, and relation additions.
-- It documents a decision (`core.Decision`): the motivating driver, the alternatives and criteria, the decision, and its consent, authorization and dissent records.
 
 ## Common confusions
 - Confused with a proposal; decisions are outcomes.
