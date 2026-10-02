@@ -430,8 +430,15 @@ question.
 
 - **2026-10-01, Q1: possible objection** (option b).
 - **2026-10-01, Q2: dissent only after a decision went ahead** (option a).
-- **Q3 and Q5:** the owner asked what Giancarlo Guizzardi would say. Q3 and Q5 now carry that analysis
-  and are open again.
+- **2026-10-01, Q3: follow the decision-making ontology** (option a): `core.Decision` is an intention
+  created by `core.Deliberation`.
+- **2026-10-01, Q5: full MLT** (option a): the class roles plus `core.DecisionClass` as a high-order
+  type.
+- **2026-10-01, Q4: refusal and revocation separate;** one revocation concept covers both permission and
+  delegated authority.
+- **2026-10-01, Q6: a permission may end at a time its authorization states;** a review date ends
+  nothing.
+- **Open:** the in-place-or-new rulings (§5) and the release.
 
 ## 6. Records of this decision (class C)
 
