@@ -1,5 +1,5 @@
 ---
-summary: "Decision note for the ontology questions from AK's decision records (AK 6364, 2026-10-02): possible objection and concern, when dissent exists, decision as an intention created by a deliberation, refusal and revocation, the decision class as a high-order type over three class roles, when a permission ends, and the in-place readings of core.Objection, core.ConsentRound, core.Dissent and core.Permission."
+summary: "Decision note for the ontology questions from AK's decision records (AK 6364, 2026-10-02): possible objection and concern, when dissent exists, decision as an intention created by a deliberation, refusal and revocation, the decision class as a high-order type over three class roles, when a permission ends, and the in-place readings of core.Objection, core.ConsentRound, core.Dissent, core.Permission and core.DecisionRecord."
 read_when:
   - "When a record, schema or layer uses core.Objection, core.PossibleObjection, core.Concern, core.Dissent, core.Decision, core.Deliberation, core.Authorization, core.Refusal, core.Revocation, core.Permission, core.DecisionClass or a class role"
   - "When a consumer keyed an argument that failed the objection test to core.Objection, or a revocation to core.Authorization"
@@ -68,7 +68,7 @@ decision-making and MLT papers in its sources, and a corrected reason in the ope
 
 ## Consent round (evidence 12306)
 
-The AK coordinator and the FCOS pilot session raised possible objections, blind and in parallel
+The AK coordinator and an FCOS session opened for the round (the pilot role was vacant) raised possible objections, blind and in parallel
 (evidence 12310). A tester who was neither the objector nor the proposer checked each argument
 against the files (evidence 12312 for AK, 12313 for FCOS).
 - **Integrated** (qualified, no ruling needed):
@@ -106,16 +106,21 @@ against the files (evidence 12312 for AK, 12313 for FCOS).
 
 ## In-place readings
 
-CORE-INV-002 says a meaning change takes a new identifier. These four identifiers were released in
-v0.3.0. The owner read each change as keeping the concept's meaning, so the identifiers stay:
+CORE-INV-002 says a meaning change takes a new identifier. These five identifiers were released in
+v0.3.0. The owner read the changes as keeping each concept's meaning (evidence 12209, 12211), so the
+identifiers stay; the two extensions ruled after the consent round (evidence 12346) are named in the
+authorization request:
 - **`core.Objection`.** Its conditions are unchanged: it blocks consent, and "a preference without
   impact" is not one. An argument that fails the S3 test never blocked consent, so it was never an
   objection under the kernel's own definition. Adding `core.PossibleObjection` above it leaves its
   extension as it was (evidence 12211, after the owner asked for Guizzardi's view on type identity).
 - **`core.ConsentRound`.** "Each possible objection is tested" names what the round already did: it
-  tested arguments before knowing whether they qualified. Only an objection takes an end state, which
-  narrows v0.3.0's text (there every tested argument took one); the owner ruled how the rest end
-  (evidence 12346), and the final authorization covers this reading.
+  tested arguments before knowing whether they qualified. Only an objection ends integrated or
+  standing; a possible objection may end withdrawn before its test, and one that fails takes no end
+  state (evidence 12346). This narrows v0.3.0's text, where every tested argument took an end state.
+- **`core.DecisionRecord`.** One record may document several decisions in order (evidence 12346); its
+  Required line now names each of them. A record of one decision is the case with one entry, so every
+  v0.3.0 record still reads as before.
 - **`core.Dissent`.** The added line restates its diagnostic: dissent does not exist without a decision
   that went ahead (ruling Q2).
 - **`core.Permission`.** "Within a stated scope" already allowed a scope with an end; the line says so
@@ -130,7 +135,8 @@ v0.3.0. The owner read each change as keeping the concept's meaning, so the iden
   - Concerns gain a home.
   - Grants may carry an optional end (Q6).
   - The AK decision row is a decision case, mapped to `core.DecisionRecord`.
-  - Migration 47 is amended with these keys before any database holds it (evidence 12346); AK 6367,
+  - Migration 47 is amended with these keys and a disposition grid matched to the final
+    `core.ConsentRound` text before any database holds it (evidence 12346; AK 6471). AK 6367,
     the live apply, waits for it. After that, the append-only CHECK constants mean a forward
     migration, never a rewrite.
   - AK 6366 waits on `core.DecisionClass`, not on `core.ConsentTier`.

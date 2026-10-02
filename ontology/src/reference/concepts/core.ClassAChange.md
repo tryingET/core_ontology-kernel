@@ -4,7 +4,7 @@ ont:
   type: concept
   labels: ["class-A change"]
   synonyms: []
-  description: "A role a proposal plays under the class rules when its change is reversible, inside one domain and outside the Holding Owner's reserved scope."
+  description: "A role a proposal plays under the class rules when its change is reversible, inside one domain and outside the Holding Owner's reserved scope, and is not a technical one-way change made reversible (that is class B)."
   relations:
     - type: is_a
       target: core.Proposal
@@ -28,7 +28,7 @@ system4d:
 # class-A change (core.ClassAChange)
 
 ## Definition
-A role a proposal plays under the class rules when its change is reversible, inside one domain and outside the Holding Owner's reserved scope.
+A role a proposal plays under the class rules when its change is reversible, inside one domain and outside the Holding Owner's reserved scope, and is not a technical one-way change made reversible (that is class B).
 
 ## Typical usage
 - One of the three decision classes (`core.DecisionClass`). A classified proposal holds exactly one class at a time, and can move to another, for example when its change is made reversible.

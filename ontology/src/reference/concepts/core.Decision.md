@@ -29,7 +29,7 @@ A mode: the intention a decider forms by deliberating, whose content is the alte
 
 ## Typical usage
 - A deliberation creates a decision (`core.Deliberation produces core.Decision`). A decision-resulting action manifests it (`manifests`); in the governance core, authorizations, refusals and revocations are such actions, though not the only ones. A decision record documents it.
-- "The decision that went ahead" over a standing objection is a decision whose resulting action carries out what the objection was raised against: an authorization that grants it, or a revocation that ends a permission. That is what dissent keeps. A refusal never produces dissent: the proposal did not go ahead.
+- "The decision that went ahead" over a standing objection is a decision whose resulting action carries out what the objection was raised against: an authorization that grants it, or a revocation that ends a permission or a delegated authority. That is what dissent keeps. A refusal never produces dissent: the proposal did not go ahead.
 
 ## Common confusions
 - Not an act: the act of deciding is the deliberation, and the act that carries the decision out is a decision-resulting action.

@@ -29,7 +29,7 @@ A high-order type that disjointly categorizes core.Proposal: each of its instanc
 ## Typical usage
 - The instances are `core.ClassAChange`, `core.ClassBChange` and `core.ClassCChange`; each is a role, because a change holds it through its classification by the class rules and can move between classes.
 - Its base type is `core.Proposal` (Holding Owner ruling, 2026-10-02, evidence 12302): each class role `is_a core.Proposal`, and a proposal holds class A, B or C under the class rules.
-- A proposal holds its class once a named party has applied the class rules to it. Until then it is unclassified, and no decision on it may go ahead (Holding Owner ruling, 2026-10-02, evidence 12346). So the class roles partition the classified proposals, not every proposal.
+- A proposal holds its class once a named party has applied the class rules to it. Until then it is unclassified, and no decision on it may go ahead (Holding Owner ruling, 2026-10-02, evidence 12346). So every classified proposal holds exactly one class role; an unclassified one holds none.
 - The authorization part of a decision record says "not required" when the class needs no owner authorization.
 
 ## Common confusions

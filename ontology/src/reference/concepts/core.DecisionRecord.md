@@ -29,7 +29,7 @@ A persistent record of a decision, including context, options, and rationale.
 
 ## Typical usage
 - Used to justify new IDs, deprecations, and relation additions.
-- One record may document several decisions taken in order on one case, for example a refusal, a grant after amendment and a later revocation; each keeps its own deliberation and resulting action (Holding Owner ruling, 2026-10-02, AK 6364, evidence 12346).
+- One record may document several decisions taken in order on one case, for example a refusal, a grant after amendment and a later revocation; each keeps its own deliberation and its resulting action, if any (Holding Owner ruling, 2026-10-02, AK 6364, evidence 12346).
 
 ## Common confusions
 - Confused with a proposal; decisions are outcomes.
@@ -37,3 +37,6 @@ A persistent record of a decision, including context, options, and rationale.
 ## Category
 - UFO kind (`core.UfoCategory.Kind`). Required: each decision it documents, in order, with its consent, authorization and dissent records.
 - Reference model: `docs/reference-model/governance-core.md`.
+
+## Source and mapping
+- Extended in place on 2026-10-02 (AK 6364, evidence 12346): one record may document several decisions in order; the Required line names each of them. Decision note: `ontology/decisions/2026-10-02-decision-records-questions.md`.

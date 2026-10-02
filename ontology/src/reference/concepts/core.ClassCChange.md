@@ -32,7 +32,7 @@ A role a proposal plays under the class rules when its change lies within the Ho
 ## Typical usage
 - One of the three decision classes (`core.DecisionClass`). A classified proposal holds exactly one class at a time, and can move to another, for example when its change is made reversible.
 - The reserved scope is the class rules' list (Holding Owner decision, 2026-09-26), for example a core definition or publication under the society's name. The list is governance-kernel's; when it changes, this concept does not.
-- The class rules apply the reserved scope first: a change within it is class C however reversible or local it is (ADR-0008: reserved identifiers are class C at every layer).
+- The class rules apply the reserved scope first: a change within it is class C however reversible or local it is. ADR-0008 applies the rule to reserved identifiers (§1.6, "class C at every layer") and, until the handover, to every change to a core concept (§4).
 - Whether class C needs a consent round or the owner's authorization is governance-kernel's rule, not part of this concept.
 
 ## Category
