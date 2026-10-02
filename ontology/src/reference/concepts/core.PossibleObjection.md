@@ -11,7 +11,7 @@ ont:
   examples:
     - "A holder in a consent round argues that the change weakens a safety invariant; the round tests whether the argument qualifies"
   anti_examples:
-    - "An assumption that cannot be backed by reasoning or evidence (that is a concern)"
+    - "An assumption held but not raised as an objection (that is a concern)"
 system4d:
   fog:
     risks: []
@@ -27,14 +27,15 @@ A mode held by a party: an argument it raises against a proposal, agreement or a
 
 ## Typical usage
 - Every argument raised in a consent round is a possible objection. The round tests it as an argument: if it qualifies, it is an objection (`core.Objection`); if it does not, it is not an objection, though it may reveal a concern (`core.Concern`).
-- A possible objection that did not qualify never blocks consent and never becomes dissent.
+- A possible objection that did not qualify never blocks consent and never becomes dissent. It is kept with its test result, and the proposer may still take it up as an amendment.
+- A possible objection may be withdrawn before its test (Holding Owner ruling, 2026-10-02, evidence 12346).
 
 ## Common confusions
 - Not an objection until it qualifies: S3 tests "if arguments qualify as objections" (the page cited below), and a failed argument may rest on a misconception, an assumption or a personal preference.
 - Not a concern: a failed argument only might reveal a concern.
 
 ## Category
-- UFO mode (`core.UfoCategory.Mode`), inhering in the party who raised it and depending on what it argues against. Required: who raised it, the proposal, agreement or activity, the argument, the test and its result.
+- UFO mode (`core.UfoCategory.Mode`), inhering in the party who raised it and depending on what it argues against. Required: who raised it, the proposal, agreement or activity, the argument, the test and its result (unless it was withdrawn before the test).
 - Reference model: `docs/reference-model/governance-core.md`.
 
 ## Source and mapping

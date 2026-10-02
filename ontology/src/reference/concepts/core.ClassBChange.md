@@ -4,7 +4,7 @@ ont:
   type: concept
   labels: ["class-B change"]
   synonyms: []
-  description: "A role a proposal plays under the class rules when its change is reversible and touches several domains, including a technical one-way change once it has been made reversible (a verified backup, a written rollback plan, a check that proves the result)."
+  description: "A role a proposal plays under the class rules when its change is reversible, touches several domains and lies outside the Holding Owner's reserved scope, including a technical one-way change once it has been made reversible (a verified backup, a written rollback plan, a check that proves the result)."
   relations:
     - type: is_a
       target: core.Proposal
@@ -27,10 +27,10 @@ system4d:
 # class-B change (core.ClassBChange)
 
 ## Definition
-A role a proposal plays under the class rules when its change is reversible and touches several domains, including a technical one-way change once it has been made reversible (a verified backup, a written rollback plan, a check that proves the result).
+A role a proposal plays under the class rules when its change is reversible, touches several domains and lies outside the Holding Owner's reserved scope, including a technical one-way change once it has been made reversible (a verified backup, a written rollback plan, a check that proves the result).
 
 ## Typical usage
-- One of the three decision classes (`core.DecisionClass`). A proposal holds exactly one class at a time, and can move to another, for example when its change is made reversible.
+- One of the three decision classes (`core.DecisionClass`). A classified proposal holds exactly one class at a time, and can move to another, for example when its change is made reversible.
 - Whether class B needs a consent round or the owner's authorization is governance-kernel's rule, not part of this concept.
 
 ## Category

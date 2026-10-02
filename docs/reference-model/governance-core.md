@@ -47,7 +47,7 @@ Commitments and claims are externally dependent modes in UFO-A (UFO2022, p. 172)
 | `core.AuditEvent` | UFO event | who, what, when, why | Can it change after it happened? No. |
 | `core.Authorization` | UFO event | grantor (holding the authority), grantee, scope, basis; it founds a permission | Can an authorization change after it was given? No: a revocation is a new event. |
 | `core.ConformanceAudit` | UFO event | the product, its requirements and documentation | Is a product checked against its requirements? Yes. |
-| `core.ConsentRound` | UFO event | the proposal, the holders asked, each possible objection with its test result, each objection with its disposition, the end date | Who was asked, and what happened to each possible objection? |
+| `core.ConsentRound` | UFO event | the proposal, the holders asked, each possible objection with its test result or its withdrawal before the test, each objection with its disposition, the end date | Who was asked, and what happened to each possible objection? |
 | `core.DecisionGate` | UFO event | the named decider, the criteria set in advance, the work at stake | Does it create or change a permission or commitment? If not, it is a check, not a decision gate. |
 | `core.Deliberation` | UFO event | the decider, the motivating intention, the alternatives, the criteria, the decision created | Did it create a decision? It must. |
 | `core.Handover` | UFO event | the product, who hands it over, the receiver | Does the receiver get what they need to use it? It must. |
@@ -63,8 +63,8 @@ Commitments and claims are externally dependent modes in UFO-A (UFO2022, p. 172)
 | `core.Validation` | UFO event | the receiver who judges, the effectiveness metric, the product | Who judged it? It must be the receiver, never the producer. |
 | `core.VerificationEvent` | UFO event | the product, the requirement or DoD row, the criteria, the evidence used, the verifier | Can it change after it happened? No: a new check is a new event. |
 | `core.WorkProductInspection` | UFO event | the work product and inspectors other than its author | Is the author among the inspectors? No. |
-| `core.DecisionClass` | high-order type | its base type `core.Proposal`, its instances (class-A, class-B and class-C change), the rules that assign them | Are its instances types? Yes: the three class roles, each a proper specialisation of `core.Proposal`. |
-| `core.DecisionRecord` | UFO kind | the decision and its consent, authorization and dissent records | Is it a record rather than the decision itself? Yes. |
+| `core.DecisionClass` | high-order type | its base type `core.Proposal`, its instances (class-A, class-B and class-C change), the rules that assign them | Are its instances types? Yes: the three class roles, each a proper specialisation of `core.Proposal`. Can a proposal hold none? Yes, until the class rules are applied; then no decision on it may go ahead. |
+| `core.DecisionRecord` | UFO kind | each decision it documents, in order, with its consent, authorization and dissent records | Is it a record rather than the decision itself? Yes. |
 | `core.Dissent` | UFO kind | the objection it keeps and the decision that went ahead over it | Does dissent exist without a decision that went ahead? No. |
 | `core.Proposal` | UFO kind | proposer, change, rationale, scope, acceptance criteria | Is it a document that can be reviewed? Yes. |
 | `core.Receipt` | UFO kind | the action or artefact, actor, time, content digest | Can it be checked against its digest? Yes. |
@@ -75,7 +75,7 @@ Commitments and claims are externally dependent modes in UFO-A (UFO2022, p. 172)
 | `core.Decision` | UFO mode | the decider, the goal it commits to, the deliberation that created it, the alternatives and criteria weighed | Is it the act of deciding? No: that is the deliberation; the act that carries it out is a decision-resulting action. |
 | `core.Objection` | UFO mode | who holds it, the proposal it objects to, its reasons | Has it ended integrated, withdrawn or standing, and did a decision go ahead over it? |
 | `core.Permission` | UFO mode | the holder, what it allows, the scope, the authorization or rule that grants it | Who granted it, and within which scope? |
-| `core.PossibleObjection` | UFO mode | who raised it, the proposal, agreement or activity, the argument, the test and its result | Has it been tested, and did it qualify? |
+| `core.PossibleObjection` | UFO mode | who raised it, the proposal, agreement or activity, the argument, the test and its result (unless withdrawn before the test) | Has it been tested, and did it qualify? |
 | `core.StakeholderExpectation` | UFO mode | the stakeholder who holds it | Who expects this? |
 | `core.Directive` | UFO normative description | whom it binds and its owner; tailoring only by relief | May someone depart from it without relief? No. |
 | `core.Guidance` | UFO normative description | its owner; it binds no one | May someone depart from it without relief? Yes. |

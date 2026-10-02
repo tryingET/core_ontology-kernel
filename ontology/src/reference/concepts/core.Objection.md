@@ -29,7 +29,7 @@ A possible objection, raised against a proposal in a consent round, that qualifi
 
 ## Typical usage
 - Used to surface risks, missing safeguards, or unclear semantics.
-- An objection ends integrated (resolved by any amendment, deferral with an owner and date or monitoring included), withdrawn, or standing. When a decision goes ahead over a standing objection, its resulting action grants what the objection was raised against, and the objection is kept as dissent.
+- An objection ends integrated (resolved by any amendment, deferral with an owner and date or monitoring included), withdrawn, or standing. When a decision goes ahead over a standing objection, its resulting action carries out what the objection was raised against (a grant, or a revocation), and the objection is kept as dissent.
 
 ## Common confusions
 - Confused with disagreement; objections must be actionable and reasoned.

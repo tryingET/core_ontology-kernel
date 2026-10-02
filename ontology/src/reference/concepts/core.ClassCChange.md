@@ -15,7 +15,7 @@ ont:
   examples:
     - "A proposal for a new core definition, or to publish under the society's name"
   anti_examples:
-    - "A proposal for a reversible change inside one domain (class A)"
+    - "A proposal for a reversible change inside one domain and outside the reserved scope (class A)"
 system4d:
   fog:
     risks: []
@@ -30,8 +30,9 @@ system4d:
 A role a proposal plays under the class rules when its change lies within the Holding Owner's reserved scope as those rules list it, or cannot be made reversible.
 
 ## Typical usage
-- One of the three decision classes (`core.DecisionClass`). A proposal holds exactly one class at a time, and can move to another, for example when its change is made reversible.
+- One of the three decision classes (`core.DecisionClass`). A classified proposal holds exactly one class at a time, and can move to another, for example when its change is made reversible.
 - The reserved scope is the class rules' list (Holding Owner decision, 2026-09-26), for example a core definition or publication under the society's name. The list is governance-kernel's; when it changes, this concept does not.
+- The class rules apply the reserved scope first: a change within it is class C however reversible or local it is (ADR-0008: reserved identifiers are class C at every layer).
 - Whether class C needs a consent round or the owner's authorization is governance-kernel's rule, not part of this concept.
 
 ## Category

@@ -449,6 +449,10 @@ question.
 - **2026-10-02, the class roles' base type and `core.Decision`'s wording** (evidence 12302): each
   class role `is_a core.Proposal`; the owner adopted the drafted `core.Decision` text verbatim,
   "doing nothing included" with it.
+- **2026-10-02, after the consent round** (evidence 12346; round 12306, tests 12312 and 12313): a
+  possible objection may be withdrawn before its test, and one that fails is kept with its test result
+  and may still be taken up; a proposal may be unclassified, and then no decision on it may go ahead;
+  one decision record may document several decisions in order; AK amends migration 47.
 - Release prep is under way: the change is drafted in
   `ontology/decisions/2026-10-02-decision-records-questions.md`; the owner authorizes the final
   content and publishes the release.
@@ -471,8 +475,9 @@ question.
   - the driver (this packet, AK 6364);
   - a review date.
 
-  They live in AK evidence until AK's schema-47 records are live (AK 6367). After that, this decision
-  can be the first to use them: an AK decision case for 6364, a consent round, and the owner's
+  They live in AK evidence until AK's schema-47 records are live (AK 6367), which waits for migration
+  47 to carry the corrected keys (evidence 12346). After that, this decision can be the first to use
+  them: an AK decision case for 6364, a consent round, and the owner's
   `ak decision authorize`.
 
 ## 7. What each consumer changes afterwards
@@ -482,8 +487,8 @@ question.
 | ontology-kernel | concept files, edges and reference-model rows (§4); a decision note under `ontology/decisions/`; v0.4.0; closes N6 (AK 6218) and adds the decision class to the reference model | Holding Owner |
 | governance-kernel | the data file (reserved identifiers, core words); consent-change-control (dissent wording, MR template "Dissent" → escalated objections and dissent); human-on-the-loop-consent (`declined` → refusal); the ADR-0008 §4 and §8 wording; the vocabulary card's authorization / consent / dissent line | Holding Owner (class C) |
 | org-handbook | the consent-tier SOPs stay on `core.ConsentTier`; class wording follows the decision class | Holding Owner |
-| agent-kernel | `decision_objections` rows key to `core.PossibleObjection`; a qualified one is a `core.Objection`. `act` keys to Authorization, Refusal or Revocation. Concerns gain a home. The `decisions` row is labelled a decision case. An optional end on grants. The append-only CHECK constants mean a forward migration with new rows or columns, never a rewrite. Bound as a new AK task when the decision is recorded. | agent-kernel |
-| FCOS (pilot) | `not_valid` arguments become possible objections that did not qualify, and leave `dissent`; revocation facts get the revocation identifier; `not_after` is named either an end or a review date; `decision_class` (design D11) maps to the decision class | FCOS pilot holder |
+| agent-kernel | `decision_objections` rows key to `core.PossibleObjection`; a qualified one is a `core.Objection`. `act` keys to Authorization, Refusal or Revocation. Concerns gain a home. The `decisions` row is labelled a decision case. An optional end on grants. Migration 47 is amended with these keys before any database holds it (evidence 12346); after that, the append-only CHECK constants mean a forward migration with new rows or columns, never a rewrite. | agent-kernel |
+| FCOS (pilot) | forward, in new record versions (v1 records, signed facts and archived inputs keep their v1 validators): `not_valid` arguments become possible objections that did not qualify, and leave `dissent`; new revocation records get the revocation identifier; `not_after` is the end its grant states, enforced as now, and a review ends nothing; `decision_class` (design D11) maps to the decision class | FCOS pilot holder |
 | AK 6366 | waits on the decision-class concept, not on `core.ConsentTier` (corrected in AK) | Holding Owner, then agent-kernel |
 | company and repo layers | repin to v0.4.0 (pi-extensions' `ontology/dist` resolves these identifiers) | each layer's holder |
 
