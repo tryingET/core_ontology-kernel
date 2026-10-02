@@ -4,7 +4,7 @@ ont:
   type: concept
   labels: ["decision class"]
   synonyms: []
-  description: "A high-order type that partitions proposed changes: each of its instances, the class roles class-A change, class-B change and class-C change, is a proper specialisation of proposed change, and each proposed change holds exactly one of them at a time."
+  description: "A high-order type that partitions core.Proposal: each of its instances, the class roles class-A change, class-B change and class-C change, is a proper specialisation of core.Proposal, and each proposal holds exactly one of them at a time."
   relations:
     - type: instance_of
       target: core.UfoCategory.HighOrderType
@@ -24,20 +24,20 @@ system4d:
 # decision class (core.DecisionClass)
 
 ## Definition
-A high-order type that partitions proposed changes: each of its instances, the class roles class-A change, class-B change and class-C change, is a proper specialisation of proposed change, and each proposed change holds exactly one of them at a time.
+A high-order type that partitions core.Proposal: each of its instances, the class roles class-A change, class-B change and class-C change, is a proper specialisation of core.Proposal, and each proposal holds exactly one of them at a time.
 
 ## Typical usage
 - The instances are `core.ClassAChange`, `core.ClassBChange` and `core.ClassCChange`; each is a role, because a change holds it through its classification by the class rules and can move between classes.
-- The base type, proposed change, has no concept yet: pending the owner's ruling (base type: `core.Proposal` or a new concept).
+- Its base type is `core.Proposal` (Holding Owner ruling, 2026-10-02, evidence 12302): each class role `is_a core.Proposal`, and a proposal holds class A, B or C under the class rules.
 - The authorization part of a decision record says "not required" when the class needs no owner authorization.
 
 ## Common confusions
-- Not `core.ConsentTier`: consent tiers classify paths by who must consent (Core, Org, Project); decision classes classify proposed changes (Holding Owner's question of 2026-09-30, AK evidence 11507).
+- Not `core.ConsentTier`: consent tiers classify paths by who must consent (Core, Org, Project); decision classes classify proposals (Holding Owner's question of 2026-09-30, AK evidence 11507).
 - Not an autonomy level: that concept, for later, describes how far an agent may decide; it belongs to the agent's delegated capacity.
 - Not a quality: a class is assigned by applying rules, not measured on a scale intrinsic to the change.
 
 ## Category
-- High-order type (`core.UfoCategory.HighOrderType`), partitioning proposed changes. Required: its instances (the three class roles), the rules that assign them.
+- High-order type (`core.UfoCategory.HighOrderType`), partitioning `core.Proposal`. Required: its base type (`core.Proposal`), its instances (the three class roles), the rules that assign them.
 - The kernel records it under a sibling category; in OntoUML with high-order types it would specialise UFO Role, the category of its instances (Fonseca et al. 2022, §4.4).
 - Reference model: `docs/reference-model/governance-core.md`.
 
@@ -46,6 +46,7 @@ A high-order type that partitions proposed changes: each of its instances, the c
 - V. A. Carvalho, J. P. A. Almeida, C. M. Fonseca, G. Guizzardi (2017), Multi-level ontology-based conceptual modeling, Data & Knowledge Engineering 109, pp. 3–24: "t partitions t’ iff t categorizes t’ and each instance of t’ is instance of exactly one instance of t".
 - C. M. Fonseca, G. Guizzardi, J. P. A. Almeida, T. P. Sales, D. Porello (2022), Incorporating Types of Types in Ontology-Driven Conceptual Modeling, ER 2022, LNCS 13607, pp. 18–34: a type categorizes a base type "iff every instance of the former is a proper specialization of the latter".
 - Holding Owner ruling Q5, 2026-10-01 (AK 6364, evidence 12179).
+- Holding Owner ruling, 2026-10-02 (AK 6364, evidence 12302): the base type is `core.Proposal`.
 - Decision note: `ontology/decisions/2026-10-02-decision-records-questions.md`.
 
 Admitted: AK task 6364, 2026-10-02

@@ -446,6 +446,9 @@ question.
   `core.Permission` changes keep their identifiers; prepare v0.4.0.
 - **2026-10-02, `core.Objection` in place** (evidence 12211), after the owner asked for Guizzardi's
   view on type identity.
+- **2026-10-02, the class roles' base type and `core.Decision`'s wording** (evidence 12302): each
+  class role `is_a core.Proposal`; the owner adopted the drafted `core.Decision` text verbatim,
+  "doing nothing included" with it.
 - Release prep is under way: the change is drafted in
   `ontology/decisions/2026-10-02-decision-records-questions.md`; the owner authorizes the final
   content and publishes the release.
