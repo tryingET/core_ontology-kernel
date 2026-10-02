@@ -313,9 +313,11 @@ Admit `core.Concern`.
 
 ## 4. Draft concept texts
 
-Drafts for the owner to adopt, amend or reject. Each follows ontology-markdown-v1 and the reference
-model: one category with its required relata, a source, and a reference-model row with its diagnostic
-question.
+These are the packet's earlier drafts. The concept files and
+`ontology/decisions/2026-10-02-decision-records-questions.md` carry the later wording from rulings
+12302 and 12346 and the consent-round integration. Each draft follows ontology-markdown-v1 and the
+reference model: one category with its required relata, a source, and a reference-model row with its
+diagnostic question.
 
 **`core.PossibleObjection`** ("possible objection")
 - **Description:** "An argument a party raises against a proposal, agreement or activity, offered as
