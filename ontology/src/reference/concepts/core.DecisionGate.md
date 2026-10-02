@@ -6,6 +6,8 @@ ont:
   synonyms: []
   description: "An act: a named authority decides, against criteria set in advance, whether work may proceed."
   relations:
+    - type: is_a
+      target: core.Deliberation
     - type: depends_on
       target: core.Authority
     - type: instance_of
@@ -29,6 +31,7 @@ system4d:
 An act: a named authority decides, against criteria set in advance, whether work may proceed.
 
 ## Common confusions
+- A decision gate is a deliberation (AK 6364): the decision it creates is carried out by an authorization or a refusal.
 - Never bare 'gate'. Binner's 'Gates' are measuring points; `fcos gates` are health checks; FCOS close is a close gate (FCOS layer).
 
 ## Category

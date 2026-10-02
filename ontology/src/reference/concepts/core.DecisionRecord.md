@@ -6,6 +6,8 @@ ont:
   synonyms: []
   description: "A persistent record of a decision, including context, options, and rationale."
   relations:
+    - type: depends_on
+      target: core.Decision
     - type: instance_of
       target: core.UfoCategory.Kind
   examples:
@@ -27,6 +29,7 @@ A persistent record of a decision, including context, options, and rationale.
 
 ## Typical usage
 - Used to justify new IDs, deprecations, and relation additions.
+- It documents a decision (`core.Decision`): the motivating driver, the alternatives and criteria, the decision, and its consent, authorization and dissent records.
 
 ## Common confusions
 - Confused with a proposal; decisions are outcomes.

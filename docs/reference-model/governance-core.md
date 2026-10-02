@@ -33,8 +33,9 @@ This is the reference layer of Guizzardi's architecture: it is written for peopl
 | `core.UfoCategory.Commitment` | UFO commitment | The UFO-C category of social moments by which one agent is bound towards another to bring about a propositional content; each is paired with a claim. | Who is bound, towards whom, to bring about what? | Guizzardi, Falbo, Guizzardi (2008), Grounding Software Domain Ontologies in UFO, IDEAS 2008 (UFO-C), §4; Guizzardi et al. (2022), UFO: Unified Foundational Ontology, Applied Ontology 17(1), p. 172. |
 | `core.UfoCategory.Claim` | UFO claim | The UFO-C category of social moments held by the party a commitment is owed to, paired with that commitment and its propositional content. | Towards whom is a commitment owed? | Guizzardi, Falbo, Guizzardi (2008), Grounding Software Domain Ontologies in UFO, IDEAS 2008 (UFO-C), §4. |
 | `core.UfoCategory.Proposition` | UFO proposition | The UFO category of propositional contents: abstract representations of the situations that beliefs, desires and intentions refer to; the content of an intention is a goal. | Can a situation satisfy it? | Guizzardi, Falbo, Guizzardi (2008), Grounding Software Domain Ontologies in UFO, IDEAS 2008 (UFO-C), §4 and Fig. 3. |
+| `core.UfoCategory.HighOrderType` | high-order type | The category, from the multi-level theory MLT that UFO incorporates, of types whose instances are themselves types; a high-order type categorises a base type when each of its instances specialises that base type. | Are its instances types rather than individuals? | Carvalho, Almeida, Fonseca, Guizzardi (2017), Multi-level ontology-based conceptual modeling, DKE 109; Fonseca et al. (2022), Incorporating Types of Types in Ontology-Driven Conceptual Modeling, ER 2022. Not yet checked against the page images. |
 
-Commitments and claims are externally dependent modes in UFO-A (UFO2022, p. 172); UFO-C names them as social moments that always come in pairs (GFG2008, §4). Permissions, powers and duties (UFO-L, Griffo et al. 2018) are not separate categories here: an authority is a mode (a power), and an authorization is the event that uses it and founds a permission. UFO also separates roles played by instances of one kind from role mixins played by instances of several kinds; this layer carries only the role category, so a role played by people and agents alike (social role), or by records of different kinds (evidence), is recorded as a UFO role and noted as a role mixin.
+Commitments and claims are externally dependent modes in UFO-A (UFO2022, p. 172); UFO-C names them as social moments that always come in pairs (GFG2008, §4). Permissions, powers and duties (UFO-L, Griffo et al. 2018) are not separate categories here: an authority is a mode (a power), an authorization is the event that uses it and founds a permission, a refusal founds none, and a revocation ends one. Following the Core Ontology on Decision Making (R. Guizzardi, Carneiro, Porello, G. Guizzardi 2020), a decision is an intention (a mode) that a deliberation (an event) creates and a decision-resulting action manifests; authorizations, refusals and revocations are such actions (AK 6364). Types whose instances are types belong to the high-order-type category (MLT): the decision class has the three class roles as its instances, and they keep their own category. UFO also separates roles played by instances of one kind from role mixins played by instances of several kinds; this layer carries only the role category, so a role played by people and agents alike (social role), or by records of different kinds (evidence), is recorded as a UFO role and noted as a role mixin.
 
 ## Governance-core concepts
 
@@ -46,19 +47,23 @@ Commitments and claims are externally dependent modes in UFO-A (UFO2022, p. 172)
 | `core.AuditEvent` | UFO event | who, what, when, why | Can it change after it happened? No. |
 | `core.Authorization` | UFO event | grantor (holding the authority), grantee, scope, basis; it founds a permission | Can an authorization change after it was given? No: a revocation is a new event. |
 | `core.ConformanceAudit` | UFO event | the product, its requirements and documentation | Is a product checked against its requirements? Yes. |
-| `core.ConsentRound` | UFO event | the proposal, the holders asked, each objection and its disposition, the end date | Who was asked, and what happened to each objection? |
+| `core.ConsentRound` | UFO event | the proposal, the holders asked, each possible objection with its test result, each objection with its disposition, the concerns raised, the end date | Who was asked, and what happened to each possible objection? |
 | `core.DecisionGate` | UFO event | the named decider, the criteria set in advance, the work at stake | Does it create or change a permission or commitment? If not, it is a check, not a decision gate. |
+| `core.Deliberation` | UFO event | the agent, the motivating intention, the alternatives, the criteria, the decision created | Did it create a decision? It must. |
 | `core.Handover` | UFO event | the product, who hands it over, the receiver | Does the receiver get what they need to use it? It must. |
 | `core.LeitungReview` | UFO event | the process or system reviewed, the effectiveness question | Does it return a Rückmeldung to Führung? Yes. |
 | `core.Operations` | UFO event | the domain whose work it is | Is it doing the work rather than governing it? Yes. |
 | `core.ProcessAudit` | UFO event | the process and its process standard | Is a process checked against its standard? Yes. |
 | `core.ReadinessReview` | UFO event | decider, criteria set in advance, the item | Does it end in a decision? Yes. |
+| `core.Refusal` | UFO event | the refuser, the party refused, what was asked for, the basis | Does it found a permission? No: the proposal returns to its driver. |
 | `core.ReplayCheck` | UFO event | the recorded operation and its recorded result | Does a pass show the result is right? No, only that it reproduces. |
 | `core.RoleReview` | UFO event | the role, its holder, the reviewers | Is it about how a role is performed, not about a product? Yes. |
+| `core.Revocation` | UFO event | the authorizations or delegation it ends, the revoker, the basis | Does it change or delete what it ends? No: those acts stay on record. |
 | `core.SchemaCheck` | UFO event | the record or file, the schema | Does a pass say anything beyond the schema? No. |
 | `core.Validation` | UFO event | the receiver who judges, the effectiveness metric, the product | Who judged it? It must be the receiver, never the producer. |
 | `core.VerificationEvent` | UFO event | the product, the requirement or DoD row, the criteria, the evidence used, the verifier | Can it change after it happened? No: a new check is a new event. |
 | `core.WorkProductInspection` | UFO event | the work product and inspectors other than its author | Is the author among the inspectors? No. |
+| `core.DecisionClass` | high-order type | its instances (class-A, class-B and class-C change), the rules that assign them | Are its instances types? Yes: the three class roles. |
 | `core.DecisionRecord` | UFO kind | the decision and its consent, authorization and dissent records | Is it a record rather than the decision itself? Yes. |
 | `core.Dissent` | UFO kind | the objection it keeps and the decision that went ahead over it | Does dissent exist without a decision that went ahead? No. |
 | `core.Proposal` | UFO kind | proposer, change, rationale, scope, acceptance criteria | Is it a document that can be reviewed? Yes. |
@@ -66,8 +71,11 @@ Commitments and claims are externally dependent modes in UFO-A (UFO2022, p. 172)
 | `core.RetainedArtefact` | UFO kind | the content digest, the source, the capture time | Can its bytes be re-verified against its digest? |
 | `core.ActorCapability` | UFO mode | the actor or system, what it can do | Could it do this even where it is not permitted to? |
 | `core.Authority` | UFO mode | its holder, its scope, and the norm or delegation that created it | Who holds it, for what? |
-| `core.Objection` | UFO mode | who holds it, the proposal it objects to, its reasons | Is it still standing, integrated, withdrawn or overruled? |
+| `core.Concern` | UFO mode | who holds it, the proposal, agreement or activity, the assumption | Could it block consent? Never. |
+| `core.Decision` | UFO mode | the decider, the goal it commits to, the deliberation that created it, the alternatives and criteria weighed | Is it the act of deciding? No: that is the deliberation; the act that carries it out is a decision-resulting action. |
+| `core.Objection` | UFO mode | who holds it, the proposal it objects to, its reasons | Has it ended integrated, withdrawn or standing, and did a decision go ahead over it? |
 | `core.Permission` | UFO mode | the holder, what it allows, the scope, the authorization or rule that grants it | Who granted it, and within which scope? |
+| `core.PossibleObjection` | UFO mode | who raised it, the proposal, agreement or activity, the argument, the test and its result | Has it been tested, and did it qualify? |
 | `core.StakeholderExpectation` | UFO mode | the stakeholder who holds it | Who expects this? |
 | `core.Directive` | UFO normative description | whom it binds and its owner; tailoring only by relief | May someone depart from it without relief? No. |
 | `core.Guidance` | UFO normative description | its owner; it binds no one | May someone depart from it without relief? Yes. |
@@ -79,6 +87,9 @@ Commitments and claims are externally dependent modes in UFO-A (UFO2022, p. 172)
 | `core.ArtefactStatus` | UFO quality | the artefact, its value on the scale approach, preliminary, baseline, update | Which of the four values does the artefact hold now? |
 | `core.Metric` | UFO quality | what it measures, calculation rule, unit, target | Which value would count as met? |
 | `core.TechnologyReadiness` | UFO quality | the technology, the TRL scale, the environment it was shown in | Which level, shown in which environment? |
+| `core.ClassAChange` | UFO role | the change, the rule that classifies it, who applied it | Which class rule makes this change hold class A? |
+| `core.ClassBChange` | UFO role | the change, the rule that classifies it, who applied it | Which class rule makes this change hold class B? |
+| `core.ClassCChange` | UFO role | the change, the rule that classifies it, who applied it | Which class rule makes this change hold class C? |
 | `core.EvidenceRole` | UFO role | the record, the claim it is offered for or against, who offered it | Which claim is this record evidence for? |
 | `core.SocialRole` | UFO role | the player, the relation that makes it true, the rule that defines it | Which relation makes this player hold the role? |
 | `core.ConsentState` | UFO situation | the round, its proposal, every objection with its disposition | Does consent exist if nobody was asked? No. |
@@ -102,7 +113,7 @@ These concepts carry no category yet. Each needs a decision, or a split, first.
 | `core.Readiness` | A phase if ready and not ready partition an item's life; otherwise a situation. |
 | `core.DominantConstraint` | A role a requirement plays relative to one design; it needs the design relation first. |
 | `core.OrganisationModel` | A conceptual artefact (Binner's metamodel); categorising it adds nothing for governance records. |
-| `core.ConsentTier` | A classification of changes by who must consent; it moves when a change is made reversible, so it is anti-rigid (phase or role). Reserved identifier. |
+| `core.ConsentTier` | A tier of paths by who must consent (Core, Org, Project). It is not the decision class, which is `core.DecisionClass` since AK 6364; its own category is a separate question. Reserved identifier. |
 | `core.Observation` | Overloaded: the measurement event and its record. A split candidate. |
 | `core.Verification` | Deprecated on 2026-09-27; use core.VerificationEvent. See `ontology/decisions/2026-09-27-governance-core-splits.md`. |
 | `core.Consent` | Deprecated on 2026-09-27; use core.ConsentState. See `ontology/decisions/2026-09-27-governance-core-splits.md`. |
