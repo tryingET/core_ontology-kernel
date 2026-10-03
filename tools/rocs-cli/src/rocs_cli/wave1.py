@@ -24,6 +24,15 @@ from typing import Any
 
 from rocs_cli import __version__
 from rocs_cli.capabilities import class_policy
+from rocs_cli.layers import dist_dir, ontology_root
+from rocs_cli.managed_surface import (
+    MANAGED_OUTPUT_FILES,
+    MANAGED_OUTPUT_LOCK,
+    _is_managed_transient,
+    clear_managed_output_root,
+    configured_output_root,
+)
+from rocs_cli.verified_runtime import render_ci_wrapper, render_cli_wrapper
 from rocs_cli.vendored import (
     compute_expected_hashes,
     parse_vendored_hashes_bytes,
@@ -286,59 +295,6 @@ def _preflight_managed_path(root: Path, rel: str, *, directory: bool = False) ->
                 raise ValueError(f"managed path is not a {kind}: {rel}")
 
 
-_VENDORED_LOCK_DIGEST_TOKEN = "__ROCS_VENDORED_LOCK_SHA256__"
-
-_CI_WRAPPER = r'''#!/usr/bin/env bash
-set -euo pipefail
-# Sanitize lookup before invoking even basic helper commands.
-export PATH="/usr/local/bin:/usr/bin:/bin"
-unset PYTHONPATH
-script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-repo="${ROCS_REPO:-$(cd -- "$script_dir/../.." && pwd)}"
-artifact="$repo/tools/rocs-cli"
-python_bin="python3"
-export ROCS_WORKSPACE_ROOT="${ROCS_WORKSPACE_ROOT:-$repo}"
-export PYTHONDONTWRITEBYTECODE=1
-
-# Verify with the standard library before importing or executing any bundled byte.
-"$python_bin" -I -S -B - "$artifact" <<'PY'
-import hashlib, json, os, stat, sys
-from pathlib import Path
-root = Path(sys.argv[1]).resolve(strict=True)
-lock = root / "VENDORED_HASHES.json"
-trusted_lock_digest = "__ROCS_VENDORED_LOCK_SHA256__"
-try:
-    lock_bytes = lock.read_bytes()
-    if hashlib.sha256(lock_bytes).hexdigest() != trusted_lock_digest:
-        raise ValueError("lock digest does not match generated trust anchor")
-    payload = json.loads(lock_bytes)
-    expected = payload["files"]
-except Exception as exc:
-    raise SystemExit(f"ROCS bundled runtime lock invalid: {exc}")
-actual = {}
-for path in sorted(root.rglob("*")):
-    if path == lock:
-        continue
-    mode = path.lstat().st_mode
-    if stat.S_ISLNK(mode) or (not stat.S_ISREG(mode) and not stat.S_ISDIR(mode)):
-        raise SystemExit(f"ROCS bundled runtime has invalid file type: {path.relative_to(root)}")
-    if stat.S_ISREG(mode):
-        actual[path.relative_to(root).as_posix()] = hashlib.sha256(path.read_bytes()).hexdigest()
-if actual != expected:
-    raise SystemExit("ROCS bundled runtime verification failed closed")
-PY
-rocs=("$python_bin" -I -S -B "$artifact/rocs.py")
-profile="${ROCS_CI_PROFILE:-local-dev}"
-case "$profile" in
-  local-dev) resolve=(--only path) ;;
-  main-strict|branch-ci) resolve=(--resolve-refs --workspace-ref-mode strict) ;;
-  *) echo "unknown ROCS_CI_PROFILE: $profile" >&2; exit 2 ;;
-esac
-"${rocs[@]}" cleanup --repo "$repo"
-"${rocs[@]}" validate --repo "$repo" --json "${resolve[@]}"
-"${rocs[@]}" build --repo "$repo" --json "${resolve[@]}"
-'''
-
 
 def bootstrap(target: Path, repo_class: str, *, dry_run: bool = False, converge: bool = False) -> dict[str, Any]:
     """Converge a repository transactionally, publishing one verified sibling stage."""
@@ -349,7 +305,7 @@ def bootstrap(target: Path, repo_class: str, *, dry_run: bool = False, converge:
     ontology_root = "" if repo_class == "ontology_repo" else "ontology/"
     managed = [
         "tools/rocs-cli", f"{ontology_root}manifest.yaml", f"{ontology_root}src/system4d.yaml",
-        "scripts/ci/full.sh", ".githooks/pre-push", ".githooks/README.md",
+        "scripts/rocs.sh", "scripts/ci/full.sh", ".githooks/pre-push", ".githooks/README.md",
     ]
     legacy = [
         "scripts/audit-fleet.py", "scripts/bootstrap-repo.sh", "scripts/vendor-to.sh",
@@ -415,8 +371,11 @@ def bootstrap(target: Path, repo_class: str, *, dry_run: bool = False, converge:
                 ci = stage / "scripts/ci/full.sh"
                 ci.parent.mkdir(parents=True, exist_ok=True)
                 lock_digest = hashlib.sha256((stage / "tools/rocs-cli/VENDORED_HASHES.json").read_bytes()).hexdigest()
-                ci.write_text(_CI_WRAPPER.replace(_VENDORED_LOCK_DIGEST_TOKEN, lock_digest), "utf-8")
+                ci.write_text(render_ci_wrapper(lock_digest), "utf-8")
                 ci.chmod(0o755)
+                launcher = stage / "scripts/rocs.sh"
+                launcher.write_text(render_cli_wrapper(lock_digest), "utf-8")
+                launcher.chmod(0o755)
                 hook = stage / ".githooks/pre-push"
                 hook.parent.mkdir(parents=True, exist_ok=True)
                 profile = "main-strict" if policy["gate_mode"] == "strict" else "local-dev"
@@ -499,19 +458,37 @@ def cleanup(repo: Path, *, dry_run: bool = False) -> dict[str, Any]:
     is_source = pyproject.is_file() and not pyproject.is_symlink() and 'name = "rocs-cli"' in pyproject.read_text("utf-8")
     if not any(path.is_file() and not path.is_symlink() for path in manifests) and not is_source:
         raise ValueError("repository identity is not verifiable")
-    targets = [root / "ontology/dist", root / "dist"]
+    override = configured_output_root(root, ontology_root(root))
+    if override is not None:
+        present = override.exists()
+        removed = [str(override.relative_to(root))] if present else []
+        if present:
+            clear_managed_output_root(root, dist_dir(root), remove_root=True, dry_run=dry_run)
+        return {"schema_version": 1, "repo": str(root), "dry_run": dry_run, "removed": removed}
+    # Only the layout's own output directory, and only names ROCS writes there: a nested
+    # `ontology/` consumer's root `dist/` belongs to the project's own build, never to ROCS.
+    has_manifest = any(path.is_file() and not path.is_symlink() for path in manifests)
+    target = (ontology_root(root) if has_manifest else root) / "dist"
+    target.resolve(strict=False).relative_to(root)
+    if target.is_symlink():
+        raise ValueError(f"refusing symlink cleanup target: {target}")
     removed: list[str] = []
-    for target in targets:
-        resolved = target.resolve(strict=False)
-        resolved.relative_to(root)
-        if target.is_symlink():
-            raise ValueError(f"refusing symlink cleanup target: {target}")
-    for target in targets:
-        if target.exists():
-            removed.append(str(target.relative_to(root)))
+    retained: list[str] = []
+    if target.is_dir():
+        for entry in sorted(target.iterdir(), key=lambda item: item.name):
+            name = entry.name
+            managed = name in MANAGED_OUTPUT_FILES or name == MANAGED_OUTPUT_LOCK or _is_managed_transient(name)
+            if not managed or entry.is_symlink() or not entry.is_file():
+                retained.append(str(entry.relative_to(root)))
+                continue
+            removed.append(str(entry.relative_to(root)))
             if not dry_run:
-                shutil.rmtree(target) if target.is_dir() else target.unlink()
-    return {"schema_version": 1, "repo": str(root), "dry_run": dry_run, "removed": removed}
+                entry.unlink()
+        if not dry_run and not retained:
+            target.rmdir()
+    elif target.exists():
+        raise ValueError(f"refusing non-directory cleanup target: {target}")
+    return {"schema_version": 1, "repo": str(root), "dry_run": dry_run, "removed": removed, "retained": retained}
 
 
 def doctor(repo: Path) -> tuple[dict[str, Any], int]:

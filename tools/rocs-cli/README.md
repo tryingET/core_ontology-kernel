@@ -43,6 +43,7 @@ Commands:
 - `rocs validate --repo . --only path|ref --layer <name>`
 - `rocs diff --repo . --baseline <repo:...@ref> --resolve-refs [--profile <name>]`
 - `rocs lint --repo . [--fail-on-warn] [--ruleset dev|strict]`
+- `rocs lint --repo . --rules HOLLOW001,HOLLOW002,HOLLOW010,HOLLOW020` (the hollow-layer report, ADR-0008 §10: for the repo's own path layers it warns on whole-value `<...>` template placeholders in any YAML under the src root, `system4d.yaml` included; on YAML that does not parse; on a layer with no concepts, relations or bridge mappings; and on a `system4d.yaml` byte-identical to the project template. Warn-only under the default `dev` ruleset, failing only with `--ruleset strict` or `--fail-on-warn`. `validate`, `build` and their authority receipts do not read it; ref layers are reported by lint in their owner repo.)
 - `rocs check-inverses --repo . [--fix]`
 - `rocs graph --repo . [--relation is_a] [--format excalidraw|excalidraw-cli-json|dot] [--json] [--out <path>]`
 - `rocs cache dir|ls|prune|clear`
@@ -73,12 +74,13 @@ Layer refs (optional):
   - example: `<repo:softwareco/ontology@main>`
 - Legacy `<gitlab:...>` locators are no longer supported.
 - `--resolve-refs` enables resolving ref layers from the local workspace.
+  - `ROCS_RESOLVE_REFS=1` makes it the default for lifecycle commands (explicit `--only path` still wins); the generated `scripts/rocs.sh` sets it unless overridden.
 - Resolution source:
   1) workspace clone (offline)
 - Workspace config:
   - `--workspace-root <path>` (or `ROCS_WORKSPACE_ROOT`): workspace root containing local clones (recommended: `~/ai-society`).
   - `--workspace-ref-mode strict|loose` (or `ROCS_WORKSPACE_REF_MODE`):
-    - `strict` (default): use workspace only if `HEAD` matches the requested ref
+    - `strict` (default): bind the layer to the exact ontology tree of the requested ref: the checkout is used in place when its committed ontology tree equals it and the layer's manifest and `src/` contain no uncommitted changes, ignored entries, or nested `.git`; otherwise the tree is read from the clone's object store into an immutable tree-keyed snapshot (`source=workspace_ref_snapshot`, under `$ROCS_CACHE_DIR/workspace-ref-snapshots/`). A missing ref or committed layer `src/` fails closed. An ontology-path submodule is followed at the exact committed gitlink pin, using that clone in place only when its selected tree is clean, otherwise a snapshot; receipts additionally record `submodule_commit`. Receipts record `requested_ref`, `resolved_commit` and `ontology_tree` per ref layer.
     - `loose`: use workspace checkout even if it doesn’t match the requested ref
   - `repo:` locators bind by workspace layout, not remote origin URL.
 - Diagnostics:
@@ -111,10 +113,14 @@ Graph export:
 - For `excalidraw-cli` (external): use `--format excalidraw-cli-json`, then run `excalidraw-cli create <file> -o graph.excalidraw`.
 
 Tests:
-- `uv run --frozen python -m unittest discover -s tests -p 'test_*.py' -q`
+- Acceptance gate: `./scripts/ci/full.sh`
+- Quick run with the system Node: `uv run --frozen python -m unittest discover -s tests -p 'test_*.py' -q`
+- Python 3.12 is pinned by `.python-version`; the exact Node the Decision 85 conformance tests require is pinned in `scripts/tool_versions.json`. `scripts/ci/full.sh` provisions that Node itself via `scripts/ensure-node.sh` (verified nodejs.org download, cached under `~/.cache/rocs/node`), so it passes regardless of the system Node. A bare `unittest` run uses the system Node, and the conformance tests fail if it differs from the pin. To move Node on purpose, change the pin and run the gate.
 
-CI profile wrapper (template-side policy contract):
-- Script: `scripts/ci/full.sh`
+Generated consumer wrappers:
+- `scripts/rocs.sh` forwards arbitrary ROCS arguments and stdin through the sealed runtime without interpreting them.
+  - When `ROCS_WORKSPACE_ROOT` is unset it defaults to the nearest ancestor containing every `<repo:...@ref>` layer the manifest names (else the repo root), and it exports `ROCS_RESOLVE_REFS=1` unless the caller sets `ROCS_RESOLVE_REFS=0`, so plain `./scripts/rocs.sh validate` checks every layer.
+- `scripts/ci/full.sh` is the separate fixed CI profile contract; caller arguments cannot change its cleanup → validate → build sequence.
 - Layout note: ontology repos may live either at `ontology/` inside a normal repo or directly at repo root when the repo itself is the ontology container.
 - Profiles via `ROCS_CI_PROFILE=local-dev|branch-ci|main-strict`
   - `local-dev`: offline-first default; runs `--only path` unless `ROCS_LOCAL_RESOLVE_REFS=1`, and that opt-in path enables `--resolve-refs` with workspace matching defaulting to `strict`
@@ -122,7 +128,7 @@ CI profile wrapper (template-side policy contract):
   - `main-strict`: requires `--resolve-refs` and defaults workspace matching to `strict` (authoritative fail-closed gate)
 - `ROCS_WORKSPACE_REF_MODE` remains an explicit override when a caller intentionally needs different behavior.
 - This same wrapper is the recommended local hook/Pi entrypoint for pre-push or pre-merge checks.
-- Bootstrapped consumers run the checked-in `tools/rocs-cli` bundle with isolated system `python3 -I -S -B`; the generated wrapper verifies an embedded digest of `VENDORED_HASHES.json` and then every bundled file before import. It does not require `uv`, a source checkout, network access, or ambient `PYTHONPATH`. Explicit `rocs vendor TARGET` is source-project based; schema-3 generation requires a provenance-bearing Git SHA-1 checkout (or an already verified schema-3 bundle for re-vendoring). Installed legacy wheels without commit provenance retain the verified schema-2 bootstrap fallback rather than inventing a Git identity.
+- Bootstrapped consumers run the checked-in `tools/rocs-cli` bundle with isolated system `python3 -I -S -B`. Both generated wrappers bind an embedded digest to `VENDORED_HASHES.json`, descriptor-capture every listed regular, singly linked file without following final symlinks, and write only those verified bytes to a fresh anonymous ZIP memfd. The archive is reread and sealed against writes/growth/shrinkage; Python/resources resolve through it and ABI-compatible native extensions use separately sealed memfds. Each command forks without exec or consumer/private filesystem-path reopen. `scripts/rocs.sh` transports exact argv and preserves stdin/stdout/stderr/exit status; `scripts/ci/full.sh` separately constructs only its fixed three commands. Neither requires `uv`, a source checkout, network access, ambient `PYTHONPATH`, or temporary runtime cleanup. Explicit `rocs vendor TARGET` is source-project based; schema-3 generation requires a provenance-bearing Git SHA-1 checkout (or an already verified schema-3 bundle for re-vendoring). Installed legacy wheels without commit provenance retain the verified schema-2 bootstrap fallback rather than inventing a Git identity.
 - Bootstrap serializes publication with a persistent external sibling lock named `.<repo>.rocs-bootstrap.lock`; it preflights and reports that coordination path separately, never exchanges or unlinks its inode, and creates no undeclared lock inside the consumer tree.
 - `ontology_repo` consumers use root `manifest.yaml` and `src/`; required/optional consumers retain the nested `ontology/` layout. Generated hooks resolve the repository from their installed path, matching Git's real hook invocation contract.
 - See `docs/ref-resolution-ci-strategy.md` for the architecture/policy rationale and migration guidance.
@@ -130,6 +136,7 @@ CI profile wrapper (template-side policy contract):
   - `ROCS_CMD` (default: `uv run --frozen python -m rocs_cli`)
   - `ROCS_REPO` (default: `.`)
   - `ROCS_PROFILE` (optional manifest profile)
+  - `ROCS_OUTPUT_ROOT` (optional parent-owned managed output directory, relative to `ROCS_REPO`; all dist writers and cleanup move together, and a ROCS ownership marker is required)
 
 Constitutional foundry (proposal-only, offline):
 - Schema-1 candidate packets bind owner/adoption scope, rationale, an allowlisted closed predicate AST, positive/negative fixtures, adversarial counterexamples, severity and suppression policy, false-positive challenges, evidence digests, and a canonical candidate digest.
@@ -145,7 +152,7 @@ Intelligence membrane (optional, offline by default):
 - `transaction prepare` binds that immutable plan and capsule to base authority, exact byte preimages, semantic ID/blast-radius/obligation effects, owner partitions, deterministic gates, and rollback. `simulate` is non-mutating. `apply` alone mutates and requires a distinct `operator:` approval bound to the transaction digest; it revalidates all inputs, rejects drift/ref/cross-owner writes, stages on the target filesystem, runs ROCS gates, and compensates every failed publication byte-exactly. `verify` and `rollback` consume digest-validated content-addressed receipts and reject post-apply drift. Rollback is itself a generation-atomic mutation authorized by the supplied transaction and receipt; it restores receipt-bound bytes and exact modes, requires the live generation still match the postimage, and does not obtain a new operator approval. These operations execute no shell, model, or network code.
 
 Wave 1 convergence CLI (the former script API was removed with no shims):
-- `rocs bootstrap TARGET --class required|optional|ontology_repo [--dry-run]` installs the complete class contract.
+- `rocs bootstrap TARGET --class required|optional|ontology_repo [--dry-run]` installs the complete class contract, including the generic sealed `scripts/rocs.sh` and separate fixed `scripts/ci/full.sh`.
 - `rocs converge TARGET --class required|optional|ontology_repo [--dry-run]` idempotently restores that contract and removes replaced generated scripts.
 - `rocs vendor TARGET [--release-version X.Y.Z] [--dry-run]` publishes `pyproject.toml`, `README.md`, the complete package, and one schema-3 `VENDORED_HASHES.json` materialization receipt. The receipt binds the current 40-hex Git SHA-1 commit, exact bundled `uv.lock`, every regular bundle file, and a SHA-256-over-JCS manifest digest.
 - `rocs fleet` provides distinct `observe`, `plan`, `apply`, and `run` operations. Each takes a workspace root and policy; apply supports dry-run and run supports audit-only, patch, or apply mode.
@@ -197,7 +204,11 @@ filesystem-effect and required-authority-artifact rules. See
 A consumer is pinned by `VENDORED_HASHES.json` schema 3. `rocs vendor TARGET`
 publishes one exact package materialization; `rocs verify TARGET` checks the
 Git-SHA-1-shaped source commit, bundled lock digest, complete path/hash set, and
-RFC 8785/JCS receipt digest. This proves exact local bundle identity and
-provenance only—not canonical cross-builder bytes, package publication, semantic
-correctness, or consumer adoption/currentness. Verification does not depend on a
-sibling checkout or workspace PATH.
+RFC 8785/JCS receipt digest. Verification rejects symlinked, non-regular, or
+multiply linked files and mutation observed during a file read. The generated
+gate additionally executes only from sealed anonymous descriptors materialized
+from bytes captured through no-follow descriptors, closing both the
+verification-to-import path race and later same-credential pathname mutation. These checks prove exact local bundle identity and provenance only—not
+canonical cross-builder bytes, package publication, semantic correctness, or
+consumer adoption/currentness. Verification does not depend on a sibling
+checkout or workspace PATH.
