@@ -455,6 +455,10 @@ diagnostic question.
   possible objection may be withdrawn before its test, and one that fails is kept with its test result
   and may still be taken up; a proposal may be unclassified, and then no decision on it may go ahead;
   one decision record may document several decisions in order; AK amends migration 47.
+- **2026-10-03, the remaining semantic points and early closure** (ruling 12461; closure 12462): keep
+  `core.DecisionGate is_a core.Deliberation` and make its diagnostic name the decision formed; add
+  `core.DecisionClass is_a core.UfoCategory.Role`, retaining HighOrderType. The owner closed the
+  round early after both sources confirmed no objection standing (12349, 12351).
 - Release prep is under way: the change is drafted in
   `ontology/decisions/2026-10-02-decision-records-questions.md`; the owner authorizes the final
   content and publishes the release.

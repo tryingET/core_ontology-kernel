@@ -8,6 +8,8 @@ ont:
   relations:
     - type: instance_of
       target: core.UfoCategory.HighOrderType
+    - type: is_a
+      target: core.UfoCategory.Role
   examples:
     - "Class C is the decision class of a new core definition"
   anti_examples:
@@ -39,7 +41,7 @@ A high-order type that disjointly categorizes core.Proposal: each of its instanc
 
 ## Category
 - High-order type (`core.UfoCategory.HighOrderType`), disjointly categorizing `core.Proposal`. Required: its base type (`core.Proposal`), its instances (the three class roles), the rules that assign them.
-- The kernel records it under a sibling category; in OntoUML with high-order types it would specialise UFO Role, the category of its instances (Fonseca et al. 2022, §4.4).
+- It specialises `core.UfoCategory.Role`, the category of its instances (Fonseca et al. 2022, §4.4; Holding Owner ruling 12461). The three class roles classify proposals; DecisionClass classifies those role types. HighOrderType identifies that its instances are types.
 - Reference model: `docs/reference-model/governance-core.md`.
 
 ## Source and mapping
@@ -49,6 +51,7 @@ A high-order type that disjointly categorizes core.Proposal: each of its instanc
 - Holding Owner ruling Q5, 2026-10-01 (AK 6364, evidence 12179).
 - Holding Owner ruling, 2026-10-02 (AK 6364, evidence 12302): the base type is `core.Proposal`.
 - Holding Owner ruling, 2026-10-02 (AK 6364, evidence 12346): a proposal may be unclassified, and then no decision on it may go ahead.
+- Holding Owner ruling, 2026-10-03 (AK 6364, evidence 12461): `is_a core.UfoCategory.Role`, retaining HighOrderType.
 - Decision note: `ontology/decisions/2026-10-02-decision-records-questions.md`.
 
 Admitted: AK task 6364, 2026-10-02

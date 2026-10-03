@@ -32,13 +32,14 @@ The category, from the multi-level theory MLT that UFO incorporates, of domain t
 - Test question: Are its instances domain types rather than individuals?
 - A concept's UFO category is the target of its instance_of edge under core.UfoCategory.
 - Governance-core concepts in this category: core.DecisionClass. It is the instance of this category; the class roles are instances of core.DecisionClass. They point to core.DecisionClass with instance_of as well, but their UFO category is core.UfoCategory.Role.
-- The kernel adds high-order type as a sibling of the other categories under core.UfoCategory. In OntoUML with high-order types, a high-order type instead specialises the UFO category of its instances (Fonseca et al. 2022, §4.4): core.DecisionClass would specialise UFO Role.
+- HighOrderType identifies a type whose instances are types. A high-order type may also specialise the UFO category of its instances (Fonseca et al. 2022, §4.4): `core.DecisionClass is_a core.UfoCategory.Role` records that every instance of DecisionClass is a role type (Holding Owner ruling 12461). The class roles classify proposals; DecisionClass classifies those role types.
 
 ## Source and mapping
 - V. A. Carvalho, J. P. A. Almeida, C. M. Fonseca, G. Guizzardi (2017), Multi-level ontology-based conceptual modeling, Data & Knowledge Engineering 109, pp. 3–24: categorization ("a type t categorizes a type t’ iff all instances of t are proper specializations of t’"), partitions, and Fig. 5 (Person Role).
 - C. M. Fonseca, G. Guizzardi, J. P. A. Almeida, T. P. Sales, D. Porello (2022), Incorporating Types of Types in Ontology-Driven Conceptual Modeling, ER 2022, LNCS 13607, pp. 18–34: high-order types, axiom a7 (categorizes), Fig. 3 (Species), §4.4 (rules involving UFO classes).
 - Checked on 2026-10-02 against the text of the authors' copies (NEMO, UFES), not the page images.
 - Holding Owner ruling Q5, 2026-10-01 (AK 6364, evidence 12179): a new foundational category.
+- Holding Owner ruling, 2026-10-03 (AK 6364, evidence 12461): retain HighOrderType and record `core.DecisionClass is_a core.UfoCategory.Role`.
 - Reference model: `docs/reference-model/governance-core.md`.
 
 Admitted: AK task 6364, 2026-10-02

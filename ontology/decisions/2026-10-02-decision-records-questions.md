@@ -8,10 +8,11 @@ type: "decision"
 
 # Ontology questions from AK's decision records, 2026-10-02
 
-**Decision.** The Holding Owner ruled on AK 6364's questions on 2026-10-01 and 2026-10-02. The
+**Decision.** The Holding Owner ruled on AK 6364's questions on 2026-10-01, 2026-10-02 and 2026-10-03. The
 rulings are AK evidence 12130 (Q1, Q2), 12179 (Q3 to Q6), 12209 (in-place readings; prepare the
 version), 12211 (`core.Objection` in place), 12302 (the class roles' base type is `core.Proposal`; the owner's
-wording of `core.Decision`) and 12346 (after the consent round). This note records the change drafted
+wording of `core.Decision`), 12346 (consent-round integration) and 12461 (early closure and the two
+remaining semantic points). This note records the change drafted
 from them.
 - **Class.** C: every question touches a reserved identifier or the core word *decision* (ADR-0008
   §1.5, §1.6, §4).
@@ -23,9 +24,12 @@ from them.
   Holding Owner. The FCOS pilot and AK sessions were invited as objection sources (packet §6;
   round evidence 12306). Both replied; each possible objection was tested, and the owner ruled on
   the points the tests left open (see "Consent round" below).
+  The owner closed the round early on 2026-10-03 (ruling 12461; closure receipt 12462). No objection
+  stood; both source confirmations are 12349 and 12351.
 - **Authorization.** Pending. The Holding Owner authorizes the final content before the PR is opened.
 - **Dissent.** None recorded; dissent exists only once a decision has gone ahead.
-- **Conformance receipt.** The corpus digest at the commit that is authorized (to be filled).
+- **Conformance receipt.** Prepared corpus `sha256:67d55411209af6c4d77a58f6ecaa0826d2d6ca318dbe32deea1c433f12f3d06d`.
+  Final receipt pending authorization of the exact checked commit on AK 6364.
 - **Review date.** 2027-04-01 (proposed).
 
 ## What changed
@@ -39,15 +43,15 @@ from them.
 | `core.Dissent` | typical usage extended in place: before a decision goes ahead, a standing objection is escalated, not yet dissent; edge `depends_on core.Decision` |
 | `core.Decision` | new, UFO mode: the intention a deliberation creates (Core Ontology on Decision Making); the Holding Owner's wording, adopted 2026-10-02 (evidence 12302), including "doing nothing included" |
 | `core.Deliberation` | new, UFO event: `produces core.Decision` |
-| `core.DecisionGate` | edge `is_a core.Deliberation` |
+| `core.DecisionGate` | edge `is_a core.Deliberation`; diagnostic names the decision the deliberation forms (evidence 12461) |
 | `core.DecisionRecord` | edge `depends_on core.Decision`; one record may document several decisions in order (evidence 12346) |
 | `core.Authorization` | edges `manifests core.Decision`, `precedes core.Revocation` |
 | `core.Refusal` | new, UFO event: the holder of the authority refuses a permission asked for |
 | `core.Revocation` | new, UFO event: ends permissions or a delegated authority; one concept for both |
 | `core.Permission` | typical usage extended in place: its scope may say when it ends; a review date ends nothing |
 | `core.ClassAChange`, `core.ClassBChange`, `core.ClassCChange` | new, UFO roles: the class a proposal holds under the class rules; each `is_a core.Proposal` (evidence 12302); the reserved scope is class C first, and A and B lie outside it |
-| `core.DecisionClass` | new, high-order type: disjointly categorizes `core.Proposal`, and a classified proposal holds exactly one class role (evidence 12346); its instances are the three class roles |
-| `core.UfoCategory.HighOrderType` | new foundational category (MLT), a sibling of the UFO categories |
+| `core.DecisionClass` | new, high-order type: disjointly categorizes `core.Proposal`, and a classified proposal holds exactly one class role (evidence 12346); its instances are the three class roles; `is_a core.UfoCategory.Role` (evidence 12461) |
+| `core.UfoCategory.HighOrderType` | new foundational category (MLT), identifying a type whose instances are types; retained alongside DecisionClass's specialization of UFO Role (evidence 12461) |
 | relation `manifests` | new relation type (UFO-B manifestation) |
 | `core.ConsentTier` | unchanged: it is the path tier, not the decision class; its category stays open |
 
@@ -94,15 +98,16 @@ against the files (evidence 12312 for AK, 12313 for FCOS).
 - **Disclosed.** `core.Deliberation` names its agent "a decider"; the packet draft read "an agent".
   The change keeps a CI discovery gate under its cap (ontology-kernel 6448); neither word was ruled.
 
-## Open points
+## Rulings of 2026-10-03 (evidence 12461)
 
-- **`core.DecisionGate`'s diagnostic question.** "Does it create or change a permission or commitment?
-  If not, it is a check, not a decision gate." Under `is_a core.Deliberation` a decision gate creates
-  a decision, an intention; the permission comes from the authorization that manifests it. The
-  question is left unchanged; the owner decides whether the question or the edge moves.
-- **Sibling category.** The kernel adds high-order type beside the UFO categories. In OntoUML with
-  high-order types, a high-order type specialises the UFO category of its instances (Fonseca et al.
-  2022, §4.4), so `core.DecisionClass` would specialise UFO Role.
+- **Early closure.** Both invited sources confirmed no remaining objection. The owner closed round
+  12306 early; receipt 12462 records every argument's test and disposition.
+- **`core.DecisionGate`.** Keep `is_a core.Deliberation`. Its diagnostic now asks: “Does a named
+  authority form a decision on whether work may proceed, against criteria set in advance?” The
+  deliberation forms the decision; authorization manifests it.
+- **`core.DecisionClass`.** Add `is_a core.UfoCategory.Role`, retaining HighOrderType. The three
+  class roles classify proposals; DecisionClass classifies those role types. This records the
+  category of its instances, following Fonseca et al. 2022 §4.4.
 
 ## In-place readings
 
