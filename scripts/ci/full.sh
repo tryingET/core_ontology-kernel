@@ -70,27 +70,36 @@ esac
 # Raw SHA-256 of the exact verified VENDORED_HASHES.json bytes. This is only
 # non-authoritative prepared-runtime invocation metadata.
 manifest_digest="sha256:1a05dc91dd1546921861851f4f16cf3dc24af00bcf3b962a72283a37a4b68564"
-"${rocs[@]}" discover \
-  --repo "$repo" \
-  --request-file "$repo/tests/fixtures/semantic-discovery-request.v0.json" \
-  --tool-kind development_runtime \
-  --tool-manifest-digest "$manifest_digest" \
-  --json --no-index-cache --no-env-file \
-  > "$gate_tmp/discover.json"
-read -r snapshot_digest document_digest < <(
-  "$python_bin" -I -S -B - "$gate_tmp/discover.json" <<'PY'
+check_discovery() {
+  local corpus_repo="$1" growth_case="${2:-normal}"
+  local snapshot_digest document_digest
+  "${rocs[@]}" discover \
+    --repo "$corpus_repo" \
+    --request-file "$repo/tests/fixtures/semantic-discovery-request.v0.json" \
+    --tool-kind development_runtime \
+    --tool-manifest-digest "$manifest_digest" \
+    --json --no-index-cache --no-env-file \
+    > "$gate_tmp/discover.json"
+  read -r snapshot_digest document_digest < <(
+    "$python_bin" -I -S -B - "$gate_tmp/discover.json" "$growth_case" <<'PY'
 import json, sys
 payload = json.load(open(sys.argv[1], encoding="utf-8"))
 candidates = payload.get("candidates")
-if payload.get("retrieval") != "multiple_candidates" or payload.get("truncated") is not False:
-    raise SystemExit("expected complete multiple-candidate discovery")
+if payload.get("retrieval") != "multiple_candidates" or type(payload.get("truncated")) is not bool:
+    raise SystemExit("expected bounded multiple-candidate discovery")
 if not isinstance(candidates, list) or len(candidates) < 2:
     raise SystemExit("expected at least two discovery candidates")
+candidate_limit = payload["effective_limits"]["candidates"]
+if len(candidates) > candidate_limit:
+    raise SystemExit("discovery exceeded the candidate emission bound")
+if sys.argv[2] == "growth" and (payload["truncated"] is not True or len(candidates) != candidate_limit):
+    raise SystemExit("expected growth regression to fill and truncate the candidate emission bound")
 identities = [(candidate.get("ont_id"), candidate.get("kind")) for candidate in candidates]
 if len(set(identities)) != len(identities):
     raise SystemExit("expected unique discovery candidates")
 # Concepts whose text mentions "agent" or "authority" rank below the two exact
-# id/label matches; the gate pins the top two, not the size of the corpus.
+# id/label matches. ROCS v0 caps emission at 12, so truncation is legitimate;
+# the gate pins the top two, not the size of the corpus.
 top_two = {(candidate.get("ont_id"), candidate.get("kind"))
            for candidate in sorted(candidates, key=lambda candidate: candidate.get("rank"))[:2]}
 expected = {("core.Agent", "concept"), ("core.Authority", "concept")}
@@ -99,13 +108,41 @@ if top_two != expected:
 candidate = next(candidate for candidate in candidates if candidate.get("ont_id") == "core.Agent")
 print(payload["corpus_snapshot_digest"], candidate["document_digest"])
 PY
-)
-"${rocs[@]}" pack core.Agent \
-  --repo "$repo" --profile kernel-v1 --json \
-  --expected-snapshot-digest "$snapshot_digest" \
-  --expected-document-digest "$document_digest" \
-  --no-index-cache --no-env-file \
-  > "$gate_tmp/bound-pack.json"
+  )
+  "${rocs[@]}" pack core.Agent \
+    --repo "$corpus_repo" --profile kernel-v1 --json \
+    --expected-snapshot-digest "$snapshot_digest" \
+    --expected-document-digest "$document_digest" \
+    --no-index-cache --no-env-file \
+    > "$gate_tmp/bound-pack.json"
+}
+check_discovery "$repo"
+
+# Copy the actual corpus, then add 13 low-ranked matching concepts exclusively
+# in disposable scratch. This exceeds the protocol's 12-candidate output bound
+# even if the kernel later sheds every other incidental match. Resource limits,
+# native snapshot checks, ranking and routing assertions remain unchanged.
+growth_root="$gate_tmp/synthetic-growth"
+"$python_bin" -I -S -B - "$repo/ontology" "$growth_root/ontology" <<'PY'
+import shutil, sys
+from pathlib import Path
+source, target = map(Path, sys.argv[1:])
+target.mkdir(parents=True)
+shutil.copyfile(source / "manifest.yaml", target / "manifest.yaml")
+shutil.copytree(source / "src", target / "src")
+if (source / "profiles").exists():
+    shutil.copytree(source / "profiles", target / "profiles")
+for index in range(13):
+    ont_id = f"synthetic.Growth{index:02}"
+    (target / "src/reference/concepts" / f"{ont_id}.md").write_text(
+        f'---\nont:\n  id: "{ont_id}"\n  type: concept\n'
+        f'  labels: ["Synthetic growth {index:02}"]\n'
+        '  description: "Synthetic agent authority candidate for CI only."\n'
+        f'  relations: []\n---\n\n# Synthetic growth {index:02}\n',
+        encoding="utf-8",
+    )
+PY
+check_discovery "$growth_root" growth
 
 # Exercise semantic routing only with conspicuously synthetic, disposable
 # policy/provenance authority. This creates no kernel or Decision 53 fact.
@@ -212,19 +249,20 @@ request = {
 (policy_root / "provenance.json").write_bytes(jcs_bytes(provenance))
 (policy_root / "request.json").write_bytes(jcs_bytes(request))
 PY
-"${rocs[@]}" route \
-  --repo "$repo" \
-  --policy-owner-repo-id synthetic-kernel-gate-owner \
-  --policy-owner-repo-root "$owner_root" \
-  --routing-policy-root "$policy_root" \
-  --routing-policy policy.json \
-  --routing-provenance provenance.json \
-  --request-json - \
-  --tool-kind development_runtime \
-  --tool-manifest-digest "$manifest_digest" \
-  --json --no-index-cache --no-env-file \
-  < "$policy_root/request.json" > "$gate_tmp/route.json"
-"$python_bin" -I -S -B - "$gate_tmp/route.json" <<'PY'
+for corpus_repo in "$repo" "$growth_root"; do
+  "${rocs[@]}" route \
+    --repo "$corpus_repo" \
+    --policy-owner-repo-id synthetic-kernel-gate-owner \
+    --policy-owner-repo-root "$owner_root" \
+    --routing-policy-root "$policy_root" \
+    --routing-policy policy.json \
+    --routing-provenance provenance.json \
+    --request-json - \
+    --tool-kind development_runtime \
+    --tool-manifest-digest "$manifest_digest" \
+    --json --no-index-cache --no-env-file \
+    < "$policy_root/request.json" > "$gate_tmp/route.json"
+  "$python_bin" -I -S -B - "$gate_tmp/route.json" "$corpus_repo" "$growth_root" <<'PY'
 import json, sys
 payload = json.load(open(sys.argv[1], encoding="utf-8"))
 if payload.get("admission", {}).get("state") != "admitted":
@@ -232,7 +270,11 @@ if payload.get("admission", {}).get("state") != "admitted":
 routing = payload.get("routing", {})
 if routing.get("state") != "single" or routing.get("selected_ont_ids") != ["core.Agent"]:
     raise SystemExit("expected synthetic route to select only core.Agent")
+if sys.argv[2] == sys.argv[3] and payload["discovery_result"]["truncated"] is not True:
+    raise SystemExit("expected single routing to survive truncated discovery in the growth corpus")
 PY
+done
+echo 'Semantic growth regression: bounded discovery and single core.Agent routing passed'
 
 # Exercise the generated hook against a disposable probe entrypoint. Hook
 # activation in the real checkout remains an explicit operator action.
