@@ -69,7 +69,7 @@ esac
 
 # Raw SHA-256 of the exact verified VENDORED_HASHES.json bytes. This is only
 # non-authoritative prepared-runtime invocation metadata.
-manifest_digest="sha256:c7bf413cc0edb5fec30eb5aadfa5bc2f30c366a36b8aa392936be821a5912ad7"
+manifest_digest="sha256:1a05dc91dd1546921861851f4f16cf3dc24af00bcf3b962a72283a37a4b68564"
 "${rocs[@]}" discover \
   --repo "$repo" \
   --request-file "$repo/tests/fixtures/semantic-discovery-request.v0.json" \

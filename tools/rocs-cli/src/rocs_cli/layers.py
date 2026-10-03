@@ -7,6 +7,7 @@ from pathlib import Path
 import yaml
 
 from rocs_cli.errors import RocsCliError
+from rocs_cli.managed_surface import configured_output_root
 from rocs_cli.source_contract import SourceContractSelectorError, source_contract_for_src_root
 from rocs_cli.workspace import (
     git_head_sha,
@@ -15,6 +16,9 @@ from rocs_cli.workspace import (
     pick_workspace_repo_root,
     workspace_ref_mode_from_env,
     workspace_root_from_env,
+    workspace_gitlink,
+    workspace_ref_binding,
+    workspace_ref_snapshot,
 )
 
 
@@ -27,8 +31,10 @@ class LayerSpec:
     src_root: Path
     origin: str  # path or ref locator
     kind: str  # path|ref
-    source: str  # path|workspace
+    source: str  # path|workspace|workspace_ref_snapshot
     source_contract: str | None = None
+    # Strict workspace ref binding: requested_ref, resolved_commit, ontology_tree.
+    binding: tuple[tuple[str, str], ...] | None = None
 
 
 def repo_root(repo: str) -> Path:
@@ -77,7 +83,9 @@ def manifest_path(repo_root: Path) -> Path:
 
 
 def dist_dir(repo_root: Path) -> Path:
-    return ontology_root(repo_root) / "dist"
+    root = repo_root.expanduser().resolve()
+    ontology = ontology_root(root)
+    return configured_output_root(root, ontology) or ontology / "dist"
 
 
 def default_repo_src_path(repo_root: Path) -> str:
@@ -142,6 +150,51 @@ def _unsupported_gitlab_locator(locator: str, *, project_path: str, ref: str) ->
     )
 
 
+def _strict_workspace_binding(
+    ws_repo_root: Path, want: str, *, locator: str, ref: str, notes: dict, details: dict
+) -> tuple[Path, str]:
+    """Bind a strict ref layer to the exact ontology bytes of `ref` (the resolved commit `want`).
+
+    That is a tree property, not a checkout property. The checkout is used in place when its
+    ontology tree is that tree and the files read are exactly those bytes; otherwise the tree is
+    read from the clone's object store into an immutable snapshot. A submodule at the ontology
+    path pins its own commit, so the bytes are that commit's, read from the nested clone.
+    """
+    subpath = "" if ontology_root(ws_repo_root) == ws_repo_root else "ontology"
+    bind_root, bind_commit, bind_subpath = ws_repo_root, want, subpath
+    pinned = workspace_gitlink(ws_repo_root, want, subpath)
+    if pinned is not None:
+        bind_root, bind_commit = ws_repo_root / subpath, pinned
+        bind_subpath = "" if ontology_root(bind_root) == bind_root else "ontology"
+    has_clone = pinned is None or (bind_root / ".git").exists()
+    binding = workspace_ref_binding(bind_root, bind_commit, bind_subpath) if has_clone else None
+    if binding is None:
+        # An ignored or unpinned nested-repository ontology is not part of `ref`: fail closed
+        # rather than bind a tree that holds no layer (AK 6329).
+        src = f"{bind_subpath}/src" if bind_subpath else "src"
+        where = f"{ref!r} has no committed {src} in {bind_root}"
+        if pinned is not None:
+            where = f"{ref!r} pins submodule {subpath!r} at {pinned}, which has no {src} in a clone at {bind_root}"
+        raise RocsCliError(
+            kind="not_found",
+            message=(
+                f"local ref not available in workspace: {locator} (strict mode reads committed bytes only, "
+                f"and {where}; an ignored or unpinned nested-repository ontology is not part of the ref. "
+                "Commit or check it out there, or use --workspace-ref-mode loose)"
+            ),
+            details={**details, "missing_tree": src, **({"submodule_commit": pinned} if pinned else {})},
+        )
+    notes["workspace"]["binding"] = {"requested_ref": ref, "resolved_commit": want, **binding}
+    if pinned is not None:
+        notes["workspace"]["binding"]["submodule_commit"] = pinned
+    notes["workspace"]["used"] = True
+    if binding["in_place"]:
+        return bind_root, "workspace"
+    snapshot = workspace_ref_snapshot(bind_root, bind_commit, bind_subpath, binding["tree"])
+    notes["workspace"]["binding"]["snapshot"] = str(snapshot)
+    return snapshot, "workspace_ref_snapshot"
+
+
 def _repo_root_for_ref(
     locator: str,
     *,
@@ -167,16 +220,14 @@ def _repo_root_for_ref(
     notes: dict = {"scheme": scheme, "workspace": {"present": False, "used": False, "reason": None}}
     mismatch_details: dict | None = None
 
+    details: dict = {
+        "project_path": project_path,
+        "requested_ref": ref,
+    }
     if workspace_root is not None:
+        details["workspace_root"] = str(workspace_root)
         if workspace_repo_exists(workspace_root, project_path):
             notes["workspace"]["present"] = True
-            mismatch_details = {
-                "workspace_root": str(workspace_root),
-                "workspace_ref_mode": workspace_ref_mode,
-                "project_path": project_path,
-                "requested_ref": ref,
-                "require_origin_match": False,
-            }
         ws_repo_root = pick_workspace_repo_root(
             workspace_root,
             project_path,
@@ -187,30 +238,29 @@ def _repo_root_for_ref(
                 notes["workspace"]["used"] = True
                 return ws_repo_root, locator, "workspace", notes
 
-            head = git_head_sha(ws_repo_root)
             want = git_rev_sha(ws_repo_root, ref)
-            mismatch_details = dict(mismatch_details or {})
-            mismatch_details.update(
-                {
-                    "workspace_repo_root": str(ws_repo_root),
-                    "head_sha": head,
-                    "requested_sha": want,
-                }
-            )
-            if head is not None and want is not None and head == want:
-                notes["workspace"]["used"] = True
-                return ws_repo_root, locator, "workspace", notes
+            # Only a clone can mismatch; with no clone the generic "check it out" message applies.
+            mismatch_details = {
+                "workspace_root": str(workspace_root),
+                "workspace_ref_mode": workspace_ref_mode,
+                "project_path": project_path,
+                "requested_ref": ref,
+                "require_origin_match": False,
+                "workspace_repo_root": str(ws_repo_root),
+                "head_sha": git_head_sha(ws_repo_root),
+                "requested_sha": want,
+            }
+            if want is not None:
+                bound, source = _strict_workspace_binding(
+                    ws_repo_root, want, locator=locator, ref=ref, notes=notes,
+                    details={**details, "workspace_ref_mismatch": mismatch_details},
+                )
+                return bound, locator, source, notes
             if workspace_ref_mode == "strict":
                 notes["workspace"]["reason"] = "ref_mismatch"
         elif notes["workspace"]["present"]:
             notes["workspace"]["reason"] = "not_git_repo"
 
-    details: dict = {
-        "project_path": project_path,
-        "requested_ref": ref,
-    }
-    if workspace_root is not None:
-        details["workspace_root"] = str(workspace_root)
     message = (
         f"local ref not available in workspace: {locator} "
         "(set --workspace-root / ROCS_WORKSPACE_ROOT and checkout the dependency repo locally)"
@@ -219,7 +269,8 @@ def _repo_root_for_ref(
         details["workspace_ref_mismatch"] = mismatch_details
         message = (
             f"local ref not available in workspace: {locator} "
-            f"(workspace ref mismatch in strict mode; checkout {ref!r} or use --workspace-ref-mode loose)"
+            f"(workspace ref mismatch in strict mode: {ref!r} is not in the local clone; "
+            f"fetch it, e.g. `git -C <clone> fetch --tags`, or use --workspace-ref-mode loose)"
         )
     raise RocsCliError(kind="not_found", message=message, details=details)
 
@@ -249,6 +300,18 @@ def resolve_ref_repo_root(
         workspace_ref_mode=ws_mode,
     )
     return repo, source, notes
+
+
+def _strict_binding(notes: dict) -> tuple[tuple[str, str], ...] | None:
+    binding = (notes.get("workspace") or {}).get("binding")
+    if not isinstance(binding, dict):
+        return None
+    return (
+        ("ontology_tree", str(binding["tree"])),
+        ("requested_ref", str(binding["requested_ref"])),
+        ("resolved_commit", str(binding["resolved_commit"])),
+        *((("submodule_commit", str(binding["submodule_commit"])),) if "submodule_commit" in binding else ()),
+    )
 
 
 def _layer_source_contract(src_root: Path, *, layer_name: str) -> str | None:
@@ -388,6 +451,7 @@ def resolve_layers(
                     kind="ref",
                     source=source,
                     source_contract=_layer_source_contract(src_root, layer_name=name),
+                    binding=_strict_binding(notes),
                 )
             )
             resolution_notes[name] = notes

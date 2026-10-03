@@ -22,7 +22,7 @@ import stat
 import sys
 from typing import Mapping
 
-TRUSTED_LOCK_DIGEST = "c7bf413cc0edb5fec30eb5aadfa5bc2f30c366a36b8aa392936be821a5912ad7"
+TRUSTED_LOCK_DIGEST = "1a05dc91dd1546921861851f4f16cf3dc24af00bcf3b962a72283a37a4b68564"
 LOCK_NAME = "VENDORED_HASHES.json"
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 DIAGNOSTIC_LIMIT = 20
