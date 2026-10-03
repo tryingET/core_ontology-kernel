@@ -25,7 +25,7 @@ The UFO category of moments that inhere in one bearer and cannot be measured on 
 
 ## Typical usage
 - Test question: Whose is it, and can it be measured on a scale?
-- Governance-core concepts in this category: core.ActorCapability, core.Authority, core.Objection, core.Permission, core.StakeholderExpectation.
+- Governance-core concepts in this category: core.ActorCapability, core.Authority, core.Concern, core.Decision, core.Objection, core.Permission, core.PossibleObjection, core.StakeholderExpectation.
 
 ## Source and mapping
 - Guizzardi et al. (2022), UFO: Unified Foundational Ontology, Applied Ontology 17(1), p. 172. Checked on the page images on 2026-09-27.

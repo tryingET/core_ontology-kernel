@@ -6,6 +6,8 @@ ont:
   synonyms: []
   description: "An act: a named authority decides, against criteria set in advance, whether work may proceed."
   relations:
+    - type: is_a
+      target: core.Deliberation
     - type: depends_on
       target: core.Authority
     - type: instance_of

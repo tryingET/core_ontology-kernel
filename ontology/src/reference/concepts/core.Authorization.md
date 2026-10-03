@@ -8,6 +8,10 @@ ont:
   relations:
     - type: depends_on
       target: core.Authority
+    - type: manifests
+      target: core.Decision
+    - type: precedes
+      target: core.Revocation
     - type: instance_of
       target: core.UfoCategory.Event
   examples:
