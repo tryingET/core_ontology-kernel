@@ -12,8 +12,8 @@ type: "decision"
 rulings are AK evidence 12130 (Q1, Q2), 12179 (Q3 to Q6), 12209 (in-place readings; prepare the
 version), 12211 (`core.Objection` in place), 12302 (the class roles' base type is `core.Proposal`; the owner's
 wording of `core.Decision`), 12346 (consent-round integration) and 12461 (early closure and the two
-remaining semantic points). This note records the change drafted
-from them.
+remaining semantic points). Final content authorization is evidence 12507. This note records
+the authorized change and its consumer handoffs.
 - **Class.** C: every question touches a reserved identifier or the core word *decision* (ADR-0008
   §1.5, §1.6, §4).
 - **Driver.** AK 5991's decision records needed closed vocabularies, and AK routed the questions it
@@ -26,11 +26,18 @@ from them.
   the points the tests left open (see "Consent round" below).
   The owner closed the round early on 2026-10-03 (ruling 12461; closure receipt 12462). No objection
   stood; both source confirmations are 12349 and 12351.
-- **Authorization.** Pending. The Holding Owner authorizes the final content before the PR is opened.
+- **Authorization.** The Holding Owner authorized v0.4.0 content at
+  `6a429bb7e1087553f4572009a743ca3b911f22ab` on 2026-10-03 (evidence 12507), including the
+  in-place ConsentRound and DecisionRecord readings, Deliberation's “a decider” and the review
+  date. Authorization annotations preserve the corpus below. The same evidence separately
+  authorizes the consumer queue bindings and push/preparation PR; release publication remains
+  the owner's separate act.
 - **Dissent.** None recorded; dissent exists only once a decision has gone ahead.
-- **Conformance receipt.** Prepared corpus `sha256:67d55411209af6c4d77a58f6ecaa0826d2d6ca318dbe32deea1c433f12f3d06d`.
-  Final receipt pending authorization of the exact checked commit on AK 6364.
-- **Review date.** 2027-04-01 (proposed).
+- **Conformance receipt.** Authorized corpus
+  `sha256:67d55411209af6c4d77a58f6ecaa0826d2d6ca318dbe32deea1c433f12f3d06d` at
+  `6a429bb7e1087553f4572009a743ca3b911f22ab`; candidate checks are AK evidence 12484.
+  The final annotation commit and its checks are recorded on AK 6364.
+- **Review date.** 2027-04-01 (authorized in 12507).
 
 ## What changed
 
@@ -96,7 +103,8 @@ against the files (evidence 12312 for AK, 12313 for FCOS).
   several permissions in one act; AK pinning the ontology version; 6368's fields; "Not the AK decision
   row" (a preference); FCOS C1, which FCOS entity plays `core.Proposal`.
 - **Disclosed.** `core.Deliberation` names its agent "a decider"; the packet draft read "an agent".
-  The change keeps a CI discovery gate under its cap (ontology-kernel 6448); neither word was ruled.
+  The change keeps a CI discovery gate under its cap (ontology-kernel 6448). Neither word was
+  ruled when the sources tested it; the owner authorized “a decider” in 12507.
 
 ## Rulings of 2026-10-03 (evidence 12461)
 
@@ -113,8 +121,8 @@ against the files (evidence 12312 for AK, 12313 for FCOS).
 
 CORE-INV-002 says a meaning change takes a new identifier. These five identifiers were released in
 v0.3.0. The owner read the changes as keeping each concept's meaning (evidence 12209, 12211), so the
-identifiers stay; the two extensions ruled after the consent round (evidence 12346) are named in the
-authorization request:
+identifiers stay. The owner explicitly authorized the two extensions ruled after the consent
+round (evidence 12346), including the narrowing below, in final authorization 12507:
 - **`core.Objection`.** Its conditions are unchanged: it blocks consent, and "a preference without
   impact" is not one. An argument that fails the S3 test never blocked consent, so it was never an
   objection under the kernel's own definition. Adding `core.PossibleObjection` above it leaves its
@@ -137,7 +145,10 @@ authorization request:
   - `decision_objections` rows key to `core.PossibleObjection`; a qualified one is a
     `core.Objection`.
   - `act` keys to `core.Authorization`, `core.Refusal` or `core.Revocation`.
-  - Concerns gain a home.
+  - Concerns gain a home through AK 6493, deferred until 6367's live schema-47 apply.
+  - AK 6492 carries the non-blocking choice of how one revocation of several permissions is recorded.
+  - AK 6368 carries each decision's deliberation, decision criteria and the do-nothing alternative,
+    after governance-kernel 6013's spine specifications.
   - Grants may carry an optional end (Q6).
   - The AK decision row is a decision case, mapped to `core.DecisionRecord`.
   - Migration 47 is amended with these keys and a disposition grid matched to the final
@@ -154,7 +165,9 @@ authorization request:
   - `not_after` is the end its grant states (`core.Permission`), enforced as now. An agreement review
     falls due before it and ends nothing.
   - `decision_class` (design D11) maps to `core.DecisionClass`. Which FCOS entity plays
-    `core.Proposal` is FCOS's to state (consent-round concern C1).
+    `core.Proposal` is FCOS's to state (consent-round concern C1). AK 6494 binds that mapping and
+    the prospective versioned adoption, deferred until the published v0.4.0 and the holder's
+    admission of timing. It preserves all version-1 custody.
 - **governance-kernel (class C).**
   - The ADR-0008 data file reserves the new identifiers, and adds *possible objection*, *concern*,
     *refusal*, *revocation* and *decision class* to `core_words`.

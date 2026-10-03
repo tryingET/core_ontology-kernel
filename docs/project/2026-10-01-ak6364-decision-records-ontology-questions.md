@@ -459,6 +459,11 @@ diagnostic question.
   `core.DecisionGate is_a core.Deliberation` and make its diagnostic name the decision formed; add
   `core.DecisionClass is_a core.UfoCategory.Role`, retaining HighOrderType. The owner closed the
   round early after both sources confirmed no objection standing (12349, 12351).
+- **2026-10-03, final authorization** (12507): the owner authorized v0.4.0 content at
+  `6a429bb7e1087553f4572009a743ca3b911f22ab`, including the disclosed in-place ConsentRound and
+  DecisionRecord readings, Deliberation's “a decider” and the 2027-04-01 review date. It separately
+  authorizes the four consumer queue bindings and push/preparation PR. Consumer receipt 12508
+  binds 6368 and new owner tasks 6492–6494. Release publication remains the owner's separate act.
 - Release prep is under way: the change is drafted in
   `ontology/decisions/2026-10-02-decision-records-questions.md`; the owner authorizes the final
   content and publishes the release.

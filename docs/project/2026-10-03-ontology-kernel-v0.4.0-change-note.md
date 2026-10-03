@@ -9,9 +9,12 @@ task_id: 6364
 
 # ontology-kernel v0.4.0 change note
 
-AK 6364 carries the ontology questions from AK 5991's decision records. This is the local v0.4.0
-preparation candidate. Consent round 12306 closed early under the owner's ruling 12461, with no
-objection standing (receipt 12462). Final content authorization and the PR are pending.
+AK 6364 carries the ontology questions from AK 5991's decision records. Consent round 12306
+closed early under the owner's ruling 12461, with no objection standing (receipt 12462).
+The owner authorized the v0.4.0 content at `6a429bb7e1087553f4572009a743ca3b911f22ab`
+(evidence 12507). This preparation candidate adds authorization annotations and queue bindings
+without changing the authorized corpus. Push and the preparation PR are authorized separately
+in the same receipt; release publication remains the owner's separate act.
 The release follows [docs/release-procedure.md](../release-procedure.md).
 
 ## Content
@@ -61,10 +64,9 @@ Added concepts, a relation type and edges make this a minor version under
 
 No new deprecation is proposed. The owner has ruled on in-place readings for `core.Objection`,
 `core.ConsentRound`, `core.Dissent` and `core.Permission` (evidence 12209 and 12211). Final
-authorization must explicitly cover the narrowing of ConsentRound's end-state text and the
+authorization 12507 explicitly covers the narrowing of ConsentRound's end-state text and the
 extension of DecisionRecord's Required line to each decision in order (ruling 12346).
-Deliberation's wording “a decider” and the proposed 2027-04-01 review date are also disclosed in
-the final authorization request.
+It also authorizes Deliberation's wording “a decider” and the 2027-04-01 review date.
 
 The five v0.3.0 deprecations remain resolvable with their existing successors and decision references:
 
@@ -83,11 +85,15 @@ Decision note: [2026-09-27-governance-core-splits.md](../../ontology/decisions/2
 - Agent Kernel: AK 6471 amends dormant migration 47 and its disposition grid before AK 6367's live
   apply. Raised arguments key to `core.PossibleObjection`; acts key to Authorization, Refusal or
   Revocation. AK 6453 carries the ontology pin and checks that its constants resolve. AK 6366
-  carries classification and outcome checks; AK 6368 carries decision-record fields.
+  carries classification and outcome checks; AK 6368 carries decision-record fields, including
+  deliberation, decision criteria and the do-nothing alternative after governance-kernel 6013.
+  AK 6492 carries the multi-permission revocation representation; AK 6493 carries the concerns
+  home after the live schema-47 apply.
 - FCOS: adoption is forward, in new record versions. Existing version-1 records, signed facts and
   archived inputs retain their validators. In new records, failed possible objections are kept
   with their test result and have no dissent entry. `not_after` is the end the grant states.
-  Which FCOS entity plays `core.Proposal` remains its owner's concern from the consent round.
+  AK 6494 carries the proposal/class-role mapping and prospective versioned adoption after
+  publication of v0.4.0 and the holder's admission of timing.
 - Governance-kernel: its owner reserves the new identifiers and core words and distinguishes
   escalated objections before a decision from dissent after it.
 - Org-handbook: consent-tier SOPs keep `core.ConsentTier`; decision-class wording follows the new
@@ -102,7 +108,7 @@ The fidelity check accounts for all twelve findings against `1204635` (evidence 
 remaining semantic points are now ruled in 12461. Conformance receipts check the source contract,
 schema and references; the owner and work-product inspection judge meaning.
 
-Publication authority and consumer adoption remain their own records. The remaining consumer
-concerns need authoritative handoffs before 6364 completes; the preparation checkpoint records
-those handoffs and any remaining permission.
-
+Publication authority and consumer adoption remain their own records. Consumer handoff receipt
+12508 binds the four queue records with owners, triggers, review dates and blast radius:
+6368 retains deferral 472 (2026-11-30); 6492 has deferral 516 (2026-10-31); 6493 has deferral
+517 (2026-11-30); 6494 has deferral 518 (2026-10-31).
