@@ -43,7 +43,7 @@ Commitments and claims are externally dependent modes in UFO-A (UFO2022, p. 172)
 |---|---|---|---|
 | `core.CarriedObligation` | UFO commitment | who owes it, to whom, the proceed decision, owner and date | Who can dismiss it? Only the party it is owed to. |
 | `core.TaskClaim` | UFO commitment | the agent (its session), the requester, the task, the lease; paired with the requester's claim | Who can end it? The agent by releasing it, or the requester by dismissing it; a lease that runs out is a broken commitment. |
-| `core.AgreementReview` | UFO event | the agreement, its evaluation criteria, the review date | Does it end in keep, evolve or drop? Yes. |
+| `core.AgreementReview` | UFO event | the agreement (S3 v2026: policy), its evaluation criteria or metrics, the review date | Does it end in keep, evolve or drop? Yes. |
 | `core.AuditEvent` | UFO event | who, what, when, why | Can it change after it happened? No. |
 | `core.Authorization` | UFO event | grantor (holding the authority), grantee, scope, basis; it founds a permission | Can an authorization change after it was given? No: a revocation is a new event. |
 | `core.ConformanceAudit` | UFO event | the product, its requirements and documentation | Is a product checked against its requirements? Yes. |
@@ -71,11 +71,11 @@ Commitments and claims are externally dependent modes in UFO-A (UFO2022, p. 172)
 | `core.RetainedArtefact` | UFO kind | the content digest, the source, the capture time | Can its bytes be re-verified against its digest? |
 | `core.ActorCapability` | UFO mode | the actor or system, what it can do | Could it do this even where it is not permitted to? |
 | `core.Authority` | UFO mode | its holder, its scope, and the norm or delegation that created it | Who holds it, for what? |
-| `core.Concern` | UFO mode | who holds it, the proposal, agreement or activity, the assumption | Could it block consent? Never. |
+| `core.Concern` | UFO mode | who holds it, the proposal, existing decision or activity, the assumption | Could it block consent? Never. |
 | `core.Decision` | UFO mode | the decider, the goal it commits to, the deliberation that created it, the alternatives and criteria weighed | Is it the act of deciding? No: that is the deliberation; the act that carries it out is a decision-resulting action. |
 | `core.Objection` | UFO mode | who holds it, the proposal it objects to, its reasons | Has it ended integrated, withdrawn or standing, and did a decision go ahead over it? |
 | `core.Permission` | UFO mode | the holder, what it allows, the scope, the authorization or rule that grants it | Who granted it, and within which scope? |
-| `core.PossibleObjection` | UFO mode | who raised it, the proposal, agreement or activity, the argument, the test and its result (unless withdrawn before the test) | Has it been tested, and did it qualify? |
+| `core.PossibleObjection` | UFO mode | who raised it, the proposal, existing decision or activity, the argument, the test and its result (unless withdrawn before the test) | Has it been tested, and did it qualify? |
 | `core.StakeholderExpectation` | UFO mode | the stakeholder who holds it | Who expects this? |
 | `core.Directive` | UFO normative description | whom it binds and its owner; tailoring only by relief | May someone depart from it without relief? No. |
 | `core.Guidance` | UFO normative description | its owner; it binds no one | May someone depart from it without relief? Yes. |
