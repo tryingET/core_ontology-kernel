@@ -68,8 +68,9 @@ not rule.
   raised are objections, but they **might reveal** concerns" (emphasis added): a failed argument may
   be a preference or a misconception, and is then neither. The line "is sometimes dependent on
   context" (S3 practical guide, local edition
-  `holdingco/governance-kernel/external/s3-0-practical-guide`: *Objections*; *Test If Arguments
-  Qualify as Objections*; `glossary.yaml`).
+  `holdingco/governance-kernel/external/s3-0-practical-guide`, v2024-04-18a: *Objections*; *Test If Arguments
+  Qualify as Objections*; `glossary.yaml`; that snapshot was removed on 2026-10-08, and the current v2026-01-26 notes
+  are in `~/Documents/Obsidian/Wiki/S3/`).
 - **The adjudication and consent-change-control** speak of "qualified objections" and "how each was
   tested". **ADR-0008 §8** lists concerns in the class-B consent record.
 - **FCOS** (`fcos.consent-record.v1`) puts every raised argument in `objections`, with a disposition
