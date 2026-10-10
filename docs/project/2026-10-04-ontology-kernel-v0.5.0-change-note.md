@@ -12,7 +12,7 @@ task_id: 6659
 AK 6592 moved the meaning the holding sets for every company from the holdingco company layer into core. The
 Holding Owner decided it on 2026-10-03 through the ADR-0008 Core Vorgabe route (class C, AK evidence 13029; the
 rewording of the second concept, 13099). No consent round was held because the owner holds both affected layers.
-The content landed in PR #15 (merge `1687560`). The owner asked on 2026-10-04 to prepare this release (evidence
+The content landed in PR #15 (merge `1687560`) and, as in-place wording, PR #17 (merge `3493a86`). The owner asked on 2026-10-04 to prepare this release (evidence
 13568). The content freeze, the version/OID authorization, the draft and the publication remain the owner's
 separate acts. The release follows [docs/release-procedure.md](../release-procedure.md).
 
@@ -29,6 +29,19 @@ separate acts. The release follows [docs/release-procedure.md](../release-proced
 The decision note is
 [ontology/decisions/2026-10-03-holding-meaning-to-core.md](../../ontology/decisions/2026-10-03-holding-meaning-to-core.md).
 ADR-0008 §1 item 7 states the rule (governance-kernel `00035f9`, `0d7603a`).
+
+## In-place wording (AK 6822, PR #17)
+
+PR #17 (merge `3493a86`) landed after the first candidate `28e34e9` and is part of v0.5.0. It rewords four
+existing concepts in S3 v2026 terms and adds vault citations; identifiers, relations and edges are unchanged:
+
+- `core.AgreementReview`: an agreement is, in S3 v2026 terms, a policy; the review checks it against evaluation
+  criteria and metrics.
+- `core.Concern`, `core.PossibleObjection`, `core.Objection`: the object of an objection or concern is "a proposal,
+  existing decision or activity" (was "proposal, agreement or activity").
+
+`rocs diff` does not report description changes, so they are listed here. The reference model
+`docs/reference-model/governance-core.md` and the AK 6364 decision packet carry the same wording.
 
 ## Semantic delta against v0.4.0
 
